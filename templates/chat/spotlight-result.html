@@ -1,0 +1,46 @@
+<form class="outgunned">
+    <div class="dice-roll">
+      <div style="display: block">  
+        <div class="flavour-result"> 
+          <div>{{label}}</div>
+        </div>
+  
+          <div class="flavour-result">
+
+
+            </div>  
+
+        <div class="dice-result">
+          <div class="dice-tooltip">
+            <div class="owner-only" style="display:block">
+              <div class="card-buttons" style="padding: 2px 0;margin: 0;">
+                <div>{{localize 'OG.rolled'}}: {{rollResult}}</div>
+              <div class="bottomline"> </div>
+            </div>
+            </div>
+          </div>
+  
+
+          
+
+            <h3 class="align-center dice-total" >
+              {{#if (eq rollResult 1)}}
+                {{localize 'OG.spotlightSpent'}}
+              {{else}}  
+                {{#if (eq rollType "save")}}
+                  {{localize 'OG.spotlightTransferred'}}
+                {{else}}
+                  {{localize 'OG.spotlightRecovered'}}
+                {{/if}}
+              {{/if}}
+            </h3>    
+          
+         
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+  </form>  

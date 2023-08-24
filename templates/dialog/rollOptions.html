@@ -1,0 +1,38 @@
+<form class="outgunned" id="check-roll-form">
+    <div class = "diff-label bold">{{label}}</div>
+    <br>
+
+    <div class="flexrow">
+      <label class="resource-label-diff">{{ localize 'OG.attribute' }}</label>
+      <select data-handle-change name="selectAtt">
+        {{selectOptions selectAttType selected=defaultAtt}}
+      </select>
+    </div>
+    <br>
+
+    <div class="flexrow">
+      <label class="resource-label-diff">{{ localize 'OG.checkType' }}</label>
+      <select class="resource-label-diff align-center" name="difficulty">
+        <option value="basic">{{ localize 'OG.basic' }}</option>
+        <option value="critical" selected="selected">{{ localize 'OG.critical' }}</option>
+        <option value="extreme" >{{ localize 'OG.extreme' }}</option>
+        <option value="impossible" >{{ localize 'OG.impossible' }}</option>
+      </select>
+    </div>
+    <br>
+
+    <div class="flexrow">
+      <label class="resource-label-diff">{{ localize 'OG.doubleDiff' }}</label>
+      <select class="resource-label-diff align-center" name="doubleDiff">
+        <option value=1 selected="selected"  >{{ localize 'OG.no' }}</option>
+        <option value=2>{{ localize 'OG.yes' }}</option>
+      </select>
+    </div>
+    <br>
+
+    <div class="flexrow">
+      <label title = "{{ localize 'OG.checkBonusHint' }}" >{{localize "OG.checkBonus"}}</label>   
+        <input class="centre" type="text" value="{{formData.checkBonus}}" name="bonusDice" data-dtype="Number">
+    </div>
+    <br>  
+  </form>

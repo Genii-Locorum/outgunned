@@ -1,0 +1,69 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <div class="header-fields">
+      <div class="charname">{{localize 'OG.feat'}}:</div>
+      {{#if isGM}}
+        <div class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></div>
+      {{else}}
+        <div class="charname">{{item.name}}</div>
+      {{/if}}
+    </div>
+
+  </header>
+
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="attributes">{{ localize 'OG.attributes' }}</a>
+    <a class="item" data-tab="description">{{ localize 'OG.description' }}</a>
+    <a class="item" data-tab="image">{{ localize 'OG.image' }}</a>
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+  <br>  
+    {{!-- Attributes Tab --}}
+    <div class="tab attributes" data-group="primary" data-tab="attributes">
+
+      <div class="item-skill-grid">
+        <div class="select-name left bold">{{localize 'OG.adrenalineCost'}}</div>  
+        <div class="toggle adrenaline centre rollable" title="{{localize 'OG.toggleHint'}}" data-property="adrenaline">{{item.system.adrenalineCost}}</div>
+      </div>  
+      <br>
+
+      <div class="item-skill-grid">
+        <div class=" select-name left bold">{{localize 'OG.actionTime'}}</div>          
+        {{#if isGM}}
+          <div class="centre">
+          <select data-handle-change name="system.usage">
+            {{selectOptions displayUsage selected=item.system.usage}}
+          </select>
+          </div>
+        {{else}}
+          <div class="select-name left">{{usage}}</div>
+        {{/if}}
+      </div>  
+      <br>
+
+      <div class="item-skill-grid">
+        <div class="select-name left bold" title="{{localize 'OG.restrictedHint'}}">{{localize 'OG.restricted'}}</div>  
+        <div class="toggle adrenaline centre rollable {{#if item.system.restricted}} restricted {{/if}}"  data-property="restricted">{{#if item.system.restricted}} {{localize 'OG.yes'}} {{else}} {{localize 'OG.no'}} {{/if}}</div>
+      </div>  
+      <br>
+
+      <div title="{{localize 'OG.shortDescHint'}}">{{localize 'OG.shortDesc'}}</div>
+      {{editor item.system.shortDesc class="shortDesc-item-doc" target="system.shortDesc" button=true owner=owner editable=editable}}
+
+    </div>
+
+    {{!-- Description Tab --}}
+
+    <div class="tab" data-group="primary" data-tab="description">
+      {{editor item.system.description class="background-item-doc" target="system.description" button=true owner=owner editable=editable}}
+    </div>
+
+    {{!-- Image Tab --}}
+    <div class="tab image" data-group="primary" data-tab="image">
+      <img class="profile-img" src="{{item.img}}" data-edit="img" height="200" width="200" title="{{item.name}}"/>
+    </div>
+  </section>
+</form>

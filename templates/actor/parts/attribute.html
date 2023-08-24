@@ -1,0 +1,43 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <div class="header-fields">
+      <div class="charname">{{localize 'OG.attribute'}}:</div>
+      <div class="charname">{{attName}}</div>
+    </div>
+
+  </header>
+
+  <br>  
+      <div class="item-skill-grid">
+        <div class="new-row select-name left bold">{{localize 'OG.attributePoints'}}</div>
+        <div></div>  
+        <div class="new-row select-name indent left ">{{localize 'OG.base'}}</div>
+        <div>
+          <a class="large-icon"><i class="{{#if (gte attValue 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          <a class="large-icon"><i class="{{#if (gte attValue 2)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+        </div>
+
+        <div class="new-row select-name indent left ">{{localize 'OG.role'}}</div>
+        <div>
+          <a class="large-icon"><i class="{{#if (gte attRole 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+        </div>
+        
+        <div class="new-row select-name indent left ">{{localize 'OG.trope'}}</div>
+        <div>
+          <a class="large-icon"><i class="{{#if (gte attTrope 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+        </div>
+        
+        <div class="new-row select-name indent left">{{localize 'OG.xp'}}</div>
+        <div>
+          <a class="large-icon"><i class="{{#if (gte attXp 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          <a class="large-icon"><i class="{{#if (gte attXp 2)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+        </div>
+
+
+
+
+      </div>  
+
+
+
+</form>

@@ -1,0 +1,12 @@
+<form class="outgunned" id="selected">
+    <br>
+    <div class="partyOrder">
+      {{#each type as |type id|}}
+        <div>  
+          <input type="radio" id="{{type.name}}" name="characterList" value={{type.id}} {{#if (eq @index 0)}}checked{{/if}}></input>
+          <label for="resource-label-diff orderList">{{type.name}}</label>  
+        </div>  
+      {{/each}}    
+    </div>
+    <br>
+  </form>

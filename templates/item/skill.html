@@ -1,0 +1,78 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <div class="header-fields">
+      <div class="charname">{{localize 'OG.skill'}}:</div>
+      {{#if isGM}}
+        <div class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></div>
+      {{else}}
+        <div class="charname">{{item.name}}</div>
+      {{/if}}
+    </div>
+
+  </header>
+
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="attributes">{{ localize 'OG.attributes' }}</a>
+    <a class="item" data-tab="description">{{ localize 'OG.description' }}</a>
+    <a class="item" data-tab="image">{{ localize 'OG.image' }}</a>
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+  <br>  
+    {{!-- Attributes Tab --}}
+    <div class="tab attributes" data-group="primary" data-tab="attributes">
+      <div class="item-skill-grid">
+        <div class=" select-name left bold" title = "{{localize 'OG.displayAttTypeHint'}}">{{localize 'OG.displayAttType'}}</div>          
+        {{#if isGM}}
+          <div class="left">
+          <select data-handle-change name="system.displayAtt">
+            {{selectOptions displayAttType selected=item.system.displayAtt}}
+          </select>
+          </div>
+        {{else}}
+          <div class="select-name left">{{attribute}}</div>
+        {{/if}}
+        <br>
+        <div class="new-row select-name left bold">{{localize 'OG.skillPoints'}}</div>
+        <div></div>  
+        <div class="new-row select-name indent left ">{{localize 'OG.base'}}</div>
+        <div>
+          <a class="large-icon"><i class="{{#if (gte item.system.value 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+        </div>
+
+        <div class="new-row select-name indent left ">{{localize 'OG.role'}}</div>
+        <div>
+          <a class="large-icon"><i class="{{#if (gte item.system.role 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+        </div>
+        
+        <div class="new-row select-name indent left ">{{localize 'OG.trope'}}</div>
+        <div>
+          <a class="large-icon"><i class="{{#if (gte item.system.trope 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+        </div>
+        
+        <div class="new-row select-name indent left">{{localize 'OG.xp'}}</div>
+        <div>
+          <a class="large-icon"><i class="{{#if (gte item.system.xp 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          <a class="large-icon"><i class="{{#if (gte item.system.xp 2)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+        </div>
+
+
+
+
+      </div>  
+    </div>
+
+    {{!-- Description Tab --}}
+
+    <div class="tab" data-group="primary" data-tab="description">
+      {{editor item.system.description class="background-item-doc" target="system.description" button=true owner=owner editable=editable}}
+    </div>
+
+    {{!-- Image Tab --}}
+    <div class="tab image" data-group="primary" data-tab="image">
+      <img class="profile-img" src="{{item.img}}" data-edit="img" height="200" width="200" title="{{item.name}}"/>
+    </div>
+  </section>
+</form>

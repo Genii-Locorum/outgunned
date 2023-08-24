@@ -1,0 +1,27 @@
+<form id="newItem-selection-form" class="outgunned newItem-selector">
+    <br>
+    <div class="flexcol">
+      <div class='bold flexrow header counter'>
+        <label class="newItem-opt-label">{{ localize 'OG.chosen' }} :</label>
+        <span class="newItem-opt-count count">0</span>
+        <span class="newItem-opt-sep">/</span>
+        <span class="newItem-opt-total">{{optionsCount}}</span>
+      </div>
+      <br>
+
+      <ol class="item-list">
+        {{#each newList as |newItem key|}}
+          <li class="item select-list" data-index="{{key}}">
+            <div class="item-controls">
+              <a class="item-control select-newItem" title="{{localize 'OG.selectNewItem'}}"><i class="fas fa-plus"></i></a>
+            </div>
+            <div class="newItem-opt-item-name item-name flexrow">
+              <div>&#160&#160{{newItem.name}}</div>
+            </div>
+            
+          </li>
+        {{/each}}
+      </ol>
+  
+    </div>
+  </form>

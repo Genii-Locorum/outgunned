@@ -1,0 +1,27 @@
+<ol class="items-list">
+  {{#each feats as |feat id|}}
+       <li class="item" data-item-id="{{feat._id}}">
+          <div class="feat-grid">
+            <div class="indent feat-name contextmenu">{{feat.name}}</div>
+            {{#if (eq feat.system.adrenalineCost 0) }}
+              <div></div>
+            {{else}}
+              <div class="centre">
+                <a class="red"><i class="fa-solid fa-bolt"></i></a>
+              </div>
+            {{/if}}
+            {{#if (eq feat.system.usage 'none')}}
+              <div></div>
+            {{else}}
+              {{#if (eq feat.system.usage 'quick')}}
+                <div>{{localize 'OG.quickAction'}}</div>
+              {{else}}
+              <div>{{localize 'OG.fullTurn' }}</div>
+              {{/if}}
+            {{/if}}    
+          </div>
+        </li>
+        <div class="shortDesc">{{{feat.system.shortDesc}}}</div>
+        <br>
+    {{/each}}
+</ol>

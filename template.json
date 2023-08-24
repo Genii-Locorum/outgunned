@@ -1,0 +1,137 @@
+{
+  "Actor": {
+    "types": ["character"],
+    "templates": {
+      "base": {
+        "grit": {
+          "value": 0,
+          "max": 12,
+          "min": 0
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "min": 0
+        },
+        "adrenaline": {
+          "value": 0,
+          "max": 6,
+          "min": 0,
+          "base": 0
+        },
+        "spotlight": {
+          "value": 1,
+          "max": 3,
+          "min": 0,
+          "base": 1
+        },
+        "deathRoulette": {
+          "value": 0,
+          "min": 1,
+          "base": 1
+        },
+        "biography": ""
+      }
+    },
+    "character": {
+      "templates": ["base"],
+      "abilities": {
+        "brawn": {
+          "value": 2,
+          "role": 0,
+          "trope":0,
+          "xp": 0
+        },
+        "nerves": {
+          "value": 2,
+          "role": 0,
+          "trope":0,
+          "xp": 0
+        },
+        "smooth": {
+          "value": 2,
+          "role": 0,
+          "trope":0,
+          "xp": 0
+        },
+        "focus": {
+          "value": 2,
+          "role": 0,
+          "trope":0,
+          "xp": 0
+        },
+        "crime": {
+          "value": 2,
+          "role": 0,
+          "trope":0,
+          "xp": 0
+        }
+      },
+      "role":"",
+      "experiences": "",
+      "trope":"",
+      "job": "",
+      "age": "",
+      "flaw": "",
+      "catchphrase": "",
+      "ageExp": 0,
+      "ageFeat": 0,
+      "ageOptFeat": 0,
+      "cash": 1,
+      "mission": "",
+      "locked": false
+    }
+  },
+  "Item": {
+    "types": ["gear","skill","role","feat","age", "trope"],
+    "templates": {
+      "base": {
+        "description": ""
+      }
+    },
+    "gear": {
+      "templates": ["base"],
+      "quantity": 1,
+      "weight": 0
+    },
+    "skill": {
+      "templates": ["base"],
+      "value": 1,
+      "role": 0,
+      "trope": 0,
+      "xp": 0,
+      "displayAtt": "brawn"
+      },
+    "role": {
+      "templates": ["base"],
+      "attribute": "brawn",
+      "skills": [],
+      "feats": [],
+      "gear": []
+    },
+    "feat": {
+      "templates": ["base"],
+      "shortDesc": "",
+      "adrenalineCost": 0,
+      "usage": "none",
+      "restricted": false,
+      "source": ""
+    },
+    "age": {
+      "templates": ["base"],
+      "numFeat": 2,
+      "optFeat": 0,
+      "baseAdrenaline": 1,
+      "baseDeathRoulette": 1,
+      "baseExperience": 0,
+      "feats": []      
+    },
+    "trope": {
+      "templates": ["base"],
+      "attribute1": "brawn",
+      "attribute2": "nerves",
+      "skills": [],
+      "feats": []
+    }
+  }
+}

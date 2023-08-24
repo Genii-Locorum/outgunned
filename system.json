@@ -1,0 +1,35 @@
+{
+  "id": "outgunned",
+  "title": "Outgunned",
+  "description": "The Outgunned system for FoundryVTT!",
+  "version": "1.0.9",
+  "compatibility": {
+    "minimum": 11,
+    "verified": "11.307",
+    "maximum": 11
+  },
+  "authors": [{
+    "name": "Dangermouse"
+  }],
+  "esmodules": ["module/outgunned.mjs"],
+  "styles": ["css/outgunned.css"],
+  "scripts": [],
+  "packs": [],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "gridDistance": 5,
+  "gridUnits": "ft",
+  "primaryTokenAttribute": "hp",
+  "secondaryTokenAttribute": "adrenaline",
+  "url": "",
+  "manifest": "",
+  "download": "",
+  "license": "LICENSE.txt",
+  "changelog": "CHANGELOG.md",
+  "socket": true
+}

@@ -1,0 +1,271 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+/* Global styles */
+.window-app {
+  font-family: "Roboto", sans-serif;
+}
+
+@font-face {
+  font-family: 'Futura';
+  font-style: bold;
+  font-weight: 400;
+  src: url('../assets/Futura Bold.otf') format('woff2');
+}
+
+.outgunned .window-content {
+  background-image:url("../assets/background.jpg");
+  background-size: cover; 
+  padding: 8px;
+  font-family: Futura;
+  font-size: 14px;
+}
+
+.rollable:hover, .rollable:focus, .contextmenu:hover, .contextmenu.focus, .clickable:hover, .clickable.focus{
+  color: #000;
+  text-shadow: 0px 0px 14px black;
+  cursor: pointer;
+}
+
+.outgunned a{
+  text-shadow:none;
+}
+
+.outgunned .logo {
+  background-image:url("../assets/OG_Live_0007_OG_LOGO.png");
+  background-size: cover; 
+  min-width: 150px;
+  height: 70px;
+
+}
+
+.outgunned .main-character-sheet {
+  display: grid;
+  grid-template-columns: 170px 300px 440px;
+  grid-column-gap: 20px;
+}
+
+.outgunned .charname {
+  font-size: 30px;
+  height: 42px;
+  background-color: rgb(177,37,26);
+  color: white !important;
+  padding: 1px 3px 1px 3px;
+}
+
+.outgunned .abilities-grid {
+  display: grid;
+  grid-template-columns: 100px 60px;
+  grid-column-gap: 10px; 
+}
+
+.outgunned .info-grid {
+  display: grid;
+  grid-template-columns: min-content auto;
+  max-height: 190px;
+}
+
+.outgunned .info-cell {
+  border-bottom: 1px solid rgb(177,37,26);
+  margin-top: 3px;
+}
+
+.outgunned .info-cell input{
+  border: none;
+  padding: 0px;
+  max-height: 20px;
+  background: none;
+}
+
+.outgunned .indent {
+  padding-left: 5px;
+}
+
+.outgunned .item-skill-grid {
+  display: grid;
+  grid-template-columns: 200px 200px;
+}
+
+.outgunned .charname input{
+  font-size: 30px;
+  height:40px;
+  background-color: rgb(177,37,26);
+  color: white;
+  border: none;
+  padding: 0px;
+}
+
+.outgunned .attribute-name {
+  background-color: rgb(177,37,26);
+  padding-left: 10px;
+  color: cornsilk;
+}
+
+.outgunned .upperCase {
+  text-transform: uppercase;
+}
+
+.outgunned .red {
+  color:rgb(177,37,26);
+}  
+
+.outgunned .title {
+  color:rgb(177,37,26);
+  font-size: 20px;
+}
+
+.outgunned .background-doc {
+  background-image: none;
+  font-size:14px;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 190px;
+  border: 1px gray solid;
+}
+
+.outgunned .background-item-doc {
+  background-image: none;
+  font-size:14px;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 450px;
+  border: 1px gray solid;
+}
+
+.outgunned .profile-img{
+  background-color: grey;
+}
+
+.outgunned .left{
+  text-align: left;
+}
+
+.outgunned .right{
+  text-align: right;
+}
+
+.outgunned .centre{
+  text-align: center;
+}
+
+.outgunned .middle {
+  display: grid;
+  align-items: center;
+}
+
+.outgunned .icon-centre {
+  align-content: center;
+}
+
+.outgunned .bold{
+  font-weight: bold;
+}
+
+.outgunned .select-name {
+  padding-top: 6px;
+}
+
+.outgunned .skill-name{
+  padding-left: 10px;
+}
+
+.outgunned .new-row {
+  grid-column-start: 1;
+}
+
+.outgunned .large-icon {
+  font-size: 26px;
+}
+
+.outgunned .medium-icon {
+  font-size: 20px;
+}
+
+.outgunned .small {
+  font-size:10px;
+}
+
+.outgunned .lock-icon {
+  min-width: 16px;
+}
+
+.outgunned .horizontalboxed {
+  border-top: 1px rgb(177,37,26) solid;
+  border-bottom: 1px rgb(177,37,26) solid;
+}
+
+.outgunned .item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.outgunned .item-list-name {
+  padding-left: 20px;
+  padding-top: 0px;
+}
+
+.outgunned .adrenaline {
+  border: 1px solid black;
+  padding-top:3px;
+}
+
+.outgunned .select-list {
+  display: grid;
+  grid-template-columns: 50px auto;
+}
+
+.outgunned .header-fields {
+  display: grid;
+  grid-template-columns: max-content auto;
+}
+
+.outgunned .restricted {
+  color: white;
+  background-color:rgba(177, 36, 26) ;
+}
+
+.outgunned .items-list {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.outgunned .shortDesc-item-doc {
+  background-image: none;
+  font-size:14px;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 75px;
+  border: 1px gray solid;
+}
+
+.outgunned .feat-grid{
+  display: grid;
+  border-top: 5px rgb(177,37,26) solid;
+  border-left: 1px grey solid;
+  border-right: 1px grey solid;
+  grid-template-columns: 200px 50px 150px ;
+}
+
+.outgunned .shortDesc p{
+  height: fit-content;
+  border: 1px grey solid;
+  padding: 0px 5px 0px 5px;
+  color:rgba(0, 0, 0, 0.75);
+  margin: 0px;
+  font-size: 14px;
+}
+
+.outgunned .result-fail {
+  color: black;
+}
+
+.outgunned .result-success {
+  color: rgb(177,37,26);
+}
+
+.outgunned .cream {
+  background-color: cornsilk;
+}

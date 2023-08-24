@@ -1,0 +1,15 @@
+    <div>
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="150" width="150"/>
+    </div>
+    
+    <div class="title">{{localize 'OG.experiences'}}</div>
+    <div>
+      {{editor system.experiences class="background-doc" target="system.experiences" button=true owner=owner editable=editable}}
+    </div>    
+
+    <br>
+
+    <div class="title">{{localize 'OG.background'}}</div>
+    <div>
+      {{editor system.biography class="background-doc" target="system.biography" button=true owner=owner editable=editable}}
+    </div>    
