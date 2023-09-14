@@ -10,8 +10,8 @@ export class OutgunnedCharacterSheet extends ActorSheet {
     return mergeObject(super.defaultOptions, {
       classes: ["outgunned", "sheet", "actor"],
       template: "systems/outgunned/templates/actor/actor-sheet.html",
-      width: 970,
-      height: 700,
+      width: 850,
+      height: 570,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "feats" }]
     });
   }
@@ -32,21 +32,16 @@ export class OutgunnedCharacterSheet extends ActorSheet {
     const actorData = this.actor.toObject(false);
     context.system = actorData.system;
     context.flags = actorData.flags;
+    context.isLocked = actorData.system.locked;
     context.ageName = this.actor.system.ageId ? this.actor.items.get(this.actor.system.ageId).name : "";
     context.roleName = this.actor.system.roleId ? this.actor.items.get(this.actor.system.roleId).name : "";
     context.tropeName = this.actor.system.tropeId ? this.actor.items.get(this.actor.system.tropeId).name : "";
+    context.heat = game.settings.get('outgunned', 'heat')
 
 
     // Prepare character data and items.
-    if (actorData.type == 'character') {
       this._prepareItems(context);
       this._prepareCharacterData(context);
-    }
-
-    // Prepare NPC data and items.
-    if (actorData.type == 'npc') {
-      this._prepareItems(context);
-    }
 
     context.rollData = context.actor.getRollData();
 
@@ -64,21 +59,69 @@ export class OutgunnedCharacterSheet extends ActorSheet {
   _prepareItems(context) {
     // Initialize containers.
     const gear = [];
+    const guns = [];
+    const rides = [];
     const skills =[];
     const feats = [];
+    const conditions = [];
+    const experiences = [];
 
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       i.img = i.img || DEFAULT_TOKEN;
       // Append to gear.
-      if (i.type === 'item') {
+      if (i.type === 'gear') {
         gear.push(i);
+      } else if (i.type === 'gun' ){
+        guns.push(i);
+      } else if (i.type === 'ride' ){
+        rides.push(i);
       } else if (i.type === 'skill' ){
           skills.push(i);
+      } else if (i.type === 'experience' ){
+        experiences.push(i);
       } else if (i.type === 'feat' ){
         feats.push(i);
-      }
+      } else if (i.type === 'condition' ){
+          if (i.system.attribute != 'na') {
+            if (i.system.attribute === 'all' || i.system.attribute === 'none') {
+              i.system.label = game.i18n.localize('OG.' + i.system.attribute)
+              i.system.order = 2
+              if (i.system.attribute === 'all') {
+                i.system.order = 99
+              }
+            } else {  
+              i.system.label = game.i18n.localize(CONFIG.OUTGUNNED.abilities[i.system.attribute]) 
+              i.system.order = 1
+            }    
+          } else if (i.system.skill != 'na'){
+            i.system.label = i.system.skill
+            i.system.order = 3 
+          } else {
+            i.system.label = game.i18n.localize('OG.other')
+            i.system.order = 4
+          }
+        conditions.push(i);
+      }  
     }  
+
+    // Sort Gear by name
+    gear.sort(function(a, b){
+      let x = a.name;
+      let y = b.name;
+      if (x < y) {return -1};
+      if (x > y) {return 1};
+      return 0;
+    });
+
+    // Sort Guns by name
+    guns.sort(function(a, b){
+      let x = a.name;
+      let y = b.name;
+      if (x < y) {return -1};
+      if (x > y) {return 1};
+      return 0;
+    });
 
     // Sort Skills by name
     skills.sort(function(a, b){
@@ -98,10 +141,23 @@ export class OutgunnedCharacterSheet extends ActorSheet {
       return 0;
     });
 
+    // Sort Conditions by Order and Label
+    conditions.sort(function(a, b){
+      let x = a.system.order;
+      let y = b.system.order;
+      if (x < y) {return -1};
+      if (x > y) {return 1};
+      return 0;
+    });
+
     // Assign and return
     context.gear = gear;
+    context.guns = guns;
+    context.rides = rides;    
     context.skills = skills;
     context.feats = feats;
+    context.conditions = conditions;
+    context.experiences = experiences;
   }
 
   /* -------------------------------------------- */
@@ -110,6 +166,11 @@ export class OutgunnedCharacterSheet extends ActorSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
+    // -------------------------------------------------------------
+    // Everything below here is only needed if the sheet is editable
+    if (!this.isEditable) return;
+
+
     // Render the item sheet for viewing/editing prior to the editable check.
     html.find('.item-edit').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
@@ -117,15 +178,20 @@ export class OutgunnedCharacterSheet extends ActorSheet {
       item.sheet.render(true);
     });
 
-    // -------------------------------------------------------------
-    // Everything below here is only needed if the sheet is editable
-    if (!this.isEditable) return;
-
+    // Delete Inventory Item
+    html.find('.item-delete').click(ev => {
+      const li = $(ev.currentTarget).parents(".item");
+      const item = this.actor.items.get(li.data("itemId"));
+      item.delete();
+      li.slideUp(200, () => this.render(false));
+    });
 
     html.find('.item-create').click(this._onItemCreate.bind(this));                       // Add Inventory Item
-    html.find('.rollable.skill-name').click(OutgunnedChecks._onSkillRoll.bind(this));             // Rollable skills
+    html.find('.rollable.skill-name').click(OutgunnedChecks._onSkillRoll.bind(this));     // Rollable skills
     html.find('.actor-toggle').dblclick(this._actorToggle.bind(this));                    // Toggle an actor value (not an item)
-
+    html.find('.item-toggle').dblclick((event) => this._itemToggle(event));               // Toggle an item value (not an actor value)
+    html.find(".inline-edit").change(this._inlineEdit.bind(this));                        // Edit an item from the character sheet
+    
     //Character Context Menu
     new OutgunnedContextMenu(html, ".skill-name.contextmenu", contextMenu.skillMenuOptions(this.actor, this.token));
     new OutgunnedContextMenu(html, ".age.contextmenu", contextMenu.ageMenuOptions(this.actor, this.token));
@@ -135,6 +201,11 @@ export class OutgunnedCharacterSheet extends ActorSheet {
     new OutgunnedContextMenu(html, ".feat-name.contextmenu", contextMenu.featMenuOptions(this.actor, this.token));
     new OutgunnedContextMenu(html, ".adrenaline-name.contextmenu", contextMenu.adrenalineMenuOptions(this.actor, this.token));
     new OutgunnedContextMenu(html, ".spotlight.contextmenu", contextMenu.spotlightMenuOptions(this.actor, this.token));
+    new OutgunnedContextMenu(html, ".condition-name.contextmenu", contextMenu.conditionMenuOptions(this.actor, this.token));
+    new OutgunnedContextMenu(html, ".catchphrase.contextmenu", contextMenu.catchphraseMenuOptions(this.actor, this.token));
+    new OutgunnedContextMenu(html, ".mission.contextmenu", contextMenu.missionMenuOptions(this.actor, this.token));
+    new OutgunnedContextMenu(html, ".flaw.contextmenu", contextMenu.flawMenuOptions(this.actor, this.token));
+    new OutgunnedContextMenu(html, ".deathRoulette.contextmenu", contextMenu.deathRouletteMenuOptions(this.actor, this.token));
 
     // Drag events for macros.
     if (this.actor.isOwner) {
@@ -167,26 +238,59 @@ export class OutgunnedCharacterSheet extends ActorSheet {
     delete itemData.system["type"];
 
     // Finally, create the item!
-    return await Item.create(itemData, {parent: this.actor});
+    let item =  await Item.create(itemData, {parent: this.actor});
+    await item.sheet.render(true);
+    return
   }
 
   //Toggle an actor value
   async _actorToggle(event) {
     const property = event.currentTarget.dataset.property;
     let checkProp={};
+    let targetScore = 0;
     if (property === "locked") {
       checkProp = {'system.locked': !this.actor.system.locked};
     } else if (property === "grit" || property === "adrenaline" || property === "spotlight" || property === "deathRoulette") {
-      let targetScore = Number(event.currentTarget.dataset.target);
+      targetScore = Number(event.currentTarget.dataset.target);
       if (targetScore === this.actor.system[property].value) {targetScore = 0};
       targetScore = Math.max(targetScore, this.actor.system[property].min);
       let targetAtt = 'system.' + property + '.value'
       checkProp = {[targetAtt] : targetScore}
+    } else if (property === 'cash') {
+      targetScore = Number(event.currentTarget.dataset.target);
+      if (targetScore === this.actor.system.cash) {targetScore = 0};
+      checkProp = {'system.cash' : targetScore};
+    } else {
+      return
     }
     
     await this.actor.update(checkProp);
 
   }  
+
+  //Toggle an item value
+  async _itemToggle(event) {
+    const property = event.currentTarget.dataset.property;
+    const itemId = event.currentTarget.closest('.item').dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    let checkProp={};
+    if (property === "active") {
+      checkProp = {'system.active': !item.system.active};
+    } else if (property === 'worn') {
+      checkProp = {'system.location': 'bag'};
+    } else if (property === 'bag') {
+      checkProp = {'system.location': 'storage'};
+    } else if (property === 'storage') {
+      checkProp = {'system.location': 'worn'};
+    } else if (property === 'armour') {
+      let targetScore = Number(event.currentTarget.dataset.target);
+      if (targetScore === item.system.armour.value) {targetScore = 0};
+      checkProp = {'system.armour.value': targetScore};
+    }else {
+      return
+    }
+    await item.update(checkProp);
+  } 
 
 
   // Change default on Drop Item Create routine for requirements (single items and folder drop)-----------------------------------------------------------------
@@ -198,21 +302,21 @@ export class OutgunnedCharacterSheet extends ActorSheet {
     let finalise = false;
 
     for (let k of itemData) {
-      //If the character sheet is locked and this isn't gear being dropped then give error message and cancel
-      if(k.type!='gear' && this.actor.system.locked) {
+      //If the character sheet is locked and this isn't gear/guns/rides being dropped then give error message and cancel
+      if(k.type!='gear' && k.type!='gun' && k.type!='ride' && this.actor.system.locked) {
         ui.notifications.warn(game.i18n.localize('OG.msg.noDropLocked'));         
         return
       }
 
-      //Test to see if the skill already exists
-      if (k.type === 'skill') {
-        let exists = await this.itemCheck (k.name, 'skill', newData)
+      //Test to see if the skill or condition already exists
+      if (k.type === 'skill' || k.type === 'condition') {
+        let exists = await this.itemCheck (k.name, k.type, newData)
         if (exists) {
           reqResult = false;
           errMsg = k.name + " (" + k.type + "): "+ game.i18n.localize('OG.msg.dupItem') 
         }  
-      }  
-
+      }
+      
       //Test to see if there is already an age on the character sheet
       if (k.type === 'age') {
         if (this.actor.system.ageId ) {
@@ -533,5 +637,15 @@ export class OutgunnedCharacterSheet extends ActorSheet {
     }
     return newData;
   }      
+
+  // Update NPC skills etc without opening the item sheet
+  async _inlineEdit(event){
+  event.preventDefault();
+    const element = event.currentTarget;
+    const li = $(event.currentTarget).closest(".item");
+    const item = this.actor.items.get(li.data("itemId"));
+    const field = element.dataset.field;
+  return item.update ({ [field]: element.value});
+}
 
 }

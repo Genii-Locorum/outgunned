@@ -1,6 +1,6 @@
-import {OutgunnedSelectLists}  from "../../apps/select-lists.mjs";
+export class OutgunnedEnemyFeatSheet extends ItemSheet {
 
-export class OutgunnedGearSheet extends ItemSheet {
+
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["outgunned", "sheet", "item"],
@@ -15,7 +15,7 @@ export class OutgunnedGearSheet extends ItemSheet {
     return `${path}/${this.item.type}.html`;
   }
 
-  async getData() {
+  getData() {
     const context = super.getData();
     const itemData = context.item;
     context.rollData = {};
@@ -26,7 +26,6 @@ export class OutgunnedGearSheet extends ItemSheet {
     context.system = itemData.system;
     context.flags = itemData.flags;
     context.isGM =  game.user.isGM;
-    context.displayLocList = await OutgunnedSelectLists.getLocationList();
 
     return context;
   }

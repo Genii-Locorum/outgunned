@@ -2,13 +2,13 @@
 /* Global styles */
 .window-app {
   font-family: "Roboto", sans-serif;
-}
+} 
 
 @font-face {
   font-family: 'Futura';
   font-style: bold;
   font-weight: 400;
-  src: url('../assets/Futura Bold.otf') format('woff2');
+  src: url('../assets/Futura-Bold.ttf') format('woff2');
 }
 
 .outgunned .window-content {
@@ -16,11 +16,10 @@
   background-size: cover; 
   padding: 8px;
   font-family: Futura;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .rollable:hover, .rollable:focus, .contextmenu:hover, .contextmenu.focus, .clickable:hover, .clickable.focus{
-  color: #000;
   text-shadow: 0px 0px 14px black;
   cursor: pointer;
 }
@@ -39,7 +38,7 @@
 
 .outgunned .main-character-sheet {
   display: grid;
-  grid-template-columns: 170px 300px 440px;
+  grid-template-columns: 170px 250px 370px;
   grid-column-gap: 20px;
 }
 
@@ -71,7 +70,16 @@
 .outgunned .info-cell input{
   border: none;
   padding: 0px;
-  max-height: 20px;
+  font-size: 12px;
+  max-height: 15px;
+  background: none;
+}
+
+.outgunned .gear-cell input{
+  border: none;
+  padding: 0px;
+  font-size: 12px;
+  max-height: 15px;
   background: none;
 }
 
@@ -103,28 +111,29 @@
   text-transform: uppercase;
 }
 
+.outgunned .lowerCase {
+  text-transform: lowercase;
+}
+
 .outgunned .red {
   color:rgb(177,37,26);
 }  
 
-.outgunned .title {
-  color:rgb(177,37,26);
-  font-size: 20px;
-}
+.outgunned .blue {
+  color:rgb(13, 27, 214);
+} 
 
 .outgunned .background-doc {
   background-image: none;
-  font-size:14px;
   font-weight: bold;
   padding-left: 10px;
   padding-right: 10px;
-  height: 190px;
+  height: 150px;
   border: 1px gray solid;
 }
 
 .outgunned .background-item-doc {
   background-image: none;
-  font-size:14px;
   font-weight: bold;
   padding-left: 10px;
   padding-right: 10px;
@@ -161,6 +170,22 @@
   font-weight: bold;
 }
 
+.outgunned .borderless {
+  border: none !important;
+}
+
+.outgunned .bordered {
+  border: 1px solid gray !important;
+}
+
+.outgunned .borderleft {
+  border-left: 1px solid gray;
+}
+
+.outgunned .borderright {
+  border-right: 1px solid gray;
+}
+
 .outgunned .select-name {
   padding-top: 6px;
 }
@@ -173,12 +198,20 @@
   grid-column-start: 1;
 }
 
+.outgunned .extralarge-icon {
+  font-size: 30px;
+}
+
 .outgunned .large-icon {
   font-size: 26px;
 }
 
+.outgunned .mediumplus-icon {
+  font-size: 22px;
+}
+
 .outgunned .medium-icon {
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .outgunned .small {
@@ -233,7 +266,6 @@
 
 .outgunned .shortDesc-item-doc {
   background-image: none;
-  font-size:14px;
   font-weight: bold;
   padding-left: 10px;
   padding-right: 10px;
@@ -249,13 +281,48 @@
   grid-template-columns: 200px 50px 150px ;
 }
 
+.outgunned .ride-header{
+  display: grid;
+  border-top: 5px rgb(177,37,26) solid;
+  border-left: 1px grey solid;
+  border-right: 1px grey solid;
+  border-bottom: 1px grey solid;
+  grid-template-columns: 340px 30px ;
+}
+
+.outgunned .ride-grid{
+  display: grid;
+  grid-template-columns: 45px 35px 35px 35px 70px 35px 35px 35px 45px;
+}
+
+.outgunned .ride-grid-type{
+  display: grid;
+  grid-template-columns: 95px 36px 36px 36px 36px 36px 95px;
+}
+
+.outgunned .ride-grid-bottom{
+  display: grid;
+  grid-template-columns: 370px;
+  border: 1px grey solid;
+  color:grey;
+}
+
+.outgunned .gear-grid{
+  display: grid;
+  grid-template-columns: 300px 30px 30px ;
+}
+
+.outgunned .guns-grid{
+  display: grid;
+  grid-template-columns: 120px 80px 20px 20px 20px 20px 30px 30px 20px ;
+}
+
 .outgunned .shortDesc p{
   height: fit-content;
   border: 1px grey solid;
   padding: 0px 5px 0px 5px;
   color:rgba(0, 0, 0, 0.75);
   margin: 0px;
-  font-size: 14px;
 }
 
 .outgunned .result-fail {
@@ -268,4 +335,118 @@
 
 .outgunned .cream {
   background-color: cornsilk;
+}
+
+.outgunned .condition-grid{
+  display: grid;
+  grid-template-columns: 100px 50px 150px ;
+}
+
+.outgunned .smallCondition {
+  opacity: 0.6;
+  padding-left: 20px;
+}
+
+.outgunned .fade {
+  opacity: 0.6;
+}
+
+.outgunned .gear-cell {
+  border-right: 1px grey solid;
+  border-bottom: 1px grey solid;
+}
+
+.outgunned .gear-cell-start {
+  border-right: 1px grey solid;
+  border-bottom: 1px grey solid;
+  border-left: 1px grey solid;
+}
+
+.outgunned .gear-cell-top {
+  border-bottom: 1px grey solid;
+}
+
+.outgunned .gun-cell-top {
+  border-bottom: 1px grey solid;
+}
+
+.outgunned .gun-feat-grid {
+  display: grid;
+  padding-left: 30px;
+  grid-template-columns: 130px 130px 130px;
+  grid-column-gap: 10px; 
+  grid-row-gap: 10px; 
+}
+
+.outgunned .gun-range-grid {
+  display: grid;
+  padding-left: 30px;
+  grid-template-columns: 100px 100px;
+  grid-row-gap: 5px; 
+}
+
+.outgunned .toggled {
+  background-color: rgb(177, 36, 26);
+  color: cornsilk;
+}
+
+.outgunned .rideType-grid {
+  display: grid;
+  padding-left: 100px;
+  grid-template-columns: repeat(5,50px);
+  grid-column-gap: 10px; 
+}
+
+.outgunned .cash-grid {
+  display: grid;
+  padding-left: 5px;
+  grid-template-columns: repeat(5,30px);
+  grid-column-gap: 10px; 
+}
+
+.outgunned .enemy-header {
+  display: grid;
+  grid-template-columns: 170px 100px;
+}
+
+.outgunned .enemy-name {
+  background-color: rgb(177, 36, 26);
+  color: cornsilk;
+  width: 170px;
+  height: 18px;
+}
+
+
+.outgunned .enemy-grid {
+  display: grid;
+  padding-top: 10px;
+  grid-template-columns: 100px 100px 70px;
+  grid-row-gap: 10px;
+}
+
+.outgunned .enemy-stats-grid {
+  display: grid;
+  padding-top: 5px;
+  grid-template-columns: 250px;
+  grid-row-gap: 5px;
+}
+.outgunned .thin select {
+  height: 18px;
+}
+
+.outgunned .enemy-feat-grid {
+  display: grid;
+  grid-template-columns: 150px 30px 30px;
+  border-left: 1px grey solid;
+}  
+
+.outgunned .enemy-feat-top {
+  width: 210px;
+  border-bottom: 1px grey solid;
+}  
+
+.outgunned .support-abilities-grid {
+  display: grid;
+  grid-template-columns: 100px 100px;
+  grid-row-gap: 5px; 
 }

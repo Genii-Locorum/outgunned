@@ -9,13 +9,13 @@ export class OutgunnedChecks {
     const dataset = event.currentTarget.dataset
     let partic =await OutgunnedActorDetails._getParticipantId(this.token,this.actor); 
     let actor = await OutgunnedActorDetails._getParticipant(partic.particId, partic.particType);
-    let itemId = dataset.itemid
+    let itemId = dataset.itemId
     let item = actor.items.get(itemId)
   
     await OutgunnedChecks.startCheck ({
       shiftKey: event.shiftKey,
       partic,
-      type: 'action',
+      type: game.settings.get('outgunned', 'defaultCheckType'),
       rollType: "roll",
       skillScore : item.system.total,
       attScore: actor.system.abilities[item.system.displayAtt].total,
@@ -24,6 +24,37 @@ export class OutgunnedChecks {
       defaultAtt: item.system.displayAtt,
       itemId,
       winTitle: item.name,
+    })
+  }
+
+  //Death Roulette roll from Character Sheet
+  static async _deathRoulette(event,actor) {
+    let partic =await OutgunnedActorDetails._getParticipantId(this.token,actor); 
+    await OutgunnedChecks.startCheck ({
+      shiftKey: true,
+      partic,
+      deathScore: actor.system.deathRoulette.value,
+      type: 'death',
+      rollType: "roll",
+      winTitle: game.i18n.localize('OG.deathRoulette'),
+    })
+  }
+
+  //Roll on Attribute from Supporting Character
+  static async _onAttributeRoll(event){
+    const dataset = event.currentTarget.dataset
+    let partic =await OutgunnedActorDetails._getParticipantId(this.token,this.actor); 
+    let actor = await OutgunnedActorDetails._getParticipant(partic.particId, partic.particType);
+    let attKey = dataset.attkey
+
+    await OutgunnedChecks.startCheck ({
+      shiftKey: event.shiftKey,
+      partic,
+      type: game.settings.get('outgunned', 'defaultCheckType'),
+      rollType: "attRoll",
+      attScore: actor.system.abilities[attKey].total,
+      attLabel: actor.system.abilities[attKey].label,
+      winTitle: actor.system.abilities[attKey].label,
     })
   }
 
@@ -41,7 +72,6 @@ export class OutgunnedChecks {
 
   // Set Roll and Dialog options for the check
   static async initiateConfig(options){
-    let actor = await OutgunnedActorDetails._getParticipant(options.partic.particId, options.partic.particType);
     const config = {
       origin: game.user.id,
       originGM: game.user.isGM,
@@ -52,16 +82,20 @@ export class OutgunnedChecks {
       skillLabel: options.skillLabel ? options.skillLabel : "",
       attLabel: options.attLabel ? options.attLabel : "",
       defaultAtt: options.defaultAtt ? options.defaultAtt : "",
+      deathScore: options.deathScore ? options.deathScore: 0,
       label: "",
-      difficulty: "critical",
+      difficulty: game.settings.get('outgunned', 'defaultDifficulty'),
       doubleDiff: 1,
+      dangerRoll: false,
+      damage: 0,
       itemId: options.itemId ? options.itemId: "",
       partic: options.partic,
-      diceNumber: 2,
-      originalDiceNumber: 2,
+      diceNumber: 1,
+      originalDiceNumber: 1,
       bonusDice: 0,
       closed: false,
       reRoll: false,
+      gamble: false,
       keepDice: [],
       rolledDice: [],
       rollResult: [],
@@ -81,27 +115,64 @@ export class OutgunnedChecks {
   // Run Check Routines 
   static async runCheck (config) {
     //If Shift key has been held then accept the defaults otherwise call a Dialog box for roll options 
+
     let actor = await OutgunnedActorDetails._getParticipant(config.partic.particId, config.partic.particType);
     if (!config.shiftKey){
       let usage = await OutgunnedChecks.RollDialog(config);
       if (usage) {
         config.defaultAtt = usage.get('selectAtt');
+        config.dangerRoll = usage.get('dangerRoll');
+        config.gamble = usage.get('gamble');
         config.difficulty = usage.get('difficulty');
         //If difficulty is impossible then ignore the doubledifficulty select - default is normal roll
         if (config.difficulty != 'impossible') {
           config.doubleDiff = Number(usage.get('doubleDiff'));
         }
         config.bonusDice = Number(usage.get('bonusDice'));
-        config.attScore = actor.system.abilities[config.defaultAtt].total;
-        config.attLabel = actor.system.abilities[config.defaultAtt].label;
+
+        if (config.rollType != 'attRoll') {
+          config.attScore = actor.system.abilities[config.defaultAtt].total;
+          config.attLabel = actor.system.abilities[config.defaultAtt].label;
+        }  
+
+        //If this is a danger roll update the check type
+        if (config.dangerRoll === 'true') {
+          config.type = 'danger';
+        } else {
+          config.type = 'action'       
+        }  
       }
     }
-  
+    //If this is a death Roulette roll then remove the Free Roll Option
+    config.freeRoll = false;
+    if(config.type === "death") {
+    }
+
+    //If this is a gamble roll add +1 Bonus
+    if (config.gamble === 'true') {
+      config.bonusDice++
+    }  
+
+    //Check for Condition Penalties for Action & Danger Rolls
+    if((config.type === "action" || config.type === "danger") && config.rollType != 'attRoll') {
+      if (actor.system.broken) {
+        config.bonusDice --;
+      }
+      if (actor.system.abilities[config.defaultAtt].condition) {
+        config.bonusDice --;
+      }
+      for (let i of actor.items) {
+        if (i.type === 'condition' && i.system.active && i.system.skill === config.skillLabel) {
+          config.bonusDice --;
+        }
+      }  
+    }  
+
     //If the roll is from a skill then prep the number of dice and label    
-    if (config.type === "action"){
+    if (config.type === "action" || config.type === "danger"){
       config.diceNumber = Math.max(config.skillScore + config.attScore + config.bonusDice,2)
       config.diceNumber = Math.min(config.diceNumber,9)
-      if (config.rollType === 'roll') {
+      if (config.rollType === 'roll' || config.rollType === 'attRoll') {
         config.originalDiceNumber = config.diceNumber
       }
     }
@@ -115,7 +186,12 @@ export class OutgunnedChecks {
 
   //Call Dice Roll, calculate Result and store result in rollVal
   static async makeRoll(config) {
-    config.label = game.i18n.localize('OG.' + config.type + '.' + config.rollType) +": " + config.attLabel + " - " + config.skillLabel
+    config.label = game.i18n.localize('OG.' + config.type + '.' + config.rollType)
+    if (config.rollType === 'attRoll') {
+      config.label = config.label +": " + config.attLabel
+    } else if (config.type != 'death') {    
+      config.label = config.label +": " + config.attLabel + " - " + config.skillLabel
+    }  
     let roll = new Roll(config.diceNumber+"D6");
     await roll.roll({ async: true});
     config.roll=roll;
@@ -155,17 +231,28 @@ export class OutgunnedChecks {
       }
     }
 
-
-
-
-
-
-
     //Calculate the success level - if no hasGenerateSuccess
-    config.successLevel = await OutgunnedChecks.successLevel (config)
+    config = await OutgunnedChecks.successLevel (config)
 
-    //On Roll Check to see if reRoll is an option
-    if (config.rollType === 'roll' && config.successLevel > 0) {
+    //If this is a damage Roll set the damage, and check for automated reduction
+    if (config.type === 'danger') {
+      if (config.successLevel > 2) {
+        config.damage = 0;
+      } else {
+        config.damage = Math.min(config.targetScore,12)
+      }  
+      if (game.settings.get('outgunned', 'damageControl') && config.difficulty != 'impossible') {
+        config.damage = Math.max((config.damage - config.rollResult.successes.total),0)
+      } 
+    }
+
+    //If a gamble roll then add Snakeyes to damage
+    if (config.gamble === 'true') {
+      config.damage = config.damage + config.rollResult.equals[1]
+    }
+
+    //On Action/Danger Roll Check to see if reRoll is an option
+    if (config.rollType === 'roll' && config.type != 'death' && config.successLevel > 0) {
       config.reRoll = true;
     } 
 
@@ -181,6 +268,14 @@ export class OutgunnedChecks {
     const html = await OutgunnedChecks.startChat(config);
     await OutgunnedChecks.showChat(html,config);
   
+    //If a failed Death Roulette roll & auto game setting active then add bullet to death roulette
+    if (config.successLevel === 5 && game.settings.get('outgunned', "autoDR")) {
+      let actor = await OutgunnedActorDetails._getParticipant(config.partic.particId, config.partic.particType);
+      if (actor.system.deathRoulette.value < 6) {
+        await actor.update({'system.deathRoulette.value': actor.system.deathRoulette.value+1});
+        ui.notifications.warn(game.i18n.localize('OG.msg.bulletAdded'));    
+      }  
+    }
     return;
   } 
 
@@ -193,6 +288,7 @@ export class OutgunnedChecks {
       label: options.label,
       rollType: options.rollType,
       defaultAtt: options.defaultAtt,
+      difficulty: options.difficulty,
       selectAttType,
     }
     const html = await renderTemplate(options.dialogTemplate,data);
@@ -222,30 +318,41 @@ export class OutgunnedChecks {
   static async successLevel (config) {
     let targetScore = 0;
     let successLevel = 0;
-    if (config.difficulty === "basic") {
-      targetScore = 1;
-    } else if (config.difficulty === "critical") {
-      targetScore = 3;
-    } else if (config.difficulty === "extreme") {
-      targetScore = 9;
-    }  else if (config.difficulty === "impossible") {
-      targetScore = 27;
+
+    if (config.type === 'death') {
+      if (config.roll.total > config.deathScore) {
+        successLevel = 5 //Narrow Escape
+      } else {
+        successLevel = -1 //Left for Dead
+      }    
+
+    } else {  
+      if (config.difficulty === "basic") {
+        targetScore = 1;
+      } else if (config.difficulty === "critical") {
+        targetScore = 3;
+      } else if (config.difficulty === "extreme") {
+        targetScore = 9;
+      }  else if (config.difficulty === "impossible") {
+        targetScore = 27;
+      }
+      targetScore = targetScore * config.doubleDiff;
+      if(config.rollResult.successes.total >= 81) {
+        successLevel = 4;  //Jackpot
+      } else if (config.rollResult.successes.total > targetScore) {
+        successLevel = 3;  // Higher Success
+      } else if (config.rollResult.successes.total >= targetScore) {
+        successLevel = 2;  // Success
+      } else if (config.rollResult.successes.total > 0) {
+        successLevel = 1;  //Partial Failure (some successes)
+      }
     }
-    targetScore = targetScore * config.doubleDiff;
-    if(config.rollResult.successes.total >= 81) {
-      successLevel = 4;
-    } else if (config.rollResult.successes.total > targetScore) {
-      successLevel = 3;
-    } else if (config.rollResult.successes.total >= targetScore) {
-      successLevel = 2;
-    } else if (config.rollResult.successes.total > 0) {
-      successLevel = 1;
-    }
-    return successLevel;
+    config.targetScore = targetScore;
+    config.successLevel = successLevel  
+    return config;
   }
 
- // Prep the chat card
-  //
+  // Prep the chat card
   static async startChat(config) {
     let actor = await OutgunnedActorDetails._getParticipant(config.partic.particId,config.partic.particType)
     let diffLabel = game.i18n.localize('OG.difficulty') +": " + game.i18n.localize('OG.'+config.difficulty);
@@ -253,23 +360,31 @@ export class OutgunnedChecks {
       diffLabel = game.i18n.localize('OG.double') +" "+ diffLabel
     }
     if (config.bonusDice > 0) {
-        diffLabel = diffLabel + "(+" + config.bonusDice + ")";
+        diffLabel = diffLabel + " (+" + config.bonusDice + ")";
       } else if (config.bonusDice < 0) {
-        diffLabel = diffLabel + "(" + config.bonusDice + ")";
+        diffLabel = diffLabel + " (" + config.bonusDice + ")";
       }  
+    if (config.gamble === 'true') {
+      diffLabel = diffLabel + " " + game.i18n.localize('OG.gamble')
+    }  
+
     let messageData = {
       origin: config.origin,
       originGM: config.originGM,
       speaker: ChatMessage.getSpeaker({ actor: actor.name }),
+      actor,
       type: config.type,
       rollType: config.rollType,
       label: config.label,
       rollResult: config.rollResult,
       rolledDice: config.rolledDice,
+      dangerRoll: config.dangerRoll,
+      damage: config.damage,
       closed: config.closed,
       reRoll: config.reRoll,
       pairsDice: config.rollResult.pairsDice,
       restDice: config.rollResult.restDice,
+      restDiceLength: config.rollResult.restDice.length,
       freeRoll: config.freeRoll,
       allIn: config.allIn,
       improve: config.improve,
@@ -300,7 +415,7 @@ export class OutgunnedChecks {
         },
     }
       
-    let msg = await ChatMessage.create(chatData);
+    await ChatMessage.create(chatData);
     return 
   }
 

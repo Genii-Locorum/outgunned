@@ -11,5 +11,6 @@
     "systems/outgunned/templates/actor/parts/actor-description.html",
     "systems/outgunned/templates/actor/parts/actor-feats.html",
     "systems/outgunned/templates/actor/parts/actor-rides.html",
+    "systems/outgunned/templates/actor/parts/actor-youLook.html",
   ]);
 };

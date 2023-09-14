@@ -1,4 +1,5 @@
 import { OutgunnedUtilities } from "../apps/utilities.mjs";
+import { OutgunnedChecks } from "../apps/checks.mjs";
 
 //Outgunned Menu Options
 export const skillMenuOptions = (actor,token) => [
@@ -143,6 +144,31 @@ export const featMenuOptions = (actor,token) => [
   }
 ]
 
+export const conditionMenuOptions = (actor,token) => [
+  {
+    name: game.i18n.localize("OG.condition"),
+    icon: "",
+    condition: () => true,
+    callback: (el) => {}
+  },
+  {
+    name: game.i18n.localize("OG.cm.view"),
+    icon: '<i class="fas fa-magnifying-glass"></i>',
+    condition: () => true,
+    callback: (el) => {
+      const itemId = OutgunnedUtilities.triggerEdit(el, actor, "itemId");
+    }
+  },
+  {
+    name: game.i18n.localize("OG.cm.delete"),
+    icon: '<i class="fas fa-trash"></i>',
+    condition: () => true,
+    callback: (el) => {
+      const itemId = OutgunnedUtilities.triggerDelete(el, actor, "itemId");
+    }
+  }
+]
+
 export const adrenalineMenuOptions = (actor,token) => [
   {
     name: game.i18n.localize("OG.adrenaline"),
@@ -181,6 +207,100 @@ export const spotlightMenuOptions = (actor,token) => [
     condition: () => true,
     callback: (el) => {
       const itemId = OutgunnedUtilities.spendSpotlight(el, actor,"spend");
+    }
+  }
+]
+
+export const catchphraseMenuOptions = (actor,token) => [
+  {
+    name: game.i18n.localize("OG.catchphrase"),
+    icon: "",
+    condition: () => true,
+    callback: (el) => {}
+  },
+  {
+    name: game.i18n.localize("OG.cm.view"),
+    icon: '<i class="fas fa-magnifying-glass"></i>',
+    condition: () => true,
+    callback: (el) => {
+      const itemId = OutgunnedUtilities.triggerEditActor(el, actor, "catchphrase");
+    }
+  }
+]
+
+export const flawMenuOptions = (actor,token) => [
+  {
+    name: game.i18n.localize("OG.flaw"),
+    icon: "",
+    condition: () => true,
+    callback: (el) => {}
+  },
+  {
+    name: game.i18n.localize("OG.cm.view"),
+    icon: '<i class="fas fa-magnifying-glass"></i>',
+    condition: () => true,
+    callback: (el) => {
+      const itemId = OutgunnedUtilities.triggerEditActor(el, actor, "flaw");
+    }
+  }
+]
+
+export const missionMenuOptions = (actor,token) => [
+  {
+    name: game.i18n.localize("OG.mission"),
+    icon: "",
+    condition: () => true,
+    callback: (el) => {}
+  },
+  {
+    name: game.i18n.localize("OG.cm.view"),
+    icon: '<i class="fas fa-magnifying-glass"></i>',
+    condition: () => true,
+    callback: (el) => {
+      const itemId = OutgunnedUtilities.triggerEditActor(el, actor, "mission");
+    }
+  }
+]
+
+export const deathRouletteMenuOptions = (actor,token) => [
+  {
+    name: game.i18n.localize("OG.deathRoulette"),
+    icon: "",
+    condition: () => true,
+    callback: (el) => {}
+  },
+  {
+    name: game.i18n.localize("OG.cm.roll"),
+    icon: '<i class="fas fa-dice"></i>',
+    condition: () => true,
+    callback: (el) => {
+      const itemId = OutgunnedChecks._deathRoulette(el, actor);
+    }
+  }
+]
+
+export const enemyGritMenuOptions = (actor,token) => [
+  {
+    name: game.i18n.localize("OG.grit"),
+    icon: "",
+    condition: () => true,
+    callback: (el) => {}
+  },
+  {
+    name: game.i18n.localize("OG.cm.maxGrit"),
+    icon: '<i class="fas fa-shield-plus"></i>',
+    condition: () => true,
+    callback: (el) => {
+      const itemId = OutgunnedUtilities.triggerEditActor(el, actor, "grit");
+    }
+  },
+
+  {
+    name: game.i18n.localize("OG.cm.toggleHot"),
+    icon: '<i class="fas fa-fire-flame-curved"></i>',
+    condition: () => true,
+    callback: (el) => {
+      const itemId = OutgunnedUtilities.triggerEditHot(el, actor);
     }
   }
 ]

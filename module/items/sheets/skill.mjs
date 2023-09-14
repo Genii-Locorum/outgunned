@@ -38,5 +38,21 @@ export class OutgunnedSkillSheet extends ItemSheet {
   activateListeners(html) {
     super.activateListeners(html);
     if (!this.isEditable) return;
+    html.find('.toggle').dblclick((event) => this._itemToggle(event));               
   }
+
+    //Toggle an actor value
+    async _itemToggle(event) {
+      const property = event.currentTarget.dataset.property;
+      let checkProp={};
+      let targetScore = 0;
+      if (property === "xp"){
+        targetScore = Number(event.currentTarget.dataset.target);
+        if (targetScore === this.item.system[property]) {targetScore = 0};
+        checkProp = {[`system.${property}`] : targetScore}
+      } else {
+        return
+      }
+      await this.item.update(checkProp)
+    }
 }

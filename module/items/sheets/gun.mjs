@@ -1,6 +1,6 @@
 import {OutgunnedSelectLists}  from "../../apps/select-lists.mjs";
 
-export class OutgunnedGearSheet extends ItemSheet {
+export class OutgunnedGunSheet extends ItemSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["outgunned", "sheet", "item"],
@@ -27,6 +27,7 @@ export class OutgunnedGearSheet extends ItemSheet {
     context.flags = itemData.flags;
     context.isGM =  game.user.isGM;
     context.displayLocList = await OutgunnedSelectLists.getLocationList();
+    context.displayMagsList = await OutgunnedSelectLists.getMagsList();
 
     return context;
   }
@@ -34,5 +35,17 @@ export class OutgunnedGearSheet extends ItemSheet {
   activateListeners(html) {
     super.activateListeners(html);
     if (!this.isEditable) return;
+      html.find('.toggle').dblclick(this.onItemToggle.bind(this));
   }
+
+  //Handle toggle states
+  async onItemToggle(event){
+    event.preventDefault();
+    const prop=event.currentTarget.closest('.toggle').dataset.property;
+    let checkProp = {[`system.feats.${prop}`]: !this.item.system.feats[prop]};
+    await this.object.update(checkProp);
+    return
+  }
+
+
 }

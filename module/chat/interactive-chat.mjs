@@ -1,6 +1,7 @@
 import { OutgunnedActorDetails } from "../apps/actorDetails.mjs";
 import { OutgunnedDiceRolls } from "../apps/dice-result.mjs";
 import { OutgunnedChecks } from "../apps/checks.mjs";
+import { OutgunnedUtilities } from '../apps/utilities.mjs';
 
 export class OutgunnedInteractiveChat {
 
@@ -14,6 +15,10 @@ static  async triggerChatButton(event){
     let origin = game.user.id;
     let originGM = game.user.isGM;
 
+    //Call confirmation
+    let confirmation = await OutgunnedUtilities.confirmation(presetType, "chatMsg")
+    if (!confirmation) {return}
+    
     //If this is GM then call the handleChatButton, otherwise it's a player in which case trigger Socket emit for the GM to act on
     if (game.user.isGM){
       OutgunnedInteractiveChat.handleChatButton ({presetType, targetChatId, origin, originGM})

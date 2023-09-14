@@ -1,11 +1,13 @@
 import {OutgunnedSelectLists}  from "../../apps/select-lists.mjs";
 
-export class OutgunnedGearSheet extends ItemSheet {
+export class OutgunnedExperienceSheet extends ItemSheet {
+
+
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["outgunned", "sheet", "item"],
       width: 520,
-      height: 600,
+      height: 200,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "attributes" }]
     });
   }
@@ -26,7 +28,7 @@ export class OutgunnedGearSheet extends ItemSheet {
     context.system = itemData.system;
     context.flags = itemData.flags;
     context.isGM =  game.user.isGM;
-    context.displayLocList = await OutgunnedSelectLists.getLocationList();
+    context.displayXPType = await OutgunnedSelectLists.getXPList();
 
     return context;
   }

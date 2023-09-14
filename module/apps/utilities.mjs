@@ -16,16 +16,23 @@ export class OutgunnedUtilities {
   static async getDataset(el, dataitem) {
     const elem = await el.target ? el.target : el[0];
     const element = await elem?.closest(".item");
+    console.log(element.dataset)
     return element.dataset[dataitem];
   }    
 
   static async confirmation(name, type) {
+    let title = ""
+      if (type === 'chatMsg') {
+        title = game.i18n.localize('OG.'+name)
+      } else {
+        title = game.i18n.localize('OG.delete') + ":" + game.i18n.localize('OG.'+type) + "(" + name +")";
+      }  
     let confirmation = await Dialog.confirm({
-        title: game.i18n.localize('OG.delete') + ":" + game.i18n.localize('OG.'+type) + "(" + name +")",
-        content: game.i18n.localize('OG.proceed'),
-      });
-      return confirmation;
-    }
+      title: title,
+      content: game.i18n.localize('OG.proceed'),
+    });
+    return confirmation;
+  }
 
   static async getDataFromDropEvent (event, entityType = 'Item') {
     if (event.originalEvent) return []
@@ -54,6 +61,49 @@ export class OutgunnedUtilities {
     item.sheet.render(true);
     return 
 }  
+
+static async triggerEditActor(el, actor, dataitem) {
+let currVal=""
+if (dataitem === 'grit') {
+  currVal = actor.system.grit.max
+}else {
+  currVal = actor.system[dataitem]
+}
+  const data = {
+    currVal,
+  }
+  const html = await renderTemplate('systems/outgunned/templates/dialog/catchPhrase.html',data);
+  let result = await new Promise(resolve => {
+    let formData = null
+    const dlg = new Dialog({
+      title: game.i18n.localize('OG.'+dataitem),
+      content: html,
+      buttons: {
+        confirm: {
+          label: game.i18n.localize("OG.confirm"),
+          callback: html => {
+          formData = new FormData(html[0].querySelector('#catchPhrase-form'))
+          return resolve(formData)
+          }
+        }
+      },
+    default: 'confirm',
+    close: () => {}
+    },{classes: ["outgunned", "sheet"]})
+    dlg.render(true);
+  })
+  let answer = result.get('newVal') 
+  if (dataitem === 'grit') {
+    answer = Number(answer);
+    if (!answer) {return} 
+    await actor.update({'system.grit.max': answer});
+  }else {
+    await actor.update({[`system.${dataitem}`]: answer});
+  }  
+
+
+  return 
+} 
 
   //Delete Age
   static async deleteAge (el, actor, dataitem) {
@@ -162,7 +212,6 @@ export class OutgunnedUtilities {
     const elem = await el.target ? el.target : el[0];
     const element = await elem?.closest(".attribute-name");
     const attName = element.dataset.attkey
-    console.log("VIEW ATTRIBUTE", attName)
     const dialogData ={}
     dialogData.attName= actor.system.abilities[attName].label
     dialogData.attValue= actor.system.abilities[attName].value
@@ -252,7 +301,6 @@ export class OutgunnedUtilities {
       selectedFriendId = usage.get('characterList');
     } 
   
-    console.log(selectedFriendId)
     return selectedFriendId
   }
 
@@ -318,6 +366,25 @@ export class OutgunnedUtilities {
       if (target.system.spotlight.value < 3) {
         await target.update({'system.spotlight.value': target.system.spotlight.value + 1});
       }  
+    }
+  }
+
+
+  static async triggerEditHot (el, actor) {
+    const elem = await el.target ? el.target : el[0]
+    const targetScore = Number(elem.dataset.target)
+    await actor.update({[`system.hot.${targetScore}`]: !actor.system.hot[targetScore]});
+  }
+
+  static async increaseHeat (change) {
+    let newHeat = game.settings.get('outgunned', 'heat') + Number(change)
+    if (newHeat < 1) {newHeat = 1};
+    if (newHeat > 12) {newHeat = 12};
+    await game.settings.set('outgunned', 'heat', newHeat);
+    for (const a of game.actors.contents) {
+      if (a.isOwner) {
+        a.render(false)
+      }
     }
   }
 

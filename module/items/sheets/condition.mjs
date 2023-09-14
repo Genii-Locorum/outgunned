@@ -1,6 +1,8 @@
 import {OutgunnedSelectLists}  from "../../apps/select-lists.mjs";
 
-export class OutgunnedGearSheet extends ItemSheet {
+export class OutgunnedConditionSheet extends ItemSheet {
+
+
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["outgunned", "sheet", "item"],
@@ -26,7 +28,11 @@ export class OutgunnedGearSheet extends ItemSheet {
     context.system = itemData.system;
     context.flags = itemData.flags;
     context.isGM =  game.user.isGM;
-    context.displayLocList = await OutgunnedSelectLists.getLocationList();
+    context.displayAttType = await OutgunnedSelectLists.getAllAttributeTypes();
+    context.attribute = context.displayAttType[this.item.system.attribute]
+
+    context.displaySkill = await OutgunnedSelectLists.getSkillList();
+    context.skill = context.displaySkill[this.item.system.skill]
 
     return context;
   }
@@ -34,5 +40,21 @@ export class OutgunnedGearSheet extends ItemSheet {
   activateListeners(html) {
     super.activateListeners(html);
     if (!this.isEditable) return;
+    html.find('.toggle').click(this.onItemToggle.bind(this));
   }
+
+  //Handle toggle states
+  async onItemToggle(event){
+    event.preventDefault();
+    const prop=event.currentTarget.closest('.toggle').dataset.property;
+    let checkProp={};
+    if (prop === 'active' || prop === 'common') {
+      checkProp = {[`system.${prop}`]: !this.item.system[prop]};
+    } else {
+      return
+    }
+    await this.object.update(checkProp);
+    return
+  } 
+
 }

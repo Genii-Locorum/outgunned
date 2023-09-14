@@ -33,10 +33,11 @@ export class OutgunnedActor extends Actor {
     const systemData = actorData.system;
     const flags = actorData.flags.outgunned || {};
 
-    // Make separate methods for each Actor type (character, npc, etc.) to keep
+    // Make separate methods for each Actor type (character, enemy, etc.) to keep
     // things organized.
     this._prepareCharacterData(actorData);
-    this._prepareNpcData(actorData);
+    this._prepareSupportData(actorData);
+    this._prepareEnemyData(actorData);
     this._prepareCommonData(actorData)
   }
 
@@ -48,11 +49,13 @@ export class OutgunnedActor extends Actor {
 
     // Make modifications to data here. For example:
     const systemData = actorData.system;
-
+    systemData.broken = false;
+    let totalXP = 0;
     // Loop through ability scores, and add their modifiers to our sheet output.
     for (let [key, ability] of Object.entries(systemData.abilities)) {
       ability.label = game.i18n.localize(CONFIG.OUTGUNNED.abilities[key]) ?? key;
       ability.total = Math.min(ability.value + ability.role + ability.trope + ability.xp,3);
+      ability.condition = false
     }
 
     //Loop through items and apply item specific impacts
@@ -64,16 +67,38 @@ export class OutgunnedActor extends Actor {
       } else if (i.type === "trope") {
         systemData.tropeId = i._id;
       }else if (i.type === "skill") {
+        totalXP = totalXP + i.system.xp;
         i.system.total = Math.min(i.system.value + i.system.role + i.system.trope + i.system.xp,3);
+      } else if (i.type === 'condition' && i.system.active) {
+        if (i.system.attribute === 'all'){
+          systemData.broken = true;
+        } else if (i.system.attribute !='na' && i.system.attribute != 'none') {
+          systemData.abilities[i.system.attribute].condition = true;
+        }
+      } else if (i.type === 'ride') {
+        if (i.system.flying || i.system.nautical || i.system.armoured) {
+          i.system.uncommon = true;
+        }
       }
-
     }  
+
+    systemData.advance = Math.floor(totalXP/2)
 
   }
 
+  _prepareSupportData(actorData) {
+    if (actorData.type !== 'support') return;
 
-  _prepareNpcData(actorData) {
-    if (actorData.type !== 'npc') return;
+      const systemData = actorData.system;
+      // Loop through ability scores, and add their modifiers to our sheet output.
+      for (let [key, ability] of Object.entries(systemData.abilities)) {
+        ability.label = game.i18n.localize(CONFIG.OUTGUNNED.abilities[key]) ?? key;
+        ability.total = Math.min(ability.value + ability.role + ability.trope + ability.xp,5);
+      }
+    }    
+
+  _prepareEnemyData(actorData) {
+    if (actorData.type !== 'enemy') return;
 
     // Make modifications to data here. For example:
     const systemData = actorData.system;
@@ -89,4 +114,60 @@ export class OutgunnedActor extends Actor {
     systemData.hp.value = systemData.grit.max - systemData.grit.value;
   }
 
+
+  /** @override */
+  static async create (data, options = {}) {
+    //When creating an actor set basics including tokenlink, bars, displays sight
+    if (data.type === 'character') {
+      data.prototypeToken = mergeObject(data.prototypeToken || {}, {
+        actorLink: true,
+        disposition: 1,
+        displayName: CONST.TOKEN_DISPLAY_MODES.ALWAYS,
+        displayBars: CONST.TOKEN_DISPLAY_MODES.ALWAYS,
+        sight: {
+          enabled: true
+        },
+        detectionModes: [{
+          id: 'basicSight',
+          range: 30,
+          enabled: true
+        }]
+      })
+    } else if (data.type === 'support') {
+      data.prototypeToken = mergeObject(data.prototypeToken || {}, {
+        actorLink: true,
+        disposition: 1,
+        displayName: CONST.TOKEN_DISPLAY_MODES.ALWAYS,
+        displayBars: CONST.TOKEN_DISPLAY_MODES.ALWAYS,
+        bar2: { attribute: null },
+        sight: {
+          enabled: true
+        },
+        detectionModes: [{
+          id: 'basicSight',
+          range: 30,
+          enabled: true
+        }]
+      })
+    }
+
+
+    let actor = await super.create(data, options)
+
+    //If an actor now add all skills to the sheet
+    if (data.type === 'character') {
+      let newData = []
+      for (let i of game.items){
+        if (i.type === 'skill' || (i.type === 'condition' && i.system.common)) {
+          newData.push(i)
+        }
+      }
+      await actor.createEmbeddedDocuments("Item", newData);
+    } else if (data.type === 'support') {
+      actor.update({'system.grit.max': 3});
+    } 
+
+     return 
+
+    }
 }

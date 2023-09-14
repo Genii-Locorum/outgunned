@@ -8,3 +8,14 @@ export const OUTGUNNED = {};
   "crime": "OUTGUNNED.AbilityCrime"
 };
 
+OUTGUNNED.difficultyList = {
+  "basic": "OG.basic",
+  "critical": "OG.critical",
+  "extreme": "OG.extreme",
+  "impossible": "OG.impossible"
+};
+
+OUTGUNNED.checkList = {
+  "action": "OG.action.roll",
+  "danger": "OG.danger.roll"
+};
