@@ -1,0 +1,103 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <div class="header-fields">
+      <div class="charname">{{localize 'OG.gear'}}:</div>
+    {{#if isGM}}
+      <div class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></div>
+    {{else}}
+      <div class="charname">{{item.name}}</div>
+    {{/if}}
+    </div>
+
+  </header>
+
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="attributes">{{ localize 'OG.attributes' }}</a>
+    <a class="item" data-tab="description">{{ localize 'OG.description' }}</a>
+    <a class="item" data-tab="image">{{ localize 'OG.image' }}</a>
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+  <br>  
+    {{!-- Attributes Tab --}}
+    <div class="tab attributes" data-group="primary" data-tab="attributes">
+      <div class="item-skill-grid">
+        <div class="info-cell borderless left bold">{{localize 'OG.cost'}} ($)</div>          
+        {{#if isGM}}
+          <div class="info-cell borderless centre"><input name="system.cost" type="text" value="{{item.system.cost}}" data-dtype="Number"/></div>
+        {{else}}
+          <div class="select-name centre">{{item.system.cost}}</div>
+        {{/if}}
+        <br>
+
+        <div class="new-row info-cell borderless left bold">{{localize 'OG.speed'}}</div>          
+        {{#if isGM}}
+          <div class="info-cell borderless centre"><input name="system.speed.start" type="text" value="{{item.system.speed.start}}" data-dtype="Number"/></div>
+        {{else}}
+          <div class="select-name centre">{{item.system.speed.start}}</div>
+        {{/if}}
+        <br>
+
+        <div class="new-row info-cell borderless left bold">{{localize 'OG.armour'}}</div>          
+        {{#if isGM}}
+          <div class="info-cell borderless centre"><input name="system.armour.max" type="text" value="{{item.system.armour.max}}" data-dtype="Number"/></div>
+        {{else}}
+          <div class="select-name centre">{{item.system.armour.max}}</div>
+        {{/if}}
+        <br>
+    </div>
+
+    <div class="">{{localize 'OG.rideType'}}</div>    
+    <div class="rideType-grid">
+      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.bike}}red{{/if}}" data-property="bike"><i title= "{{localize 'OG.bike'}}" class="fa-solid fa-motorcycle"></i></a></div>  
+      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.car}}red{{/if}}" data-property="car"><i title= "{{localize 'OG.car'}}" class="fa-solid fa-car-side"></i></a></div>  
+      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.nautical}}red{{/if}}" data-property="nautical"><i title= "{{localize 'OG.nautical'}}" class="fa-solid fa-ship"></i></a></div>  
+      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.flying}}red{{/if}}" data-property="flying"><i title= "{{localize 'OG.flying'}}" class="fa-solid fa-helicopter"></i></a></div>  
+      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.armoured}}red{{/if}}" data-property="armoured"><i title= "{{localize 'OG.armoured'}}" class="fa-solid fa-truck-monster"></i></a></div>  
+    </div>
+    <br>
+
+
+    {{!-- Selected Items --}}
+    <div class="horizontalboxed {{#if isGM}} droppable {{/if}} skills">
+    <div class="select-name">{{ localize "OG.items"}}</div>
+    <ol class="item-list">
+      {{#each items as |item|}}
+        <li class="item flexrow" data-item-id="{{item._id}}" >
+          <div class="item-name flexrow">
+            <div class="item-list-name">{{item.name}}</div>
+          </div>
+
+          <div class="item-controls">
+            {{#if ../isGM}}
+              <a class="item-control item-delete items" title="{{localize 'OG.deleteItem'}}"><i class="fas fa-trash"></i></a>
+            {{/if}}
+          </div>
+        </li>
+      {{/each}}
+    </ol>
+    </div>
+
+    <br>
+
+
+
+      <div title="{{localize 'OG.shortDescHint'}}">{{localize 'OG.shortDesc'}}</div>
+      <div class="info-cell bordered"><input name="system.shortDesc" type="text" value="{{item.system.shortDesc}}"/></div>
+
+
+    </div>
+    
+    {{!-- Description Tab --}}
+    <div class="tab" data-group="primary" data-tab="description">
+      {{editor item.system.description class="background-item-doc" target="system.description" button=true owner=owner editable=editable}}
+    </div>
+
+    {{!-- Image Tab --}}
+    <div class="tab image" data-group="primary" data-tab="image">
+      <img class="profile-img" src="{{item.img}}" data-edit="img" height="200" width="200" title="{{item.name}}"/>
+    </div>
+  </section>
+</form>

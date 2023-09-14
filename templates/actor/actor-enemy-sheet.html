@@ -1,0 +1,98 @@
+<form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+
+  <section class="main-enemy-sheet">    
+    <div class="enemy-header">
+      <div class="enemy-name"><input class="enemy-name" name="name" type="text" value="{{actor.name}}"/></div>
+      <div class=" thin centre">
+        <select  data-handle-change name="system.enemyType">
+          {{selectOptions displayEnemyList selected=actor.system.enemyType}}
+        </select>
+      </div>
+    </div>
+
+
+
+    <div class="enemy-stats-grid">
+      <div class="grit">
+        {{#each actor.system.hot as |value key|}}
+          {{#if (lte key ../actor.system.grit.max)}}  
+            {{#unless value}}
+              <a class="red medium-icon actor-toggle clickable enemy-grit contextmenu" data-property="grit" data-target = {{key}}><i class="{{#if (gte ../actor.system.grit.value key)}}fa-solid fa-shield{{else}}fa-regular fa-shield{{/if}}"></i></a>
+            {{else}}  
+              <a class="red medium-icon actor-toggle clickable enemy-grit contextmenu" data-property="grit" data-target = {{key}}><i class="{{#if (gte ../actor.system.grit.value key)}}fa-solid fa-fire-flame-curved{{else}}fa-regular fa-fire-flame-curved{{/if}}"></i></a>
+            {{/unless}}  
+          {{/if}}  
+        {{/each}}
+      </div>    
+
+      <div class="grit">
+        {{#loop 1 system.adrenaline.max 1}}
+          <a class="red medium-icon actor-toggle clickable" data-property="adrenaline" data-target = {{this}} ><i class="{{#if (gte ../actor.system.adrenaline.value this)}}fa-solid fa-battery-full fa-rotate-270{{else}}fa-solid fa-battery-empty fa-rotate-270{{/if}}"></i></a>
+        {{/loop}}
+      </div>  
+    </div>
+
+    <div class="enemy-grid">
+      <div class="middle">{{localize 'OG.attack'}}</div>
+      <div class=" thin centre">
+        <select  data-handle-change name="system.attack.rating">
+          {{selectOptions displayDiffList selected=actor.system.attack.rating}}
+        </select>
+      </div>
+      <div class="thin centre">
+        <select data-handle-change name="system.attack.value">
+          {{selectOptions displayMultiList selected=actor.system.attack.value}}
+        </select>
+      </div>
+      
+      <div class="middle">{{localize 'OG.defence'}}</div>
+      <div class="thin centre">
+        <select data-handle-change name="system.defence.rating">
+          {{selectOptions displayDiffList selected=actor.system.defence.rating}}
+        </select>
+      </div>
+      <div class="thin centre">
+        <select data-handle-change name="system.defence.value">
+          {{selectOptions displayMultiList selected=actor.system.defence.value}}
+        </select>
+      </div>
+    </div>
+    <br>
+
+    <div class="enemy-feat-top">{{localize 'OG.feats'}}</div>
+    <ol class="items-list">
+    {{#each feats as |feat key|}}
+        <li class="item" data-item-id="{{feat._id}}">
+          <div class="enemy-feat-grid">
+            <div class="gear-cell" title="{{{feat.system.shortDesc}}}">{{feat.name}}</div>
+            <div class="centre gear-cell" title="{{localize 'OG.edit'}}"><a class="item-edit clickable"><i class="fa-solid fa-magnifying-glass"></i></a></div>
+            <div class="centre gear-cell" title="{{localize 'OG.delete'}}"><a class="item-delete clickable"><i class="fa-solid fa-trash"></i></a></div>
+          </div>
+        </li> 
+      {{/each}}
+    </ol>
+
+    <br>
+
+    <div class="enemy-feat-top">{{localize 'OG.specialActions'}}</div>
+    <ol class="items-list">
+    {{#each actions as |action key|}}
+        <li class="item" data-item-id="{{action._id}}">
+          <div class="enemy-feat-grid">
+            <div class="gear-cell" title="{{{action.system.shortDesc}}}">{{action.name}} ({{action.system.cost}})</div>
+            <div class="centre gear-cell" title="{{localize 'OG.edit'}}"><a class="item-edit clickable"><i class="fa-solid fa-magnifying-glass"></i></a></div>
+            <div class="centre gear-cell" title="{{localize 'OG.delete'}}"><a class="item-delete clickable"><i class="fa-solid fa-trash"></i></a></div>
+          </div>
+        </li> 
+      {{/each}}
+    </ol>
+
+    {{#if (eq actor.system.enemyType 'boss')}}
+      <br>
+      <div class="red">{{localize 'OG.strengths'}}</div>
+      <div>
+        {{editor system.strengths class="background-doc" target="system.strengths" button=true owner=owner editable=editable}}
+      </div> 
+    {{/if}}
+  </section>  
+</form>

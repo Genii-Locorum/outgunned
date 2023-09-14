@@ -54,8 +54,8 @@
         
         <div class="new-row select-name indent left">{{localize 'OG.xp'}}</div>
         <div>
-          <a class="large-icon"><i class="{{#if (gte item.system.xp 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
-          <a class="large-icon"><i class="{{#if (gte item.system.xp 2)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          <a class="large-icon toggle" data-property="xp" data-target = 1><i class="{{#if (gte item.system.xp 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          <a class="large-icon toggle" data-property="xp" data-target = 2><i class="{{#if (gte item.system.xp 2)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
         </div>
 
 

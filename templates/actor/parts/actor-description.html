@@ -1,15 +1,53 @@
-    <div>
-        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="150" width="150"/>
+    <div class="enemy-header">
+      <div>  
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+      </div>
+      <div>
+        <div title="{{localize 'OG.advancedHint'}}">{{localize 'OG.advanced'}}</div>
+        <div>
+          <a class="large-icon"><i class="{{#if (gte actor.system.advance 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          <a class="large-icon"><i class="{{#if (gte actor.system.advance 2)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          <a class="large-icon"><i class="{{#if (gte actor.system.advance 3)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+        </div>
+      </div>  
     </div>
     
-    <div class="title">{{localize 'OG.experiences'}}</div>
-    <div>
-      {{editor system.experiences class="background-doc" target="system.experiences" button=true owner=owner editable=editable}}
-    </div>    
-
+    <ol class="items-list">
+      <div class="gear-grid">
+        <div class="gear-cell-top red">{{localize 'OG.experiences'}}</div>
+        <div class="gear-cell-top"></div>
+        <div class="gear-cell-top centre item-control item-create" title="{{localize 'OG.createGear'}}" data-type="experience"><a class="centre red clickable" ><i class="fa-solid fa-plus"></i></a></div>
+      </div>  
+      {{#each experiences as |experience id|}}
+        <li class="item" data-item-id="{{experience._id}}">  
+          <div class="gear-grid">
+            <div class = "gear-cell-start indent">{{experience.system.shortDesc}}</div>
+            <div class = "gear-cell middle centre"><a class="">
+            {{#if (eq experience.system.variant 'achievement')}} 
+              <i title = "{{localize 'OG.achievement'}}" class="fa-solid fa-seal"></i>
+            {{/if}}
+            {{#if (eq experience.system.variant 'scar')}} 
+              <i title = "{{localize 'OG.scar'}}" class="fa-solid fa-bolt"></i>
+            {{/if}}
+            {{#if (eq experience.system.variant 'bond')}} 
+            <i title = "{{localize 'OG.bond'}}" class="fa-solid fa-user-group"></i>
+            {{/if}}
+            {{#if (eq experience.system.variant 'reputation')}} 
+              <i title = "{{localize 'OG.reputation'}}" class="fa-solid fa-sparkles"></i>
+            {{/if}}    
+            </a></div>
+            {{#if ../isLocked}}
+              <div class="centre middle gear-cell" title="{{localize 'OG.edit'}}"><a class="item-edit clickable"><i class="fa-solid fa-magnifying-glass"></i></a></div>
+            {{else}}  
+              <div class="centre middle gear-cell" title="{{localize 'OG.delete'}}"><a class="item-delete clickable"><i class="fa-solid fa-trash"></i></a></div>
+            {{/if}}   
+          </div>  
+        </li>
+      {{/each}}  
+    </ol>
     <br>
 
-    <div class="title">{{localize 'OG.background'}}</div>
+    <div class="red">{{localize 'OG.background'}}</div>
     <div>
       {{editor system.biography class="background-doc" target="system.biography" button=true owner=owner editable=editable}}
     </div>    

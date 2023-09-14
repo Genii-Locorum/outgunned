@@ -3,43 +3,24 @@
       <div style="display: block">  
         <div class="flavour-result"> 
           <div>{{label}}</div>
-          <div>{{diffLabel}}</div> 
-        </div>
+          {{#unless (eq type 'death')}}
+            <div>{{diffLabel}}</div> 
+          {{/unless}}
+          </div>
   
-          <div class="flavour-result">
-            {{#if (eq successLevel 4)}} 
-              <div class="roll-icons">{{resultLabel}}: <i class=" result-success fas fa-bolt"></i><i class=" result-success fas fa-bolt"></i><i class="result-success fas fa-bolt"></i></div>
-            {{/if}}
-
-            {{#if (eq successLevel 3)}} 
-              <div class="roll-icons">{{resultLabel}}: <i class=" result-success fas fa-bolt"></i><i class="result-success fas fa-bolt"></i></div>
-            {{/if}}
-
-            {{#if (eq successLevel 2)}} 
-              <div class="roll-icons">{{resultLabel}}: <i class=" result-success fas fa-bolt"></i></div>
-            {{/if}}
-
-            {{#if (eq successLevel 1)}} 
-              <div class="roll-icons">{{resultLabel}}: <i class=" result-fail fas fa-skull"></i></div>
-            {{/if}}
-
-            {{#if (eq successLevel 0)}} 
-              <div class="roll-icons">{{resultLabel}}: <i class=" result-fail fas fa-skull"></i><i class=" result-fail fas fa-skull"></i></div>
-            {{/if}}
-
-            </div>  
-
         <div class="dice-result">
           <div class="dice-tooltip">
             <div class="owner-only" style="display:block">
               <div class="card-buttons" style="padding: 2px 0;margin: 0;">
                 <div>{{localize 'OG.rolled'}}: {{rolledDice}}</div>
                 {{#unless (eq rollType 'roll')}}
-                  {{#if improve}}  
-                    <div>{{localize 'OG.improved'}}</div>
-                  {{else}}               
-                    <div>{{localize 'OG.worse'}}</div>
-                  {{/if}}
+                  {{#unless (eq rollType 'attRoll')}}
+                    {{#if improve}}  
+                      <div>{{localize 'OG.improved'}}</div>
+                    {{else}}               
+                      <div>{{localize 'OG.worse'}}</div>
+                    {{/if}}
+                  {{/unless}}
                 {{/unless}}
 
                 {{#if reRoll}}
@@ -54,25 +35,72 @@
                 {{#if closed}}
                   <div class="align-center dice-total" >
                     <span class="result-success">{{pairsDice}}<span>
-                    <span class="result-fail">[{{restDice}}]</span>
-                    </div>
+                    {{#if (gt restDiceLength 0)}}
+                      <span class="result-fail">[{{restDice}}]</span>
+                    {{/if}}
+                  </div>
+                  <div class="align-center dice-total" >  {{resultLabel}}</div>
                 {{/if}}
               <div class="bottomline"> </div>
             </div>
             </div>
           </div>
   
+          {{#unless closed}}
+            <div class="align-center dice-total">
+              {{#if (eq successLevel 5)}} 
+                <div class="roll-icons">{{resultLabel}}: <i class=" result-success fas fa-bolt"></i></div>
+              {{/if}}
 
-          
+              {{#if (eq successLevel 4)}} 
+                <div class="roll-icons">{{resultLabel}}: <i class=" result-success fas fa-bolt"></i><i class=" result-success fas fa-bolt"></i><i class="result-success fas fa-bolt"></i></div>
+              {{/if}}
+
+              {{#if (eq successLevel 3)}} 
+                <div class="roll-icons">{{resultLabel}}: <i class=" result-success fas fa-bolt"></i><i class="result-success fas fa-bolt"></i></div>
+              {{/if}}
+
+              {{#if (eq successLevel 2)}} 
+                <div class="roll-icons">{{resultLabel}}: <i class=" result-success fas fa-bolt"></i></div>
+              {{/if}}
+
+              {{#if (eq successLevel 1)}} 
+                <div class="roll-icons">{{resultLabel}}: <i class=" result-fail fas fa-skull"></i></div>
+              {{/if}}
+
+              {{#if (eq successLevel 0)}} 
+                <div class="roll-icons">{{resultLabel}}: <i class=" result-fail fas fa-skull"></i><i class=" result-fail fas fa-skull"></i></div>
+              {{/if}}
+
+              {{#if (eq successLevel -1)}} 
+                <div class="roll-icons">{{resultLabel}}: <i class=" result-fail fas fa-skull"></i></div>
+              {{/if}}
+            </div>
+
+              {{#if (gt damage 0)}}
+                {{#if (gte actor.system.grit.value actor.system.grit.max)}}  
+                  <div class="align-center dice-total">
+                    <div class="red">{{localize 'OG.deathRoulette'}}: ({{damage}})</div>    
+                  </div>
+                {{else}}
+                  <div class="align-center dice-total">
+                    <div class="">{{localize 'OG.gritDamage'}}: {{damage}}</div>    
+                  </div> 
+                {{/if}}   
+              {{/if}}
+          {{/unless}}
+
           {{#if closed}}
-            <h3 class="align-center dice-total" >
+            <div class="align-center dice-total" >
               {{ localize 'OG.closed'}}
-            </h3>
+            </div>
           {{else}}
-            <h3 class="{{#if (gt successLevel 1)}}cream {{/if}} align-center dice-total" >
+            <div class="{{#if (gt successLevel 1)}}cream {{/if}} align-center dice-total" >
               <span class="result-success" title="{{ localize 'OG.successDice' }}">{{pairsDice}}<span>
-              <span class="result-fail" title="{{ localize 'OG.failDice' }}">[{{restDice}}]</span>
-            </h3>    
+              {{#if (gt restDiceLength 0)}}
+                <span class="result-fail" title="{{ localize 'OG.failDice' }}">[{{restDice}}]</span>
+              {{/if}}  
+              </div>    
           {{/if}}    
           
          

@@ -1,3 +1,100 @@
 <ol class="items-list">
+  
+  {{!- Guns Section}}
+  <div class="guns-grid">
+    <div class="gun-cell-top red">{{localize 'OG.guns'}}</div>
+    <div class="gun-cell-top centre red">{{localize 'OG.feats'}}</div>
+    <div class="gun-cell-top centre red" title="{{localize 'OG.meleeRange'}}">{{localize 'OG.meleeAbbr'}}</div>
+    <div class="gun-cell-top centre red" title="{{localize 'OG.closeRange'}}">{{localize 'OG.closeAbbr'}}</div>
+    <div class="gun-cell-top centre red" title="{{localize 'OG.mediumRange'}}">{{localize 'OG.mediumAbbr'}}</div>
+    <div class="gun-cell-top centre red" title="{{localize 'OG.longRange'}}">{{localize 'OG.longAbbr'}}</div>  
+    <div class="gun-cell-top centre red" title="{{localize 'OG.magsHint'}}">{{localize 'OG.magsAbbr'}}</div>
+    <div class="gun-cell-top centre red" title="{{localize 'OG.keptHint'}}">{{localize 'OG.keptAbbr'}}</div>  
+    <div class="gun-cell-top centre red">&nbsp</div>  
+  </div>
+  {{#each guns as |gun id|}}
+    <li class="item" data-item-id="{{gun._id}}">
+      <div class="guns-grid">
+        <div class="indent gear-cell-start">{{gun.name}}</div>
+        <div class="centre gear-cell">
+          <a class="">
+              <i title= "{{localize 'OG.accurate'}}" class="{{#if gun.system.feats.accurate}}fa-solid fa-bullseye{{/if}}"></i>  
+              <i title="{{localize 'OG.explosive'}}" class="{{#if gun.system.feats.explosive}}fa-solid fa-explosion{{/if}}"></i> 
+              <i title="{{localize 'OG.jam'}}" class="{{#if gun.system.feats.jam}}fa-solid fa-hammer-crash{{/if}}"></i>  
+              <i title="{{localize 'OG.precision'}}" class="{{#if gun.system.feats.precision}}fa-solid fa-crosshairs-simple{{/if}}"></i>  
+              <i title="{{localize 'OG.rapid'}}" class="{{#if gun.system.feats.rapid}}fa-solid fa-person-falling-burst{{/if}}"></i>  
+              <i title="{{localize 'OG.short'}}" class="{{#if gun.system.feats.short}}fa-solid fa-arrow-down-short-wide{{/if}}"></i>  
+              <i title="{{localize 'OG.silent'}}" class="{{#if gun.system.feats.silent}}fa-solid fa-volume-slash{{/if}}"></i>  
+              <i title="{{localize 'OG.single'}}" class="{{#if gun.system.feats.single}}fa-solid fa-bow-arrow{{/if}}"></i>  
+              <i title="{{localize 'OG.slow'}}" class="{{#if gun.system.feats.slow}}fa-solid fa-turtle{{/if}}"></i>  
+          </a>          
+          
+        </div>
+        <div class="centre gear-cell">{{gun.system.range.melee}}</div>
+        <div class="centre gear-cell">{{gun.system.range.close}}</div>
+        <div class="centre gear-cell">{{gun.system.range.medium}}</div>
+        <div class="centre gear-cell">{{gun.system.range.long}}</div>
+        <div class="gear-cell"><input class="blue centre inline-edit" data-field="system.mags" name="guns.system.mags" type="text" value="{{gun.system.mags}}" data-dtype="Number"/></div>
+        {{#if (eq gun.system.location 'worn')}}
+          <div class="centre gear-cell"><a class="item-toggle clickable" data-property="worn" title="{{localize 'OG.worn'}}"><i class="fa-solid fa-user"></i></a></div>         
+        {{else}}
+          {{#if (eq gun.system.location 'bag')}}
+            <div class="centre gear-cell"><a class="item-toggle clickable" data-property="bag" title="{{localize 'OG.bag'}}"><i class="fa-solid fa-briefcase"></i></a></div>         
+          {{else}}
+            <div class="centre gear-cell"><a class="item-toggle clickable" data-property="storage" title="{{localize 'OG.storage'}}"><i class="fa-solid fa-warehouse"></i></a></div>              
+          {{/if}}
+        {{/if}}
+
+        {{#if ../isLocked}}
+          <div class="centre gear-cell" title="{{localize 'OG.edit'}}"><a class="item-edit clickable"><i class="fa-solid fa-magnifying-glass"></i></a></div>
+        {{else}}  
+          <div class="centre gear-cell" title="{{localize 'OG.delete'}}"><a class="item-delete clickable"><i class="fa-solid fa-trash"></i></a></div>
+        {{/if}} 
+      </div>  
+    </li>
+  {{/each}}    
+  
+  
+  {{!- Gear Section}}
+  <br>
+  <div class="gear-grid">
+    <div class="gear-cell-top red">{{localize 'OG.gear'}}</div>
+    <div class="gear-cell-top"></div>
+    <div class="gear-cell-top centre item-control item-create" title="{{localize 'OG.createGear'}}" data-type="gear"><a class="centre red clickable" ><i class="fa-solid fa-plus"></i></a></div>
+  </div>  
+  {{#each gear as |gear id|}}
+    <li class="item" data-item-id="{{gear._id}}">
+      <div class="gear-grid">
+        <div class="indent gear-cell-start" title="{{gear.system.shortDesc}}">{{gear.name}}</div>
+        {{#if (eq gear.system.location 'worn')}}
+          <div class="centre gear-cell"><a class="item-toggle clickable" data-property="worn" title="{{localize 'OG.worn'}}"><i class="fa-solid fa-user"></i></a></div>         
+        {{else}}
+          {{#if (eq gear.system.location 'bag')}}
+            <div class="centre gear-cell"><a class="item-toggle clickable" data-property="bag" title="{{localize 'OG.bag'}}"><i class="fa-solid fa-briefcase"></i></a></div>         
+          {{else}}
+            <div class="centre gear-cell"><a class="item-toggle clickable" data-property="storage" title="{{localize 'OG.storage'}}"><i class="fa-solid fa-warehouse"></i></a></div>              
+          {{/if}}
+        {{/if}}
+        {{#if ../isLocked}}
+           <div class="centre gear-cell" title="{{localize 'OG.edit'}}"><a class="item-edit clickable"><i class="fa-solid fa-magnifying-glass"></i></a></div>
+        {{else}}  
+           <div class="centre gear-cell" title="{{localize 'OG.delete'}}"><a class="item-delete clickable"><i class="fa-solid fa-trash"></i></a></div>
+        {{/if}}  
+      </div>
+   </li>
+  {{/each}}
+  <br>
+
+  {{! Cash Section}}
+  <div class="red">{{localize 'OG.cash'}}</div>
+  <div class="cash-grid">
+
+    {{#loop 1 5 1}}
+      <div class="centre middle"><a class="mediumplus-icon clickable actor-toggle" data-property="cash" data-target = {{this}}>
+        <i class="{{#if (gte ../actor.system.cash this)}}fa-solid fa-circle-dollar{{else}}fa-regular fa-circle-dollar{{/if}}"></i>
+      </a></div>
+    {{/loop}}
+  </div>
+
 
 </ol>

@@ -1,12 +1,12 @@
 <form class="{{cssClass}}" autocomplete="off">
   <header class="sheet-header">
     <div class="header-fields">
-      <div class="charname">{{localize 'OG.gear'}}:</div>
-    {{#if isGM}}
-      <div class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></div>
-    {{else}}
-      <div class="charname">{{item.name}}</div>
-    {{/if}}
+      <div class="charname">{{localize 'OG.enemyFeat'}}:</div>
+      {{#if isGM}}
+        <div class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></div>
+      {{else}}
+        <div class="charname">{{item.name}}</div>
+      {{/if}}
     </div>
 
   </header>
@@ -23,31 +23,23 @@
   <br>  
     {{!-- Attributes Tab --}}
     <div class="tab attributes" data-group="primary" data-tab="attributes">
-      <div class="item-skill-grid">
-        <div class="info-cell borderless left bold">{{localize 'OG.cost'}} ($)</div>          
-        {{#if isGM}}
-          <div class="info-cell borderless centre"><input name="system.cost" type="text" value="{{item.system.cost}}" data-dtype="Number"/></div>
-        {{else}}
-          <div class="select-name centre">{{item.system.cost}}</div>
-        {{/if}}
-        <br>
 
-        <div class="new-row select-name left bold">{{localize 'OG.kept'}}</div>          
-        <div class="centre">
-        <select data-handle-change name="system.location">
-          {{selectOptions displayLocList selected=item.system.location}}
-        </select>
-        </div>
+      <div class="item-skill-grid">
+        <div class="select-name left bold">{{localize 'OG.cost'}}</div>  
+        {{#if isGM}}
+          <div class="centre"><input name="system.cost" type="text" value="{{item.system.cost}}"/></div>
+        {{else}}
+          <div class="centre">{{item.system.cost}}</div>
+        {{/if}}
+      </div>  
       <br>
-    </div>
 
       <div title="{{localize 'OG.shortDescHint'}}">{{localize 'OG.shortDesc'}}</div>
-      <div class="info-cell bordered"><input name="system.shortDesc" type="text" value="{{item.system.shortDesc}}"/></div>
-
-
+      <div class=""><input name="system.shortDesc" type="text" value="{{item.system.shortDesc}}"/></div>
     </div>
-    
+
     {{!-- Description Tab --}}
+
     <div class="tab" data-group="primary" data-tab="description">
       {{editor item.system.description class="background-item-doc" target="system.description" button=true owner=owner editable=editable}}
     </div>

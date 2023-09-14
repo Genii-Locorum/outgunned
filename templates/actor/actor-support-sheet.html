@@ -1,0 +1,39 @@
+<form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+
+  <section class="main-enemy-sheet">    
+    <div class="enemy-header">
+      <div class="enemy-name"><input class="enemy-name" name="name" type="text" value="{{actor.name}}"/></div>
+    </div>
+    <br>
+
+    <div class="">{{localize 'OG.help'}}</div>
+    <div class=""><input class="" name="system.help" type="text" value="{{actor.system.help}}"/></div>
+    <br>
+
+    <div class="">{{localize 'OG.flaw'}}</div>
+    <div class=""><input class="" name="system.flaw" type="text" value="{{actor.system.flaw}}"/></div>
+    <br>
+
+    <div class="support-abilities-grid">
+      {{#each system.abilities as |ability key|}}
+        <div class="indent upperCase rollable attribute" data-attkey = {{key}}>{{ability.label}}</div>
+        <div>
+          {{#loop 1 5 1}}
+            <a class="actor-toggle clickable" data-property="attribute" data-attKey = {{key}} data-target={{this}}><i class="{{#if (gte ability.total this)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          {{/loop}}
+        </div>
+      {{/each}}  
+    </div>    
+    <br>
+
+    <div class="centre grit">
+      {{#loop 1 system.grit.max 1}}
+          <a class="red large-icon actor-toggle clickable" data-property="grit" data-target = {{this}}>
+            <i class="{{#if (gte ../actor.system.grit.value this)}}fa-solid fa-shield{{else}}fa-regular fa-shield{{/if}}"></i>
+          </a>
+      {{/loop}}
+    </div>  
+
+
+  </section>  
+</form>

@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character"],
+    "types": ["character","support","enemy"],
     "templates": {
       "base": {
         "grit": {
@@ -68,7 +68,6 @@
         }
       },
       "role":"",
-      "experiences": "",
       "trope":"",
       "job": "",
       "age": "",
@@ -80,10 +79,74 @@
       "cash": 1,
       "mission": "",
       "locked": false
-    }
+    },
+    "support": {
+      "templates": ["base"],
+      "abilities": {
+        "brawn": {
+          "value": 3,
+          "role": 0,
+          "trope":0,
+          "xp": 0
+        },
+        "nerves": {
+          "value": 3,
+          "role": 0,
+          "trope":0,
+          "xp": 0
+        },
+        "smooth": {
+          "value": 3,
+          "role": 0,
+          "trope":0,
+          "xp": 0
+        },
+        "focus": {
+          "value": 3,
+          "role": 0,
+          "trope":0,
+          "xp": 0
+        },
+        "crime": {
+          "value": 3,
+          "role": 0,
+          "trope":0,
+          "xp": 0
+        }
+      },
+      "help": "",
+      "flaw": ""
+    },
+    "enemy": {
+      "templates": ["base"],
+      "enemyType": "goon",
+      "attack": {
+        "value": 1,
+        "rating": "basic"
+      },
+      "defense": {
+        "value": 1,
+        "rating": "basic"
+      },
+      "strengths": "",      
+      "hot": {
+        "1" : false,
+        "2" : false,
+        "3" : false,
+        "4" : false,
+        "5" : false,
+        "6" : false,
+        "7" : false,
+        "8" : false,
+        "9" : false,
+        "10" : false,
+        "11" : false,
+        "12" : false
+      }
+    }      
   },
   "Item": {
-    "types": ["gear","skill","role","feat","age", "trope"],
+    "types": ["gear","gun","ride","skill","role","feat","age", "trope","condition","enemyFeat","specialAction", "experience", "chase"],
     "templates": {
       "base": {
         "description": ""
@@ -91,9 +154,54 @@
     },
     "gear": {
       "templates": ["base"],
-      "quantity": 1,
-      "weight": 0
-    },
+      "cost": 0,
+      "shortDesc": "",
+      "location": "worn"
+      },
+      "gun": {
+        "templates": ["base"],
+        "cost": 0,
+        "shortDesc": "",
+        "location": "worn",
+        "mags":0,
+        "feats": {
+          "accurate": false,
+          "explosive": false,
+          "jam": false,
+          "precision": false,
+          "rapid": false,
+          "short": false,
+          "silent": false,
+          "single": false,
+          "slow": false
+        },
+        "range": {
+          "melee": "0",
+          "close": "0",
+          "medium": "0",
+          "long": "0"
+        }
+      },
+    "ride": {
+      "templates": ["base"],
+      "cost": 0,
+      "shortDesc": "",
+      "bike": false,
+      "car": false,
+      "nautical": false,
+      "flying": false,
+      "armoured": false,
+      "speed": {
+        "start": 1,
+        "value": 0
+      },
+      "armour": {
+        "max": 3,
+        "value": 3
+      },  
+      "uncommon": false,
+      "items" : []
+      },
     "skill": {
       "templates": ["base"],
       "value": 1,
@@ -132,6 +240,43 @@
       "attribute2": "nerves",
       "skills": [],
       "feats": []
+    },
+    "condition": {
+      "templates": ["base"],
+      "active": false,
+      "attribute": "",
+      "skill": "",
+      "common": false,
+      "shortDesc": ""
+    },
+    "enemyFeat": {
+      "templates": ["base"],
+      "shortDesc": "",
+      "cost": 0
+    },
+    "specialAction": {
+      "templates": ["base"],
+      "shortDesc": "",
+      "cost": 0
+    },
+    "experience": {
+      "shortDesc": "",
+      "variant": "achievement"
+    },
+    "chase":{
+      "need": {
+        "max":6,
+        "value":0
+      },  
+      "notes": "",
+      "specialActions": [],
+      "adrenaline": {
+        "value": 0,
+        "max": 3,
+        "min": 0,
+        "base": 0
+      },
+      "vehicles": []
     }
   }
 }

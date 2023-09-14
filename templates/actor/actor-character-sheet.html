@@ -18,7 +18,7 @@
         </div>
         {{#each ../skills as |skill id|}}
           {{#if (eq skill.system.displayAtt key)}}
-            <div class="item upperCase right rollable skill-name contextmenu" data-itemid="{{skill._id}}">{{skill.name}}</div>  
+            <div class="item upperCase right rollable skill-name contextmenu" data-item-id="{{skill._id}}">{{skill.name}}</div>  
             <div class="right">
               <a class=""><i class="{{#if (gte skill.system.total 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
               <a class=""><i class="{{#if (gte skill.system.total 2)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
@@ -44,19 +44,18 @@
       <div class="info-cell indent">{{tropeName}}</div>
       <div class="red info-cell">{{localize 'OG.job'}}</div>
       <div class="info-cell indent"><input name="system.job" type="text" value="{{actor.system.job}}"/></div>
-      <div class="red info-cell">{{localize 'OG.flaw'}}</div>
-      <div class="info-cell indent">{{actor.system.flaw}}</div>
-      <div class="red info-cell">{{localize 'OG.catchphrase'}}</div>
-      <div class="info-cell indent"><input name="system.catchphrase" type="text" value="{{actor.system.catchphrase}}"/></div>
       <div class="red info-cell item age contextmenu" data-item-id="{{actor.system.ageId}}">{{localize 'OG.age'}}</div>
       <div class="info-cell indent">{{ageName}}</div>
-      <div class="red info-cell">{{localize 'OG.mission'}}</div>
-      <div class="info-cell indent"><input name="system.mission" type="text" value="{{actor.system.mission}}"/></div>
-    </div>  
-
+    </div> 
+    <div class="red flaw contextmenu">{{localize 'OG.flaw'}}</div>
+    <div class="info-cell indent">{{{actor.system.flaw}}}</div>
+    <div class="red catchphrase contextmenu">{{localize 'OG.catchphrase'}}</div>
+    <div class="info-cell indent">{{{actor.system.catchphrase}}}</div>
+    <div class="red mission contextmenu">{{localize 'OG.mission'}}</div>
+    <div class="info-cell indent">{{{actor.system.mission}}}</div>
     <br>
 
-    <div class="title upperCase">{{localize 'OG.grit'}}</div>
+    <div class="red upperCase">{{localize 'OG.grit'}}</div>
     <div class="grit">
       {{#loop 1 system.grit.max 1}}
         {{#unless (eq this ../system.grit.max) }}
@@ -71,7 +70,7 @@
 
     <br>
 
-    <div class="title upperCase adrenaline-name contextmenu">{{localize 'OG.adrenaline'}}</div>
+    <div class="red upperCase adrenaline-name contextmenu">{{localize 'OG.adrenaline'}}</div>
     <div class="grit">
       {{#loop 1 system.adrenaline.max 1}}
       <a class="red medium-icon actor-toggle clickable" data-property="adrenaline" data-target = {{this}}><i class="{{#if (gte ../actor.system.adrenaline.value this)}} fa-solid fa-battery-full fa-rotate-270 {{else}} fa-solid fa-battery-empty fa-rotate-270{{/if}}"></i></a>
@@ -80,7 +79,7 @@
 
     <br>
 
-    <div class="title upperCase spotlight contextmenu">{{localize 'OG.spotlight'}}</div>
+    <div class="red upperCase spotlight contextmenu">{{localize 'OG.spotlight'}}</div>
     <div class="grit">
       {{#loop 1 system.spotlight.max 1}}
       <a class="red medium-icon actor-toggle clickable" data-property="spotlight" data-target = {{this}}><i class="{{#if (gte ../actor.system.spotlight.value this)}} fa-solid fa-camera-movie {{else}} fa-regular fa-camera-movie{{/if}}"></i></a>
@@ -89,15 +88,23 @@
     
     <br>
 
-    <div class="title upperCase">{{localize 'OG.deathRoulette'}}</div>
+    <div class="red upperCase deathRoulette contextmenu">{{localize 'OG.deathRoulette'}}</div>
     <div class="grit">
       {{#loop 1 6 1}}
       <a class="red medium-icon actor-toggle clickable" data-property="deathRoulette" data-target = {{this}}><i class="{{#if (gte ../actor.system.deathRoulette.value this)}} fa-solid fa-gun-slash {{else}} fa-regular fa-gun{{/if}}"></i></a>
       {{/loop}}
     </div>
 
+    <br>
 
-
+    <div class="red upperCase" title = "{{localize 'OG.heat'}}: {{heat}}">{{localize 'OG.heat'}}</div>
+    <div class="grit">
+      {{#loop 1 12 1}}
+      <a class="{{#if (eq this 6)}}black{{else}}{{#if (eq this 12)}} black {{else}} red{{/if}}{{/if}} medium-icon"><i class="{{#if (gte ../heat this)}} fa-solid fa-temperature-full {{else}} fa-regular fa-temperature-empty{{/if}}"></i></a>
+      {{/loop}}
+    </div>
+    <div class="small upperCase">{{localize 'OG.heat6Hint'}}</div>
+    <div class="small upperCase">{{localize 'OG.heat12Hint'}}</div>
   </div>
 
 
@@ -125,6 +132,11 @@
       {{> "systems/outgunned/templates/actor/parts/actor-description.html"}}
     </div>
 
+    {{!-- You Look Tab --}}
+    <div class="tab youLook" data-group="primary" data-tab="youLook">
+       {{> "systems/outgunned/templates/actor/parts/actor-youLook.html"}}
+    </div>
+
     {{!-- Gear Tab --}}
     <div class="tab gear" data-group="primary" data-tab="gear">
        {{> "systems/outgunned/templates/actor/parts/actor-gear.html"}}
@@ -143,7 +155,7 @@
 
   </section>
   </section>
-  </div>
+
 
 </form>
 

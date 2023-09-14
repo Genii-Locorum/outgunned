@@ -1,2 +1,17 @@
-<ol class="items-list">
+<ol class="items-list smallText">
+    {{#each conditions as |condition id|}}
+    <li class="item {{#if (eq condition.system.order 99)}}red{{/if}}" data-item-id="{{condition._id}}">
+      <div class="feat-grid">
+        <div class="indent condition-name contextmenu">{{condition.name}}</div>
+        <div class="centre">
+          <a class="item-toggle" data-property="active"><i class="clickable {{#if condition.system.active}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+        </div>
+        <div class="fade">{{condition.system.label}}</div>
+        <div></div>
+      </div>  
+    </li>
+    <div class="shortDesc">{{{condition.system.shortDesc}}}</div>
+    <br>
+ {{/each}}
 </ol>
+<div class = "smallCondition">{{localize 'OG.condition4' }}</div>

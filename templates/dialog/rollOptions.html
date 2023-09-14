@@ -2,6 +2,7 @@
     <div class = "diff-label bold">{{label}}</div>
     <br>
 
+    {{#unless (eq rollType 'attRoll')}}
     <div class="flexrow">
       <label class="resource-label-diff">{{ localize 'OG.attribute' }}</label>
       <select data-handle-change name="selectAtt">
@@ -9,14 +10,33 @@
       </select>
     </div>
     <br>
+    {{/unless}}
+
+    <div class="flexrow">
+      <label class="resource-label-diff">{{ localize 'OG.dangerRoll' }}</label>
+      <select class="resource-label-diff align-center" name="dangerRoll">
+        <option value=false {{#if (eq type 'action')}} selected="selected" {{/if}}  >{{ localize 'OG.no' }}</option>
+        <option value=true {{#if (eq type 'danger')}} selected="selected" {{/if}}>{{ localize 'OG.yes' }}</option>
+      </select>
+    </div>
+    <br>
+
+    <div class="flexrow">
+      <label class="resource-label-diff" title = "{{ localize 'OG.gambleHint' }}">{{ localize 'OG.gamble' }}</label>
+      <select class="resource-label-diff align-center" name="gamble">
+        <option value=false selected="selected">{{ localize 'OG.no' }}</option>
+        <option value=true>{{ localize 'OG.yes' }}</option>
+      </select>
+    </div>
+    <br>
 
     <div class="flexrow">
       <label class="resource-label-diff">{{ localize 'OG.checkType' }}</label>
       <select class="resource-label-diff align-center" name="difficulty">
-        <option value="basic">{{ localize 'OG.basic' }}</option>
-        <option value="critical" selected="selected">{{ localize 'OG.critical' }}</option>
-        <option value="extreme" >{{ localize 'OG.extreme' }}</option>
-        <option value="impossible" >{{ localize 'OG.impossible' }}</option>
+        <option value="basic" {{#if (eq difficulty 'basic')}} selected="selected" {{/if}}>{{ localize 'OG.basic' }}</option>
+        <option value="critical" {{#if (eq difficulty 'critical')}} selected="selected" {{/if}}>{{ localize 'OG.critical' }}</option>
+        <option value="extreme" {{#if (eq difficulty 'extreme')}} selected="selected" {{/if}}>{{ localize 'OG.extreme' }}</option>
+        <option value="impossible" {{#if (eq difficulty 'impossible')}} selected="selected" {{/if}}>{{ localize 'OG.impossible' }}</option>
       </select>
     </div>
     <br>

@@ -1,0 +1,27 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <div class="header-fields">
+      <div class="charname">{{localize 'OG.experience'}}:</div>
+      {{#if isGM}}
+        <div class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></div>
+      {{else}}
+        <div class="charname">{{item.name}}</div>
+      {{/if}}
+    </div>
+
+  </header>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+  <br>  
+      <div title="{{localize 'OG.shortDescHint'}}">{{localize 'OG.shortDesc'}}</div>
+      <div class=""><input name="system.shortDesc" type="text" value="{{item.system.shortDesc}}"/></div>
+  <br>
+  
+  <div class="left">
+    <select data-handle-change name="system.variant">
+      {{selectOptions displayXPType selected=item.system.variant}}
+    </select>
+    </div>
+  </section>
+</form>

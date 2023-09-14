@@ -1,0 +1,84 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <div class="header-fields">
+      <div class="charname">{{localize 'OG.condition'}}:</div>
+    {{#if isGM}}
+      <div class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></div>
+    {{else}}
+      <div class="charname">{{item.name}}</div>
+    {{/if}}
+    </div>
+
+  </header>
+
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="attributes">{{ localize 'OG.attributes' }}</a>
+    <a class="item" data-tab="description">{{ localize 'OG.description' }}</a>
+    <a class="item" data-tab="image">{{ localize 'OG.image' }}</a>
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+  <br>  
+    {{!-- Attributes Tab --}}
+    <div class="tab attributes" data-group="primary" data-tab="attributes">
+      <div class="item-skill-grid">
+        <div class=" select-name left bold">{{localize 'OG.affectedAttType'}}</div>          
+        {{#if isGM}}
+          <div class="left">
+          <select data-handle-change name="system.attribute">
+            {{selectOptions displayAttType selected=item.system.attribute}}
+          </select>
+          </div>
+        {{else}}
+          <div class="select-name left">{{attribute}}</div>
+        {{/if}}
+        <br>
+      </div>
+
+      <div class="item-skill-grid">
+        <div class=" select-name left bold">{{localize 'OG.affectedSkill'}}</div>          
+        {{#if isGM}}
+          <div class="left">
+          <select data-handle-change name="system.skill">
+            {{selectOptions displaySkill selected=item.system.skill}}
+          </select>
+          </div>
+        {{else}}
+          <div class="select-name left">{{skill}}</div>
+        {{/if}}
+        <br>
+      </div>
+
+      <div class="item-skill-grid">
+        <div class="select-name left bold" title="{{localize 'OG.commonHint'}}">{{localize 'OG.common'}}</div>  
+        <div>
+          <a class="large-icon {{#if isGM}}toggle{{/if}}" data-property="common"><i class="{{#if item.system.common}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+        </div>
+      </div>
+
+      <div class="item-skill-grid">
+        <div class="select-name left bold" title="{{localize 'OG.activeHint'}}">{{localize 'OG.active'}}</div>  
+        <div>
+          <a class="large-icon toggle" data-property="active"><i class="{{#if item.system.active}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+        </div>
+      </div>
+
+      <div title="{{localize 'OG.shortDescHint'}}">{{localize 'OG.shortDesc'}}</div>
+      {{editor item.system.shortDesc class="shortDesc-item-doc" target="system.shortDesc" button=true owner=owner editable=editable}}
+
+    </div>
+    
+    {{!-- Description Tab --}}
+
+    <div class="tab" data-group="primary" data-tab="description">
+      {{editor item.system.description class="background-item-doc" target="system.description" button=true owner=owner editable=editable}}
+    </div>
+
+    {{!-- Image Tab --}}
+    <div class="tab image" data-group="primary" data-tab="image">
+      <img class="profile-img" src="{{item.img}}" data-edit="img" height="200" width="200" title="{{item.name}}"/>
+    </div>
+  </section>
+</form>

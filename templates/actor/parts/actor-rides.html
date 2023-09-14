@@ -1,2 +1,48 @@
 <ol class="items-list">
+
+    {{#each rides as |ride id|}}
+      <li class="item" data-item-id="{{ride._id}}">
+        <div class="ride-header">
+          <div class="indent">{{ride.name}}</div>
+          {{#if ../isLocked}}
+            <div class="centre" title="{{localize 'OG.edit'}}"><a class="item-edit clickable"><i class="fa-solid fa-magnifying-glass"></i></a></div>
+          {{else}}  
+            <div class="centre" title="{{localize 'OG.delete'}}"><a class="item-delete clickable"><i class="fa-solid fa-trash"></i></a></div>
+          {{/if}}
+        </div>    
+        <div class="ride-grid">
+          <div class="borderleft"></div>
+          {{#loop 1 6 1}}
+            <div class="centre middle"><a class="mediumplus-icon clickable item-toggle {{#if (lt this 4)}}red{{/if}}" title="{{localize 'OG.armour'}}" data-property="armour" data-target = {{this}}>
+              <i class="{{#if (gte ride.system.armour.value this)}}fa-solid fa-shield{{else}}fa-regular fa-shield{{/if}}"></i>
+            </a></div>
+            {{#if (eq this 3)}}
+              <div class="centre middle"><a class="extralarge-icon" title="{{localize 'OG.startingSpeed'}}: {{ride.system.speed.start}}"><i class="
+                {{#if (eq ride.system.speed.start 0)}}fa-solid fa-gauge-min{{/if}}
+                {{#if (eq ride.system.speed.start 1)}}fa-solid fa-gauge-low{{/if}}
+                {{#if (eq ride.system.speed.start 2)}}fa-solid fa-gauge-high{{/if}}
+               {{#if (eq ride.system.speed.start 3)}}fa-solid fa-gauge-max{{/if}}
+              "></i></a></div>
+            {{/if}}      
+          {{/loop}}
+          <div class="borderright"></div>  
+        </div>   
+        
+        <div class="ride-grid-type">     
+           <div class="borderleft"></div>    
+           <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.bike}}red{{/if}}" title="{{localize 'OG.bike'}}"><i class="fa-solid fa-motorcycle"></i></a></div>
+           <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.car}}red{{/if}}" title="{{localize 'OG.car'}}"><i class="fa-solid fa-car-side"></i></a></div>
+           <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.nautical}}red{{/if}}" title="{{localize 'OG.nautical'}}"><i class="fa-solid fa-ship"></i></a></div>
+           <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.flying}}red{{/if}}" title="{{localize 'OG.flying'}}"><i class="fa-solid fa-helicopter"></i></a></div>
+           <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.armoured}}red{{/if}}" title="{{localize 'OG.armoured'}}"><i class="fa-solid fa-truck-monster"></i></a></div>
+           <div class="borderright"></div>     
+
+        </div>
+
+        <div class="ride-grid-bottom indent">{{ride.system.shortDesc}}</div>
+
+      </li>
+      <br>
+    {{/each}}    
+
 </ol>

@@ -2,10 +2,10 @@
   "id": "outgunned",
   "title": "Outgunned",
   "description": "The Outgunned system for FoundryVTT!",
-  "version": "1.0.9",
+  "version": "1.0.12",
   "compatibility": {
     "minimum": 11,
-    "verified": "11.307",
+    "verified": "11.308",
     "maximum": 11
   },
   "authors": [{
@@ -14,7 +14,74 @@
   "esmodules": ["module/outgunned.mjs"],
   "styles": ["css/outgunned.css"],
   "scripts": [],
-  "packs": [],
+  "packs": [
+    {
+      "name": "age",
+      "label": "Ages",
+      "path": "./packs/age.db",
+      "type": "Item"
+    },
+    {
+      "name": "conditions",
+      "label": "Conditions",
+      "path": "./packs/conditions.db",
+      "type": "Item"
+    },
+    {
+      "name": "feats",
+      "label": "Feats",
+      "path": "./packs/feats.db",
+      "type": "Item"
+    },
+    {
+      "name": "enemy-feats",
+      "label": "Enemy Feats",
+      "path": "./packs/enemy-feats.db",
+      "type": "Item"
+    },
+    {
+      "name": "gear",
+      "label": "Gear",
+      "path": "./packs/gear.db",
+      "type": "Item"
+    },
+    {
+      "name": "guns",
+      "label": "Guns",
+      "path": "./packs/guns.db",
+      "type": "Item"
+    },
+    {
+      "name": "rides",
+      "label": "Rides",
+      "path": "./packs/rides.db",
+      "type": "Item"
+    },
+    {
+      "name": "roles",
+      "label": "Roles",
+      "path": "./packs/roles.db",
+      "type": "Item"
+    },
+    {
+      "name": "skills",
+      "label": "Skills",
+      "path": "./packs/skills.db",
+      "type": "Item"
+    },
+    {
+      "name": "special-actions",
+      "label": "Special Actions",
+      "path": "./packs/special-actions.db",
+      "type": "Item"
+    },
+    {
+      "name": "tropes",
+      "label": "Tropes",
+      "path": "./packs/tropes.db",
+      "type": "Item"
+    }
+  ],
   "languages": [
     {
       "lang": "en",
@@ -26,9 +93,9 @@
   "gridUnits": "ft",
   "primaryTokenAttribute": "hp",
   "secondaryTokenAttribute": "adrenaline",
-  "url": "",
-  "manifest": "",
-  "download": "",
+  "url": "https://github.com/Genii-Locorum/outgunned",
+  "manifest": "https://github.com/Genii-Locorum/outgunned/releases/latest/download/system.json",
+  "download": "https://github.com/Genii-Locorum/outgunned/releases/latest/download/system.zip",
   "license": "LICENSE.txt",
   "changelog": "CHANGELOG.md",
   "socket": true
