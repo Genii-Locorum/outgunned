@@ -144,8 +144,8 @@ export class OutgunnedChecks {
       }
     }
     //If this is a death Roulette roll then remove the Free Roll Option
-    config.freeRoll = false;
     if(config.type === "death") {
+      config.freeRoll = false;
     }
 
     //If this is a gamble roll add +1 Bonus
