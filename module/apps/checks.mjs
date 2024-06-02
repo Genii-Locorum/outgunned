@@ -193,7 +193,7 @@ export class OutgunnedChecks {
       config.label = config.label +": " + config.attLabel + " - " + config.skillLabel
     }  
     let roll = new Roll(config.diceNumber+"D6");
-    await roll.roll({ async: true});
+    await roll.evaluate();
     config.roll=roll;
     const results = roll.terms[0] && roll.terms[0].results ? roll.terms[0].results : [];
     let diceRolls = results.reduce((acc, curVal) => [...acc, curVal.result], []);
@@ -405,7 +405,6 @@ export class OutgunnedChecks {
     let chatData={};
       chatData = {
         user: game.user.id,
-        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
         rolls: [config.roll],
         content: html,
         flags: {config: config},

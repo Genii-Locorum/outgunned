@@ -119,7 +119,7 @@ export class OutgunnedActor extends Actor {
   static async create (data, options = {}) {
     //When creating an actor set basics including tokenlink, bars, displays sight
     if (data.type === 'character') {
-      data.prototypeToken = mergeObject(data.prototypeToken || {}, {
+      data.prototypeToken = foundry.utils.mergeObject( {
         actorLink: true,
         disposition: 1,
         displayName: CONST.TOKEN_DISPLAY_MODES.ALWAYS,
@@ -132,9 +132,9 @@ export class OutgunnedActor extends Actor {
           range: 30,
           enabled: true
         }]
-      })
+      },data.prototypeToken || {})
     } else if (data.type === 'support') {
-      data.prototypeToken = mergeObject(data.prototypeToken || {}, {
+      data.prototypeToken = foundry.utils.mergeObject({
         actorLink: true,
         disposition: 1,
         displayName: CONST.TOKEN_DISPLAY_MODES.ALWAYS,
@@ -148,7 +148,7 @@ export class OutgunnedActor extends Actor {
           range: 30,
           enabled: true
         }]
-      })
+      },data.prototypeToken || {})
     }
 
 

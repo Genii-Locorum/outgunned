@@ -5,7 +5,7 @@ import * as contextMenu from "../actor-cm.mjs";
 export class OutgunnedEnemySheet extends ActorSheet {
 
     static get defaultOptions() {
-      return mergeObject(super.defaultOptions, {
+      return foundry.utils.mergeObject(super.defaultOptions, {
         classes: ["outgunned", "sheet", "actor"],
         template: "systems/outgunned/templates/actor/actor-sheet.html",
         width: 300,
@@ -107,7 +107,7 @@ export class OutgunnedEnemySheet extends ActorSheet {
       });
   
       // Delete Inventory Item
-      html.find('.item-delete').click(ev => {
+      html.find('.item-delete').dblclick(ev => {
         const li = $(ev.currentTarget).parents(".item");
         const item = this.actor.items.get(li.data("itemId"));
         item.delete();

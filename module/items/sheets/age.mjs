@@ -5,7 +5,7 @@ export class OutgunnedAgeSheet extends ItemSheet {
 
 
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["outgunned", "sheet", "item"],
       width: 520,
       height: 600,
@@ -88,7 +88,7 @@ export class OutgunnedAgeSheet extends ItemSheet {
       event.preventDefault()
       event.stopPropagation()
       const dataList = await OutgunnedUtilities.getDataFromDropEvent(event, 'Item')
-      const collection = this.item.system[collectionName] ? duplicate(this.item.system[collectionName]) : []
+      const collection = this.item.system[collectionName] ? foundry.utils.duplicate(this.item.system[collectionName]) : []
    
       for (const item of dataList) {
         if (!item || !item.system) continue
@@ -107,7 +107,7 @@ export class OutgunnedAgeSheet extends ItemSheet {
       const itemId = item.data('item-id')
       const itemIndex = this.item.system[collectionName].findIndex(i => (itemId && i._id === itemId))
       if (itemIndex > -1) {
-        const collection = this.item.system[collectionName] ? duplicate(this.item.system[collectionName]) : []
+        const collection = this.item.system[collectionName] ? foundry.utils.duplicate(this.item.system[collectionName]) : []
         collection.splice(itemIndex, 1)
         await this.item.update({ [`system.${collectionName}`]: collection })
       }

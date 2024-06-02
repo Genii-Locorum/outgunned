@@ -7,8 +7,8 @@ import { OutgunnedHooks } from './hooks/index.mjs'
 import { OutgunnedSystemSocket } from "./apps/socket.mjs"
 import * as Chat from "./chat/chat.mjs";
 import { registerSettings } from './setup/register-settings.mjs'
-import { OutgunnedLayer } from "./setup/layers.mjs"
-import { OutgunnedUtilities } from './apps/utilities.mjs'
+import { OutgunnedMenu } from "./setup/layers.mjs"
+
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -40,11 +40,6 @@ Hooks.once('init', async function() {
 
 });
 
-  // Set Up Layers for Toolbar
-  const layers = { oggmtools: { layerClass: OutgunnedLayer, group: "primary" } };
-  CONFIG.Canvas.layers = foundry.utils.mergeObject(Canvas.layers, layers);
-
-
 
 Hooks.on('ready', async () => {
   game.socket.on('system.outgunned', async data => {
@@ -52,45 +47,25 @@ Hooks.on('ready', async () => {
   });
 });
 
-//Add GM controls to Scene
-Hooks.on('getSceneControlButtons', (buttons) => {
-  if(game.user.isGM) {
-    const ogGMTool = {
-      activeTool: "select",
-      icon: "fas fa-tools",
-      layer: "oggmtools",
-      name: "oggmtools",
-      title: game.i18n.localize('OG.GMTools'),
-      tools: [],
-      visible: true
-    };
-    // Increase Heat
-    ogGMTool.tools.push({
-      name: "raiseheat",
-      icon: "fas fa-temperature-arrow-up",
-      title:  game.i18n.localize('OG.heatIncrease'),
-      toggle: false,
-      onClick: async toggle => await OutgunnedUtilities.increaseHeat(1)
-    });
-    // Decrease Heat
-    ogGMTool.tools.push({
-      name: "lowerheat",
-      icon: "fas fa-temperature-arrow-down",
-      title: game.i18n.localize('OG.heatDecrease'),
-      toggle: false,
-      onClick: async toggle => await  OutgunnedUtilities.increaseHeat(-1)
-    });
-       buttons.push(ogGMTool);
-    };
-  });
+//Remove certain Items types from the list of options to create under the items menu (can still be created directly from the character sheet)
+Hooks.on("renderDialog", (dialog, html) => {
+  let deprecatedTypes = ["chase","experience"]; // 
+  Array.from(html.find("#document-create option")).forEach(i => {
+      if (deprecatedTypes.includes(i.value))
+      {
+          i.remove()
+      }
+  })
+})
 
-    OutgunnedHooks.listen()
-
+OutgunnedHooks.listen()
 
 //Add Chat Log Hooks
 Hooks.on("renderChatLog", (app, html, data) => Chat.addChatListeners(html));
 
-
+//Add GM Tool Layer
+Hooks.on('getSceneControlButtons', OutgunnedMenu.getButtons)
+Hooks.on('renderSceneControls', OutgunnedMenu.renderControls)
 
 //Ready Hook
 Hooks.once("ready", async function() {

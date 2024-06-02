@@ -7,7 +7,7 @@ import * as contextMenu from "../actor-cm.mjs";
 export class OutgunnedCharacterSheet extends ActorSheet {
 
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["outgunned", "sheet", "actor"],
       template: "systems/outgunned/templates/actor/actor-sheet.html",
       width: 850,
@@ -225,7 +225,7 @@ export class OutgunnedCharacterSheet extends ActorSheet {
     // Get the type of item to create.
     const type = header.dataset.type;
     // Grab any data associated with this control.
-    const data = duplicate(header.dataset);
+    const data = foundry.utils.duplicate(header.dataset);
     // Initialize a default name.
     const name = `New ${type.capitalize()}`;
     // Prepare the item object.
@@ -306,6 +306,12 @@ export class OutgunnedCharacterSheet extends ActorSheet {
       if(k.type!='gear' && k.type!='gun' && k.type!='ride' && this.actor.system.locked) {
         ui.notifications.warn(game.i18n.localize('OG.msg.noDropLocked'));         
         return
+      }
+
+      //Test for invalid item types for Character
+      if(["enemyFeat","specialAction"].includes(k.type)) {
+        reqResult = false
+        errMsg = k.name + " (" + k.type + "): "+ game.i18n.localize('OG.msg.enemyItem') 
       }
 
       //Test to see if the skill or condition already exists
@@ -536,7 +542,7 @@ export class OutgunnedCharacterSheet extends ActorSheet {
         }  
       }  
     } else {
-      let newItem = duplicate(item)
+      let newItem = foundry.utils.duplicate(item)
       for (let j of newItem.system[collectionName]){
         //If the item is a feat only include it in the list if it's not already on the character sheet
         if (itemType === 'feat') {

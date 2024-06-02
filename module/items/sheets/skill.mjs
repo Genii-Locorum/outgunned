@@ -5,7 +5,7 @@ export class OutgunnedSkillSheet extends ItemSheet {
 
 
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["outgunned", "sheet", "item"],
       width: 520,
       height: 600,
@@ -29,6 +29,7 @@ export class OutgunnedSkillSheet extends ItemSheet {
     context.system = itemData.system;
     context.flags = itemData.flags;
     context.isGM =  game.user.isGM;
+    context.hasOwner = this.item.isEmbedded === true
     context.displayAttType = await OutgunnedSelectLists.getAttributeTypes();
     context.attribute = context.displayAttType[this.item.system.displayAtt]
 

@@ -6,7 +6,7 @@ import * as contextMenu from "../actor-cm.mjs";
 export class OutgunnedSupportSheet extends ActorSheet {
 
     static get defaultOptions() {
-      return mergeObject(super.defaultOptions, {
+      return foundry.utils.mergeObject(super.defaultOptions, {
         classes: ["outgunned", "sheet", "actor"],
         template: "systems/outgunned/templates/actor/actor-sheet.html",
         width: 380,
