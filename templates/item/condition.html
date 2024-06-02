@@ -58,12 +58,14 @@
         </div>
       </div>
 
-      <div class="item-skill-grid">
-        <div class="select-name left bold" title="{{localize 'OG.activeHint'}}">{{localize 'OG.active'}}</div>  
-        <div>
-          <a class="large-icon toggle" data-property="active"><i class="{{#if item.system.active}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+      {{#if hasOwner}}
+        <div class="item-skill-grid">
+          <div class="select-name left bold" title="{{localize 'OG.activeHint'}}">{{localize 'OG.active'}}</div>  
+          <div>
+            <a class="large-icon toggle" data-property="active"><i class="{{#if item.system.active}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          </div>
         </div>
-      </div>
+      {{/if}}  
 
       <div title="{{localize 'OG.shortDescHint'}}">{{localize 'OG.shortDesc'}}</div>
       {{editor item.system.shortDesc class="shortDesc-item-doc" target="system.shortDesc" button=true owner=owner editable=editable}}

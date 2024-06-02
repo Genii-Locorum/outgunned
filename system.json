@@ -5,12 +5,14 @@
   "version": "1.0.13",
   "compatibility": {
     "minimum": 11,
-    "verified": "11.308",
-    "maximum": 11
+    "verified": "12.325",
+    "maximum": 12
   },
-  "authors": [{
-    "name": "Dangermouse"
-  }],
+  "authors": [
+    {"name": "Dangermouse"},
+    {"name": "KarstenW"},
+    {"name": "IkeoMajesty"}
+  ],
   "esmodules": ["module/outgunned.mjs"],
   "styles": ["css/outgunned.css"],
   "scripts": [],
@@ -80,6 +82,12 @@
       "label": "Tropes",
       "path": "./packs/tropes.db",
       "type": "Item"
+    },
+    {
+      "name": "instructions",
+      "label": "Instructions",
+      "path": "./packs/instructions.db",
+      "type": "JournalEntry"
     }
   ],
   "languages": [
@@ -87,10 +95,17 @@
       "lang": "en",
       "name": "English",
       "path": "lang/en.json"
+    },
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "lang/de.json"
     }
   ],
-  "gridDistance": 5,
-  "gridUnits": "ft",
+  "grid":{
+    "distance": 5,
+    "units": "ft"
+  }, 
   "primaryTokenAttribute": "hp",
   "secondaryTokenAttribute": "adrenaline",
   "url": "https://github.com/Genii-Locorum/outgunned",
