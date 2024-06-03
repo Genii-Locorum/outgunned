@@ -27,6 +27,17 @@ export class OutgunnedChecks {
     })
   }
 
+  static async _onNeutralRoll () {
+    await OutgunnedChecks.startCheck ({
+      shiftKey: false,
+      type: game.settings.get('outgunned', 'defaultCheckType'),
+      rollType: "roll",
+      winTitle: game.i18n.localize("OG.neutralRoll"),
+      neutralRoll: true
+    })
+    
+  }
+
   //Death Roulette roll from Character Sheet
   static async _deathRoulette(event,actor) {
     let partic =await OutgunnedActorDetails._getParticipantId(this.token,actor); 
@@ -89,7 +100,7 @@ export class OutgunnedChecks {
       dangerRoll: false,
       damage: 0,
       itemId: options.itemId ? options.itemId: "",
-      partic: options.partic,
+      partic: options.partic ? options.partic: "",
       diceNumber: 1,
       originalDiceNumber: 1,
       bonusDice: 0,
@@ -103,11 +114,12 @@ export class OutgunnedChecks {
       improve: false,
       successLevel: 0,
       freeRoll: true,
+      neutralRoll: options.neutralRoll ? options.neutralRoll: false,
       allIn: false,
       type: options.type,
       chatTemplate: 'systems/outgunned/templates/chat/roll-result.html',
       dialogTemplate: 'systems/outgunned/templates/dialog/rollOptions.html',
-      winTitle: options.winTitle ? options.winTitle : game.i18n.localize("OG.rollWindow")      
+      winTitle: options.winTitle ? options.winTitle : game.i18n.localize("OG.rollWindow"),      
     }  
     return config;
   }
@@ -116,10 +128,18 @@ export class OutgunnedChecks {
   static async runCheck (config) {
     //If Shift key has been held then accept the defaults otherwise call a Dialog box for roll options 
 
-    let actor = await OutgunnedActorDetails._getParticipant(config.partic.particId, config.partic.particType);
+    let actor = ""
+    config.spkrName = game.user.name
+    if (!config.neutralRoll) {
+      actor = await OutgunnedActorDetails._getParticipant(config.partic.particId, config.partic.particType);
+      config.spkrName = actor.name
+    }
     if (!config.shiftKey){
       let usage = await OutgunnedChecks.RollDialog(config);
       if (usage) {
+        if (config.neutralRoll) {
+          config.attScore = Number(usage.get('neutralDice'))
+        }  
         config.defaultAtt = usage.get('selectAtt');
         config.dangerRoll = usage.get('dangerRoll');
         config.gamble = usage.get('gamble');
@@ -130,7 +150,7 @@ export class OutgunnedChecks {
         }
         config.bonusDice = Number(usage.get('bonusDice'));
 
-        if (config.rollType != 'attRoll') {
+        if (config.rollType != 'attRoll' && !config.neutralRoll) {
           config.attScore = actor.system.abilities[config.defaultAtt].total;
           config.attLabel = actor.system.abilities[config.defaultAtt].label;
         }  
@@ -154,7 +174,7 @@ export class OutgunnedChecks {
     }  
 
     //Check for Condition Penalties for Action & Danger Rolls
-    if((config.type === "action" || config.type === "danger") && config.rollType != 'attRoll') {
+    if((config.type === "action" || config.type === "danger") && (config.rollType != 'attRoll' && !config.neutralRoll)) {
       if (actor.system.broken) {
         config.bonusDice --;
       }
@@ -192,6 +212,9 @@ export class OutgunnedChecks {
     } else if (config.type != 'death') {    
       config.label = config.label +": " + config.attLabel + " - " + config.skillLabel
     }  
+    if (config.neutralRoll) {
+      config.label = config.label + "[" + game.i18n.localize('OG.neutralRoll') + "]"
+    }
     let roll = new Roll(config.diceNumber+"D6");
     await roll.evaluate();
     config.roll=roll;
@@ -290,6 +313,7 @@ export class OutgunnedChecks {
       defaultAtt: options.defaultAtt,
       difficulty: options.difficulty,
       selectAttType,
+      neutralRoll: options.neutralRoll
     }
     const html = await renderTemplate(options.dialogTemplate,data);
     return new Promise(resolve => {
@@ -368,10 +392,15 @@ export class OutgunnedChecks {
       diffLabel = diffLabel + " " + game.i18n.localize('OG.gamble')
     }  
 
+    let actorId = ""
+    if (!config.neutralRoll) {
+      actorId = actor._id
+    }
+
     let messageData = {
       origin: config.origin,
       originGM: config.originGM,
-      speaker: ChatMessage.getSpeaker({ actor: actor.name }),
+      speaker: ChatMessage.getSpeaker({ actor: config.spkrName }),
       actor,
       type: config.type,
       rollType: config.rollType,
@@ -388,11 +417,12 @@ export class OutgunnedChecks {
       freeRoll: config.freeRoll,
       allIn: config.allIn,
       improve: config.improve,
-      actorId: actor._id,
+      actorId: actorId,
       partic: config.partic,
       successLevel : config.successLevel,
       resultLabel: game.i18n.localize('OG.resultLevel.'+config.successLevel),
       diffLabel: diffLabel,
+      neutralRoll: config.neutralRoll
     }
     const messageTemplate = config.chatTemplate
     let html = await renderTemplate (messageTemplate, messageData);
@@ -401,7 +431,13 @@ export class OutgunnedChecks {
 
   // Display the chat card and roll the dice
   static async showChat(html,config) {
-    let actor = await OutgunnedActorDetails._getParticipant(config.partic.particId,config.partic.particType)
+    let actor = ""
+    let actorId = ""
+    if (!config.neutralRoll) {
+      actor = await OutgunnedActorDetails._getParticipant(config.partic.particId,config.partic.particType)
+      actorId = actor._id
+    }  
+
     let chatData={};
       chatData = {
         user: game.user.id,
@@ -409,8 +445,8 @@ export class OutgunnedChecks {
         content: html,
         flags: {config: config},
         speaker: {
-          actor: actor._id,
-          alias: actor.name,
+          actor: actorId,
+          alias: config.spkrName,
         },
     }
       

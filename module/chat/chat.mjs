@@ -16,8 +16,10 @@ static async renderMessageHook (message, html) {
   if (!game.user.isGM) {
     const ownerOnly = html.find('.owner-only')
     const actor = await OutgunnedActorDetails._getParticipant(message.flags.config.partic.particId,message.flags.config.partic.particType);
+    const origin = message.flags.config.origin
+    console.log(origin,actor,game.user.id)
     for (const zone of ownerOnly) {
-      if ((actor && !actor.isOwner) || (!actor && !game.user.isGM)) {
+      if ((actor && !actor.isOwner) || (!actor && (!game.user.isGM && game.user.id != origin))) {
         zone.style.display = 'none'
       } 
     }
