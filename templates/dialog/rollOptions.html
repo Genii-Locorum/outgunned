@@ -3,14 +3,24 @@
     <br>
 
     {{#unless (eq rollType 'attRoll')}}
+      {{#unless neutralRoll}}
+      <div class="flexrow">
+        <label class="resource-label-diff">{{ localize 'OG.attribute' }}</label>
+        <select data-handle-change name="selectAtt">
+          {{selectOptions selectAttType selected=defaultAtt}}
+        </select>
+      </div>
+      <br>
+      {{/unless}}
+    {{/unless}}  
+
+    {{#if neutralRoll}}
     <div class="flexrow">
-      <label class="resource-label-diff">{{ localize 'OG.attribute' }}</label>
-      <select data-handle-change name="selectAtt">
-        {{selectOptions selectAttType selected=defaultAtt}}
-      </select>
+      <label title = "{{ localize 'OG.neutralDiceHint' }}" >{{localize "OG.neutralDice"}}</label>   
+      <input class="centre" type="text" value="{{formData.neutralDice}}" name="neutralDice" data-dtype="Number">
     </div>
     <br>
-    {{/unless}}
+    {{/if}}
 
     <div class="flexrow">
       <label class="resource-label-diff">{{ localize 'OG.dangerRoll' }}</label>
