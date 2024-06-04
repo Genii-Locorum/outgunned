@@ -8,6 +8,7 @@
 - Changed Dice Roll chat message to show follow up dice roll options
 - Added a Close Roll option to chat message to accept the result
 - Added a check so that re-rolls etc are only carried out by one GM (not all of them)
+- When making a follow up roll then it is actually made (behind the scenes) by the originating player/GM and not the GM
 
 ## 1.0.13
 - Fixed an issue with Free Roll not working - thanks to Karsten W for the fix

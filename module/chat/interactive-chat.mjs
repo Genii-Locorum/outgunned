@@ -65,9 +65,17 @@ static  async triggerChatButton(event){
             'flags.config.improve': false,
           });
 
-      //Re-roll the dice
-      await OutgunnedChecks.makeRoll(targetMsg.flags.config);
-      return
+      if (targetMsg.flags.config.origin === game.user.id) {    
+        //Re-roll the dice
+        await OutgunnedChecks.makeRoll(targetMsg.flags.config);
+        return
+      } else {
+        game.socket.emit('system.outgunned', {
+          type: 'reRoll',
+          to: targetMsg.flags.config.origin,
+          value: targetMsg.flags.config
+        })  
+      }  
     } else if (presetType === 'close'){
  //Update original message and re-render
     await targetMsg.update({

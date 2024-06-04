@@ -1,4 +1,5 @@
 import { OutgunnedInteractiveChat } from '../chat/interactive-chat.mjs';
+import { OutgunnedChecks } from './checks.mjs';
 
 export class OutgunnedSystemSocket {
   
@@ -9,6 +10,10 @@ export class OutgunnedSystemSocket {
             OutgunnedInteractiveChat.handleChatButton(data.value);
         }  
       break; 
+      case 'reRoll':
+        console.log("reroll")
+        await OutgunnedChecks.makeRoll(data.value);
+      break;
 
 
     }
