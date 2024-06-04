@@ -9,7 +9,7 @@
           </div>
   
         <div class="dice-result">
-          <div class="dice-tooltip">
+          <div class="">
             <div class="owner-only" style="display:block">
               <div class="card-buttons" style="padding: 2px 0;margin: 0;">
                 <div>{{localize 'OG.rolled'}}: {{rolledDice}}</div>
@@ -32,6 +32,9 @@
                 {{#if allIn}}
                   <button class="cardbutton" data-preset = "allIn" type = "button" >{{localize 'OG.allIn'}}</button>
                 {{/if}}
+                {{#unless closed}}
+                <button class="cardbutton" data-preset = "close" type = "button" >{{localize 'OG.closeRoll'}}</button>
+                {{/unless}}
                 {{#if closed}}
                   <div class="align-center dice-total" >
                     <span class="result-success">{{pairsDice}}<span>

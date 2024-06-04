@@ -23,10 +23,16 @@ static  async triggerChatButton(event){
     if (game.user.isGM){
       OutgunnedInteractiveChat.handleChatButton ({presetType, targetChatId, origin, originGM})
     } else {
-      game.socket.emit('system.outgunned', {
-        type: 'chatUpdate',
-        value: {presetType, targetChatId, origin, originGM}
-      })
+      const availableGM = game.users.find(d => d.active && d.isGM)?.id
+      if (availableGM) {
+        game.socket.emit('system.outgunned', {
+          type: 'chatUpdate',
+          to: availableGM,
+          value: {presetType, targetChatId, origin, originGM}
+        })
+      }  else {
+        ui.notifications.warn(game.i18n.localize('OG.noAvailableGM'))     
+      }
     }
   }
 
@@ -62,7 +68,18 @@ static  async triggerChatButton(event){
       //Re-roll the dice
       await OutgunnedChecks.makeRoll(targetMsg.flags.config);
       return
-    } 
+    } else if (presetType === 'close'){
+ //Update original message and re-render
+    await targetMsg.update({
+      'flags.config.reRoll': false,
+      'flags.config.freeRoll': false,
+      'flags.config.allIn' : false,
+      'flags.config.closed': true,
+    });
+    const reRollhtml = await OutgunnedChecks.startChat(targetMsg.flags.config);
+    await targetMsg.update({
+      content: reRollhtml});
+    }
   }
 
 }
