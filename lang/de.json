@@ -156,6 +156,7 @@
     "neutralDice": "Anzahl Würfel Gesamt",
     "neutralDiceHint": "Wie viele Würfel sollen insgesamt geworfen werden?",
     "no": "Nein",
+    "noAvailableGM": "Es ist kein SL verfügbar, um diese Anfrage durchzuführen",
     "none": "Keine",
     "normal": "Normal",
     "notes": "Notizen",
