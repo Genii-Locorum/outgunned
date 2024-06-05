@@ -274,12 +274,12 @@
     "settings": {
       "autoDR": "Todesroulette automatisieren",
       "autoDRHint": "Ein erfolgreicher Wurf beim Todesroulette fügt automatisch eine Patrone hinzu.",
-      "damageControl": "Automatische Schadensbegrenzung",
-      "damageControlHint": "Automatische Verringerung des Grit-Schadens bei niedrigeren Erfolgen",
+      "damageControl": "Schadensbegrenzung berechnen",
+      "damageControlHint": "Verringerung des Grit-Schadens bei niedrigeren Erfolgen berechnen und im Chat-Fenster ausgeben",
       "defaultCheckType": "Attributszuordnung der Fertigkeit",
       "defaultCheckTypeHint": "Wähle übliches Attribut für Proben mit dieser Fertigkeit",
       "defaultDifficulty": "Standard-Schwierigkeit",
-      "defaultDifficultyHint": "Wähle die Standardschwierigkeit für Proben"
+      "defaultDifficultyHint": "Wähle die übliche Schwierigkeit für Proben (Voreinstellung im Auswahlfenster vor einem Wurf, kann dort jeweils geändert werden)"
     }
   }
 }
