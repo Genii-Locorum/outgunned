@@ -274,8 +274,8 @@
     "settings": {
       "autoDR": "Automate Death Roulette",
       "autoDRHint": "Automatically add bullets on a succesful Death Roulette roll",
-      "damageControl": "Automatic Damage Control",
-      "damageControlHint": "Automatically reduce damage for rolled successes",
+      "damageControl": "Calculate Damage Control",
+      "damageControlHint": "Reduces damage shown in chat message for rolled successes (does not apply grit to the actor)",
       "defaultCheckType": "Default Skill Check type",
       "defaultCheckTypeHint": "Select the default type of check for skill rolls",
       "defaultDifficulty": "Default Difficutly",
