@@ -8,7 +8,8 @@ import { OutgunnedSystemSocket } from "./apps/socket.mjs"
 import * as Chat from "./chat/chat.mjs";
 import { registerSettings } from './setup/register-settings.mjs'
 import { OutgunnedMenu } from "./setup/layers.mjs"
-
+import { OutgunnedUtilities } from './apps/utilities.mjs'
+import { OutgunnedChecks } from './apps/checks.mjs'
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -21,7 +22,9 @@ Hooks.once('init', async function() {
   game.Outgunned = {
     OutgunnedActor,
     OutgunnedItem,
-    rollItemMacro
+    rollItemMacro,
+    incHeatMacro,
+    basicRollMacro
   };
 
   // Add custom constants for configuration.
@@ -117,4 +120,15 @@ function rollItemMacro(itemUuid) {
     // Trigger the item roll
     item.roll();
   });
+}
+
+//Increase/Decrease Heat Macro
+ function incHeatMacro(value) {
+  if (!game.user.isGM) {return}
+  OutgunnedUtilities.increaseHeat(value)
+}
+
+//Neutral/Basic Roll Macro
+function basicRollMacro() {
+  OutgunnedChecks._onNeutralRoll()
 }
