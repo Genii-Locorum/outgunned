@@ -88,6 +88,12 @@
       "label": "Instructions",
       "path": "./packs/instructions.db",
       "type": "JournalEntry"
+    },
+    {
+      "name": "macros",
+      "label": "Macros",
+      "path": "./packs/macros.db",
+      "type": "Macro"
     }
   ],
   "languages": [
@@ -109,8 +115,8 @@
   "primaryTokenAttribute": "hp",
   "secondaryTokenAttribute": "adrenaline",
   "url": "https://github.com/Genii-Locorum/outgunned",
-  "manifest": "https://github.com/Genii-Locorum/outgunned/releases/latest/download/system.json",
-  "download": "https://github.com/Genii-Locorum/outgunned/releases/latest/download/system.zip",
+  "manifest": "https://github.com/Genii-Locorum/outgunned/releases/download/Alpha6/system.json",
+  "download": "https://github.com/Genii-Locorum/outgunned/releases/download/Alpha6/system.zip",
   "license": "LICENSE.txt",
   "changelog": "CHANGELOG.md",
   "socket": true

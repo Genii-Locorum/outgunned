@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.0.16
+- Added macros packs which includes Heat Increase/Decrease macros and neutral roll
+
 ## 1.0.14
 - Updated for Foundry V12
 - German Language Pack added (thank you Karsten)
