@@ -35,7 +35,7 @@
       <br>
 
       <div title="{{localize 'OG.shortDescHint'}}">{{localize 'OG.shortDesc'}}</div>
-      <div class=""><input name="system.shortDesc" type="text" value="{{item.system.shortDesc}}"/></div>
+      {{editor item.system.shortDesc class="shortDesc-item-doc" target="system.shortDesc" button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Description Tab --}}
