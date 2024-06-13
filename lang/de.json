@@ -216,7 +216,7 @@
     "startingFeatsHint":"Für den Start mit 1 Talent wähle den linken Diamanten, für 2 wähle den rechten.",
     "startingSpeed": "Startwert Gescheindigkeit",
     "storage": "Im Lager",
-    "strengths": "Stärken/Schwächen",
+    "strengths": "Stärken/Schwächen/Details",
     "successDice": "Erfolgswürfel",
     "support": "Helfer", 
     "toggleHint": "Klicken, um diesen Wert umzuschalten",
@@ -236,7 +236,7 @@
       "roll": "Probe",
       "saveFriend": "Rette einen Freund",
       "spendSpotlight": "Spotlight ausgeben",
-      "toggleHot": "Heiss oder nicht",
+      "toggleHot": "Heiss oder Normal",
       "view": "Anzeigen/Editieren"
     },
 
