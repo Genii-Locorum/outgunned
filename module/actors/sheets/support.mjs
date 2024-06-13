@@ -9,8 +9,8 @@ export class OutgunnedSupportSheet extends ActorSheet {
       return foundry.utils.mergeObject(super.defaultOptions, {
         classes: ["outgunned", "sheet", "actor"],
         template: "systems/outgunned/templates/actor/actor-sheet.html",
-        width: 380,
-        height: 360,
+        width: 300,
+        height: 450,
         tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "feats" }]
       });
     }
