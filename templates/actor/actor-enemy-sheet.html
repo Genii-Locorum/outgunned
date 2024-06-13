@@ -87,12 +87,10 @@
       {{/each}}
     </ol>
 
-    {{#if (eq actor.system.enemyType 'boss')}}
       <br>
       <div class="red">{{localize 'OG.strengths'}}</div>
       <div>
         {{editor system.strengths class="background-doc" target="system.strengths" button=true owner=owner editable=editable}}
       </div> 
-    {{/if}}
   </section>  
 </form>
