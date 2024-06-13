@@ -9,7 +9,7 @@ export class OutgunnedEnemySheet extends ActorSheet {
         classes: ["outgunned", "sheet", "actor"],
         template: "systems/outgunned/templates/actor/actor-sheet.html",
         width: 300,
-        height: 550,
+        height: 450,
         tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "feats" }]
       });
     }
