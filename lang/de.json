@@ -14,8 +14,8 @@
     "accurate": "Akkurat",
     "achievement": "Erfolg",
     "action": {
-      "attRoll": "Aktion: Attributs-Probe",
-      "roll": "Aktion: Probe",
+      "attRoll": "Attributsprobe",
+      "roll": "Aktionsprobe",
       "reRoll": "Aktion: Neu würfeln",
       "freeRoll": "Aktion: Freier Neuwurf",
       "allIn": "Aktion: Alles oder Nichts"
@@ -73,8 +73,8 @@
     "createGear": "Ausrüstung erstellen",
     "critical": "Kritisch",
     "danger": {
-      "attRoll": "Gefahr: Attributs-Probe",
-      "roll": "Gefahr: Probe",
+      "attRoll": "Gefahren-Attributs-Probe",
+      "roll": "Gefahrenprobe",
       "reRoll": "Gefahr: Neu würfeln",
       "freeRoll": "Gefahr: Freies neu würfeln",
       "allIn": "Gefahr: Alles oder Nichts"
@@ -89,8 +89,8 @@
     "deleteItem": "Element löschen",
     "description": "Beschreibung",
     "difficulty": "Schwierigkeit",
-    "displayAttType": "Primäres Attribut",
-    "displayAttTypeHint": "Dies ist das Attribut, unter dem die Fertigkeit aufgeführt wird.",
+    "displayAttType": "Standard-Attribut",
+    "displayAttTypeHint": "Dies ist das Attribut, unter dem die Fertigkeit gelistet ist und häufig genutzt wird.",
     "double": "Doppelt",
     "doubleDiff": "Doppelte Schwierigkeit",
     "edit": "Editieren",
@@ -275,11 +275,11 @@
       "autoDR": "Todesroulette automatisieren",
       "autoDRHint": "Ein erfolgreicher Wurf beim Todesroulette fügt automatisch eine Patrone hinzu.",
       "damageControl": "Schadensbegrenzung berechnen",
-      "damageControlHint": "Verringerung des Grit-Verlustes bei niedrigeren Erfolgen berechnen und im Chat-Fenster ausgeben",
-      "defaultCheckType": "Attributszuordnung der Fertigkeit",
-      "defaultCheckTypeHint": "Wähle übliches Attribut für Proben mit dieser Fertigkeit",
+      "damageControlHint": "Verringerung des Grit-Verlustes bei niedrigeren Erfolgen berechnen und im Chat-Fenster ausgeben.",
+      "defaultCheckType": "Fertigkeitsproben Standard-Art",
+      "defaultCheckTypeHint": "Wähle, ob Fertigkeits-Proben zumeist Aktionsproben oder Gefahrenproben sind.",
       "defaultDifficulty": "Standard-Schwierigkeit",
-      "defaultDifficultyHint": "Wähle die übliche Schwierigkeit für Proben (Voreinstellung im Auswahlfenster vor einem Wurf, kann dort jeweils geändert werden)"
+      "defaultDifficultyHint": "Wähle die übliche Schwierigkeit für Proben (Voreinstellung im Auswahlfenster vor einem Wurf, kann dort jeweils geändert werden)."
     }
   }
 }
