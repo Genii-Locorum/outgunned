@@ -276,7 +276,7 @@
       "autoDRHint": "Ein erfolgreicher Wurf beim Todesroulette fügt automatisch eine Patrone hinzu.",
       "damageControl": "Schadensbegrenzung berechnen",
       "damageControlHint": "Verringerung des Grit-Verlustes bei niedrigeren Erfolgen berechnen und im Chat-Fenster ausgeben.",
-      "defaultCheckType": "Fertigkeitsproben Standard-Art",
+      "defaultCheckType": "Fertigkeitsproben Standard-Probentyp",
       "defaultCheckTypeHint": "Wähle, ob Fertigkeits-Proben zumeist Aktionsproben oder Gefahrenproben sind.",
       "defaultDifficulty": "Standard-Schwierigkeit",
       "defaultDifficultyHint": "Wähle die übliche Schwierigkeit für Proben (Voreinstellung im Auswahlfenster vor einem Wurf, kann dort jeweils geändert werden)."
