@@ -2,10 +2,10 @@
   "id": "outgunned",
   "title": "Outgunned",
   "description": "The Outgunned system for FoundryVTT!",
-  "version": "1.0.16",
+  "version": "2.01",
   "compatibility": {
     "minimum": 12,
-    "verified": "12.325",
+    "verified": "12.327",
     "maximum": 12
   },
   "authors": [
@@ -19,81 +19,157 @@
   "packs": [
     {
       "name": "age",
-      "label": "Ages",
-      "path": "./packs/age.db",
-      "type": "Item"
+      "label": "Ages (sample)",
+      "path": "./packs/age",
+      "type": "Item",
+      "system": "outgunned",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "conditions",
-      "label": "Conditions",
-      "path": "./packs/conditions.db",
-      "type": "Item"
+      "label": "Conditions (sample)",
+      "path": "./packs/conditions",
+      "type": "Item",
+      "system": "outgunned",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "feats",
-      "label": "Feats",
-      "path": "./packs/feats.db",
-      "type": "Item"
+      "label": "Feats (sample)",
+      "path": "./packs/feats",
+      "type": "Item",
+      "system": "outgunned",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "enemy-feats",
-      "label": "Enemy Feats",
-      "path": "./packs/enemy-feats.db",
-      "type": "Item"
+      "label": "Enemy Feats (sample)",
+      "path": "./packs/enemy-feats",
+      "type": "Item",
+      "system": "outgunned",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "gear",
-      "label": "Gear",
-      "path": "./packs/gear.db",
-      "type": "Item"
+      "label": "Gear (sample)",
+      "path": "./packs/gear",
+      "type": "Item",
+      "system": "outgunned",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "guns",
-      "label": "Guns",
-      "path": "./packs/guns.db",
-      "type": "Item"
+      "label": "Guns (sample)",
+      "path": "./packs/guns",
+      "type": "Item",
+      "system": "outgunned",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "rides",
-      "label": "Rides",
-      "path": "./packs/rides.db",
-      "type": "Item"
+      "label": "Rides (sample)",
+      "path": "./packs/rides",
+      "type": "Item",
+      "system": "outgunned",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "roles",
-      "label": "Roles",
-      "path": "./packs/roles.db",
-      "type": "Item"
+      "label": "Roles (sample)",
+      "path": "./packs/roles",
+      "type": "Item",
+      "system": "outgunned",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "skills",
       "label": "Skills",
-      "path": "./packs/skills.db",
-      "type": "Item"
+      "path": "./packs/skills",
+      "type": "Item",
+      "system": "outgunned",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "special-actions",
-      "label": "Special Actions",
-      "path": "./packs/special-actions.db",
-      "type": "Item"
+      "label": "Special Actions (sample)",
+      "path": "./packs/special-actions",
+      "type": "Item",
+      "system": "outgunned",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "tropes",
-      "label": "Tropes",
-      "path": "./packs/tropes.db",
-      "type": "Item"
+      "label": "Tropes (sample)",
+      "path": "./packs/tropes",
+      "type": "Item",
+      "system": "outgunned",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "instructions",
       "label": "Instructions",
-      "path": "./packs/instructions.db",
-      "type": "JournalEntry"
+      "path": "./packs/instructions",
+      "type": "JournalEntry",
+      "system": "outgunned",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "anleitung",
+      "label": "Anleitung (Deutsch)",
+      "path": "./packs/anleitung",
+      "type": "JournalEntry",
+      "system": "outgunned",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "macros",
       "label": "Macros",
-      "path": "./packs/macros.db",
-      "type": "Macro"
+      "path": "./packs/macros",
+      "type": "Macro",
+      "system": "outgunned",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
     }
   ],
   "languages": [
@@ -108,6 +184,28 @@
       "path": "lang/de.json"
     }
   ],
+  "packFolders": [
+    {
+      "name": "Outgunned system",
+      "sorting": "a",
+      "packs": [
+        "age",
+        "anleitung",
+        "conditions",
+        "feats",
+        "enemy-feats",
+        "gear",
+        "guns",
+        "instructions",
+        "macros",
+        "rides",
+        "roles",
+        "skills",
+        "special-actions",
+        "tropes"
+      ]
+    }
+  ],
   "grid":{
     "distance": 5,
     "units": "ft"
@@ -115,8 +213,8 @@
   "primaryTokenAttribute": "hp",
   "secondaryTokenAttribute": "adrenaline",
   "url": "https://github.com/Genii-Locorum/outgunned",
-  "manifest": "https://github.com/Genii-Locorum/outgunned/releases/download/Alpha6/system.json",
-  "download": "https://github.com/Genii-Locorum/outgunned/releases/download/Alpha6/system.zip",
+  "manifest": "https://github.com/Genii-Locorum/outgunned/releases/download/Beta1/system.json",
+  "download": "https://github.com/Genii-Locorum/outgunned/releases/download/Beta1/system.zip",
   "license": "LICENSE.txt",
   "changelog": "CHANGELOG.md",
   "socket": true
