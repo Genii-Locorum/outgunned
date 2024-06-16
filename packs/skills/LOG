@@ -1,8 +1,0 @@
-2023/09/14-20:11:20.126 3184 Recovering log #4
-2023/09/14-20:11:20.131 3184 Delete type=0 #4
-2023/09/14-20:11:20.131 3184 Delete type=3 #2
-2023/09/14-20:11:51.796 10c4 Level-0 table #9: started
-2023/09/14-20:11:51.796 10c4 Level-0 table #9: 0 bytes OK
-2023/09/14-20:11:51.798 10c4 Delete type=0 #7
-2023/09/14-20:11:51.801 10c4 Manual compaction at level-0 from '!items!1nwYWAurGkbqqmYp' @ 72057594037927935 : 1 .. '!items!t1VugirneUkZL0zn' @ 0 : 0; will stop at (end)
-2023/09/14-20:11:51.801 10c4 Manual compaction at level-1 from '!items!1nwYWAurGkbqqmYp' @ 72057594037927935 : 1 .. '!items!t1VugirneUkZL0zn' @ 0 : 0; will stop at (end)
