@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.1 (Beta1)
+- Complete overhaul of the Item Compendiums of the system for Beta GoLive
+- Added German language "Anleitung" as Compendium and hereby updated some information in the Englisch "Description" Compendium
+
 ## 1.0.16
 - Added macros packs which includes Heat Increase/Decrease macros and neutral roll
 
