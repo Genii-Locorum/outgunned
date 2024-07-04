@@ -2,10 +2,10 @@
   "id": "outgunned",
   "title": "Outgunned",
   "description": "The Outgunned system for FoundryVTT!",
-  "version": "2.01",
+  "version": "2.02",
   "compatibility": {
     "minimum": 12,
-    "verified": "12.327",
+    "verified": "12.328",
     "maximum": 12
   },
   "authors": [

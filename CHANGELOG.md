@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.0.2(Beta)
+- Changed Gear, Gun, Ride, Experience items so players can change the name (other items can only have the GM change the name)
+
 ## 2.0.1 (Beta1)
 - Complete overhaul of the Item Compendiums of the system for Beta GoLive
 - Added German language "Anleitung" as Compendium and hereby updated some information in the Englisch "Description" Compendium
@@ -18,4 +21,4 @@
 - When making a follow up roll then it is actually made (behind the scenes) by the originating player/GM and not the GM
 
 ## 1.0.13
-- Fixed an issue with Free Roll not working - thanks to Karsten W for the fix
+- Fixed an issue with Free Roll not working - thanks to KarstenW for the fix

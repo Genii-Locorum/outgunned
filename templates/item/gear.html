@@ -2,11 +2,7 @@
   <header class="sheet-header">
     <div class="header-fields">
       <div class="charname">{{localize 'OG.gear'}}:</div>
-    {{#if isGM}}
       <div class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></div>
-    {{else}}
-      <div class="charname">{{item.name}}</div>
-    {{/if}}
     </div>
 
   </header>
