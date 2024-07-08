@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.0.3(Beta)
+- fixed error with imcompatible system.json file
+
 ## 2.0.2(Beta)
 - Changed Gear, Gun, Ride, Experience items so players can change the name (other items can only have the GM change the name)
 

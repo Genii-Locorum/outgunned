@@ -2,7 +2,7 @@
   "id": "outgunned",
   "title": "Outgunned",
   "description": "The Outgunned system for FoundryVTT!",
-  "version": "2.02",
+  "version": "2.03",
   "compatibility": {
     "minimum": 12,
     "verified": "12.328",
@@ -213,8 +213,8 @@
   "primaryTokenAttribute": "hp",
   "secondaryTokenAttribute": "adrenaline",
   "url": "https://github.com/Genii-Locorum/outgunned",
-  "manifest": "https://github.com/Genii-Locorum/outgunned/releases/download/Beta2/system.json",
-  "download": "https://github.com/Genii-Locorum/outgunned/releases/download/Beta2/system.zip",
+  "manifest": "https://github.com/Genii-Locorum/outgunned/releases/download/Beta3/system.json",
+  "download": "https://github.com/Genii-Locorum/outgunned/releases/download/Beta3/system.zip",
   "license": "LICENSE.txt",
   "changelog": "CHANGELOG.md",
   "socket": true
