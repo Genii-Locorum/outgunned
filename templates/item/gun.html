@@ -21,11 +21,8 @@
     <div class="tab attributes" data-group="primary" data-tab="attributes">
       <div class="item-skill-grid">
         <div class="info-cell borderless left bold">{{localize 'OG.cost'}} ($)</div>          
-        {{#if isGM}}
-          <div class="info-cell borderless centre"><input name="system.cost" type="text" value="{{item.system.cost}}" data-dtype="Number"/></div>
-        {{else}}
-          <div class="select-name centre">{{item.system.cost}}</div>
-        {{/if}}
+        <div class="info-cell borderless centre"><input name="system.cost" type="text" value="{{item.system.cost}}" data-dtype="Number"/></div>
+        <div class="select-name centre">{{item.system.cost}}</div>
         <br>
 
         {{#if hasOwner}}
@@ -69,27 +66,19 @@
         <div class="gun-range-grid">
           <div class="info-cell borderless">{{localize 'OG.melee'}}</div>
           <div class="info-cell borderless centre">
-            {{#if isGM}}<input name="system.range.melee" type="text" value="{{item.system.range.melee}}" placeholder="0"/>
-            {{else}}{{item.system.range.melee}}
-            {{/if}}
+            <input name="system.range.melee" type="text" value="{{item.system.range.melee}}" placeholder="0"/>
           </div> 
           <div class="info-cell borderless">{{localize 'OG.close'}}</div> 
           <div class="info-cell borderless centre">
-            {{#if isGM}}<input name="system.range.close" type="text" value="{{item.system.range.close}}" placeholder="0"/>
-            {{else}}{{item.system.range.close}}
-            {{/if}}
+            <input name="system.range.close" type="text" value="{{item.system.range.close}}" placeholder="0"/>
           </div> 
           <div class="info-cell borderless">{{localize 'OG.medium'}}</div> 
           <div class="info-cell borderless centre">
-            {{#if isGM}}<input name="system.range.medium" type="text" value="{{item.system.range.medium}}" placeholder="0"/>
-            {{else}}{{item.system.range.medium}}
-            {{/if}}
+            <input name="system.range.medium" type="text" value="{{item.system.range.medium}}" placeholder="0"/>
           </div> 
           <div class="info-cell borderless">{{localize 'OG.long'}}</div> 
           <div class="info-cell borderless centre">
-            {{#if isGM}}<input name="system.range.long" type="text" value="{{item.system.range.long}}" placeholder="0"/>
-            {{else}}{{item.system.range.long}}
-            {{/if}}
+            <input name="system.range.long" type="text" value="{{item.system.range.long}}" placeholder="0"/>
           </div> 
         </div>  
     </div>

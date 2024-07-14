@@ -21,11 +21,7 @@
     <div class="tab attributes" data-group="primary" data-tab="attributes">
       <div class="item-skill-grid">
         <div class="info-cell borderless left bold">{{localize 'OG.cost'}} ($)</div>          
-        {{#if isGM}}
-          <div class="info-cell borderless centre"><input name="system.cost" type="text" value="{{item.system.cost}}" data-dtype="Number"/></div>
-        {{else}}
-          <div class="select-name centre">{{item.system.cost}}</div>
-        {{/if}}
+        <div class="info-cell borderless centre"><input name="system.cost" type="text" value="{{item.system.cost}}" data-dtype="Number"/></div>
         <br>
 
         {{#if hasOwner}}
