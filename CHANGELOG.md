@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.0.5(Beta)
+- Change to manifest URL to correct it
+
+## 2.0.4(Beta)
+- players can now change cost and other values of gear, guns and rides (no longer restricted to the name)
+
 ## 2.0.3(Beta)
 - fixed error with imcompatible system.json file
 
