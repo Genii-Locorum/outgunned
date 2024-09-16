@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.06(Beta)
+- Added French tranlslation - (thank you to xKuPeD)
+
 ## 2.0.5(Beta)
 - Change to manifest URL to correct it
 
