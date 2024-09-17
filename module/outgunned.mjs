@@ -74,6 +74,11 @@ Hooks.on('renderSceneControls', OutgunnedMenu.renderControls)
 Hooks.once("ready", async function() {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => createItemMacro(data, slot));
+  //Ensure freeform toggle is reset to false on world restart
+  if (game.user.isGM) {
+    if (game.settings.get('outgunned' , 'freeform')) {game.settings.set('outgunned','freeform', false)};
+  }  
+
 });
 
 //Hotbar Macros

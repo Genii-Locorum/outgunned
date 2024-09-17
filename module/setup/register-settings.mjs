@@ -55,4 +55,13 @@ export async function registerSettings () {
     type: Number
   });
 
+  //Non-visible setting to record if freeform is available
+  game.settings.register('outgunned', 'freeform', {
+    name: 'OG.settings.freeform',
+    scope: 'world',
+    config: false,
+    default: false,
+    type: Boolean
+  });
+
 }

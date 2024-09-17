@@ -62,6 +62,15 @@ class OutgunnedLayer extends PlaceablesLayer {
             visible: true,
             onClick: async neutralRoll => {
               await OutgunnedChecks._onNeutralRoll()}            
+          },
+          {
+            name: "freeform",
+            icon: "fas fa-pencil",
+            title: game.i18n.localize('OG.freeform'),
+            toggle: true,
+            visible: isGM,
+            onClick: async toggle => {
+              await OutgunnedUtilities._freeform(toggle)}            
           }
         ]
       })

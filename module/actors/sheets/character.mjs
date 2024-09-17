@@ -393,12 +393,14 @@ export class OutgunnedCharacterSheet extends ActorSheet {
           //Set finalise to true so that the character will get to add 2 free skills at the end plus any age related feats
           finalise = true;
 
-          //As we are adding a Role - first check which attribute to improve
+          //As we are adding a Trope - first check which attribute to improve
           let roleAtt = this.actor.items.get(this.actor.system.roleId).system.attribute
+          //If the role Attribute = one of the Trope attributes then improve the other trope attribute
           if (roleAtt === k.system.attribute1) {
             await this.actor.update({[`system.abilities.${k.system.attribute2}.trope`] : 1})
           } else if (roleAtt === k.system.attribute2) {
             await this.actor.update({[`system.abilities.${k.system.attribute1}.trope`] : 1})
+          // Otherwise let the user select which attribute 
           } else {
             let usage = await this.chooseAtt (k.system.attribute1, k.system.attribute2)
             if (usage) {

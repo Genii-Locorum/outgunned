@@ -92,6 +92,12 @@
   grid-template-columns: 200px 200px;
 }
 
+.outgunned .att-grid {
+  display: grid;
+  grid-template-columns: 200px 30px 57px 30px;
+}
+
+
 .outgunned .charname input{
   font-size: 30px;
   height:40px;

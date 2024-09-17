@@ -1,4 +1,5 @@
 import { OutgunnedCharacterSheet } from '../actors/sheets/character.mjs';
+import { AttViewDialog } from '../chat/attributeView.mjs'
 
 export class OutgunnedUtilities {
     static async triggerDelete(el, actor, dataitem) {
@@ -16,7 +17,6 @@ export class OutgunnedUtilities {
   static async getDataset(el, dataitem) {
     const elem = await el.target ? el.target : el[0];
     const element = await elem?.closest(".item");
-    console.log(element.dataset)
     return element.dataset[dataitem];
   }    
 
@@ -213,25 +213,11 @@ if (dataitem === 'grit') {
     const element = await elem?.closest(".attribute-name");
     const attName = element.dataset.attkey
     const dialogData ={}
-    dialogData.attName= actor.system.abilities[attName].label
-    dialogData.attValue= actor.system.abilities[attName].value
-    dialogData.attRole= actor.system.abilities[attName].role
-    dialogData.attTrope= actor.system.abilities[attName].trope
-    dialogData.attXp= actor.system.abilities[attName].xp
-
-    const html = await renderTemplate(
-        'systems/outgunned/templates/actor/parts/attribute.html',
-        dialogData
-      ) 
-      return new Promise(resolve => {
-        const dlg = new Dialog({
-            title: dialogData.attName,
-            content: html,
-            buttons: {},
-            close: () => {}
-          }, { classes: ['outgunned'] })
-        dlg.render(true)
-      })
+    let newScores = await AttViewDialog.create(actor.system.abilities[attName].label,actor.system.abilities[attName].value,actor.system.abilities[attName].role,actor.system.abilities[attName].trope)
+    await actor.update({[`system.abilities.${attName}.value`]: newScores.value,
+                        [`system.abilities.${attName}.role`]: newScores.role,
+                        [`system.abilities.${attName}.trope`]: newScores.trope
+    })
   } 
 
   static async spendAdrenaline(el, actor) {
@@ -388,4 +374,10 @@ if (dataitem === 'grit') {
     }
   }
 
+  static async _freeform(toggle) {
+    if(!game.user.isGM) {
+      return
+    }
+    await game.settings.set('outgunned', 'freeform', toggle)
+  }
 }

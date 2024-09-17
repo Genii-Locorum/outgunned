@@ -24,7 +24,6 @@ static  async triggerChatButton(event){
       OutgunnedInteractiveChat.handleChatButton ({presetType, targetChatId, origin, originGM})
     } else {
       const availableGM = game.users.find(d => d.active && d.isGM)?.id
-      console.log(availableGM)
       if (availableGM) {
         game.socket.emit('system.outgunned', {
           type: 'chatUpdate',
@@ -68,7 +67,6 @@ static  async triggerChatButton(event){
 
       if (targetMsg.flags.config.origin === game.user.id) {    
         //Re-roll the dice
-        //console.log("GM",game.user.id)
         await OutgunnedChecks.makeRoll(targetMsg.flags.config);
         return
       } else {

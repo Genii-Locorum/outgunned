@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.07(Beta)
+- Added a "GM Freedorm Edit" tool under Outgunned tools.  This allows GMs to toggle on this option and directly change Attribute and Skill scores on the character sheet
+
 ## 2.06(Beta)
 - Added French tranlslation - (thank you to xKuPeD)
 
