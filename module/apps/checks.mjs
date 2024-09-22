@@ -106,7 +106,7 @@ export class OutgunnedChecks {
       bonusDice: 0,
       closed: false,
       reRoll: false,
-      gamble: false,
+      gamble: 0,
       keepDice: [],
       rolledDice: [],
       rollResult: [],
@@ -142,7 +142,7 @@ export class OutgunnedChecks {
         }  
         config.defaultAtt = usage.get('selectAtt');
         config.dangerRoll = usage.get('dangerRoll');
-        config.gamble = usage.get('gamble');
+        config.gamble = Number(usage.get('gamble'));
         config.difficulty = usage.get('difficulty');
         //If difficulty is impossible then ignore the doubledifficulty select - default is normal roll
         if (config.difficulty != 'impossible') {
@@ -168,21 +168,18 @@ export class OutgunnedChecks {
       config.freeRoll = false;
     }
 
-    //If this is a gamble roll add +1 Bonus
-    if (config.gamble === 'true') {
-      config.bonusDice++
+    //If this is a gamble roll add Bonus Dice
+    if (config.gamble > 0) {
+      config.bonusDice = config.bonusDice + config.gamble
     }  
 
     //Check for Condition Penalties for Action & Danger Rolls
     if((config.type === "action" || config.type === "danger") && (config.rollType != 'attRoll' && !config.neutralRoll)) {
-      if (actor.system.broken) {
-        config.bonusDice --;
-      }
-      if (actor.system.abilities[config.defaultAtt].condition) {
+      if (actor.system.abilities[config.defaultAtt].condition || actor.system.broken) {
         config.bonusDice --;
       }
       for (let i of actor.items) {
-        if (i.type === 'condition' && i.system.active && i.system.skill === config.skillLabel) {
+        if (i.type === 'condition' && i.system.active && (i.system.skill === config.skillLabel || i.system.skill2 === config.skillLabel)) {
           config.bonusDice --;
         }
       }  
@@ -258,6 +255,7 @@ export class OutgunnedChecks {
     config = await OutgunnedChecks.successLevel (config)
 
     //If this is a damage Roll set the damage, and check for automated reduction
+    config.damage = 0
     if (config.type === 'danger') {
       if (config.successLevel > 2) {
         config.damage = 0;
@@ -270,8 +268,10 @@ export class OutgunnedChecks {
     }
 
     //If a gamble roll then add Snakeyes to damage
-    if (config.gamble === 'true') {
+    if (config.gamble === 1) {
       config.damage = config.damage + config.rollResult.equals[1]
+    } else if (config.gamble === 2) {
+      config.damage = config.damage + (3* config.rollResult.equals[1])
     }
 
     //On Action/Danger Roll Check to see if reRoll is an option
@@ -306,6 +306,7 @@ export class OutgunnedChecks {
   //Open the roll Modifier Dialog box 
   static async RollDialog (options) {
     let selectAttType = await OutgunnedSelectLists.getAttributeTypes();
+    let razorsEdge=game.settings.get('outgunned','razorsEdge')
     const data = {
       type : options.type,
       label: options.label,
@@ -313,7 +314,8 @@ export class OutgunnedChecks {
       defaultAtt: options.defaultAtt,
       difficulty: options.difficulty,
       selectAttType,
-      neutralRoll: options.neutralRoll
+      neutralRoll: options.neutralRoll,
+      razorsEdge,
     }
     const html = await renderTemplate(options.dialogTemplate,data);
     return new Promise(resolve => {
@@ -388,8 +390,10 @@ export class OutgunnedChecks {
       } else if (config.bonusDice < 0) {
         diffLabel = diffLabel + " (" + config.bonusDice + ")";
       }  
-    if (config.gamble === 'true') {
+    if (config.gamble === 1) {
       diffLabel = diffLabel + " " + game.i18n.localize('OG.gamble')
+    } else if (config.gamble === 2) {
+      diffLabel = diffLabel + " " + game.i18n.localize('OG.settings.razorsEdge')
     }  
 
     let actorId = ""

@@ -34,7 +34,6 @@ export class OutgunnedSkillSheet extends ItemSheet {
     context.attribute = context.displayAttType[this.item.system.displayAtt]
     context.freeform = await game.settings.get('outgunned', 'freeform')
     if(!this.item.isEmbedded || !context.isGM){ context.freeform = false}
-    console.log(context.freeform)
     return context;
   }
 
@@ -53,7 +52,7 @@ export class OutgunnedSkillSheet extends ItemSheet {
         targetScore = Number(event.currentTarget.dataset.target);
         if (targetScore === this.item.system[property]) {targetScore = 0};
         checkProp = {[`system.${property}`] : targetScore}
-      } else if(["value","role","trope"].includes(property)) {
+      } else if(["value","role","trope","free"].includes(property)) {
         if (this.item.system[property] === 0) {targetScore = 1}
         checkProp = {[`system.${property}`] : targetScore}
       } else {

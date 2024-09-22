@@ -1,5 +1,6 @@
 import { OutgunnedCharacterSheet } from '../actors/sheets/character.mjs';
 import { AttViewDialog } from '../chat/attributeView.mjs'
+import { ItemSelectDialog} from "../apps/feat-selection-dialog.mjs";
 
 export class OutgunnedUtilities {
     static async triggerDelete(el, actor, dataitem) {
@@ -363,10 +364,22 @@ if (dataitem === 'grit') {
   }
 
   static async increaseHeat (change) {
+    if(!game.user.isGM) {
+      return
+    }
     let newHeat = game.settings.get('outgunned', 'heat') + Number(change)
     if (newHeat < 1) {newHeat = 1};
     if (newHeat > 12) {newHeat = 12};
     await game.settings.set('outgunned', 'heat', newHeat);
+    let msg = game.i18n.localize('OG.msg.heatIncrease')+newHeat
+    if(change<0) {
+      msg = game.i18n.localize('OG.msg.heatDecrease')+newHeat
+    }
+    game.socket.emit('system.outgunned', {
+    type: 'PlanB',
+    value: msg
+  }) 
+    ui.notifications.warn(msg)
     for (const a of game.actors.contents) {
       if (a.isOwner) {
         a.render(false)
@@ -380,4 +393,122 @@ if (dataitem === 'grit') {
     }
     await game.settings.set('outgunned', 'freeform', toggle)
   }
-}
+
+  static async clearFreeXP(el, actor) {
+    let changes = [];
+    for (let i of actor.items) {
+      //Clear all freeXP points
+      if (i.type === 'skill') {
+        changes.push({
+          _id: i.id,
+          'system.free': 0
+        }) 
+      }  
+    }
+    //Reset all skill to zero free value
+    await Item.updateDocuments(changes, {parent: actor}) 
+  }  
+
+  static async spendFreeXP(el, actor) {
+    let count = Math.max(2-actor.system.freeXP,0)
+    if (count<=0) {return}
+      let newData =[];
+      let newList=[];
+      const dialogData = {}
+      //Now add the 2 free skills available to new characters
+      for (let j of game.items) {
+        if (j.type === 'skill') {
+          let exists = false
+          for (let k of actor.items) {
+            if (k.name === j.name && k.type === 'skill' && k.system.total >=3) {
+              exists = true
+            }
+          }  
+          if (!exists) {
+            j.selected=false
+            newList.push(j)
+          }          
+        }
+      }      
+
+    //Sort the list alphabetically
+    newList.sort(function(a, b){
+      let x = a.name;
+      let y = b.name;
+      if (x < y) {return -1};
+      if (x > y) {return 1};
+      return 0;
+    });
+
+    //Prep and open the dialog window
+    dialogData.newList= newList
+    dialogData.actorId = actor.id
+    dialogData.optionsCount = count
+    dialogData.title = game.i18n.localize('OG.SelectionWindow')
+    const selected = await ItemSelectDialog.create(dialogData)
+
+    if (selected.length > 0) {
+      let changes=[];
+      for (let j of selected) {
+         let exists = false
+         for (let k of actor.items){
+          if (j.name === k.name && k.type==="skill") {
+            exists=true
+          }
+         }
+         //If the skill doesnt exist add it to the character sheet but with Free score = 1  
+         if (!exists) {
+           j.system.free = 1
+           newData.push(j);
+         } else {
+           //Otherwsie change the free score to 1
+           for (let i of actor.items) {
+             if (i.type === 'skill' && i.name === j.name) {
+              changes.push({
+                _id: i.id,
+                'system.free': 1
+              }) 
+             }
+           }
+         }  
+       }   
+       await Item.updateDocuments(changes, {parent: actor})   
+       await actor.createEmbeddedDocuments("Item", newData); 
+    } 
+  }  
+
+  static async _planB(name) {
+    if(!game.user.isGM) {
+      return
+    }
+    let val = await game.settings.get('outgunned', "planB"+name)
+    let planName =  await game.settings.get('outgunned', "planBName-"+name)
+    await game.settings.set('outgunned', "planB"+name, !val)
+
+    if (!val) {
+      ui.notifications.warn(game.i18n.localize('OG.msg.planBActivated')+" - "+planName);     
+      let msg = game.i18n.localize('OG.msg.planBActivated')+" - "+planName
+      game.socket.emit('system.outgunned', {
+      type: 'PlanB',
+      value: msg
+    }) 
+
+    }
+    
+
+    for (const a of game.actors) {
+      if (a.isOwner) {
+        await a.sheet.render(false)
+      }
+    }
+  }
+
+  static async planBbroadcast(msg)
+{
+  ui.notifications.warn(msg); 
+  for (const a of game.actors) {
+    if (a.isOwner) {
+      await a.sheet.render(false)
+    }  
+  }
+}}

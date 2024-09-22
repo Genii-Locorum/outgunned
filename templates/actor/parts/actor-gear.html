@@ -18,15 +18,9 @@
         <div class="indent gear-cell-start">{{gun.name}}</div>
         <div class="centre gear-cell">
           <a class="">
-              <i title= "{{localize 'OG.accurate'}}" class="{{#if gun.system.feats.accurate}}fa-solid fa-bullseye{{/if}}"></i>  
-              <i title="{{localize 'OG.explosive'}}" class="{{#if gun.system.feats.explosive}}fa-solid fa-explosion{{/if}}"></i> 
-              <i title="{{localize 'OG.jam'}}" class="{{#if gun.system.feats.jam}}fa-solid fa-hammer-crash{{/if}}"></i>  
-              <i title="{{localize 'OG.precision'}}" class="{{#if gun.system.feats.precision}}fa-solid fa-crosshairs-simple{{/if}}"></i>  
-              <i title="{{localize 'OG.rapid'}}" class="{{#if gun.system.feats.rapid}}fa-solid fa-person-falling-burst{{/if}}"></i>  
-              <i title="{{localize 'OG.short'}}" class="{{#if gun.system.feats.short}}fa-solid fa-arrow-down-short-wide{{/if}}"></i>  
-              <i title="{{localize 'OG.silent'}}" class="{{#if gun.system.feats.silent}}fa-solid fa-volume-slash{{/if}}"></i>  
-              <i title="{{localize 'OG.single'}}" class="{{#if gun.system.feats.single}}fa-solid fa-bow-arrow{{/if}}"></i>  
-              <i title="{{localize 'OG.slow'}}" class="{{#if gun.system.feats.slow}}fa-solid fa-turtle{{/if}}"></i>  
+            {{#each gun.system.weaponfeats as |weaponfeat id|}}
+              <i title= "{{weaponfeat.name}}" class="{{weaponfeat.system.fasIcon}}"></i>  
+            {{/each}}
           </a>          
           
         </div>

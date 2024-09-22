@@ -34,8 +34,9 @@
     <div class="flexrow">
       <label class="resource-label-diff" title = "{{ localize 'OG.gambleHint' }}">{{ localize 'OG.gamble' }}</label>
       <select class="resource-label-diff align-center" name="gamble">
-        <option value=false selected="selected">{{ localize 'OG.no' }}</option>
-        <option value=true>{{ localize 'OG.yes' }}</option>
+        <option value=0 selected="selected">{{ localize 'OG.no' }}</option>
+        <option value=1>{{ localize 'OG.yes' }}</option>
+        {{#if razorsEdge}}<option value=2>{{ localize 'OG.settings.razorsEdge' }}</option>{{/if}}
       </select>
     </div>
     <br>

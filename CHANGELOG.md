@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## 2.08(Beta)
+- Free Skill points are no longer part of the Trope score, they are held separately.  When adding a trope you will be able to still add the points.
+- There is also a new heading on the "Description" tab that shows the number of Free Skill points spent and a context menu that allows you to clear or spend points.
+- The GM can edit the Free Skill points on individual skills under the GM Freeform Edit option
+- You may need to edit pre-existing characters to make changes manually.
+- Added a new item type for Weapon Feats - these are added to weapons, not to the character.  You will need to enter an icon name from https://fontawesome.com/search (e.g. fa-regular fa-bullseye)
+- Weapon Feats are dragged and dropped on to guns and will then show as an icon on the character sheet with a tooltip for the feat name (no real change).  The old "feats" on the weapon sheet have been moved to a tab that's only visible to the GM - more to allow the GM to make updates to the new system.  I will delete this in a future iteration - but left in for now.
+- There are game settings for three Plan Bs each with a name and FAS Icon.  GM can activate the options via the GM Tools.  The options are shown on the character sheet as icons below the HEAT section.  There is no validation of the FAS Icon text in game settings but if you can't see them on the character sheet then you probably have a typo in the icon text.  All players will get an alert when the GM triggers a plan B and their character sheets will update.
+- As the GM changes Heat all players will get an alert and their character sheets should update automatically.
+- Added three new ride types, Pedal Power, Beast of Burden and Spaceship
+- The title "Adrenaline" can now be edited when the character sheet is unlocked as it's called different things in different variants of the game.  It does mean that the language packs no longer translate this.
+- Added a "Cyber Enahnce" status on the description tab of the character sheet which changes the 8th grit box from Bad to Hot.
+- In Game Settings there is now an option to add "Razor's Edge" to gambling rolls.  When activated the Gambling drop down in the Dice Roll dialog box will now show this option
+- Conditions can now have two attributes or skills attached to them, providing some flexibility for other OG expansions and homebrew rules
+
+
 ## 2.07(Beta)
 - Added a "GM Freedorm Edit" tool under Outgunned tools.  This allows GMs to toggle on this option and directly change Attribute and Skill scores on the character sheet
 

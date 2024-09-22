@@ -6,11 +6,10 @@
         <div class="centre">
           <a class="item-toggle" data-property="active"><i class="clickable {{#if condition.system.active}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
         </div>
-        <div class="fade">{{condition.system.label}}</div>
-        <div></div>
-      </div>  
+      </div>
+      <div class="feat-label indent">{{condition.system.label}}</div>
     </li>
-    <div class="shortDesc">{{{condition.system.shortDesc}}}</div>
+    <div class="shortDesc">{{{condition.system.shortDescDisplay}}}</div>
     <br>
  {{/each}}
 </ol>

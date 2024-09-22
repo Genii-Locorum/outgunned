@@ -12,6 +12,9 @@
     <a class="item" data-tab="attributes">{{ localize 'OG.attributes' }}</a>
     <a class="item" data-tab="description">{{ localize 'OG.description' }}</a>
     <a class="item" data-tab="image">{{ localize 'OG.image' }}</a>
+    {{#if isGM}}
+      <a class="item" data-tab="feats">{{ localize 'OG.feats' }}</a>
+    {{/if}}
   </nav>
 
   {{!-- Sheet Body --}}
@@ -22,7 +25,6 @@
       <div class="item-skill-grid">
         <div class="info-cell borderless left bold">{{localize 'OG.cost'}} ($)</div>          
         <div class="info-cell borderless centre"><input name="system.cost" type="text" value="{{item.system.cost}}" data-dtype="Number"/></div>
-        <div class="select-name centre">{{item.system.cost}}</div>
         <br>
 
         {{#if hasOwner}}
@@ -49,19 +51,7 @@
         {{/if}}
       </div>
 
-      <div class="left bold" title="{{localize 'OG.redActive'}}">{{localize 'OG.feats'}}</div>         
-      <div class="gun-feat-grid">
-        <div class="{{#if isGM}}toggle{{/if}} centre bordered {{#if item.system.feats.accurate}}toggled{{/if}}" data-property="accurate">{{localize 'OG.accurate'}}</div>
-        <div class="{{#if isGM}}toggle{{/if}} centre bordered {{#if item.system.feats.explosive}}toggled{{/if}}" data-property="explosive">{{localize 'OG.explosive'}}</div>
-        <div class="{{#if isGM}}toggle{{/if}} centre bordered {{#if item.system.feats.jam}}toggled{{/if}}" data-property="jam">{{localize 'OG.jam'}}</div>
-        <div class="{{#if isGM}}toggle{{/if}} centre bordered {{#if item.system.feats.precision}}toggled{{/if}}" data-property="precision">{{localize 'OG.precision'}}</div>
-        <div class="{{#if isGM}}toggle{{/if}} centre bordered {{#if item.system.feats.rapid}}toggled{{/if}}" data-property="rapid">{{localize 'OG.rapid'}}</div>
-        <div class="{{#if isGM}}toggle{{/if}} centre bordered {{#if item.system.feats.short}}toggled{{/if}}" data-property="short">{{localize 'OG.short'}}</div>
-        <div class="{{#if isGM}}toggle{{/if}} centre bordered {{#if item.system.feats.silent}}toggled{{/if}}" data-property="silent">{{localize 'OG.silent'}}</div>
-        <div class="{{#if isGM}}toggle{{/if}} centre bordered {{#if item.system.feats.single}}toggled{{/if}}" data-property="single">{{localize 'OG.single'}}</div>
-        <div class="{{#if isGM}}toggle{{/if}} centre bordered {{#if item.system.feats.slow}}toggled{{/if}}" data-property="slow">{{localize 'OG.slow'}}</div>
-      </div>
-      <br>
+
       <div class="left bold">{{localize 'OG.range'}}</div>     
         <div class="gun-range-grid">
           <div class="info-cell borderless">{{localize 'OG.melee'}}</div>
@@ -81,6 +71,28 @@
             <input name="system.range.long" type="text" value="{{item.system.range.long}}" placeholder="0"/>
           </div> 
         </div>  
+
+        <br>
+
+        {{!-- Selected Feats --}}
+        <div class="horizontalboxed {{#if isGM}} droppable {{/if}} weaponfeats">
+        <div class="select-name">{{ localize "OG.feats"}}</div>
+        <ol class="item-list">
+          {{#each weaponfeats as |weaponfeat|}}
+            <li class="item flexrow" data-item-id="{{weaponfeat._id}}" >
+              <div class="item-name flexrow">
+                <div class="item-list-name">{{weaponfeat.name}}  <a><i class="{{weaponfeat.system.fasIcon}}"></i></a></div>
+              </div>
+  
+              <div class="item-controls">
+                {{#if ../isGM}}
+                  <a class="item-control item-delete feats" title="{{localize 'OG.deleteItem'}}"><i class="fas fa-trash"></i></a>
+                {{/if}}
+              </div>
+            </li>
+          {{/each}}
+        </ol>
+        </div>
     </div>
     
     {{!-- Description Tab --}}
@@ -92,5 +104,22 @@
     <div class="tab image" data-group="primary" data-tab="image">
       <img class="profile-img" src="{{item.img}}" data-edit="img" height="200" width="200" title="{{item.name}}"/>
     </div>
+
+    {{!-- Feats Tab --}}
+    <div class="tab feats" data-group="primary" data-tab="feats">
+      <div class="left bold" title="{{localize 'OG.redActive'}}">{{localize 'OG.feats'}}</div>         
+      <div class="gun-feat-grid">
+        <div class="{{#if isGM}}toggle{{/if}} centre bordered {{#if item.system.feats.accurate}}toggled{{/if}}" data-property="accurate">{{localize 'OG.accurate'}}</div>
+        <div class="{{#if isGM}}toggle{{/if}} centre bordered {{#if item.system.feats.explosive}}toggled{{/if}}" data-property="explosive">{{localize 'OG.explosive'}}</div>
+        <div class="{{#if isGM}}toggle{{/if}} centre bordered {{#if item.system.feats.jam}}toggled{{/if}}" data-property="jam">{{localize 'OG.jam'}}</div>
+        <div class="{{#if isGM}}toggle{{/if}} centre bordered {{#if item.system.feats.precision}}toggled{{/if}}" data-property="precision">{{localize 'OG.precision'}}</div>
+        <div class="{{#if isGM}}toggle{{/if}} centre bordered {{#if item.system.feats.rapid}}toggled{{/if}}" data-property="rapid">{{localize 'OG.rapid'}}</div>
+        <div class="{{#if isGM}}toggle{{/if}} centre bordered {{#if item.system.feats.short}}toggled{{/if}}" data-property="short">{{localize 'OG.short'}}</div>
+        <div class="{{#if isGM}}toggle{{/if}} centre bordered {{#if item.system.feats.silent}}toggled{{/if}}" data-property="silent">{{localize 'OG.silent'}}</div>
+        <div class="{{#if isGM}}toggle{{/if}} centre bordered {{#if item.system.feats.single}}toggled{{/if}}" data-property="single">{{localize 'OG.single'}}</div>
+        <div class="{{#if isGM}}toggle{{/if}} centre bordered {{#if item.system.feats.slow}}toggled{{/if}}" data-property="slow">{{localize 'OG.slow'}}</div>
+      </div>
+    </div>
+
   </section>
 </form>

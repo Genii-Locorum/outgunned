@@ -78,7 +78,9 @@
       "ageOptFeat": 0,
       "cash": 1,
       "mission": "",
-      "locked": false
+      "locked": false,
+      "adrenalineName": "Adrenaline",
+      "cyberEnhance": false
     },
     "support": {
       "templates": ["base"],
@@ -146,7 +148,7 @@
     }      
   },
   "Item": {
-    "types": ["gear","gun","ride","skill","role","feat","age", "trope","condition","enemyFeat","specialAction", "experience", "chase"],
+    "types": ["gear","gun","ride","skill","role","feat","age", "trope","condition","enemyFeat","specialAction", "experience", "chase","weaponfeat"],
     "templates": {
       "base": {
         "description": ""
@@ -164,6 +166,7 @@
         "shortDesc": "",
         "location": "worn",
         "mags":0,
+        "weaponfeats":[],
         "feats": {
           "accurate": false,
           "explosive": false,
@@ -191,6 +194,9 @@
       "nautical": false,
       "flying": false,
       "armoured": false,
+      "space": false,
+      "pedal": false,
+      "beast": false,
       "speed": {
         "start": 1,
         "value": 0
@@ -207,6 +213,7 @@
       "value": 1,
       "role": 0,
       "trope": 0,
+      "free": 0,
       "xp": 0,
       "displayAtt": "brawn"
       },
@@ -244,8 +251,10 @@
     "condition": {
       "templates": ["base"],
       "active": false,
-      "attribute": "",
-      "skill": "",
+      "attribute": "na",
+      "attribute2": "na",
+      "skill": "na",
+      "skill2": "na",
       "common": false,
       "shortDesc": ""
     },
@@ -277,6 +286,10 @@
         "base": 0
       },
       "vehicles": []
+    },
+    "weaponfeat":{
+      "templates": ["base"],
+      "fasIcon": "fa-solid fa-seal-question"
     }
   }
 }

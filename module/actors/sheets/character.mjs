@@ -37,7 +37,16 @@ export class OutgunnedCharacterSheet extends ActorSheet {
     context.roleName = this.actor.system.roleId ? this.actor.items.get(this.actor.system.roleId).name : "";
     context.tropeName = this.actor.system.tropeId ? this.actor.items.get(this.actor.system.tropeId).name : "";
     context.heat = game.settings.get('outgunned', 'heat')
-
+    context.planB1 = game.settings.get("outgunned","planB1")
+    context.planB1Name = game.settings.get("outgunned","planBName-1")
+    context.planB1Icon = game.settings.get("outgunned","planBIcon-1")
+    context.planB2 = game.settings.get("outgunned","planB2")
+    context.planB2Name = game.settings.get("outgunned","planBName-2")
+    context.planB2Icon = game.settings.get("outgunned","planBIcon-2")
+    context.planB3 = game.settings.get("outgunned","planB3")
+    context.planB3Name = game.settings.get("outgunned","planBName-3")
+    context.planB3Icon = game.settings.get("outgunned","planBIcon-3")
+    context.planB3Name = game.settings.get("outgunned","planBName-3")
 
     // Prepare character data and items.
       this._prepareItems(context);
@@ -83,23 +92,48 @@ export class OutgunnedCharacterSheet extends ActorSheet {
       } else if (i.type === 'feat' ){
         feats.push(i);
       } else if (i.type === 'condition' ){
-          if (i.system.attribute != 'na') {
-            if (i.system.attribute === 'all' || i.system.attribute === 'none') {
+          i.system.label=""
+          i.system.order = 0
+
+          if (i.system.attribute != 'na' && i.system.attribute != 'none') {
+            if (i.system.attribute === 'all') {
               i.system.label = game.i18n.localize('OG.' + i.system.attribute)
-              i.system.order = 2
-              if (i.system.attribute === 'all') {
-                i.system.order = 99
-              }
+              i.system.order = 99
             } else {  
               i.system.label = game.i18n.localize(CONFIG.OUTGUNNED.abilities[i.system.attribute]) 
               i.system.order = 1
             }    
-          } else if (i.system.skill != 'na'){
-            i.system.label = i.system.skill
-            i.system.order = 3 
-          } else {
+          }  
+          if (i.system.attribute2 != 'na' && i.system.attribute2 != 'none') {
+            if (i.system.attribute2 === 'all') {
+              i.system.label = game.i18n.localize('OG.' + i.system.attribute2)
+              i.system.order = 99
+            } else {  
+              i.system.label = i.system.label + " " + game.i18n.localize(CONFIG.OUTGUNNED.abilities[i.system.attribute2]) 
+              i.system.order = Math.max(i.system.order,1)
+            }    
+          }  
+
+          if (i.system.skill != 'na'){
+            i.system.label = i.system.label + " " + i.system.skill
+            i.system.order = Math.max(i.system.order,3) 
+          } 
+          
+          if (i.system.skill2 != 'na'){
+            i.system.label = i.system.label + " " + i.system.skill2
+            i.system.order = Math.max(i.system.order,3) 
+          } 
+          
+          
+          if (i.system.label === "") {
             i.system.label = game.i18n.localize('OG.other')
             i.system.order = 4
+          }
+
+          if ((i.system.shortDesc).length < 1) {
+            i.system.shortDescDisplay = "<p>" + game.i18n.localize('OG.none') + "</p>"
+          } else {
+            i.system.shortDescDisplay = i.system.shortDesc
           }
         conditions.push(i);
       }  
@@ -206,7 +240,7 @@ export class OutgunnedCharacterSheet extends ActorSheet {
     new OutgunnedContextMenu(html, ".mission.contextmenu", contextMenu.missionMenuOptions(this.actor, this.token));
     new OutgunnedContextMenu(html, ".flaw.contextmenu", contextMenu.flawMenuOptions(this.actor, this.token));
     new OutgunnedContextMenu(html, ".deathRoulette.contextmenu", contextMenu.deathRouletteMenuOptions(this.actor, this.token));
-
+    new OutgunnedContextMenu(html, ".free.contextmenu", contextMenu.freeXPMenuOptions(this.actor, this.token));
     // Drag events for macros.
     if (this.actor.isOwner) {
       let handler = ev => this._onDragStart(ev);
@@ -260,6 +294,8 @@ export class OutgunnedCharacterSheet extends ActorSheet {
       targetScore = Number(event.currentTarget.dataset.target);
       if (targetScore === this.actor.system.cash) {targetScore = 0};
       checkProp = {'system.cash' : targetScore};
+    } else if (property === "cyberEnhance") {      
+      checkProp = {'system.cyberEnhance': !this.actor.system.cyberEnhance};
     } else {
       return
     }
@@ -309,7 +345,7 @@ export class OutgunnedCharacterSheet extends ActorSheet {
       }
 
       //Test for invalid item types for Character
-      if(["enemyFeat","specialAction"].includes(k.type)) {
+      if(["enemyFeat","specialAction","weaponfeat"].includes(k.type)) {
         reqResult = false
         errMsg = k.name + " (" + k.type + "): "+ game.i18n.localize('OG.msg.enemyItem') 
       }
@@ -472,11 +508,10 @@ export class OutgunnedCharacterSheet extends ActorSheet {
     
     //Once the Trope and associated items have been added finalise the charactewr
     if (finalise) {
-      newData = await this.finaliseCharacter();
+      let count = Math.max(2-this.actor.system.freeXP,0)
+      newData = await this.finaliseCharacter("all",count);
       await this.actor.createEmbeddedDocuments("Item", newData); 
     }
-    
-    
     return
   }
 
@@ -521,6 +556,7 @@ export class OutgunnedCharacterSheet extends ActorSheet {
             }
           }  
           if (!exists) {
+          j.selected=false;
             newList.push(j)
           }          
         }
@@ -611,31 +647,35 @@ export class OutgunnedCharacterSheet extends ActorSheet {
     })
   }
 
-  async finaliseCharacter() {
+  async finaliseCharacter(option, count) {
     let newData =[];
     //Now add the 2 free skills available to new characters
-    let newFeats = await this._newItemSelect("",2,'skill','free')
-    if (newFeats.length > 0) {
-      for (let j of newFeats) {
-        let exists = await this.itemCheck (j.name, 'skill', newData)
-        //If the skill doesnt exist add it to the character sheet but with Trope score = 1  
-        if (!exists) {
-          j.system.trope = 1
-          newData.push(j);
-        } else {
-          //Otherwsie change the trope score to 1
-          for (let i of this.actor.items) {
-            if (i.type === 'skill' && i.name === j.name) {
-              await i.update ({'system.trope': 1});
+    if(count>0){
+      let newSkills=[];
+      newSkills = await this._newItemSelect("",count,'skill','free')
+      
+      if (newSkills.length > 0) {
+        for (let j of newSkills) {
+          let exists = await this.itemCheck (j.name, 'skill', newData)
+          //If the skill doesnt exist add it to the character sheet but with Free score = 1  
+          if (!exists) {
+            j.system.free = 1
+            newData.push(j);
+          } else {
+            //Otherwsie change the free score to 1
+            for (let i of this.actor.items) {
+              if (i.type === 'skill' && i.name === j.name) {
+                await i.update ({'system.free': 1});
+              }
             }
-          }
+          }  
         }   
       }    
     }
 
     //Finally for the Trope, add the optional feat if character is Old
-    if (this.actor.system.ageOptFeat > 0) {
-      newFeats = await this._newItemSelect("",this.actor.system.ageOptFeat,'feat','optFeat')
+    if (this.actor.system.ageOptFeat > 0 && option === "all") {
+      let newFeats = await this._newItemSelect("",this.actor.system.ageOptFeat,'feat','optFeat')
       if (newFeats.length > 0) {
         for (let j of newFeats) {
           j.system.source = "trope";

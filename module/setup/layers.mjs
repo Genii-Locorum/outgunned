@@ -71,6 +71,33 @@ class OutgunnedLayer extends PlaceablesLayer {
             visible: isGM,
             onClick: async toggle => {
               await OutgunnedUtilities._freeform(toggle)}            
+          },
+          {
+            name: "planB1",
+            icon: game.settings.get("outgunned","planBIcon-1"),
+            title: game.i18n.localize('OG.planB')+"-1",
+            button: true,
+            visible: isGM,
+            onClick: async planB1 => {
+              await OutgunnedUtilities._planB("1")}            
+          },
+          {
+            name: "planB2",
+            icon: game.settings.get("outgunned","planBIcon-2"),
+            title: game.i18n.localize('OG.planB')+"-2",
+            button: true,
+            visible: isGM,
+            onClick: async planB1 => {
+              await OutgunnedUtilities._planB("2")}            
+          },
+          {
+            name: "planB3",
+            icon: game.settings.get("outgunned","planBIcon-3"),
+            title: game.i18n.localize('OG.planB')+"-3",
+            button: true,
+            visible: isGM,
+            onClick: async planB1 => {
+              await OutgunnedUtilities._planB("3")}            
           }
         ]
       })

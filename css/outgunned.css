@@ -92,6 +92,11 @@
   grid-template-columns: 200px 200px;
 }
 
+.outgunned .item-condition-grid {
+  display: grid;
+  grid-template-columns: 200px 150px 150px;
+}
+
 .outgunned .att-grid {
   display: grid;
   grid-template-columns: 200px 30px 57px 30px;
@@ -124,6 +129,10 @@
 .outgunned .red {
   color:rgb(177,37,26);
 }  
+
+.outgunned .grey {
+  color: grey;
+}
 
 .outgunned .blue {
   color:rgb(13, 27, 214);
@@ -303,7 +312,7 @@
 
 .outgunned .ride-grid-type{
   display: grid;
-  grid-template-columns: 95px 36px 36px 36px 36px 36px 95px;
+  grid-template-columns: 40px 36px 36px 36px 36px 36px 36px 36px 36px 40px;
 }
 
 .outgunned .ride-grid-bottom{
@@ -327,6 +336,14 @@
   height: fit-content;
   border: 1px grey solid;
   padding: 0px 5px 0px 5px;
+  color:rgba(0, 0, 0, 0.75);
+  margin: 0px;
+}
+
+.outgunned .feat-label{
+  border-top: 1px grey solid;
+  border-left: 1px grey solid;
+  border-right: 1px grey solid;
   color:rgba(0, 0, 0, 0.75);
   margin: 0px;
 }
@@ -398,8 +415,8 @@
 
 .outgunned .rideType-grid {
   display: grid;
-  padding-left: 100px;
-  grid-template-columns: repeat(5,50px);
+  padding-left: 20px;
+  grid-template-columns: repeat(8,50px);
   grid-column-gap: 10px; 
 }
 

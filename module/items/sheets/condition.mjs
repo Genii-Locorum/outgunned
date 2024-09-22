@@ -31,9 +31,10 @@ export class OutgunnedConditionSheet extends ItemSheet {
     context.hasOwner = this.item.isEmbedded === true
     context.displayAttType = await OutgunnedSelectLists.getAllAttributeTypes();
     context.attribute = context.displayAttType[this.item.system.attribute]
-
+    context.attribute2 = context.displayAttType[this.item.system.attribute2]
     context.displaySkill = await OutgunnedSelectLists.getSkillList();
-    context.skill = context.displaySkill[this.item.system.skill]
+    context.skill = context.displaySkill[this.item.system.skill];
+    context.skill2 = context.displaySkill[this.item.system.skill2];
 
     return context;
   }

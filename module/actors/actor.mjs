@@ -51,6 +51,7 @@ export class OutgunnedActor extends Actor {
     const systemData = actorData.system;
     systemData.broken = false;
     let totalXP = 0;
+    let freeXP = 0;
     // Loop through ability scores, and add their modifiers to our sheet output.
     for (let [key, ability] of Object.entries(systemData.abilities)) {
       ability.label = game.i18n.localize(CONFIG.OUTGUNNED.abilities[key]) ?? key;
@@ -68,12 +69,18 @@ export class OutgunnedActor extends Actor {
         systemData.tropeId = i._id;
       }else if (i.type === "skill") {
         totalXP = totalXP + i.system.xp;
-        i.system.total = Math.min(i.system.value + i.system.role + i.system.trope + i.system.xp,3);
+        freeXP = freeXP + i.system.free
+        i.system.total = Math.min(i.system.value + i.system.role + i.system.trope + i.system.free + i.system.xp,3);
       } else if (i.type === 'condition' && i.system.active) {
         if (i.system.attribute === 'all'){
           systemData.broken = true;
         } else if (i.system.attribute !='na' && i.system.attribute != 'none') {
           systemData.abilities[i.system.attribute].condition = true;
+        }
+        if (i.system.attribute2 === 'all'){
+          systemData.broken = true;
+        } else if (i.system.attribute2 !='na' && i.system.attribute2 != 'none') {
+          systemData.abilities[i.system.attribute2].condition = true;
         }
       } else if (i.type === 'ride') {
         if (i.system.flying || i.system.nautical || i.system.armoured) {
@@ -83,7 +90,7 @@ export class OutgunnedActor extends Actor {
     }  
 
     systemData.advance = Math.floor(totalXP/2)
-
+    systemData.freeXP = freeXP
   }
 
   _prepareSupportData(actorData) {

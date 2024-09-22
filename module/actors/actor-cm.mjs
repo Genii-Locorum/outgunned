@@ -102,6 +102,31 @@ export const tropeMenuOptions = (actor,token) => [
   }
 ]
 
+export const freeXPMenuOptions = (actor,token) => [
+  {
+    name: game.i18n.localize("OG.freeSkill"),
+    icon: "",
+    condition: () => true,
+    callback: (el) => {}
+  },
+  {
+    name: game.i18n.localize("OG.cm.spend"),
+    icon: '<i class="fas fa-pencil"></i>',
+    condition: () => true,
+    callback: (el) => {
+      const itemId = OutgunnedUtilities.spendFreeXP(el, actor);
+    }
+  },
+  {
+    name: game.i18n.localize("OG.cm.clear"),
+    icon: '<i class="fas fa-trash"></i>',
+    condition: () => (game.user.isGM),
+    callback: (el) => {
+      const itemId = OutgunnedUtilities.clearFreeXP(el, actor);
+    }
+  }
+]
+
 export const attributeMenuOptions = (actor,token) => [
   {
     name: game.i18n.localize("OG.attribute"),

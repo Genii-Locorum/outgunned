@@ -96,7 +96,7 @@ export class OutgunnedRideSheet extends ItemSheet {
       event.preventDefault();
       const prop=event.currentTarget.closest('.toggle').dataset.property;
       let checkProp={};
-      if (prop === 'bike' || prop === 'car' || prop === 'nautical' || prop === 'flying' || prop === 'armoured') {
+      if (['bike','car','nautical','flying','armoured','beast','pedal','space'].includes(prop)) {
         checkProp = {[`system.${prop}`]: !this.item.system[prop]};
       } else {
         return

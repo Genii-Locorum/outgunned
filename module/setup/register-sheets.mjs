@@ -13,6 +13,7 @@ import { OutgunnedRideSheet } from '../items/sheets/ride.mjs';
 import { OutgunnedEnemyFeatSheet } from '../items/sheets/enemyFeat.mjs';
 import { OutgunnedSpecialActionSheet } from '../items/sheets/specialAction.mjs';
 import { OutgunnedExperienceSheet } from '../items/sheets/experience.mjs';
+import { OutgunnedWeaponFeat } from '../items/sheets/weaponfeat.mjs';
 
 export function registerSheets () {
   Actors.unregisterSheet("core", ActorSheet);
@@ -90,6 +91,11 @@ export function registerSheets () {
 
   Items.registerSheet('Outgunned', OutgunnedExperienceSheet, {
     types: ['experience'],
+    makeDefault: true
+  })
+  
+  Items.registerSheet('Outgunned', OutgunnedWeaponFeat, {
+    types: ['weaponfeat'],
     makeDefault: true
   })
 }

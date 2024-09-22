@@ -1,5 +1,6 @@
 import { OutgunnedInteractiveChat } from '../chat/interactive-chat.mjs';
 import { OutgunnedChecks } from './checks.mjs';
+import {OutgunnedUtilities} from './utilities.mjs';
 
 export class OutgunnedSystemSocket {
   
@@ -17,7 +18,9 @@ export class OutgunnedSystemSocket {
       case 'reRoll':
         await OutgunnedChecks.makeRoll(data.value);
       break;
-
+      case 'PlanB':
+        await OutgunnedUtilities.planBbroadcast(data.value);
+      break;  
 
     }
   }

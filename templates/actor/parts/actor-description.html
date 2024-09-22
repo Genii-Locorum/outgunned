@@ -3,6 +3,7 @@
         <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
       </div>
       <div>
+        <div><span class="red free contextmenu">{{localize 'OG.freeSkill'}}: </span><span>{{actor.system.freeXP}}</span></div>
         <div title="{{localize 'OG.advancedHint'}}">{{localize 'OG.advanced'}}</div>
         <div>
           <a class="large-icon"><i class="{{#if (gte actor.system.advance 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
@@ -50,4 +51,11 @@
     <div class="red">{{localize 'OG.background'}}</div>
     <div>
       {{editor system.biography class="background-doc" target="system.biography" button=true owner=owner editable=editable}}
-    </div>    
+    </div>   
+    <br>
+
+    <div class="red">{{localize 'OG.status'}}</div>
+    <div class="item-skill-grid">
+      <div class="">{{localize 'OG.cyberEnhanced'}}</div>
+      <div><a class="medium-icon actor-toggle clickable" data-property="cyberEnhance"><i class="{{#if actor.system.cyberEnhance}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a></div>
+    </div>

@@ -1,7 +1,6 @@
 
 
 export async function registerSettings () {
-
   //Choose default difficulty level
   game.settings.register('outgunned', 'defaultDifficulty', {
       name: 'OG.settings.defaultDifficulty',
@@ -45,6 +44,76 @@ export async function registerSettings () {
     type: Boolean
   });
 
+  //Choose whether to include Razor's Edge gamble option
+  game.settings.register('outgunned', 'razorsEdge', {
+    name: 'OG.settings.razorsEdge',
+    hint: 'OG.settings.razorsEdgeHint',
+    scope: 'world',
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
+  //Name Plan B option 1
+  game.settings.register('outgunned', 'planBName-1', {
+    name: 'OG.settings.planBName-1',
+    hint: 'OG.settings.planBNameHint',
+    scope: 'world',
+    config: true,
+    default: "Bullet",
+    type: String
+  });    
+
+  //Icon Plan B option 1
+  game.settings.register('outgunned', 'planBIcon-1', {
+    name: 'OG.settings.planBIcon-1',
+    hint: 'OG.fasIconHint',
+    scope: 'world',
+    config: true,
+    default: "fa-solid fa-person-rifle",
+    type: String
+  });  
+
+  //Name Plan B option 2
+  game.settings.register('outgunned', 'planBName-2', {
+    name: 'OG.settings.planBName-2',
+    hint: 'OG.settings.planBNameHint',
+    scope: 'world',
+    config: true,
+    default: "Backup",
+    type: String
+  });    
+
+  //Icon Plan B option 2
+  game.settings.register('outgunned', 'planBIcon-2', {
+    name: 'OG.settings.planBIcon-2',
+    hint: 'OG.fasIconHint',
+    scope: 'world',
+    config: true,
+    default: "fa-solid fa-heart",
+    type: String
+  });  
+  
+  //Name Plan B option 3
+  game.settings.register('outgunned', 'planBName-3', {
+    name: 'OG.settings.planBName-3',
+    hint: 'OG.settings.planBNameHint',
+    scope: 'world',
+    config: true,
+    default: "Bluff",
+    type: String
+  });      
+
+  //Icon Plan B option 3
+  game.settings.register('outgunned', 'planBIcon-3', {
+    name: 'OG.settings.planBIcon-3',
+    hint: 'OG.fasIconHint',
+    scope: 'world',
+    config: true,
+    default: "fa-solid fa-face-hand-peaking",
+    type: String
+  });  
+
   //Non-visible setting to record heat
   game.settings.register('outgunned', 'heat', {
     name: 'OG.settings.heat',
@@ -64,4 +133,30 @@ export async function registerSettings () {
     type: Boolean
   });
 
+  //Non-visible setting to record if PlanB option 1 has been used
+  game.settings.register('outgunned', 'planB1', {
+    name: 'planB1',
+    scope: 'world',
+    config: false,
+    default: false,
+    type: Boolean
+  });
+
+  //Non-visible setting to record if PlanB option 2 has been used
+  game.settings.register('outgunned', 'planB2', {
+    name: 'planB2',
+    scope: 'world',
+    config: false,
+    default: false,
+    type: Boolean
+  });
+  
+  //Non-visible setting to record if PlanB option 3 has been used
+  game.settings.register('outgunned', 'planB3', {
+    name: 'planB3',
+    scope: 'world',
+    config: false,
+    default: false,
+    type: Boolean
+  });  
 }

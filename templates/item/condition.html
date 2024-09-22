@@ -23,7 +23,7 @@
   <br>  
     {{!-- Attributes Tab --}}
     <div class="tab attributes" data-group="primary" data-tab="attributes">
-      <div class="item-skill-grid">
+      <div class="item-condition-grid">
         <div class=" select-name left bold">{{localize 'OG.affectedAttType'}}</div>          
         {{#if isGM}}
           <div class="left">
@@ -31,13 +31,19 @@
             {{selectOptions displayAttType selected=item.system.attribute}}
           </select>
           </div>
+          <div class="left">
+            <select data-handle-change name="system.attribute2">
+              {{selectOptions displayAttType selected=item.system.attribute2}}
+            </select>
+            </div>
         {{else}}
           <div class="select-name left">{{attribute}}</div>
+          <div class="select-name left">{{attribute2}}</div>
         {{/if}}
         <br>
       </div>
 
-      <div class="item-skill-grid">
+      <div class="item-condition-grid">
         <div class=" select-name left bold">{{localize 'OG.affectedSkill'}}</div>          
         {{#if isGM}}
           <div class="left">
@@ -45,8 +51,14 @@
             {{selectOptions displaySkill selected=item.system.skill}}
           </select>
           </div>
+          <div class="left">
+            <select data-handle-change name="system.skill2">
+              {{selectOptions displaySkill selected=item.system.skill2}}
+            </select>
+            </div>          
         {{else}}
           <div class="select-name left">{{skill}}</div>
+          <div class="select-name left">{{skill2}}</div>
         {{/if}}
         <br>
       </div>
