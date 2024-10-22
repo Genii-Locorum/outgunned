@@ -32,6 +32,13 @@
             </select>
           </div>
           <br>
+          {{#if (eq gameVersion "1")}}
+            <div class="new-row select-name left bold">{{localize 'OG.keyItem'}}</div>         
+            <div>
+              <a class="large-icon toggle" data-property="keyItem" ><i class="{{#if item.system.keyItem}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+            </div>
+            <br>
+          {{/if}}
         {{/if}}  
     </div>
 

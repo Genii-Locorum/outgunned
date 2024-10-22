@@ -33,6 +33,7 @@ export class OutgunnedCharacterSheet extends ActorSheet {
     context.system = actorData.system;
     context.flags = actorData.flags;
     context.isLocked = actorData.system.locked;
+    context.gameVersion = game.settings.get("outgunned","ogVersion")
     context.ageName = this.actor.system.ageId ? this.actor.items.get(this.actor.system.ageId).name : "";
     context.roleName = this.actor.system.roleId ? this.actor.items.get(this.actor.system.roleId).name : "";
     context.tropeName = this.actor.system.tropeId ? this.actor.items.get(this.actor.system.tropeId).name : "";
@@ -47,6 +48,14 @@ export class OutgunnedCharacterSheet extends ActorSheet {
     context.planB3Name = game.settings.get("outgunned","planBName-3")
     context.planB3Icon = game.settings.get("outgunned","planBIcon-3")
     context.planB3Name = game.settings.get("outgunned","planBName-3")
+    context.adrenalineLabel = game.i18n.localize("OG.adrenaline")
+    context.jobLabel = game.i18n.localize("OG.job")
+    context.missionLabel = game.i18n.localize("OG.mission")
+    if (context.gameVersion === '1') {
+      context.adrenalineLabel = game.i18n.localize("OG.luck")
+      context.missionLabel = game.i18n.localize("OG.treasure")
+      context.jobLabel = game.i18n.localize("OG.background")
+    }
 
     // Prepare character data and items.
       this._prepareItems(context);

@@ -212,7 +212,7 @@ export class OutgunnedChecks {
     if (config.neutralRoll) {
       config.label = config.label + "[" + game.i18n.localize('OG.neutralRoll') + "]"
     }
-    let roll = new Roll(config.diceNumber+"D6");
+    let roll = new Roll(config.diceNumber+"da");
     await roll.evaluate();
     config.roll=roll;
     const results = roll.terms[0] && roll.terms[0].results ? roll.terms[0].results : [];

@@ -37,9 +37,9 @@
                 {{/unless}}
                 {{#if closed}}
                   <div class="align-center dice-total" >
-                    <span class="result-success">{{pairsDice}}<span>
+                    <span class="result-success dice">{{pairsDice}}<span>
                     {{#if (gt restDiceLength 0)}}
-                      <span class="result-fail">[{{restDice}}]</span>
+                      <span class="result-fail dice">{{restDice}}</span>
                     {{/if}}
                   </div>
                   <div class="align-center dice-total" >  {{resultLabel}}</div>
@@ -99,9 +99,9 @@
             </div>
           {{else}}
             <div class="{{#if (gt successLevel 1)}}cream {{/if}} align-center dice-total" >
-              <span class="result-success" title="{{ localize 'OG.successDice' }}">{{pairsDice}}<span>
+              <span class="result-success dice" title="{{ localize 'OG.successDice' }}">{{pairsDice}}<span>
               {{#if (gt restDiceLength 0)}}
-                <span class="result-fail" title="{{ localize 'OG.failDice' }}">[{{restDice}}]</span>
+                <span class="result-fail dice" title="{{ localize 'OG.failDice' }}">{{restDice}}</span>
               {{/if}}  
               </div>    
           {{/if}}    

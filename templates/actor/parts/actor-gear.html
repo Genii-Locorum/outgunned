@@ -35,7 +35,11 @@
           {{#if (eq gun.system.location 'bag')}}
             <div class="centre gear-cell"><a class="item-toggle clickable" data-property="bag" title="{{localize 'OG.bag'}}"><i class="fa-solid fa-briefcase"></i></a></div>         
           {{else}}
-            <div class="centre gear-cell"><a class="item-toggle clickable" data-property="storage" title="{{localize 'OG.storage'}}"><i class="fa-solid fa-warehouse"></i></a></div>              
+            {{#if (eq ../gameVersion "1")}}
+            <div class="centre gear-cell"><a class="item-toggle clickable" data-property="storage" title="{{localize 'OG.backpack'}}"><i class="fa-solid fa-backpack"></i></a></div>              
+            {{else}}
+              <div class="centre gear-cell"><a class="item-toggle clickable" data-property="storage" title="{{localize 'OG.storage'}}"><i class="fa-solid fa-warehouse"></i></a></div>              
+            {{/if}}  
           {{/if}}
         {{/if}}
 
@@ -59,14 +63,25 @@
   {{#each gear as |gear id|}}
     <li class="item" data-item-id="{{gear._id}}">
       <div class="gear-grid">
-        <div class="indent gear-cell-start" title="{{gear.system.shortDesc}}">{{gear.name}}</div>
+        <div class="indent gear-cell-start" title="{{gear.system.shortDesc}}">
+          {{#if gear.system.keyItem}}
+            {{#if (eq ../gameVersion "1")}}
+              <a class="item-edit clickable red" title="{{localize 'OG.keyItem'}}"><i class="fa-solid fa-key"></i></a>
+            {{/if}}
+          {{/if}}
+          {{gear.name}}
+        </div>
         {{#if (eq gear.system.location 'worn')}}
           <div class="centre gear-cell"><a class="item-toggle clickable" data-property="worn" title="{{localize 'OG.worn'}}"><i class="fa-solid fa-user"></i></a></div>         
         {{else}}
           {{#if (eq gear.system.location 'bag')}}
             <div class="centre gear-cell"><a class="item-toggle clickable" data-property="bag" title="{{localize 'OG.bag'}}"><i class="fa-solid fa-briefcase"></i></a></div>         
           {{else}}
-            <div class="centre gear-cell"><a class="item-toggle clickable" data-property="storage" title="{{localize 'OG.storage'}}"><i class="fa-solid fa-warehouse"></i></a></div>              
+            {{#if (eq ../gameVersion "1")}}
+            <div class="centre gear-cell"><a class="item-toggle clickable" data-property="storage" title="{{localize 'OG.backpack'}}"><i class="fa-solid fa-backpack"></i></a></div>              
+            {{else}}
+              <div class="centre gear-cell"><a class="item-toggle clickable" data-property="storage" title="{{localize 'OG.storage'}}"><i class="fa-solid fa-warehouse"></i></a></div>              
+            {{/if}}  
           {{/if}}
         {{/if}}
         {{#if ../isLocked}}

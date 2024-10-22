@@ -327,5 +327,14 @@ export const enemyGritMenuOptions = (actor,token) => [
     callback: (el) => {
       const itemId = OutgunnedUtilities.triggerEditHot(el, actor);
     }
+  },
+
+  {
+    name: game.i18n.localize("OG.cm.toggleBad"),
+    icon: '<i class="fas fa-fire-flame-curved"></i>',
+    condition: () => (game.settings.get("outgunned","ogVersion") === '1'),
+    callback: (el) => {
+      const itemId = OutgunnedUtilities.triggerEditBad(el, actor);
+    }
   }
 ]

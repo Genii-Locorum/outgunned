@@ -51,7 +51,7 @@
     <div class="info-cell indent">{{{actor.system.flaw}}}</div>
     <div class="red catchphrase contextmenu">{{localize 'OG.catchphrase'}}</div>
     <div class="info-cell indent">{{{actor.system.catchphrase}}}</div>
-    <div class="red mission contextmenu">{{localize 'OG.mission'}}</div>
+    <div class="red mission contextmenu">{{missionLabel}}</div>
     <div class="info-cell indent">{{{actor.system.mission}}}</div>
     <br>
 
@@ -77,11 +77,7 @@
     </div>
 
     <br>
-    {{#if isLocked}}
-      <div class="red upperCase adrenaline-name contextmenu">{{system.adrenalineName}}</div>
-    {{else}}
-      <div class="info-cell adrenaline-name contextmenu" style="margin-top:0px !important;"><input class="upperCase red" name="system.adrenalineName" type="text" value="{{actor.system.adrenalineName}}"/></div>
-    {{/if}}
+    <div class="red upperCase adrenaline-name contextmenu">{{adrenalineLabel}}</div>
     <div class="grit">
       {{#loop 1 system.adrenaline.max 1}}
       <a class="red medium-icon actor-toggle clickable" data-property="adrenaline" data-target = {{this}}><i class="{{#if (gte ../actor.system.adrenaline.value this)}} fa-solid fa-battery-full fa-rotate-270 {{else}} fa-solid fa-battery-empty fa-rotate-270{{/if}}"></i></a>

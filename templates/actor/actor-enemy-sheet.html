@@ -16,8 +16,8 @@
       <div class="grit">
         {{#each actor.system.hot as |value key|}}
           {{#if (lte key ../actor.system.grit.max)}}  
-            {{#unless value}}
-              <a class="red medium-icon actor-toggle clickable enemy-grit contextmenu" data-property="grit" data-target = {{key}}><i class="{{#if (gte ../actor.system.grit.value key)}}fa-solid fa-shield{{else}}fa-regular fa-shield{{/if}}"></i></a>
+            {{#unless (eq value 'hot')}}
+              <a class="{{#if (eq value 'bad')}}black{{else}}red{{/if}} medium-icon actor-toggle clickable enemy-grit contextmenu" data-property="grit" data-target = {{key}}><i class="{{#if (gte ../actor.system.grit.value key)}}fa-solid fa-shield{{else}}fa-regular fa-shield{{/if}}"></i></a>
             {{else}}  
               <a class="red medium-icon actor-toggle clickable enemy-grit contextmenu" data-property="grit" data-target = {{key}}><i class="{{#if (gte ../actor.system.grit.value key)}}fa-solid fa-fire-flame-curved{{else}}fa-regular fa-fire-flame-curved{{/if}}"></i></a>
             {{/unless}}  

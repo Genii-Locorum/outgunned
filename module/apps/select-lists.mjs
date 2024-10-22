@@ -77,6 +77,12 @@ export class OutgunnedSelectLists {
       "bag": game.i18n.localize("OG.bag"),
       "storage": game.i18n.localize("OG.storage")
     }   
+    if (game.settings.get("outgunned","ogVersion") === "1") {
+      options= Object.assign(options,{"storage": game.i18n.localize("OG.backpack")});
+    }else {
+      options= Object.assign(options,{"storage": game.i18n.localize("OG.storage")});
+    }  
+
     return options;
   } 
 

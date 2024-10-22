@@ -360,8 +360,23 @@ if (dataitem === 'grit') {
   static async triggerEditHot (el, actor) {
     const elem = await el.target ? el.target : el[0]
     const targetScore = Number(elem.dataset.target)
-    await actor.update({[`system.hot.${targetScore}`]: !actor.system.hot[targetScore]});
+    if (actor.system.hot[targetScore] === 'not') {
+      await actor.update({[`system.hot.${targetScore}`]: 'hot'});      
+    } else {
+      await actor.update({[`system.hot.${targetScore}`]: 'not'});
+    }  
   }
+
+  static async triggerEditBad (el, actor) {
+    const elem = await el.target ? el.target : el[0]
+    const targetScore = Number(elem.dataset.target)
+    if (actor.system.hot[targetScore] === 'bad') {
+      await actor.update({[`system.hot.${targetScore}`]: 'not'});      
+    } else {
+      await actor.update({[`system.hot.${targetScore}`]: 'bad'});
+    }  
+  }
+
 
   static async increaseHeat (change) {
     if(!game.user.isGM) {

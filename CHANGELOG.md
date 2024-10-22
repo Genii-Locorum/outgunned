@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2.09
+- Dice rolls now show Outgunned Dice rather than 1-6 (you still see the values in the chat card).  If you manually roll in chat you will only see numbers
+- If using Dice So Nice you will get the icons.  
+- Removed the inout for "Adrenaline" - reverted back to how it was but see below
+- There is a game setting for the version of the game you are running - currently just Outgunned or Adventures
+- When using Adventure, Job becomes Background, Mission becomes Treasure and Adrenaline becomes Luck - with appropriate French and German Translations
+- When using Adventure, enemies now have Grit that can now change grit to "Bad" as well as Hot or Not.
+- When using Adventure, items in storage are replaced with items in backpack
+- When using Adventure, gear Items can now be flagged as "Key Items".  This only applies to "Gear", not Guns etc
+
 ## 2.08(Beta)
 - Free Skill points are no longer part of the Trope score, they are held separately.  When adding a trope you will be able to still add the points.
 - There is also a new heading on the "Description" tab that shows the number of Free Skill points spent and a context menu that allows you to clear or spend points.

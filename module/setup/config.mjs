@@ -19,3 +19,4 @@ OUTGUNNED.checkList = {
   "action": "OG.action.roll",
   "danger": "OG.danger.roll"
 };
+

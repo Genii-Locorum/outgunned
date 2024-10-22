@@ -11,6 +11,18 @@
   src: url('../assets/Futura-Bold.ttf') format('woff2');
 }
 
+@font-face {
+  font-family: 'OG-dice';
+  font-style: bold;
+  font-weight: 400;
+  src: url('../assets/OG-dice.ttf') format('woff2');
+}
+
+.outgunned .dice {
+  font-family: 'OG-dice';
+  font-size: 20px;
+
+}
 .outgunned .window-content {
   background-image:url("../assets/background.jpg");
   background-size: cover; 

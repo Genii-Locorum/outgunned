@@ -1,6 +1,13 @@
-
+import {OutgunnedActionDie} from "./outgunnedDice.mjs"
 
 export async function registerSettings () {
+
+  let gameVersion = {
+    "0": game.i18n.localize("OG.outgunned"),
+    "1": game.i18n.localize("OG.adventures")
+  };  
+
+  
   //Choose default difficulty level
   game.settings.register('outgunned', 'defaultDifficulty', {
       name: 'OG.settings.defaultDifficulty',
@@ -114,6 +121,18 @@ export async function registerSettings () {
     type: String
   });  
 
+  //Outgunned Game Version
+  game.settings.register('outgunned', 'ogVersion', {
+    name: 'OG.settings.ogVersion',
+    hint: 'OG.settings.ogVersionHint',
+    scope: 'world',
+    config: true,
+    type: String,
+    choices: gameVersion,
+    default: 0
+  });  
+
+
   //Non-visible setting to record heat
   game.settings.register('outgunned', 'heat', {
     name: 'OG.settings.heat',
@@ -159,4 +178,7 @@ export async function registerSettings () {
     default: false,
     type: Boolean
   });  
+  
+  CONFIG.Dice.terms['a'] = OutgunnedActionDie;
+
 }

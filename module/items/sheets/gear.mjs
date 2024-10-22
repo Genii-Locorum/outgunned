@@ -24,6 +24,7 @@ export class OutgunnedGearSheet extends ItemSheet {
       context.rollData = actor.getRollData();
     }
     context.system = itemData.system;
+    context.gameVersion = game.settings.get("outgunned","ogVersion")
     context.flags = itemData.flags;
     context.isGM =  game.user.isGM;
     context.hasOwner = this.item.isEmbedded === true
@@ -35,5 +36,21 @@ export class OutgunnedGearSheet extends ItemSheet {
   activateListeners(html) {
     super.activateListeners(html);
     if (!this.isEditable) return;
+    html.find('.toggle').click(this.onItemToggle.bind(this));
   }
+
+    //Handle toggle states
+    async onItemToggle(event){
+      event.preventDefault();
+      const prop=event.currentTarget.closest('.toggle').dataset.property;
+      console.log(prop)
+      let checkProp={};
+      if (prop === 'keyItem') {
+        checkProp = {[`system.${prop}`]: !this.item.system[prop]};
+      } else {
+        return
+      }
+      await this.object.update(checkProp);
+      return
+    }  
 }
