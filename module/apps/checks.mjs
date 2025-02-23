@@ -346,7 +346,7 @@ export class OutgunnedChecks {
     let successLevel = 0;
 
     if (config.type === 'death') {
-      if (config.roll.total > config.deathScore) {
+      if (config.rolledDice > config.deathScore) {
         successLevel = 5 //Narrow Escape
       } else {
         successLevel = -1 //Left for Dead

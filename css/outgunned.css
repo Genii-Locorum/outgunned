@@ -18,6 +18,12 @@
   src: url('../assets/OG-dice.ttf') format('woff2');
 }
 
+body {
+  background-attachment: fixed !important;
+  background-size:100%  !important;
+  background: url("../assets/Outgunned-feat.webp") no-repeat;
+}
+
 .outgunned .dice {
   font-family: 'OG-dice';
   font-size: 20px;

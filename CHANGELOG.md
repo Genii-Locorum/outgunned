@@ -1,9 +1,12 @@
 # CHANGELOG
 
+## 2.10
+- Death Roulette no longer always rolls "Left for Dead"
+
 ## 2.09
 - Dice rolls now show Outgunned Dice rather than 1-6 (you still see the values in the chat card).  If you manually roll in chat you will only see numbers
 - If using Dice So Nice you will get the icons.  
-- Removed the inout for "Adrenaline" - reverted back to how it was but see below
+- Removed the input for "Adrenaline" - reverted back to how it was but see below
 - There is a game setting for the version of the game you are running - currently just Outgunned or Adventures
 - When using Adventure, Job becomes Background, Mission becomes Treasure and Adrenaline becomes Luck - with appropriate French and German Translations
 - When using Adventure, enemies now have Grit that can now change grit to "Bad" as well as Hot or Not.
