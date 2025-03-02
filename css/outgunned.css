@@ -153,7 +153,7 @@ body {
 }
 
 .outgunned .blue {
-  color:rgb(13, 27, 214);
+  color:rgb(73, 84, 231);
 } 
 
 .outgunned .background-doc {
@@ -217,6 +217,10 @@ body {
 
 .outgunned .borderright {
   border-right: 1px solid gray;
+}
+
+.outgunned .borderbottom {
+  border-bottom: 1px solid gray;
 }
 
 .outgunned .select-name {
@@ -320,7 +324,7 @@ body {
   border-left: 1px grey solid;
   border-right: 1px grey solid;
   border-bottom: 1px grey solid;
-  grid-template-columns: 340px 30px ;
+  grid-template-columns: 300px 70px ;
 }
 
 .outgunned .ride-grid{
@@ -330,7 +334,7 @@ body {
 
 .outgunned .ride-grid-type{
   display: grid;
-  grid-template-columns: 40px 36px 36px 36px 36px 36px 36px 36px 36px 40px;
+  grid-template-columns: 41px 36px 36px 36px 36px 36px 36px 36px 36px 41px;
 }
 
 .outgunned .ride-grid-bottom{
@@ -491,3 +495,239 @@ body {
   grid-template-columns: 100px 100px;
   grid-row-gap: 5px; 
 }
+
+.outgunned .mission {
+  flex:0;
+}
+
+.outgunned .mission-sheet {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 540px 250px;
+  grid-column-gap: 10px;
+}
+
+.outgunned .mission-title {
+  display: grid;
+  grid-template-columns: 170px 60PX 310px;
+  height: 70px;
+}
+
+.outgunned .planB-icons {
+  display: grid;
+  grid-template-columns: 80px 80px 80px;
+  grid-column-gap: 5px;
+}
+
+.outgunned .planBIcon {
+  font-family: 'OG-dice';
+  font-size: 35px;
+}
+
+.outgunned .planB {
+  height: 70px;
+}
+
+.outgunned .participants {
+  display: grid;
+  margin-top: 10px;
+  grid-template-columns: 70px 170px 70px 170px 40px;
+  grid-column-gap: 5px;
+}
+
+.outgunned .mission-heat{
+  margin-top: 10px;
+}
+
+.outgunned .nav-panel {
+  margin-top: 10px;
+  display: grid;
+  width: 100%;
+  max-height: 40px;
+  align-content: center;
+  background-color: rgb(177,37,26);
+  color: white;
+} 
+
+.sheet nav.sheet-tabs {
+  margin: 0 0;
+}
+
+.outgunned .tabs .item:hover {
+  color: darkgrey;
+}
+
+.outgunned .tabs .item.active {
+  color: black;
+  text-shadow:0px 0px 5px white;
+}
+
+.outgunned .sheet-body,
+.outgunned .sheet-body .tab,
+.outgunned .sheet-body .tab .editor {
+ height: 100%;
+}
+
+.outgunned .mission-shots {
+  display: grid;
+  grid-template-columns: 100px 650px 40px;
+  grid-column-gap: 5px; 
+  max-height: 50px;
+  border: 1px solid rgb(177,37,26);
+}
+
+
+.outgunned .truncate {
+  align-self: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+}
+
+.outgunned .mission-villain{
+  margin-top:5px;
+  display: grid;
+  grid-template-columns: 100px 690px ;
+  grid-column-gap: 5px; 
+}
+
+.outgunned .mission-support{
+  margin-top:5px;
+  display: grid;
+  grid-template-columns: 260px 260px 260px ;
+  grid-column-gap: 5px; 
+  grid-row-gap: 20px;
+}
+
+.outgunned .mission-support-name {
+  display: grid;
+  grid-template-columns: 200px 55px;
+  grid-column-gap: 5px; 
+}
+
+.outgunned .mission-box {
+  border: 1px solid rgb(177,37,26);
+  background-color:rgb(247, 241, 241);
+  padding: 5px;
+}
+
+.outgunned .mission-rides{
+  margin-top:5px;
+  display: grid;
+  grid-template-columns: 370px 370px;
+  grid-column-gap: 50px; 
+  grid-row-gap: 20px;
+}
+
+.outgunned .director {
+  flex:0;
+}
+
+.outgunned .director-sheet {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 540px 250px;
+  grid-column-gap: 10px;
+}
+
+.outgunned .director-title {
+  display: grid;
+  grid-template-columns: 170px 60PX 310px;
+  height: 70px;
+}
+
+.outgunned .director-heat {
+  height: 80px;
+}
+
+.outgunned .director-enemy-stats {
+  display: grid;
+  grid-template-columns: 250px;
+}
+
+.outgunned .director-attacks {
+  display: grid;
+  grid-template-columns: 125px 125px;
+}
+
+.outgunned .director-chase {
+  display: grid;
+  grid-template-columns: 125px 125px;
+
+}
+
+.outgunned .director-need {
+  display: grid;
+  grid-template-columns: repeat(18,20px);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.outgunned .director-chase-notes {
+  display: grid;
+  grid-template-columns: 60px 300px;
+  max-height: 16px;
+}
+
+.outgunned .director-sa {
+  display: grid;
+  grid-template-columns: 290px 70px;
+
+}
+
+.outgunned .director-chase-notes p {
+margin: 0px;
+}
+
+.outgunned .chase {
+  flex:0;
+}
+
+.outgunned .chase-sheet {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 500px 250px;
+  grid-column-gap: 50px;
+}
+
+.outgunned  .chase-need {
+  display: grid;
+  grid-template-columns: repeat(9,25px);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.outgunned  .chase-speed {
+  display: grid;
+  grid-template-columns: repeat(5,50px);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  margin-top: 10px;
+}
+
+.outgunned .chase-title {
+  display: grid;
+  grid-template-columns: 170px 60PX 270px;
+  height: 70px;
+}
+
+.outgunned .chase-participants {
+  display: grid;
+  margin-top: 10px;
+  grid-template-columns: 70px 150px 70px 150px 40px;
+  grid-column-gap: 5px;
+}
+
+.outgunned  .chase-adrenaline {
+  display: grid;
+  margin-top: 5px;
+  grid-template-columns: repeat(3,50px);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.outgunned .chase-sa{
+  display: grid;
+  grid-template-columns: 300px 70px ;
+}
+

@@ -1,0 +1,39 @@
+
+<ol class="items-list">
+  <div class="mission-support">
+    {{#each supporters as |support key|}}
+      <li class="item partic" data-collection = "participants" data-particuuid="{{support.uuid}}">
+        <div class="mission-box">
+          <div class="mission-support-name">
+            <div>
+              <span class="blue">{{localize 'OG.name'}}:  </span><span class="black clickable partic-edit">{{support.name}}</span>
+            </div>  
+            <div class="centre">
+              <a class="ride-refresh clickable"title=" {{localize 'OG.refresh'}}"><i class="fa-solid fa-arrows-rotate"></i></a>
+              <a class="support-delete clickable"title=" {{localize 'OG.delete'}}"><i class="fa-solid fa-trash"></i></a>
+            </div>
+          </div>  
+          <div class="new-row"><span class="blue">{{localize 'OG.help'}}:  </span><span class="black">{{support.system.help}}</span></div>
+          <div><span class="blue">{{localize 'OG.flaw'}}:  </span><span class="black">{{support.system.flaw}}</span></div>
+          <div class="support-abilities-grid">
+            {{#each system.abilities as |ability key|}}
+              <div class="upperCase">{{ability.label}}</div>
+              <div class="centre">
+                {{#loop 1 5 1}}
+                  <a class=""><i class="{{#if (gte ability.total this)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+                {{/loop}}
+              </div>
+            {{/each}}  
+          </div>    
+          <div class="centre grit" style="max-width:260px">
+            {{#loop 1 system.grit.max 1}}
+              <a class="red medium-icon">
+                <i class="{{#if (gte support.system.grit.value this)}}fa-solid fa-shield{{else}}fa-regular fa-shield{{/if}}"></i>
+              </a>
+            {{/loop}}
+          </div>  
+        </div>
+      </li>  
+    {{/each}}
+  </div>  
+</ol>

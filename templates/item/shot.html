@@ -1,0 +1,19 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <div class="header-fields">
+      {{#if (eq item.system.subtype 'shot')}}
+        <div class="charname">{{localize 'OG.shot'}}: </div>
+      {{else}}
+        <div class="charname">{{localize 'OG.contact'}}: </div>
+      {{/if}}
+      <div class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></div>
+    </div>
+  </header>
+  <br>
+    {{!-- Description Tab --}}
+    <div>
+      <div>{{localize 'OG.description'}}</div>
+      {{editor item.system.description class="background-item-doc" target="system.description" button=true owner=owner editable=editable}}
+    </div>
+  </section>
+</form>

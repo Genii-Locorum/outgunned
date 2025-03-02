@@ -1,6 +1,9 @@
 import { OutgunnedCharacterSheet } from '../actors/sheets/character.mjs';
 import { OutgunnedEnemySheet } from '../actors/sheets/enemy.mjs';
 import { OutgunnedSupportSheet } from '../actors/sheets/support.mjs';
+import { OutgunnedMissionSheet } from '../actors/sheets/mission.mjs';
+import { OutgunnedDirectorSheet } from '../actors/sheets/director.mjs';
+import { OutgunnedChaseSheet } from '../actors/sheets/chase.mjs';
 import { OutgunnedGearSheet } from '../items/sheets/gear.mjs';
 import { OutgunnedSkillSheet } from '../items/sheets/skill.mjs';
 import { OutgunnedRoleSheet } from '../items/sheets/role.mjs';
@@ -14,6 +17,7 @@ import { OutgunnedEnemyFeatSheet } from '../items/sheets/enemyFeat.mjs';
 import { OutgunnedSpecialActionSheet } from '../items/sheets/specialAction.mjs';
 import { OutgunnedExperienceSheet } from '../items/sheets/experience.mjs';
 import { OutgunnedWeaponFeat } from '../items/sheets/weaponfeat.mjs';
+import { OutgunnedShotSheet } from '../items/sheets/shot.mjs';
 
 export function registerSheets () {
   Actors.unregisterSheet("core", ActorSheet);
@@ -32,6 +36,21 @@ export function registerSheets () {
     types: ['support'],
     makeDefault: true
   })
+
+  Actors.registerSheet('Outgunned', OutgunnedMissionSheet, {
+    types: ['mission'],
+    makeDefault: true
+  })
+
+  Actors.registerSheet('Outgunned', OutgunnedDirectorSheet, {
+    types: ['director'],
+    makeDefault: true
+  })
+
+  Actors.registerSheet('Outgunned', OutgunnedChaseSheet, {
+    types: ['chase'],
+    makeDefault: true
+  })  
 
   Items.unregisterSheet('core', ItemSheet)
     Items.registerSheet('Outgunned', OutgunnedGearSheet, {
@@ -98,4 +117,9 @@ export function registerSheets () {
     types: ['weaponfeat'],
     makeDefault: true
   })
+
+  Items.registerSheet('Outgunned', OutgunnedShotSheet, {
+    types: ['shot'],
+    makeDefault: true
+  })  
 }

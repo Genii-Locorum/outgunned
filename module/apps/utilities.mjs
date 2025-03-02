@@ -67,7 +67,9 @@ static async triggerEditActor(el, actor, dataitem) {
 let currVal=""
 if (dataitem === 'grit') {
   currVal = actor.system.grit.max
-}else {
+} else if (dataitem === 'need') {
+  currVal = actor.system.need.max
+} else {
   currVal = actor.system[dataitem]
 }
   const data = {
@@ -98,7 +100,11 @@ if (dataitem === 'grit') {
     answer = Number(answer);
     if (!answer) {return} 
     await actor.update({'system.grit.max': answer});
-  }else {
+  } else if (dataitem === 'need') {
+    answer = Number(answer);
+    if (!answer) {return} 
+    await actor.update({'system.need.max': answer});
+  } else {
     await actor.update({[`system.${dataitem}`]: answer});
   }  
 
@@ -377,6 +383,12 @@ if (dataitem === 'grit') {
     }  
   }
 
+  static async triggerEditNeed (el, actor) {
+    const elem = await el.target ? el.target : el[0]
+    const targetScore = Number(elem.dataset.target)
+      await actor.update({[`system.need.hot.${targetScore}`]: !actor.system.need.hot[targetScore]});      
+  }
+
 
   static async increaseHeat (change) {
     if(!game.user.isGM) {
@@ -423,6 +435,22 @@ if (dataitem === 'grit') {
     //Reset all skill to zero free value
     await Item.updateDocuments(changes, {parent: actor}) 
   }  
+
+
+  //Sort by Name Key
+  static sortByNameKey (a, b) {
+    return a.name
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLocaleLowerCase()
+      .localeCompare(
+        b.name
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .toLocaleLowerCase()
+      )
+  }  
+  
 
   static async spendFreeXP(el, actor) {
     let count = Math.max(2-actor.system.freeXP,0)

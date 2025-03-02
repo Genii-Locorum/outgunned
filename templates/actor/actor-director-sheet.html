@@ -1,0 +1,80 @@
+<form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+  <section class="director-sheet">
+
+    {{!-- Mission Title --}}
+    <div class="director-title">
+      <div class ="logo" style="margin-top: 10px !important;"></div>
+      <div>
+        <div class="indent blue medium-icon upperCase" style="margin-top:10px;">{{localize 'OG.director'}}</div>
+        <div class="indent blue info-cell" style="margin-top:33px;">{{localize 'OG.mission'}}:</div>
+      </div>
+
+      <div class="info-cell" style="margin-top: auto;"><input name="name" type="text" value="{{actor.name}}"/></div>
+    </div>
+    {{!-- Heat --}}
+    <div class="director-heat">
+      <div class="red upperCase" title = "{{localize 'OG.heat'}}: {{heat}}">{{localize 'OG.heat'}}</div>
+      <div class="grit">
+        {{#loop 1 12 1}}
+          <a class="{{#if (eq this 6)}}black{{else}}{{#if (eq this 9)}} black {{else}}{{#if (eq this 12)}} black {{else}} red{{/if}}{{/if}}{{/if}} medium-icon"><i class="{{#if (gte ../heat this)}} fa-solid fa-temperature-full {{else}} fa-regular fa-temperature-empty{{/if}}"></i></a>
+        {{/loop}}
+      </div>
+      <div class="small upperCase">{{localize 'OG.heat6Hint'}}</div>
+      <div class="small upperCase">{{localize 'OG.heat9Hint'}}</div>
+      <div class="small upperCase">{{localize 'OG.heat12Hint'}}</div>
+    </div>
+
+    {{!-- Characters --}}
+    <ol class="items-list">
+      <div class="participants">
+        <div class="blue upperCase"> {{localize 'OG.heroes'}}</div>
+      </div>  
+      {{#each participants as |partic key|}}
+        <li class="partic" data-particuuid="{{partic.uuid}}">
+          <div class="participants">
+            <div class="blue new-row">{{localize 'OG.name'}}:</div>
+            <div class="clickable partic-edit" >{{partic.name}}</div>
+            <div class="blue">{{localize 'OG.role'}}:</div>
+            <div> {{partic.role}}</div>
+            <div class="centre blue" title="{{localize 'OG.delete'}}"><a class="partic-remove clickable"><i class="fa-solid fa-trash"></i></a></div>
+          </div>
+        </li>
+      {{/each}}
+    </ol>
+    <div></div>
+  </section>
+
+  {{!-- Sheet Tab Navigation --}}
+  <section class="nav-panel" style="background-color: rgb(73, 84, 231) !important;">
+    <nav class="sheet-tabs tabs" data-group="primary">
+      <div><a class="item" data-tab="ride">{{localize 'OG.ride'}}</a></div>
+      <div><a class="item" data-tab="villain">{{localize 'OG.villain'}}</a></div>
+      <div><a class="item" data-tab="enemies">{{localize 'OG.enemies'}}</a></div>
+      <div><a class="item" data-tab="support">{{localize 'OG.support'}}</a></div>
+    </nav>
+  </section> 
+
+  <section class="sheet-body">
+
+    {{!-- Ride Tab --}}
+    <div class="tab ride" data-group="primary" data-tab="ride">
+      {{> "systems/outgunned/templates/actor/parts/director-ride.html"}}
+    </div>
+    
+    {{!-- Villain Tab --}}
+    <div class="tab villain" data-group="primary" data-tab="villain">
+      {{> "systems/outgunned/templates/actor/parts/director-villain.html"}}
+    </div>
+
+    {{!-- Enemies Tab --}}
+    <div class="tab enemies" data-group="primary" data-tab="enemies">
+      {{> "systems/outgunned/templates/actor/parts/director-enemies.html"}}
+    </div>    
+
+    {{!-- Support Tab --}}
+    <div class="tab support" data-group="primary" data-tab="support">
+      {{> "systems/outgunned/templates/actor/parts/director-support.html"}}
+    </div>
+  </section>
+</form>
+

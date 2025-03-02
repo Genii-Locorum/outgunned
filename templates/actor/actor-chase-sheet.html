@@ -1,0 +1,154 @@
+<form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+  <section class="chase-sheet">
+
+    {{!-- Chase Title --}}
+    <div class="chase-title">
+      <div class ="logo"></div>
+      <div>
+        <div class="indent red medium-icon upperCase">{{localize 'OG.chase'}}</div>
+        <div class="indent red info-cell" style="margin-top:33px;">{{localize 'OG.chase'}}:</div>
+      </div>
+      <div class="info-cell" style="margin-top: auto;"><input name="name" type="text" value="{{actor.name}}"/></div>
+    </div>
+
+    {{!-- Need --}}
+    <div>
+      <div class="red upperCase">{{localize 'OG.need'}}</div>
+      <div class="chase-need">
+        {{#each actor.system.need.hot as |value key|}}
+          {{#if (lte key ../actor.system.need.max)}}  
+            <div class="centre middle {{#if ../isGM}}actor-toggle chase-need contextmenu{{/if}}" data-property="need" data-target = {{key}}>
+              <a class="centre  {{#if value}}red{{/if}}" style="font-size: 20px;">
+                <i class="{{#if (gte ../actor.system.need.current key)}}fa-regular fa-square-check{{else}}fa-regular fa-square{{/if}}"></i>
+              </a>
+            </div>
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
+    
+    {{!-- Characters --}}
+    <ol class="items-list">
+      <div class="chase-participants">
+        <div class="red upperCase"> {{localize 'OG.heroes'}}</div>
+      </div>  
+      {{#each participants as |partic key|}}
+        <li class="partic" data-particuuid="{{partic.uuid}}">
+          <div class="chase-participants">
+            <div class="red new-row">{{localize 'OG.name'}}:</div>
+            <div class="clickable partic-edit" >{{partic.name}}</div>
+            <div class="red">{{localize 'OG.role'}}:</div>
+            <div> {{partic.role}}</div>
+            <div class="centre red" title="{{localize 'OG.delete'}}"><a class="partic-remove clickable"><i class="fa-solid fa-trash"></i></a></div>
+          </div>
+        </li>
+      {{/each}}
+    </ol>
+
+    {{!-- Speed --}}
+    <div class="mission-heat">
+      <div class="red upperCase">{{localize 'OG.speed'}}</div>
+      <div class="chase-speed large-icon">
+        <div></div>
+        <div class="{{#if isGM}}actor-toggle{{/if}}" data-property="speed" data-target = -1 title="{{localize 'OG.speedDown'}}"><a><i class="fa-solid fa-arrow-turn-left-down"></i></a></div>
+        <div class="">{{actor.system.speed}}</div>
+        <div class="{{#if isGM}}actor-toggle{{/if}}" data-property="speed" data-target = 1  title="{{localize 'OG.speedUp'}}"><a><i class="fa-solid fa-arrow-turn-up"></i></a></div>
+        <div></div>
+      </div>
+    </div>
+
+    {{!-- Ride --}}  
+    <div>
+    <div class="participants">
+      <div class="red upperCase"> {{localize 'OG.ride'}}</div>
+    </div> 
+    <ol class="items-list">
+      <div class="mission-rides">
+        {{#each rides as |ride key|}}
+        <li class="item" data-collection = "rides" data-particuuid="{{ride.uuid}}">
+            <div class="ride-header">
+              <div class="indent clickable red ride-edit">{{ride.name}} ({{ride.parent.name}})</div>
+              <div class="centre" >
+                  <a class="ride-refresh clickable" title=" {{localize 'OG.refresh'}}"><i class="fa-solid fa-arrows-rotate"></i></a>
+                  <a class="support-delete clickable" title=" {{localize 'OG.delete'}}"><i class="fa-solid fa-trash"></i></a>
+              </div>
+            </div>    
+            <div class="ride-grid">
+              <div class="borderleft"></div>
+              {{#loop 1 6 1}}
+                <div class="centre middle"><a class="mediumplus-icon {{#if (lt this 4)}}red{{/if}}" title="{{localize 'OG.armour'}}" data-property="armour" data-target = {{this}}>
+                  <i class="{{#if (gte ride.system.armour.value this)}}fa-solid fa-shield{{else}}fa-regular fa-shield{{/if}}"></i>
+                </a></div>
+                {{#if (eq this 3)}}
+                  <div class="centre middle"><a class="extralarge-icon" title="{{localize 'OG.startingSpeed'}}: {{ride.system.speed.start}}"><i class="
+                    {{#if (eq ride.system.speed.start 0)}}fa-solid fa-gauge-min{{/if}}
+                    {{#if (eq ride.system.speed.start 1)}}fa-solid fa-gauge-low{{/if}}
+                    {{#if (eq ride.system.speed.start 2)}}fa-solid fa-gauge-high{{/if}}
+                    {{#if (eq ride.system.speed.start 3)}}fa-solid fa-gauge-max{{/if}}
+                  "></i></a></div>
+                {{/if}}      
+              {{/loop}}
+              <div class="borderright"></div>  
+            </div>   
+            
+            <div class="ride-grid-type">     
+               <div class="borderleft"></div>    
+               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.pedal}}red{{/if}}" title="{{localize 'OG.pedal'}}"><i class="fa-solid fa-bicycle"></i></a></div>
+               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.beast}}red{{/if}}" title="{{localize 'OG.beast'}}"><i class="fa-solid fa-horse"></i></a></div>
+               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.bike}}red{{/if}}" title="{{localize 'OG.bike'}}"><i class="fa-solid fa-motorcycle"></i></a></div>
+               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.car}}red{{/if}}" title="{{localize 'OG.car'}}"><i class="fa-solid fa-car-side"></i></a></div>
+               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.nautical}}red{{/if}}" title="{{localize 'OG.nautical'}}"><i class="fa-solid fa-ship"></i></a></div>
+               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.flying}}red{{/if}}" title="{{localize 'OG.flying'}}"><i class="fa-solid fa-helicopter"></i></a></div>
+               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.armoured}}red{{/if}}" title="{{localize 'OG.armoured'}}"><i class="fa-solid fa-truck-monster"></i></a></div>
+               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.space}}red{{/if}}" title="{{localize 'OG.spaceship'}}"><i class="fa-solid fa-starship"></i></a></div>
+               <div class="borderright"></div>     
+    
+            </div>
+    
+            <div class="ride-grid-bottom indent">{{ride.system.shortDesc}}</div>
+    
+        </li>
+        {{/each}}
+      </div>
+    </ol>
+    </div>
+
+    {{!-- Adrenaline --}}  
+    <div class="mission-heat">
+      <div class="red upperCase">{{localize 'OG.adrenaline'}}</div>
+      <div class="chase-adrenaline large-icon red">
+        {{#loop 1 3 1}}
+          <div class="centre middle {{#if ../isGM}}actor-toggle{{/if}}" data-property="adrenaline" data-target = {{this}}>
+            <a><i class="{{#if (gte ../actor.system.adrenaline.current this)}} fa-solid fa-battery-full fa-rotate-270 {{else}} fa-solid fa-battery-empty fa-rotate-270{{/if}}"></i></a>
+          </div>
+        {{/loop}}
+      </div>
+    </div>
+
+    {{!-- Special Actions --}}  
+    <ol class="items-list">
+      <div class="mission-heat">
+        <div class="red upperCase">{{localize 'OG.specialActions'}}</div>
+        {{#each specialActions as |sA key|}}
+          <li class="item" data-item-id="{{sA._id}}">
+            <div class="chase-sa">
+              <div class="clickable ride-edit">{{sA.name}} ({{sA.system.cost}})</div>
+              <div class="centre"><a class="item-delete" title=" {{localize 'OG.delete'}}"><i class="fa-solid fa-trash"></i></a></div>
+            </div>  
+          </li> 
+        {{/each}}
+      </div>
+    </ol>  
+  </section>
+
+    {{!-- Notes --}}  
+    <div class="mission-heat">
+      <div class="red upperCase">{{localize 'OG.notes'}}</div>
+      </div>
+      <div>
+        {{editor actor.system.notes class="background-doc" target="system.notes" button=true owner=owner editable=editable}}
+      </div>  
+    
+
+</form>
+

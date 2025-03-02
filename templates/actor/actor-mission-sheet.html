@@ -1,0 +1,97 @@
+<form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+  <section class="mission-sheet">
+
+    {{!-- Mission Title --}}
+    <div class="mission-title">
+      <div class ="logo"></div>
+      <div class="indent red info-cell" style="margin-top: auto;">{{localize 'OG.mission'}}:</div>
+      <div class="info-cell" style="margin-top: auto;"><input name="name" type="text" value="{{actor.name}}"/></div>
+    </div>
+    <div class="planB">
+      <div class="upperCase centre">{{localize 'OG.whatPlanB'}}<span class="red upperCase">{{localize 'OG.planB'}}</span>?</div>
+      <div class="planB-icons">
+        <div class="planBIcon centre {{#unless planB1}}red{{/unless}}">2</div>
+        <div class="planBIcon centre {{#unless planB2}}red{{/unless}}">3</div>
+        <div class="planBIcon centre {{#unless planB3}}red{{/unless}}">4</div>
+      </div>
+      <div class="planB-icons">
+        <div class="centre">{{planB1Name}}</div>
+        <div class="centre">{{planB2Name}}</div>
+        <div class="centre">{{planB3Name}}</div>
+      </div>
+    </div>
+
+    {{!-- Characters --}}
+    <ol class="items-list">
+      <div class="participants">
+        <div class="red upperCase"> {{localize 'OG.heroes'}}</div>
+      </div>  
+      {{#each participants as |partic key|}}
+        <li class="partic" data-particuuid="{{partic.uuid}}">
+          <div class="participants">
+            <div class="red new-row">{{localize 'OG.name'}}:</div>
+            <div class="clickable partic-edit" >{{partic.name}}</div>
+            <div class="red">{{localize 'OG.role'}}:</div>
+            <div> {{partic.role}}</div>
+            <div class="centre red" title="{{localize 'OG.delete'}}"><a class="partic-remove clickable"><i class="fa-solid fa-trash"></i></a></div>
+          </div>
+        </li>
+      {{/each}}
+    </ol>
+
+    {{!-- Heat --}}
+    <div class="mission-heat">
+      <div class="red upperCase" title = "{{localize 'OG.heat'}}: {{heat}}">{{localize 'OG.heat'}}</div>
+      <div class="grit">
+        {{#loop 1 12 1}}
+          <a class="{{#if (eq this 6)}}black{{else}}{{#if (eq this 9)}} black {{else}}{{#if (eq this 12)}} black {{else}} red{{/if}}{{/if}}{{/if}} medium-icon"><i class="{{#if (gte ../heat this)}} fa-solid fa-temperature-full {{else}} fa-regular fa-temperature-empty{{/if}}"></i></a>
+        {{/loop}}
+      </div>
+      <div class="small upperCase">{{localize 'OG.heat6Hint'}}</div>
+      <div class="small upperCase">{{localize 'OG.heat9Hint'}}</div>
+      <div class="small upperCase">{{localize 'OG.heat12Hint'}}</div>
+    </div>
+
+  </section>
+
+  {{!-- Sheet Tab Navigation --}}
+  <section class="nav-panel">
+    <nav class="sheet-tabs tabs" data-group="primary">
+      <div><a class="item" data-tab="shots">{{localize 'OG.shots'}}</a></div>
+      <div><a class="item" data-tab="ride">{{localize 'OG.ride'}}</a></div>
+      <div><a class="item" data-tab="villain">{{localize 'OG.villain'}}</a></div>
+      <div><a class="item" data-tab="support">{{localize 'OG.support'}}</a></div>
+      <div><a class="item" data-tab="contacts">{{localize 'OG.contact'}}</a></div>
+    </nav>
+  </section> 
+
+  <section class="sheet-body">
+
+    {{!-- Shots Tab --}}
+    <div class="tab shots" data-group="primary" data-tab="shots">
+      {{> "systems/outgunned/templates/actor/parts/mission-shots.html"}}
+    </div>
+
+    {{!-- Ride Tab --}}
+    <div class="tab ride" data-group="primary" data-tab="ride">
+      {{> "systems/outgunned/templates/actor/parts/mission-ride.html"}}
+    </div>
+    
+    {{!-- Villain Tab --}}
+    <div class="tab villain" data-group="primary" data-tab="villain">
+      {{> "systems/outgunned/templates/actor/parts/mission-villain.html"}}
+    </div>
+    
+    {{!-- Support Tab --}}
+    <div class="tab support" data-group="primary" data-tab="support">
+      {{> "systems/outgunned/templates/actor/parts/mission-support.html"}}
+    </div>
+    
+    {{!-- Contacts Tab --}}
+    <div class="tab contacts" data-group="primary" data-tab="contacts">
+      {{> "systems/outgunned/templates/actor/parts/mission-contacts.html"}}
+    </div>    
+
+  </section>
+</form>
+

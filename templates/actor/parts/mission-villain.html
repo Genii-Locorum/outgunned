@@ -1,0 +1,17 @@
+<div class="mission-villain">
+
+    <div class="red">{{localize 'OG.name'}}</div>
+    <div><input name="system.villain.name" type="text" value="{{actor.system.villain.name}}"/></div>
+    <br>
+
+    <div class="red new-row">{{localize 'OG.strongSpots'}}</div>
+    <div>
+      {{editor actor.system.villain.strongSpots class="background-doc" target="system.villain.strongSpots" button=true owner=owner editable=editable}}
+    </div>  
+    <br>
+    
+    <div  class="red new-row">{{localize 'OG.weakSpots'}}</div>
+    <div>
+      {{editor actor.system.villain.weakSpots class="background-doc" target="system.villain.weakSpots" button=true owner=owner editable=editable}}
+    </div>  
+</div>

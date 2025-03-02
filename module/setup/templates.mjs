@@ -12,5 +12,14 @@
     "systems/outgunned/templates/actor/parts/actor-feats.html",
     "systems/outgunned/templates/actor/parts/actor-rides.html",
     "systems/outgunned/templates/actor/parts/actor-youLook.html",
+    "systems/outgunned/templates/actor/parts/mission-shots.html",
+    "systems/outgunned/templates/actor/parts/mission-ride.html",
+    "systems/outgunned/templates/actor/parts/mission-villain.html",
+    "systems/outgunned/templates/actor/parts/mission-support.html",
+    "systems/outgunned/templates/actor/parts/mission-contacts.html",
+    "systems/outgunned/templates/actor/parts/director-ride.html",
+    "systems/outgunned/templates/actor/parts/director-villain.html",
+    "systems/outgunned/templates/actor/parts/director-enemies.html",
+    "systems/outgunned/templates/actor/parts/director-support.html",
   ]);
 };

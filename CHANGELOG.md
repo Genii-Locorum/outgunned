@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2.11
+- You can now add a mission sheet - this is a type of Actor.  By default this is owned by all players.
+- Chases have been added as a type of actor.
+- Director's sheet has now been added as a type of actor
+- A few error messages corrected to show the appropriate dialogue.
+
+
 ## 2.10
 - Death Roulette no longer always rolls "Left for Dead"
 

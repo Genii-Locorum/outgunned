@@ -38,6 +38,9 @@ export class OutgunnedActor extends Actor {
     this._prepareCharacterData(actorData);
     this._prepareSupportData(actorData);
     this._prepareEnemyData(actorData);
+    this._prepareMissionData(actorData)
+    this._prepareDirectorData(actorData)
+    this._prepareChaseData(actorData)
     this._prepareCommonData(actorData)
   }
 
@@ -106,14 +109,31 @@ export class OutgunnedActor extends Actor {
 
   _prepareEnemyData(actorData) {
     if (actorData.type !== 'enemy') return;
-
     // Make modifications to data here. For example:
     const systemData = actorData.system;
-
   }
 
-  _prepareCommonData(actorData) {
+  _prepareChaseData(actorData) {
+    if (actorData.type !== 'chase') return;
+    // Make modifications to data here. For example:
+    const systemData = actorData.system;
+  }
 
+  _prepareMissionData(actorData) {
+    if (actorData.type !== 'mission') return;
+    // Make modifications to data here. For example:
+    const systemData = actorData.system;
+  }
+
+  _prepareDirectorData(actorData) {
+    if (actorData.type !== 'director') return;
+    // Make modifications to data here. For example:
+    const systemData = actorData.system;
+  }
+
+  //Common except for missions
+  _prepareCommonData(actorData) {
+    if (['mission','director','chase'].includes(actorData.type)) return;
     // Make modifications to data here. For example:
     const systemData = actorData.system;
     systemData.hp.max = systemData.grit.max;
@@ -156,9 +176,43 @@ export class OutgunnedActor extends Actor {
           enabled: true
         }]
       },data.prototypeToken || {})
-    }
-
-
+    } else if (data.type === 'mission') {
+      data.prototypeToken = foundry.utils.mergeObject( {
+        actorLink: true,
+        disposition: 1,
+        displayName: CONST.TOKEN_DISPLAY_MODES.ALWAYS,
+        sight: {
+          enabled: false
+        },
+        texture: {
+          src: "systems/outgunned/assets/clapperboard.svg"
+        },
+      },data.prototypeToken || {})
+    } else if (data.type === 'director') {
+      data.prototypeToken = foundry.utils.mergeObject( {
+        actorLink: true,
+        disposition: 1,
+        displayName: CONST.TOKEN_DISPLAY_MODES.ALWAYS,
+        sight: {
+          enabled: false
+        },
+        texture: {
+          src: "systems/outgunned/assets/director-chair.svg"
+        },
+      },data.prototypeToken || {})
+    } else if (data.type === 'chase') {
+      data.prototypeToken = foundry.utils.mergeObject( {
+        actorLink: true,
+        disposition: 1,
+        displayName: CONST.TOKEN_DISPLAY_MODES.ALWAYS,
+        sight: {
+          enabled: false
+        },
+        texture: {
+          src: "systems/outgunned/assets/speedometer.svg"
+        },
+      },data.prototypeToken || {})
+    }  
     let actor = await super.create(data, options)
 
     //If an actor now add all skills to the sheet
@@ -172,7 +226,14 @@ export class OutgunnedActor extends Actor {
       await actor.createEmbeddedDocuments("Item", newData);
     } else if (data.type === 'support') {
       actor.update({'system.grit.max': 3});
-    } 
+    } else if (data.type === 'mission') {
+      actor.update({'ownership.default': 3,
+                    'img':"systems/outgunned/assets/clapperboard.svg"});
+    } else if (data.type === 'director') {
+      actor.update({'img':"systems/outgunned/assets/director-chair.svg"});
+    } else if (data.type === 'chase') {
+      actor.update({'img':"systems/outgunned/assets/speedometer.svg"});
+    }
 
      return 
 

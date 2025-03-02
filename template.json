@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character","support","enemy"],
+    "types": ["character","support","enemy","mission","director","chase"],
     "templates": {
       "base": {
         "grit": {
@@ -144,10 +144,67 @@
         "11" : "not",
         "12" : "not"
       }
-    }      
+    },
+    "mission": {
+      "participants": [],
+      "villain": {
+        "name":"",
+        "strongSpots": "",
+        "weakSpots": ""
+      },
+      "rides": []
+    },
+    "director": {
+      "participants": [],
+      "villain": {
+        "name":"",
+        "strongSpots": "",
+        "weakSpots": ""
+      },
+      "rides": []
+    },
+    "chase": {
+      "participants": [],
+      "rides": [],
+      "need": {
+        "current": 0,
+        "max": 0,
+        "hot": {
+          "1" : false,
+          "2" : false,
+          "3" : true,
+          "4" : false,
+          "5" : false,
+          "6" : true,
+          "7" : false,
+          "8" : false,
+          "9" : true,
+          "10" : false,
+          "11" : false,
+          "12" : false,
+          "13" : false,
+          "14" : false,
+          "15" : false,
+          "16" : false,
+          "17" : false,
+          "18" : false
+        }
+      },
+      "speed": 0,
+      "countdown": {
+        "status": false,
+        "turns": 4
+      },
+      "adrenaline": {
+        "current": 0,
+        "max": 3
+      },
+      "specialActions": [],
+      "notes": ""
+    }  
   },
   "Item": {
-    "types": ["gear","gun","ride","skill","role","feat","age", "trope","condition","enemyFeat","specialAction", "experience", "chase","weaponfeat"],
+    "types": ["gear","gun","ride","skill","role","feat","age", "trope","condition","enemyFeat","specialAction", "experience", "weaponfeat","shot"],
     "templates": {
       "base": {
         "description": ""
@@ -272,24 +329,13 @@
       "shortDesc": "",
       "variant": "achievement"
     },
-    "chase":{
-      "need": {
-        "max":6,
-        "value":0
-      },  
-      "notes": "",
-      "specialActions": [],
-      "adrenaline": {
-        "value": 0,
-        "max": 3,
-        "min": 0,
-        "base": 0
-      },
-      "vehicles": []
-    },
     "weaponfeat":{
       "templates": ["base"],
       "fasIcon": "fa-solid fa-seal-question"
-    }
+    },
+    "shot": {
+      "templates": ["base"],
+      "subtype":"shot"
+    }  
   }
 }

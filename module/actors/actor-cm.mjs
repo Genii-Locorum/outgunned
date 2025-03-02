@@ -338,3 +338,29 @@ export const enemyGritMenuOptions = (actor,token) => [
     }
   }
 ]
+
+export const needMenuOptions = (actor,token) => [
+  {
+    name: game.i18n.localize("OG.need"),
+    icon: "",
+    condition: () => true,
+    callback: (el) => {}
+  },
+  {
+    name: game.i18n.localize("OG.cm.maxNeed"),
+    icon: '<i class="fas fa-square-check"></i>',
+    condition: () => true,
+    callback: (el) => {
+      const itemId = OutgunnedUtilities.triggerEditActor(el, actor, "need");
+    }
+  },
+
+  {
+    name: game.i18n.localize("OG.cm.toggleHot"),
+    icon: '<i class="fas fa-fire-flame-curved"></i>',
+    condition: () => true,
+    callback: (el) => {
+      const itemId = OutgunnedUtilities.triggerEditNeed(el, actor);
+    }
+  }  
+]

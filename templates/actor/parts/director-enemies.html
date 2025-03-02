@@ -1,0 +1,78 @@
+
+<ol class="items-list">
+  <div class="mission-support">
+    {{#each enemies as |enemy key|}}
+      <li class="item partic" data-collection = "participants" data-particuuid="{{enemy.uuid}}">
+        <div class="mission-box">
+          <div class="mission-support-name">
+            <div>
+              <span class="blue">{{localize 'OG.name'}}:  </span><span class="black clickable partic-edit">{{enemy.name}}</span>
+            </div>  
+            <div class="centre">
+              <a class="ride-refresh clickable"title=" {{localize 'OG.refresh'}}"><i class="fa-solid fa-arrows-rotate"></i></a>
+              <a class="support-delete clickable"title=" {{localize 'OG.delete'}}"><i class="fa-solid fa-trash"></i></a>
+            </div>
+          </div>
+          <div>
+            <span class="blue">{{localize 'OG.type'}}:  </span><span class="black">{{enemy.system.enemyTypeName}}</span>
+          </div>   
+          <div>
+            <div class="director-attacks">
+              <div>
+                <span class="blue">{{localize 'OG.attack'}}:  </span><span class="black">{{enemy.system.attack.value}} ({{enemy.system.attackName}})</span>
+              </div> 
+              <div>
+                <span class="blue">{{localize 'OG.defence'}}:  </span><span class="black">{{enemy.system.defence.value}}  ({{enemy.system.defenceName}})</span>
+              </div> 
+            </div>
+          </div>
+
+
+          <div class="director-enemy-stats">
+            <div class="grit">
+              {{#each enemy.system.hot as |value key|}}
+                {{#if (lte key enemy.system.grit.max)}}  
+                  {{#unless (eq value 'hot')}}
+                    <a class="{{#if (eq value 'bad')}}black{{else}}red{{/if}} medium-icon enemy-grit"><i class="{{#if (gte enemy.system.grit.value key)}}fa-solid fa-shield{{else}}fa-regular fa-shield{{/if}}"></i></a>
+                  {{else}}  
+                    <a class="red medium-icon enemy-grit"><i class="{{#if (gte enemy.system.grit.value key)}}fa-solid fa-fire-flame-curved{{else}}fa-regular fa-fire-flame-curved{{/if}}"></i></a>
+                  {{/unless}}  
+                {{/if}}  
+              {{/each}}
+            </div>    
+      
+            <div class="grit">
+              {{#loop 1 enemy.system.adrenaline.max 1}}
+                <a class="red medium-icon"><i class="{{#if (gte enemy.system.adrenaline.value this)}}fa-solid fa-battery-full fa-rotate-270{{else}}fa-solid fa-battery-empty fa-rotate-270{{/if}}"></i></a>
+              {{/loop}}
+            </div>  
+          </div>
+
+          <div class="enemy-feat-top blue">{{localize 'OG.feats'}}</div>
+          <ol class="items-list">
+            {{#each enemy.items as |feat key|}}
+              {{#if (eq feat.type 'enemyFeat')}}
+                <li class="item" data-item-id="{{feat._id}}">
+                  <div class="indent" title="{{{feat.system.shortDesc}}}">{{feat.name}}</div>
+                </li> 
+              {{/if}}  
+            {{/each}}
+          </ol>
+        
+          <div class="enemy-feat-top blue">{{localize 'OG.specialActions'}}</div>
+          <ol class="items-list">
+            {{#each enemy.items as |action key|}}
+              {{#if (eq action.type 'specialAction')}}
+                <li class="item" data-item-id="{{action._id}}">
+                  <div class="indent" title="{{{action.system.shortDesc}}}">{{action.name}} ({{action.system.cost}})</div>
+                </li> 
+              {{/if}}  
+            {{/each}}
+          </ol>          
+
+
+        </div>
+      </li>  
+    {{/each}}
+  </div>  
+</ol>

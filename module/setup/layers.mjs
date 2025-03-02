@@ -75,7 +75,7 @@ class OutgunnedLayer extends PlaceablesLayer {
           {
             name: "planB1",
             icon: game.settings.get("outgunned","planBIcon-1"),
-            title: game.i18n.localize('OG.planB')+"-1",
+            title: game.i18n.localize('OG.planB')+":"+game.settings.get("outgunned","planBName-1"),
             button: true,
             visible: isGM,
             onClick: async planB1 => {
@@ -84,7 +84,7 @@ class OutgunnedLayer extends PlaceablesLayer {
           {
             name: "planB2",
             icon: game.settings.get("outgunned","planBIcon-2"),
-            title: game.i18n.localize('OG.planB')+"-2",
+            title: game.i18n.localize('OG.planB')+":"+game.settings.get("outgunned","planBName-2"),
             button: true,
             visible: isGM,
             onClick: async planB1 => {
@@ -93,7 +93,7 @@ class OutgunnedLayer extends PlaceablesLayer {
           {
             name: "planB3",
             icon: game.settings.get("outgunned","planBIcon-3"),
-            title: game.i18n.localize('OG.planB')+"-3",
+            title: game.i18n.localize('OG.planB')+":"+game.settings.get("outgunned","planBName-3"),
             button: true,
             visible: isGM,
             onClick: async planB1 => {

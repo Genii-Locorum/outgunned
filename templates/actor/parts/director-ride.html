@@ -1,0 +1,105 @@
+<ol class="items-list" style="margin-top:5px;">
+  <div class="mission-rides">
+    {{#each rides as |ride key|}}
+    <li class="item" data-collection = "rides" data-particuuid="{{ride.uuid}}">
+        <div class="ride-header" style="  border-top: 5px rgb(73, 84, 231) solid !important;">
+          <div class="indent blue ride-edit">{{ride.name}} ({{ride.parent.name}})</div>
+          <div class="centre" >
+              <a class="ride-refresh clickable"title=" {{localize 'OG.refresh'}}"><i class="fa-solid fa-arrows-rotate"></i></a>
+              <a class="support-delete clickable"title=" {{localize 'OG.delete'}}"><i class="fa-solid fa-trash"></i></a>
+          </div>
+        </div>    
+        <div class="ride-grid">
+          <div class="borderleft"></div>
+          {{#loop 1 6 1}}
+            <div class="centre middle"><a class="mediumplus-icon {{#if (lt this 4)}}red{{/if}}" title="{{localize 'OG.armour'}}" data-property="armour" data-target = {{this}}>
+              <i class="{{#if (gte ride.system.armour.value this)}}fa-solid fa-shield{{else}}fa-regular fa-shield{{/if}}"></i>
+            </a></div>
+            {{#if (eq this 3)}}
+              <div class="centre middle"><a class="extralarge-icon" title="{{localize 'OG.startingSpeed'}}: {{ride.system.speed.start}}"><i class="
+                {{#if (eq ride.system.speed.start 0)}}fa-solid fa-gauge-min{{/if}}
+                {{#if (eq ride.system.speed.start 1)}}fa-solid fa-gauge-low{{/if}}
+                {{#if (eq ride.system.speed.start 2)}}fa-solid fa-gauge-high{{/if}}
+                {{#if (eq ride.system.speed.start 3)}}fa-solid fa-gauge-max{{/if}}
+              "></i></a></div>
+            {{/if}}      
+          {{/loop}}
+          <div class="borderright"></div>  
+        </div>   
+        
+        <div class="ride-grid-type">     
+           <div class="borderleft"></div>    
+           <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.pedal}}red{{/if}}" title="{{localize 'OG.pedal'}}"><i class="fa-solid fa-bicycle"></i></a></div>
+           <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.beast}}red{{/if}}" title="{{localize 'OG.beast'}}"><i class="fa-solid fa-horse"></i></a></div>
+           <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.bike}}red{{/if}}" title="{{localize 'OG.bike'}}"><i class="fa-solid fa-motorcycle"></i></a></div>
+           <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.car}}red{{/if}}" title="{{localize 'OG.car'}}"><i class="fa-solid fa-car-side"></i></a></div>
+           <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.nautical}}red{{/if}}" title="{{localize 'OG.nautical'}}"><i class="fa-solid fa-ship"></i></a></div>
+           <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.flying}}red{{/if}}" title="{{localize 'OG.flying'}}"><i class="fa-solid fa-helicopter"></i></a></div>
+           <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.armoured}}red{{/if}}" title="{{localize 'OG.armoured'}}"><i class="fa-solid fa-truck-monster"></i></a></div>
+           <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.space}}red{{/if}}" title="{{localize 'OG.spaceship'}}"><i class="fa-solid fa-starship"></i></a></div>
+           <div class="borderright"></div>     
+
+        </div>
+
+        <div class="ride-grid-bottom indent">{{ride.system.shortDesc}}</div>
+
+    </li>
+    {{/each}}
+  </div>
+  <br>
+  <div class="">
+    <div class="blue upperCase"> {{localize 'OG.chases'}}</div>
+  </div>  
+  <div class="mission-rides">
+    {{#each chases as |chase key|}}
+      <li class="partic" data-particuuid="{{chase.uuid}}">
+        <div class="mission-box">
+          <div class="chase-sa">
+            <div class="clickable partic-edit">
+              <span class="blue">{{localize 'OG.name'}}:</span>
+              <span>{{chase.name}}</span>
+            </div>
+            <div class="centre blue" title="{{localize 'OG.delete'}}">
+              <a class="ride-refresh clickable"title=" {{localize 'OG.refresh'}}"><i class="fa-solid fa-arrows-rotate"></i></a>
+              <a class="partic-remove clickable"><i class="fa-solid fa-trash"></i></a>
+            </div>
+          </div>
+          <div class="blue upperCase"> {{localize 'OG.need'}}</div>
+          <div class="director-need">
+            {{#each chase.system.need.hot as |value key|}}
+              {{#if (lte key chase.system.need.max)}}  
+                <div class="centre middle">
+                  <a class="centre  {{#if value}}red{{/if}}" style="font-size: 20px;">
+                    <i class="{{#if (gte chase.system.need.current key)}}fa-regular fa-square-check{{else}}fa-regular fa-square{{/if}}"></i>
+                  </a>
+                </div>
+              {{/if}}
+            {{/each}}
+          </div>
+          <div class="director-chase-notes">
+            <div class="blue">{{localize 'OG.notes'}}: </div>
+            <div class="truncate" style="margin: 0px !important";>{{{chase.system.notes}}}</div>
+          </div>  
+
+          <div class="blue"> {{localize 'OG.specialActions'}}:</div>
+          <div class="director-sa">
+            <div>
+              {{#each chase.items as |sA key|}}
+                {{#if (eq sA.type 'specialAction')}}
+                  <div class="indent">{{sA.name}} ({{sA.system.cost}})</div>
+                {{/if}}
+              {{/each}}
+            </div>
+
+            <div class="medium-icon red">
+              {{#loop 1 3 1}}
+                  <a><i class="{{#if (gte chase.system.adrenaline.current this)}} fa-solid fa-battery-full fa-rotate-270 {{else}} fa-solid fa-battery-empty fa-rotate-270{{/if}}"></i></a>
+              {{/loop}}
+            </div>
+          </div>
+
+        </div>
+      </li>
+    {{/each}}
+  </div>
+</ol>
