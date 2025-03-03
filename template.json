@@ -168,7 +168,7 @@
       "rides": [],
       "need": {
         "current": 0,
-        "max": 0,
+        "max": 18,
         "hot": {
           "1" : false,
           "2" : false,

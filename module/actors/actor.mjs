@@ -117,6 +117,7 @@ export class OutgunnedActor extends Actor {
     if (actorData.type !== 'chase') return;
     // Make modifications to data here. For example:
     const systemData = actorData.system;
+    systemData.need.max=Math.max(systemData.need.max,1)
   }
 
   _prepareMissionData(actorData) {
