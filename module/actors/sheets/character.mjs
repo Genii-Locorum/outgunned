@@ -2,6 +2,7 @@ import { OutgunnedContextMenu } from '../../setup/context-menu.mjs';
 import { OutgunnedChecks } from '../../apps/checks.mjs';
 import { ItemSelectDialog} from "../../apps/feat-selection-dialog.mjs";
 import * as contextMenu from "../actor-cm.mjs";
+import { OutgunnedUtilities } from '../../apps/utilities.mjs';
 
 
 export class OutgunnedCharacterSheet extends ActorSheet {
@@ -697,12 +698,17 @@ export class OutgunnedCharacterSheet extends ActorSheet {
 
   // Update NPC skills etc without opening the item sheet
   async _inlineEdit(event){
-  event.preventDefault();
+    event.preventDefault();
     const element = event.currentTarget;
     const li = $(event.currentTarget).closest(".item");
     const item = this.actor.items.get(li.data("itemId"));
     const field = element.dataset.field;
-  return item.update ({ [field]: element.value});
-}
+    return item.update ({ [field]: element.value});
+  }
+
+  //Implement Game Settings for Colours
+  static renderSheet (sheet,html) {
+     OutgunnedUtilities.displaySettings(sheet);
+  }  
 
 }

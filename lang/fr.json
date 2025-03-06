@@ -331,6 +331,12 @@
       "defaultCheckTypeHint": "Sélectionnez le type de vérification par défaut pour les jets de compétence",
       "defaultDifficulty": "Difficulté par défaut",
       "defaultDifficultyHint": "Sélectionnez la difficulté par défaut pour les jets d'action, etc.",
+      "directorColour": "Feuille de directeur Couleur",
+      "directorColourHint": "Couleur primaire pour les titres des feuilles de réalisateur",
+      "displaySettings": "Paramètres d’affichage",
+      "displaySettingsHint": "Ajustez les couleurs sur les différentes feuilles.",
+      "mainTextColour": "Couleur du texte principal",
+      "mainTextColourHint": "TCouleur du texte principal Le texte par défaut sur les feuilles d’acteur et d’élément",
       "ogVersion": "Version du jeu",
       "ogVersionHint": "Quelle version d’Outgunned utilisez-vous ?",
       "planBIcon-1": "Plan B FAS Icône 1",
@@ -340,8 +346,16 @@
       "planBName-2": "Plan B Option 2",
       "planBName-3": "Plan B Option 3",
       "planBNameHint": "Nom de l’option Plan B",
+      "primaryColour": "Couleur primaire utilisée sur les feuilles",
+      "primaryColourHint": "C’est la couleur principale utilisée pour les titres, les lignes, etc.",
+      "primaryIcon": "Couleur primaire utilisée pour les icônes sur les feuilles.",
+      "primaryIconHint": "C’est la couleur principale utilisée pour les icônes.",
       "razorsEdge": "Fil du Rasoir",
-      "razorsEdgeHint": "L’activation de cette option ajoute cette option lors de la sélection des rouleaux de jeu"      
+      "razorsEdgeHint": "L’activation de cette option ajoute cette option lors de la sélection des rouleaux de jeu",
+      "secondaryColour": "Couleur secondaire utilisée sur les feuilles",
+      "secondaryColourHint": "Il s’agit de la couleur secondaire utilisée pour les titres, les lignes, etc.",
+      "secondaryIcon": "Couleur secondaire utilisée pour les icônes.",
+      "secondaryIconHint": "Il s’agit de la couleur secondaire utilisée pour les icônes."  
     }
   }
 }

@@ -27,12 +27,12 @@
         <div class=" select-name left bold">{{localize 'OG.affectedAttType'}}</div>          
         {{#if isGM}}
           <div class="left">
-          <select data-handle-change name="system.attribute">
+          <select class="mainText" data-handle-change name="system.attribute">
             {{selectOptions displayAttType selected=item.system.attribute}}
           </select>
           </div>
           <div class="left">
-            <select data-handle-change name="system.attribute2">
+            <select class="mainText" data-handle-change name="system.attribute2">
               {{selectOptions displayAttType selected=item.system.attribute2}}
             </select>
             </div>
@@ -47,12 +47,12 @@
         <div class=" select-name left bold">{{localize 'OG.affectedSkill'}}</div>          
         {{#if isGM}}
           <div class="left">
-          <select data-handle-change name="system.skill">
+          <select class="mainText" data-handle-change name="system.skill">
             {{selectOptions displaySkill selected=item.system.skill}}
           </select>
           </div>
           <div class="left">
-            <select data-handle-change name="system.skill2">
+            <select class="mainText" data-handle-change name="system.skill2">
               {{selectOptions displaySkill selected=item.system.skill2}}
             </select>
             </div>          
@@ -66,7 +66,7 @@
       <div class="item-skill-grid">
         <div class="select-name left bold" title="{{localize 'OG.commonHint'}}">{{localize 'OG.common'}}</div>  
         <div>
-          <a class="large-icon {{#if isGM}}toggle{{/if}}" data-property="common"><i class="{{#if item.system.common}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          <a class="large-icon {{#if isGM}}toggle{{/if}} secIcon" data-property="common"><i class="{{#if item.system.common}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
         </div>
       </div>
 
@@ -74,7 +74,7 @@
         <div class="item-skill-grid">
           <div class="select-name left bold" title="{{localize 'OG.activeHint'}}">{{localize 'OG.active'}}</div>  
           <div>
-            <a class="large-icon toggle" data-property="active"><i class="{{#if item.system.active}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+            <a class="large-icon toggle secIcon" data-property="active"><i class="{{#if item.system.active}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
           </div>
         </div>
       {{/if}}  

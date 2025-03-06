@@ -6,9 +6,9 @@
         <div><span class="red free contextmenu">{{localize 'OG.freeSkill'}}: </span><span>{{actor.system.freeXP}}</span></div>
         <div title="{{localize 'OG.advancedHint'}}">{{localize 'OG.advanced'}}</div>
         <div>
-          <a class="large-icon"><i class="{{#if (gte actor.system.advance 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
-          <a class="large-icon"><i class="{{#if (gte actor.system.advance 2)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
-          <a class="large-icon"><i class="{{#if (gte actor.system.advance 3)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          <a class="secIcon large-icon"><i class="{{#if (gte actor.system.advance 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          <a class="secIcon large-icon"><i class="{{#if (gte actor.system.advance 2)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          <a class="secIcon large-icon"><i class="{{#if (gte actor.system.advance 3)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
         </div>
       </div>  
     </div>
@@ -23,7 +23,7 @@
         <li class="item" data-item-id="{{experience._id}}">  
           <div class="gear-grid">
             <div class = "gear-cell-start indent">{{experience.system.shortDesc}}</div>
-            <div class = "gear-cell middle centre"><a class="">
+            <div class = "gear-cell middle centre"><a class="secIcon">
             {{#if (eq experience.system.variant 'achievement')}} 
               <i title = "{{localize 'OG.achievement'}}" class="fa-solid fa-seal"></i>
             {{/if}}
@@ -38,9 +38,9 @@
             {{/if}}    
             </a></div>
             {{#if ../isLocked}}
-              <div class="centre middle gear-cell" title="{{localize 'OG.edit'}}"><a class="item-edit clickable"><i class="fa-solid fa-magnifying-glass"></i></a></div>
+              <div class="centre middle gear-cell" title="{{localize 'OG.edit'}}"><a class="secIcon item-edit clickable"><i class="fa-solid fa-magnifying-glass"></i></a></div>
             {{else}}  
-              <div class="centre middle gear-cell" title="{{localize 'OG.delete'}}"><a class="item-delete clickable"><i class="fa-solid fa-trash"></i></a></div>
+              <div class="centre middle gear-cell" title="{{localize 'OG.delete'}}"><a class="secIcon item-delete clickable"><i class="fa-solid fa-trash"></i></a></div>
             {{/if}}   
           </div>  
         </li>
@@ -57,5 +57,5 @@
     <div class="red">{{localize 'OG.status'}}</div>
     <div class="item-skill-grid">
       <div class="">{{localize 'OG.cyberEnhanced'}}</div>
-      <div><a class="medium-icon actor-toggle clickable" data-property="cyberEnhance"><i class="{{#if actor.system.cyberEnhance}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a></div>
+      <div><a class="secIcon medium-icon actor-toggle clickable" data-property="cyberEnhance"><i class="{{#if actor.system.cyberEnhance}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a></div>
     </div>

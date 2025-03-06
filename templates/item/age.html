@@ -26,30 +26,30 @@
       <div class="item-skill-grid">
         <div class="new-row select-name left bold" title="{{localize 'OG.startingFeatsHint'}}">{{localize 'OG.startingFeats'}}</div>  
         <div>
-          <a class="large-icon toggle" data-property="numFeat" data-target = 1><i class="{{#if (gte item.system.numFeat 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
-          <a class="large-icon toggle" data-property="numFeat" data-target = 2><i class="{{#if (gte item.system.numFeat 2)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          <a class="large-icon toggle secIcon" data-property="numFeat" data-target = 1><i class="{{#if (gte item.system.numFeat 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          <a class="large-icon toggle secIcon" data-property="numFeat" data-target = 2><i class="{{#if (gte item.system.numFeat 2)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
         </div>
 
         <div class="new-row select-name left bold" title="{{localize 'OG.optionalFeatsHint'}}">{{localize 'OG.optionalFeats'}}</div>  
         <div>
-          <a class="large-icon toggle" data-property="optFeat"><i class="{{#if (gte item.system.optFeat 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          <a class="large-icon toggle secIcon" data-property="optFeat"><i class="{{#if (gte item.system.optFeat 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
         </div>
 
         <div class="new-row select-name left bold" title="{{localize 'OG.startingBulletsHint'}}">{{localize 'OG.startingBullets'}}</div>  
         <div>
-          <a class="large-icon toggle" data-property="baseDeathRoulette" data-target = 1><i class="{{#if (gte item.system.baseDeathRoulette 1)}}fa-solid fa-gun-slash{{else}}fa-regular fa-gun{{/if}}"></i></a>
-          <a class="large-icon toggle" data-property="baseDeathRoulette" data-target = 2><i class="{{#if (gte item.system.baseDeathRoulette 2)}}fa-solid fa-gun-slash{{else}}fa-regular fa-gun{{/if}}"></i></a>
+          <a class="large-icon toggle secIcon" data-property="baseDeathRoulette" data-target = 1><i class="{{#if (gte item.system.baseDeathRoulette 1)}}fa-solid fa-gun-slash{{else}}fa-regular fa-gun{{/if}}"></i></a>
+          <a class="large-icon toggle secIcon" data-property="baseDeathRoulette" data-target = 2><i class="{{#if (gte item.system.baseDeathRoulette 2)}}fa-solid fa-gun-slash{{else}}fa-regular fa-gun{{/if}}"></i></a>
         </div>
 
         <div class="new-row select-name left bold" title="{{localize 'OG.startingAdrenalineHint'}}">{{localize 'OG.startingAdrenaline'}}</div>  
         <div>
-          <a class="large-icon toggle" data-property="baseAdrenaline" data-target = 1><i class="{{#if (gte item.system.baseAdrenaline 1)}}fa-solid fa-battery-full fa-rotate-270 {{else}} fa-solid fa-battery-empty fa-rotate-270{{/if}}"></i></a>
-          <a class="large-icon toggle" data-property="baseAdrenaline" data-target = 2><i class="{{#if (gte item.system.baseAdrenaline 2)}}fa-solid fa-battery-full fa-rotate-270 {{else}} fa-solid fa-battery-empty fa-rotate-270{{/if}}"></i></a>
+          <a class="large-icon toggle secIcon" data-property="baseAdrenaline" data-target = 1><i class="{{#if (gte item.system.baseAdrenaline 1)}}fa-solid fa-battery-full fa-rotate-270 {{else}} fa-solid fa-battery-empty fa-rotate-270{{/if}}"></i></a>
+          <a class="large-icon toggle secIcon" data-property="baseAdrenaline" data-target = 2><i class="{{#if (gte item.system.baseAdrenaline 2)}}fa-solid fa-battery-full fa-rotate-270 {{else}} fa-solid fa-battery-empty fa-rotate-270{{/if}}"></i></a>
         </div>
 
         <div class="new-row select-name left bold" title="{{localize 'OG.startingExpHint'}}">{{localize 'OG.startingExp'}}</div>  
         <div>
-          <a class="large-icon toggle" data-property="baseExperience"><i class="{{#if (gte item.system.baseExperience 1)}}fa-solid fa-seal-exclamation{{else}}fa-regular fa-seal-exclamation{{/if}}"></i></a>
+          <a class="large-icon toggle secIcon" data-property="baseExperience"><i class="{{#if (gte item.system.baseExperience 1)}}fa-solid fa-seal-exclamation{{else}}fa-regular fa-seal-exclamation{{/if}}"></i></a>
         </div>
       </div>  
 
@@ -67,7 +67,7 @@
 
             <div class="item-controls">
               {{#if ../isGM}}
-                <a class="item-control item-delete feats" title="{{localize 'OG.deleteItem'}}"><i class="fas fa-trash"></i></a>
+                <a class="item-control item-delete feats secIcon" title="{{localize 'OG.deleteItem'}}"><i class="fas fa-trash"></i></a>
               {{/if}}
             </div>
           </li>

@@ -27,15 +27,15 @@
         {{#if hasOwner}}
           <div class="new-row select-name left bold">{{localize 'OG.kept'}}</div>          
           <div class="centre">
-            <select data-handle-change name="system.location">
+            <select class="mainText" data-handle-change name="system.location">
               {{selectOptions displayLocList selected=item.system.location}}
             </select>
           </div>
           <br>
           {{#if (eq gameVersion "1")}}
             <div class="new-row select-name left bold">{{localize 'OG.keyItem'}}</div>         
-            <div>
-              <a class="large-icon toggle" data-property="keyItem" ><i class="{{#if item.system.keyItem}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+            <div class="centre">
+              <a class="large-icon toggle secIcon" data-property="keyItem" ><i class="{{#if item.system.keyItem}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
             </div>
             <br>
           {{/if}}

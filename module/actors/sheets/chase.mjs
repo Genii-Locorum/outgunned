@@ -266,4 +266,5 @@ export class OutgunnedChaseSheet extends ActorSheet {
       await this.actor.update({'system.adrenaline.current': value })
     } 
   }
+ 
 }

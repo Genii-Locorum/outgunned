@@ -113,5 +113,9 @@ export class OutgunnedAgeSheet extends ItemSheet {
       }
     }
 
+  //Implement Game Settings for Colours
+  static renderSheet (sheet,html) {
+    OutgunnedUtilities.displaySettings(sheet);
+  }      
 
 }

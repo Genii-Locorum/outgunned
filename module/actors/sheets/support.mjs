@@ -2,6 +2,7 @@ import {OutgunnedSelectLists}  from "../../apps/select-lists.mjs";
 import { OutgunnedContextMenu } from '../../setup/context-menu.mjs';
 import { OutgunnedChecks } from '../../apps/checks.mjs';
 import * as contextMenu from "../actor-cm.mjs";
+import { OutgunnedUtilities } from '../../apps/utilities.mjs';
 
 export class OutgunnedSupportSheet extends ActorSheet {
 
@@ -10,7 +11,7 @@ export class OutgunnedSupportSheet extends ActorSheet {
         classes: ["outgunned", "sheet", "actor"],
         template: "systems/outgunned/templates/actor/actor-sheet.html",
         width: 300,
-        height: 450,
+        height: 530,
         tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "feats" }]
       });
     }
@@ -117,6 +118,7 @@ export class OutgunnedSupportSheet extends ActorSheet {
     await this.actor.update(checkProp);
 
   }
+
 
   }
   

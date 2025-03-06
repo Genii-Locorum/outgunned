@@ -331,6 +331,12 @@
       "defaultCheckTypeHint": "Wähle, ob Fertigkeits-Proben zumeist Aktionsproben oder Gefahrenproben sind.",
       "defaultDifficulty": "Standard-Schwierigkeit",
       "defaultDifficultyHint": "Wähle die übliche Schwierigkeit für Proben (Voreinstellung im Auswahlfenster vor einem Wurf, kann dort jeweils geändert werden).",
+      "directorColour": "Regie Blatt Farbe",
+      "directorColourHint": "Primärfarbe für die Titel des Regiebogens",
+      "displaySettings": "Anzeige-Einstellungen",
+      "displaySettingsHint": "Passen Sie die Farben auf den verschiedenen Blättern an.",
+      "mainTextColour": "Farbe des Haupttextes",
+      "mainTextColourHint": "Haupttextfarbe Der Standardtext auf Actor- und Item-Sheets",
       "ogVersion": "Spielversion",
       "ogVersionHint": "Welche Version von Outgunned verwendest du?",
       "planBIcon-1": "FAS Symbol Plan B 1",
@@ -340,8 +346,16 @@
       "planBName-2": "Plan B Option 2",
       "planBName-3": "Plan B Option 3",
       "planBNameHint": "Name der Option Plan B",
+      "primaryColour": "Primärfarbe, die auf Blechen verwendet wird",
+      "primaryColourHint": "Dies ist die Hauptfarbe, die für Überschriften, Zeilen usw. verwendet wird.",
+      "primaryIcon": "Primärfarbe, die für Symbole auf Blättern verwendet wird.",
+      "primaryIconHint": "Dies ist die Hauptfarbe, die für Symbole verwendet wird.",      
       "razorsEdge": "Auf Messers Schneide",
-      "razorsEdgeHint": "Wenn Sie diese Option aktivieren, wird diese Option bei der Auswahl von Glücksspielrollen hinzugefügt"
+      "razorsEdgeHint": "Wenn Sie diese Option aktivieren, wird diese Option bei der Auswahl von Glücksspielrollen hinzugefügt",
+      "secondaryColour": "Sekundärfarbe, die auf Blechen verwendet wird",
+      "secondaryColourHint": "Dies ist die Sekundärfarbe, die für Überschriften, Zeilen usw. verwendet wird.",
+      "secondaryIcon": "Sekundärfarbe, die für Symbole verwendet wird.",
+      "secondaryIconHint": "Dies ist die Sekundärfarbe, die für Symbole verwendet wird."  
     }
   }
 }

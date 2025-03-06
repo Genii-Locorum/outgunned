@@ -273,4 +273,6 @@ export class OutgunnedMissionSheet extends ActorSheet {
       await this.actor.update({ [`system.${collectionName}`]: collection })
     }  
   }
+ 
+
 }

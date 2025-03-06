@@ -11,11 +11,11 @@
   <section class="sheet-body">
   <br>  
       <div title="{{localize 'OG.shortDescHint'}}">{{localize 'OG.shortDesc'}}</div>
-      <div class=""><input name="system.shortDesc" type="text" value="{{item.system.shortDesc}}"/></div>
+      <div class=""><input class="mainText" name="system.shortDesc" type="text" value="{{item.system.shortDesc}}"/></div>
   <br>
   
   <div class="left">
-    <select data-handle-change name="system.variant">
+    <select class="mainText" data-handle-change name="system.variant">
       {{selectOptions displayXPType selected=item.system.variant}}
     </select>
     </div>

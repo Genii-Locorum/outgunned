@@ -1,4 +1,5 @@
 import {OutgunnedActionDie} from "./outgunnedDice.mjs"
+import { OutgunnedDisplaySettings } from "./displaySettings.mjs";
 
 export async function registerSettings () {
 
@@ -132,6 +133,15 @@ export async function registerSettings () {
     default: 0
   });  
 
+  //Display Settings Menu Button
+  game.settings.registerMenu('outgunned', 'displaySettings', {
+    name: 'OG.settings.displaySettings',
+    label: 'OG.settings.displaySettingsHint',
+    icon: 'fas fa-palette',
+    type: OutgunnedDisplaySettings,
+    restricted: true
+  });
+  OutgunnedDisplaySettings.registerSettings()
 
   //Non-visible setting to record heat
   game.settings.register('outgunned', 'heat', {

@@ -35,14 +35,14 @@
 
     <div class="">{{localize 'OG.rideType'}}</div>    
     <div class="rideType-grid">
-      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.pedal}}red{{/if}}" data-property="pedal"><i title= "{{localize 'OG.pedal'}}" class="fa-solid fa-bicycle"></i></a></div>  
-      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.beast}}red{{/if}}" data-property="beast"><i title= "{{localize 'OG.beast'}}" class="fa-solid fa-horse"></i></a></div>  
-      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.bike}}red{{/if}}" data-property="bike"><i title= "{{localize 'OG.bike'}}" class="fa-solid fa-motorcycle"></i></a></div>  
-      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.car}}red{{/if}}" data-property="car"><i title= "{{localize 'OG.car'}}" class="fa-solid fa-car-side"></i></a></div>  
-      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.nautical}}red{{/if}}" data-property="nautical"><i title= "{{localize 'OG.nautical'}}" class="fa-solid fa-ship"></i></a></div>  
-      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.flying}}red{{/if}}" data-property="flying"><i title= "{{localize 'OG.flying'}}" class="fa-solid fa-helicopter"></i></a></div>  
-      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.armoured}}red{{/if}}" data-property="armoured"><i title= "{{localize 'OG.armoured'}}" class="fa-solid fa-truck-monster"></i></a></div>  
-      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.space}}red{{/if}}" data-property="space"><i title= "{{localize 'OG.spaceship'}}" class="fa-solid fa-starship"></i></a></div>  
+      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.pedal}}primIcon{{else}}secIcon{{/if}}" data-property="pedal"><i title= "{{localize 'OG.pedal'}}" class="fa-solid fa-bicycle"></i></a></div>  
+      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.beast}}primIcon{{else}}secIcon{{/if}}" data-property="beast"><i title= "{{localize 'OG.beast'}}" class="fa-solid fa-horse"></i></a></div>  
+      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.bike}}primIcon{{else}}secIcon{{/if}}" data-property="bike"><i title= "{{localize 'OG.bike'}}" class="fa-solid fa-motorcycle"></i></a></div>  
+      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.car}}primIcon{{else}}secIcon{{/if}}" data-property="car"><i title= "{{localize 'OG.car'}}" class="fa-solid fa-car-side"></i></a></div>  
+      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.nautical}}primIcon{{else}}secIcon{{/if}}" data-property="nautical"><i title= "{{localize 'OG.nautical'}}" class="fa-solid fa-ship"></i></a></div>  
+      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.flying}}primIcon{{else}}secIcon{{/if}}" data-property="flying"><i title= "{{localize 'OG.flying'}}" class="fa-solid fa-helicopter"></i></a></div>  
+      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.armoured}}primIcon{{else}}secIcon{{/if}}" data-property="armoured"><i title= "{{localize 'OG.armoured'}}" class="fa-solid fa-truck-monster"></i></a></div>  
+      <div><a class="large-icon {{#if isGM}}toggle{{/if}} {{#if item.system.space}}primIcon{{else}}secIcon{{/if}}" data-property="space"><i title= "{{localize 'OG.spaceship'}}" class="fa-solid fa-starship"></i></a></div>  
     </div>
     <br>
 
@@ -58,7 +58,7 @@
           </div>
 
           <div class="item-controls">
-            <a class="item-control item-delete items" title="{{localize 'OG.deleteItem'}}"><i class="fas fa-trash"></i></a>
+            <a class="item-control item-delete items secIcon" title="{{localize 'OG.deleteItem'}}"><i class="fas fa-trash"></i></a>
           </div>
         </li>
       {{/each}}

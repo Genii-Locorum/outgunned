@@ -9,8 +9,8 @@
               <span class="red">{{localize 'OG.name'}}:  </span><span class="black clickable partic-edit">{{support.name}}</span>
             </div>  
             <div class="centre">
-              <a class="ride-refresh clickable"title=" {{localize 'OG.refresh'}}"><i class="fa-solid fa-arrows-rotate"></i></a>
-              <a class="support-delete clickable"title=" {{localize 'OG.delete'}}"><i class="fa-solid fa-trash"></i></a>
+              <a class="ride-refresh clickable secIcon" title=" {{localize 'OG.refresh'}}"><i class="fa-solid fa-arrows-rotate"></i></a>
+              <a class="support-delete clickable secIcon" title=" {{localize 'OG.delete'}}"><i class="fa-solid fa-trash"></i></a>
             </div>
           </div>  
           <div class="new-row"><span class="red">{{localize 'OG.help'}}:  </span><span class="black">{{support.system.help}}</span></div>
@@ -20,14 +20,14 @@
               <div class="upperCase">{{ability.label}}</div>
               <div class="centre">
                 {{#loop 1 5 1}}
-                  <a class=""><i class="{{#if (gte ability.total this)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+                  <a class="secIcon"><i class="{{#if (gte ability.total this)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
                 {{/loop}}
               </div>
             {{/each}}  
           </div>    
           <div class="centre grit" style="max-width:260px">
             {{#loop 1 system.grit.max 1}}
-              <a class="red medium-icon">
+              <a class="primIcon medium-icon">
                 <i class="{{#if (gte support.system.grit.value this)}}fa-solid fa-shield{{else}}fa-regular fa-shield{{/if}}"></i>
               </a>
             {{/loop}}

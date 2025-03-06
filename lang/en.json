@@ -331,6 +331,12 @@
       "defaultCheckTypeHint": "Select the default type of check for skill rolls",
       "defaultDifficulty": "Default Difficutly",
       "defaultDifficultyHint": "Select the default difficutly for Action Rolls etc",
+      "directorColour": "Director Sheet Colour",
+      "directorColourHint": "Primary Colour for the Director Sheet titles",
+      "displaySettings": "Display Settings",
+      "displaySettingsHint": "Adjust colours on the various sheets",
+      "mainTextColour": "Main Text Colour",
+      "mainTextColourHint": "The default text on Actor and Item Sheets",
       "ogVersion": "Game Version",
       "ogVersionHint": "Which version of Outgunned are you running",
       "planBIcon-1": "Plan B FAS Icon 1",
@@ -340,8 +346,16 @@
       "planBName-2": "Plan B Option 2",
       "planBName-3": "Plan B Option 3",
       "planBNameHint": "Name of the Plan B Option",
+      "primaryColour": "Primary Colour used on sheets",
+      "primaryColourHint": "This is the main colour used for headings, lines etc..",
+      "primaryIcon": "Primary Colour used for icons on sheets",
+      "primaryIconHint": "This is the main colour used for icons.",
       "razorsEdge": "Razor's Edge",
-      "razorsEdgeHint": "Turning this on adds this option when selecting gambling rolls"
+      "razorsEdgeHint": "Turning this on adds this option when selecting gambling rolls",
+      "secondaryColour": "Secondary Colour used on sheets",
+      "secondaryColourHint": "This is the secondary colour used for headings, lines etc.",
+      "secondaryIcon": "Secondary Colour used for icons",
+      "secondaryIconHint": "This is the secondary colour used for icons."
     }
   }
 }

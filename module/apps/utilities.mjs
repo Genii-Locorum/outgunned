@@ -546,12 +546,62 @@ if (dataitem === 'grit') {
     }
   }
 
-  static async planBbroadcast(msg)
-{
-  ui.notifications.warn(msg); 
-  for (const a of game.actors) {
-    if (a.isOwner) {
-      await a.sheet.render(false)
-    }  
+  static async planBbroadcast(msg) {
+    ui.notifications.warn(msg); 
+    for (const a of game.actors) {
+      if (a.isOwner) {
+        await a.sheet.render(false)
+      }  
+    }
   }
-}}
+
+    //Implement Game Settings for Colours
+    static async displaySettings(sheet) {
+
+    if (game.settings.get('outgunned', 'mainTextColour')) {
+      sheet.element.css(
+        '--mainTextColour',
+        game.settings.get('outgunned', 'mainTextColour')
+      )
+    }
+
+    if (game.settings.get('outgunned', 'primaryColour')) {
+      sheet.element.css(
+        '--primary-colour',
+        game.settings.get('outgunned', 'primaryColour')
+      )
+    }
+
+    if (game.settings.get('outgunned', 'secondaryColour')) {
+      sheet.element.css(
+        '--secondary-colour',
+        game.settings.get('outgunned', 'secondaryColour')
+      )
+    }
+
+    if (game.settings.get('outgunned', 'directorColour')) {
+      sheet.element.css(
+        '--director-colour',
+        game.settings.get('outgunned', 'directorColour')
+      )
+    }
+
+    if (game.settings.get('outgunned', 'primaryIcon')) {
+      sheet.element.css(
+        '--primaryIcon',
+        game.settings.get('outgunned', 'primaryIcon')
+      )
+    }
+
+    if (game.settings.get('outgunned', 'secondaryIcon')) {
+      sheet.element.css(
+        '--secondaryIcon',
+        game.settings.get('outgunned', 'secondaryIcon')
+      )
+    }    
+
+  }  
+
+
+
+}

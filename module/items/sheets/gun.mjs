@@ -97,6 +97,7 @@ async _onItemDelete (event, collectionName) {
     const collection = this.item.system[collectionName] ? foundry.utils.duplicate(this.item.system[collectionName]) : []
     collection.splice(itemIndex, 1)
     await this.item.update({ [`system.${collectionName}`]: collection })
-  }
+  } 
 }
+
 }

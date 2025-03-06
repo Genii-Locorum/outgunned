@@ -16,7 +16,7 @@
       <div class="red upperCase" title = "{{localize 'OG.heat'}}: {{heat}}">{{localize 'OG.heat'}}</div>
       <div class="grit">
         {{#loop 1 12 1}}
-          <a class="{{#if (eq this 6)}}black{{else}}{{#if (eq this 9)}} black {{else}}{{#if (eq this 12)}} black {{else}} red{{/if}}{{/if}}{{/if}} medium-icon"><i class="{{#if (gte ../heat this)}} fa-solid fa-temperature-full {{else}} fa-regular fa-temperature-empty{{/if}}"></i></a>
+          <a class="{{#if (eq this 6)}}secIcon{{else}}{{#if (eq this 9)}} secIcon {{else}}{{#if (eq this 12)}} secIcon {{else}} primIcon{{/if}}{{/if}}{{/if}} medium-icon"><i class="{{#if (gte ../heat this)}} fa-solid fa-temperature-full {{else}} fa-regular fa-temperature-empty{{/if}}"></i></a>
         {{/loop}}
       </div>
       <div class="small upperCase">{{localize 'OG.heat6Hint'}}</div>
@@ -36,7 +36,7 @@
             <div class="clickable partic-edit" >{{partic.name}}</div>
             <div class="blue">{{localize 'OG.role'}}:</div>
             <div> {{partic.role}}</div>
-            <div class="centre blue" title="{{localize 'OG.delete'}}"><a class="partic-remove clickable"><i class="fa-solid fa-trash"></i></a></div>
+            <div class="centre" title="{{localize 'OG.delete'}}"><a class="secIcon partic-remove clickable"><i class="fa-solid fa-trash"></i></a></div>
           </div>
         </li>
       {{/each}}
@@ -45,7 +45,7 @@
   </section>
 
   {{!-- Sheet Tab Navigation --}}
-  <section class="nav-panel" style="background-color: rgb(73, 84, 231) !important;">
+  <section class="nav-panel" style="background-color: var(--director-colour) !important;">
     <nav class="sheet-tabs tabs" data-group="primary">
       <div><a class="item" data-tab="ride">{{localize 'OG.ride'}}</a></div>
       <div><a class="item" data-tab="villain">{{localize 'OG.villain'}}</a></div>

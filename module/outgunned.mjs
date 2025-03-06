@@ -10,6 +10,8 @@ import { registerSettings } from './setup/register-settings.mjs'
 import { OutgunnedMenu } from "./setup/layers.mjs"
 import { OutgunnedUtilities } from './apps/utilities.mjs'
 import { OutgunnedChecks } from './apps/checks.mjs'
+import { OutgunnedCharacterSheet } from "./actors/sheets/character.mjs";
+import { OutgunnedAgeSheet } from "./items/sheets/age.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -65,6 +67,9 @@ OutgunnedHooks.listen()
 
 //Add Chat Log Hooks
 Hooks.on("renderChatLog", (app, html, data) => Chat.addChatListeners(html));
+Hooks.on('renderActorSheet', OutgunnedCharacterSheet.renderSheet)
+Hooks.on('renderItemSheet', OutgunnedAgeSheet.renderSheet)
+
 
 //Add GM Tool Layer
 Hooks.on('getSceneControlButtons', OutgunnedMenu.getButtons)

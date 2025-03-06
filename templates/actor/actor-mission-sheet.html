@@ -10,9 +10,9 @@
     <div class="planB">
       <div class="upperCase centre">{{localize 'OG.whatPlanB'}}<span class="red upperCase">{{localize 'OG.planB'}}</span>?</div>
       <div class="planB-icons">
-        <div class="planBIcon centre {{#unless planB1}}red{{/unless}}">2</div>
-        <div class="planBIcon centre {{#unless planB2}}red{{/unless}}">3</div>
-        <div class="planBIcon centre {{#unless planB3}}red{{/unless}}">4</div>
+        <div class="planBIcon centre {{#unless planB1}}primIcon{{/unless}}">2</div>
+        <div class="planBIcon centre {{#unless planB2}}primIcon{{/unless}}">3</div>
+        <div class="planBIcon centre {{#unless planB3}}primIcon{{/unless}}">4</div>
       </div>
       <div class="planB-icons">
         <div class="centre">{{planB1Name}}</div>
@@ -33,7 +33,7 @@
             <div class="clickable partic-edit" >{{partic.name}}</div>
             <div class="red">{{localize 'OG.role'}}:</div>
             <div> {{partic.role}}</div>
-            <div class="centre red" title="{{localize 'OG.delete'}}"><a class="partic-remove clickable"><i class="fa-solid fa-trash"></i></a></div>
+            <div class="centre" title="{{localize 'OG.delete'}}"><a class="primIcon partic-remove clickable"><i class="fa-solid fa-trash"></i></a></div>
           </div>
         </li>
       {{/each}}
@@ -44,7 +44,7 @@
       <div class="red upperCase" title = "{{localize 'OG.heat'}}: {{heat}}">{{localize 'OG.heat'}}</div>
       <div class="grit">
         {{#loop 1 12 1}}
-          <a class="{{#if (eq this 6)}}black{{else}}{{#if (eq this 9)}} black {{else}}{{#if (eq this 12)}} black {{else}} red{{/if}}{{/if}}{{/if}} medium-icon"><i class="{{#if (gte ../heat this)}} fa-solid fa-temperature-full {{else}} fa-regular fa-temperature-empty{{/if}}"></i></a>
+          <a class="{{#if (eq this 6)}}secIcon{{else}}{{#if (eq this 9)}} secIcon {{else}}{{#if (eq this 12)}} secIcon {{else}} primIcon{{/if}}{{/if}}{{/if}} medium-icon"><i class="{{#if (gte ../heat this)}} fa-solid fa-temperature-full {{else}} fa-regular fa-temperature-empty{{/if}}"></i></a>
         {{/loop}}
       </div>
       <div class="small upperCase">{{localize 'OG.heat6Hint'}}</div>

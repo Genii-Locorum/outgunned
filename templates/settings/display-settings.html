@@ -1,0 +1,66 @@
+<form class="outgunned settingsForm flexcol" autocomplete="off">
+<h2 class="bold">{{localize 'OG.settings.displaySettings'}}</h2>
+
+
+  <div class="form-group">
+    <label class="bold">{{localize 'OG.settings.mainTextColour'}}</label>
+    <div class="form-fields" style="flex: 1;">
+      <input class="centre" name="mainTextColour" type="text" value="{{mainTextColour.value}}"/>
+    </div>
+    <p class="settingNote">{{localize 'OG.settings.mainTextColourHint'}}</p>
+  </div>
+
+  <div class="form-group">
+    <label class="bold">{{localize 'OG.settings.primaryColour'}}</label>
+    <div class="form-fields" style="flex: 1;">
+      <input class="centre" name="primaryColour" type="text" value="{{primaryColour.value}}"/>
+    </div>
+    <p class="settingNote">{{localize 'OG.settings.primaryColourHint'}}</p>
+  </div>
+
+  <div class="form-group">
+    <label class="bold">{{localize 'OG.settings.secondaryColour'}}</label>
+    <div class="form-fields" style="flex: 1;">
+      <input class="centre" name="secondaryColour" type="text" value="{{secondaryColour.value}}"/>
+    </div>
+    <p class="settingNote">{{localize 'OG.settings.secondaryColourHint'}}</p>
+  </div>
+
+  <div class="form-group">
+    <label class="bold">{{localize 'OG.settings.directorColour'}}</label>
+    <div class="form-fields" style="flex: 1;">
+      <input class="centre" name="directorColour" type="text" value="{{directorColour.value}}"/>
+    </div>
+    <p class="settingNote">{{localize 'OG.settings.directorColourHint'}}</p>
+  </div>
+
+  <div class="form-group">
+    <label class="bold">{{localize 'OG.settings.primaryIcon'}}</label>
+    <div class="form-fields" style="flex: 1;">
+      <input class="centre" name="primaryIcon" type="text" value="{{primaryIcon.value}}"/>
+    </div>
+    <p class="settingNote">{{localize 'OG.settings.primaryIconHint'}}</p>
+  </div>
+
+
+  <div class="form-group">
+    <label class="bold">{{localize 'OG.settings.secondaryIcon'}}</label>
+    <div class="form-fields" style="flex: 1;">
+      <input class="centre" name="secondaryIcon" type="text" value="{{secondaryIcon.value}}"/>
+    </div>
+    <p class="settingNote">{{localize 'OG.settings.secondaryIconHint'}}</p>
+  </div>  
+
+
+
+  <br>
+  <footer class="sheet-footer flexrow">
+    <button class = "settingsButton" type="submit" name="submit">
+      <i class="fas fa-save"></i> {{localize "Save Changes"}}
+    </button>
+    <button class="settingsButton" type="button" name="reset">
+      <i class="fas fa-undo"></i> {{localize "Reset Defaults"}}
+    </button>
+  </footer>
+  <br>
+</form>

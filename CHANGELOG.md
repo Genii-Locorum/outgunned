@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.13
+There are now some colour settings for you to change text and icon colours.
+
+## 2.12
+- Default "Need" for chases set to 18, with validation to maintain a minimum score of 1
+
 ## 2.11
 - You can now add a mission sheet - this is a type of Actor.  By default this is owned by all players.
 - Chases have been added as a type of actor.

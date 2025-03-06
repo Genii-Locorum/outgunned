@@ -27,7 +27,7 @@
         <div class=" select-name left bold" title = "{{localize 'OG.displayAttTypeHint'}}">{{localize 'OG.displayAttType'}}</div>          
         {{#if isGM}}
           <div class="left">
-          <select data-handle-change name="system.displayAtt">
+          <select class="mainText" data-handle-change name="system.displayAtt">
             {{selectOptions displayAttType selected=item.system.displayAtt}}
           </select>
           </div>
@@ -39,29 +39,29 @@
         <div></div>  
         <div class="new-row select-name indent left">{{localize 'OG.base'}}</div>
         <div>
-          <a class="large-icon {{#if freeform}}red toggle{{/if}}" data-property="value"><i class="{{#if (gte item.system.value 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          <a class="large-icon {{#if freeform}}primIcon toggle{{else}}secIcon{{/if}}" data-property="value"><i class="{{#if (gte item.system.value 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
         </div>
 
         {{#if hasOwner}}
           <div class="new-row select-name indent left ">{{localize 'OG.role'}}</div>
           <div>
-            <a class="large-icon {{#if freeform}}red toggle{{/if}}" data-property="role"><i class="{{#if (gte item.system.role 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+            <a class="large-icon {{#if freeform}}primIcon toggle{{else}}secIcon{{/if}}" data-property="role"><i class="{{#if (gte item.system.role 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
           </div>
         
           <div class="new-row select-name indent left ">{{localize 'OG.trope'}}</div>
           <div>
-            <a class="large-icon {{#if freeform}}red toggle{{/if}}" data-property="trope"><i class="{{#if (gte item.system.trope 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+            <a class="large-icon {{#if freeform}}primIcon toggle{{else}}secIcon{{/if}}" data-property="trope"><i class="{{#if (gte item.system.trope 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
           </div>
                 
           <div class="new-row select-name indent left ">{{localize 'OG.freeSkill'}}</div>
           <div>
-            <a class="large-icon {{#if freeform}}red toggle{{/if}}" data-property="free"><i class="{{#if (gte item.system.free 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+            <a class="large-icon {{#if freeform}}primIcon toggle{{else}}secIcon{{/if}}" data-property="free"><i class="{{#if (gte item.system.free 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
           </div>
 
           <div class="new-row select-name indent left">{{localize 'OG.xp'}}</div>
           <div>
-            <a class="large-icon toggle" data-property="xp" data-target = 1><i class="{{#if (gte item.system.xp 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
-            <a class="large-icon toggle" data-property="xp" data-target = 2><i class="{{#if (gte item.system.xp 2)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+            <a class="large-icon toggle secIcon" data-property="xp" data-target = 1><i class="{{#if (gte item.system.xp 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+            <a class="large-icon toggle secIcon" data-property="xp" data-target = 2><i class="{{#if (gte item.system.xp 2)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
           </div>
         {{/if}}
 

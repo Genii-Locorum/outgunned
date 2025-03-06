@@ -12,17 +12,17 @@
       {{#each system.abilities as |ability key|}}
         <div class="new-row attribute-name contextmenu upperCase left bold" data-attkey = {{key}}>{{ability.label}}</div>
         <div>
-          <a class="red"><i class="{{#if (gt ability.total 0)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
-          <a class="red"><i class="{{#if (gt ability.total 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
-          <a class="red"><i class="{{#if (gt ability.total 2)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          <a class="primIcon"><i class="{{#if (gt ability.total 0)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          <a class="primIcon"><i class="{{#if (gt ability.total 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+          <a class="primIcon"><i class="{{#if (gt ability.total 2)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
         </div>
         {{#each ../skills as |skill id|}}
           {{#if (eq skill.system.displayAtt key)}}
             <div class="item upperCase right rollable skill-name contextmenu" data-item-id="{{skill._id}}">{{skill.name}}</div>  
             <div class="right">
-              <a class=""><i class="{{#if (gte skill.system.total 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
-              <a class=""><i class="{{#if (gte skill.system.total 2)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
-              <a class=""><i class="{{#if (gte skill.system.total 3)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+              <a class="secIcon"><i class="{{#if (gte skill.system.total 1)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+              <a class="secIcon"><i class="{{#if (gte skill.system.total 2)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
+              <a class="secIcon"><i class="{{#if (gte skill.system.total 3)}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a>
             </div>
           {{/if}}
         {{/each}}
@@ -60,16 +60,16 @@
       {{#loop 1 system.grit.max 1}}
         {{#unless (eq this ../system.grit.max) }}
           {{#unless (eq this 8)}}
-            <a class="red medium-icon actor-toggle clickable" data-property="grit" data-target = {{this}} ><i class="{{#if (gte ../actor.system.grit.value this)}}fa-solid fa-shield{{else}}fa-regular fa-shield{{/if}}"></i></a>
+            <a class="primIcon medium-icon actor-toggle clickable" data-property="grit" data-target = {{this}} ><i class="{{#if (gte ../actor.system.grit.value this)}}fa-solid fa-shield{{else}}fa-regular fa-shield{{/if}}"></i></a>
           {{else}}
             {{#if ../system.cyberEnhance}}
-              <a class="red medium-icon actor-toggle clickable" title="{{localize 'OG.hot'}}" data-property="grit" data-target = {{this}} ><i class="{{#if (gte ../actor.system.grit.value this)}}fa-solid fa-fire-flame-curved{{else}}fa-regular fa-fire-flame-curved{{/if}}"></i></a>
+              <a class="primIcon medium-icon actor-toggle clickable" title="{{localize 'OG.hot'}}" data-property="grit" data-target = {{this}} ><i class="{{#if (gte ../actor.system.grit.value this)}}fa-solid fa-fire-flame-curved{{else}}fa-regular fa-fire-flame-curved{{/if}}"></i></a>
             {{else}}
-              <a class="medium-icon actor-toggle clickable" title="{{localize 'OG.bad'}}" data-property="grit" data-target = {{this}} ><i class="{{#if (gte ../actor.system.grit.value this)}}fa-solid fa-shield{{else}}fa-regular fa-shield{{/if}}"></i></a>
+              <a class="secIcon medium-icon actor-toggle clickable" title="{{localize 'OG.bad'}}" data-property="grit" data-target = {{this}} ><i class="{{#if (gte ../actor.system.grit.value this)}}fa-solid fa-shield{{else}}fa-regular fa-shield{{/if}}"></i></a>
             {{/if}}
           {{/unless}}
         {{else}}
-          <a class="red medium-icon actor-toggle clickable" title="{{localize 'OG.hot'}}" data-property="grit" data-target = {{../system.grit.max}} ><i class="{{#if (gte ../actor.system.grit.value 12)}}fa-solid fa-fire-flame-curved{{else}}fa-regular fa-fire-flame-curved{{/if}}"></i></a>
+          <a class="primIcon medium-icon actor-toggle clickable" title="{{localize 'OG.hot'}}" data-property="grit" data-target = {{../system.grit.max}} ><i class="{{#if (gte ../actor.system.grit.value 12)}}fa-solid fa-fire-flame-curved{{else}}fa-regular fa-fire-flame-curved{{/if}}"></i></a>
         {{/unless}}
       {{/loop}}
       <div class="small upperCase">{{localize 'OG.badHint'}}</div>
@@ -80,7 +80,7 @@
     <div class="red upperCase adrenaline-name contextmenu">{{adrenalineLabel}}</div>
     <div class="grit">
       {{#loop 1 system.adrenaline.max 1}}
-      <a class="red medium-icon actor-toggle clickable" data-property="adrenaline" data-target = {{this}}><i class="{{#if (gte ../actor.system.adrenaline.value this)}} fa-solid fa-battery-full fa-rotate-270 {{else}} fa-solid fa-battery-empty fa-rotate-270{{/if}}"></i></a>
+      <a class="primIcon medium-icon actor-toggle clickable" data-property="adrenaline" data-target = {{this}}><i class="{{#if (gte ../actor.system.adrenaline.value this)}} fa-solid fa-battery-full fa-rotate-270 {{else}} fa-solid fa-battery-empty fa-rotate-270{{/if}}"></i></a>
       {{/loop}}
     </div>
 
@@ -89,7 +89,7 @@
     <div class="red upperCase spotlight contextmenu">{{localize 'OG.spotlight'}}</div>
     <div class="grit">
       {{#loop 1 system.spotlight.max 1}}
-      <a class="red medium-icon actor-toggle clickable" data-property="spotlight" data-target = {{this}}><i class="{{#if (gte ../actor.system.spotlight.value this)}} fa-solid fa-camera-movie {{else}} fa-regular fa-camera-movie{{/if}}"></i></a>
+      <a class="primIcon medium-icon actor-toggle clickable" data-property="spotlight" data-target = {{this}}><i class="{{#if (gte ../actor.system.spotlight.value this)}} fa-solid fa-camera-movie {{else}} fa-regular fa-camera-movie{{/if}}"></i></a>
       {{/loop}}
     </div>
     
@@ -98,7 +98,7 @@
     <div class="red upperCase deathRoulette contextmenu">{{localize 'OG.deathRoulette'}}</div>
     <div class="grit">
       {{#loop 1 6 1}}
-      <a class="red medium-icon actor-toggle clickable" data-property="deathRoulette" data-target = {{this}}><i class="{{#if (gte ../actor.system.deathRoulette.value this)}} fa-solid fa-gun-slash {{else}} fa-regular fa-gun{{/if}}"></i></a>
+      <a class="primIcon medium-icon actor-toggle clickable" data-property="deathRoulette" data-target = {{this}}><i class="{{#if (gte ../actor.system.deathRoulette.value this)}} fa-solid fa-gun-slash {{else}} fa-regular fa-gun{{/if}}"></i></a>
       {{/loop}}
     </div>
 
@@ -107,7 +107,7 @@
     <div class="red upperCase" title = "{{localize 'OG.heat'}}: {{heat}}">{{localize 'OG.heat'}}</div>
     <div class="grit">
       {{#loop 1 12 1}}
-      <a class="{{#if (eq this 6)}}black{{else}}{{#if (eq this 12)}} black {{else}} red{{/if}}{{/if}} medium-icon"><i class="{{#if (gte ../heat this)}} fa-solid fa-temperature-full {{else}} fa-regular fa-temperature-empty{{/if}}"></i></a>
+      <a class="{{#if (eq this 6)}}secIcon{{else}}{{#if (eq this 12)}} secIcon {{else}} primIcon{{/if}}{{/if}} medium-icon"><i class="{{#if (gte ../heat this)}} fa-solid fa-temperature-full {{else}} fa-regular fa-temperature-empty{{/if}}"></i></a>
       {{/loop}}
     </div>
     <div class="small upperCase">{{localize 'OG.heat6Hint'}}</div>
@@ -115,9 +115,9 @@
     <br>
     <div class="red upperCase">{{localize 'OG.planB'}}</div>
     <div>
-      <a class="{{#if planB1}}grey fade{{else}}red{{/if}} large-icon" title="{{planB1Name}}"><i class="{{planB1Icon}}"></i></a>
-      <a class="{{#if planB2}}grey fade{{else}}red{{/if}} large-icon" title="{{planB2Name}}"><i class="{{planB2Icon}}"></i></a>
-      <a class="{{#if planB3}}grey fade{{else}}red{{/if}} large-icon" title="{{planB3Name}}"><i class="{{planB3Icon}}"></i></a>
+      <a class="{{#if planB1}}secIcon fade{{else}}primIcon{{/if}} large-icon" title="{{planB1Name}}"><i class="{{planB1Icon}}"></i></a>
+      <a class="{{#if planB2}}secIcon fade{{else}}primIcon{{/if}} large-icon" title="{{planB2Name}}"><i class="{{planB2Icon}}"></i></a>
+      <a class="{{#if planB3}}secIcon fade{{else}}primIcon{{/if}} large-icon" title="{{planB3Name}}"><i class="{{planB3Icon}}"></i></a>
     </div>
   </div>
 

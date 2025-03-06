@@ -18,6 +18,17 @@
   src: url('../assets/OG-dice.ttf') format('woff2');
 }
 
+:root {
+--primary-colour: rgb(177,37,26);
+--secondary-colour:cornsilk;
+--mainTextColour: black;
+--primaryIcon: rgb(177,37,26);
+--secondaryIcon: black;
+--director-colour: rgb(73, 84, 231);
+}  
+
+
+
 body {
   background-attachment: fixed !important;
   background-size:100%  !important;
@@ -35,11 +46,16 @@ body {
   padding: 8px;
   font-family: Futura;
   font-size: 12px;
+  color: var(--mainTextColour)
 }
 
 .rollable:hover, .rollable:focus, .contextmenu:hover, .contextmenu.focus, .clickable:hover, .clickable.focus{
   text-shadow: 0px 0px 14px black;
   cursor: pointer;
+}
+
+.outgunned .mainText{
+  color: var(--mainTextColour);
 }
 
 .outgunned a{
@@ -63,7 +79,7 @@ body {
 .outgunned .charname {
   font-size: 30px;
   height: 42px;
-  background-color: rgb(177,37,26);
+  background-color: var(--primary-colour);
   color: white !important;
   padding: 1px 3px 1px 3px;
 }
@@ -81,8 +97,9 @@ body {
 }
 
 .outgunned .info-cell {
-  border-bottom: 1px solid rgb(177,37,26);
+  border-bottom: 1px solid var(--primary-colour);
   margin-top: 3px;
+  color: var(--mainTextColour)
 }
 
 .outgunned .info-cell input{
@@ -91,6 +108,7 @@ body {
   font-size: 12px;
   max-height: 15px;
   background: none;
+  color: var(--mainTextColour)
 }
 
 .outgunned .gear-cell input{
@@ -124,16 +142,16 @@ body {
 .outgunned .charname input{
   font-size: 30px;
   height:40px;
-  background-color: rgb(177,37,26);
+  background-color: var(--primary-colour);
   color: white;
   border: none;
   padding: 0px;
 }
 
 .outgunned .attribute-name {
-  background-color: rgb(177,37,26);
+  background-color: var(--primary-colour);
   padding-left: 10px;
-  color: cornsilk;
+  color: var(--secondary-colour);
 }
 
 .outgunned .upperCase {
@@ -145,7 +163,7 @@ body {
 }
 
 .outgunned .red {
-  color:rgb(177,37,26);
+  color: var(--primary-colour);
 }  
 
 .outgunned .grey {
@@ -153,7 +171,7 @@ body {
 }
 
 .outgunned .blue {
-  color:rgb(73, 84, 231);
+  color:var(--director-colour);
 } 
 
 .outgunned .background-doc {
@@ -235,6 +253,14 @@ body {
   grid-column-start: 1;
 }
 
+.outgunned .primIcon {
+  color: var(--primaryIcon);
+}
+
+.outgunned .secIcon {
+  color: var(--secondaryIcon);
+}
+
 .outgunned .extralarge-icon {
   font-size: 30px;
 }
@@ -260,8 +286,8 @@ body {
 }
 
 .outgunned .horizontalboxed {
-  border-top: 1px rgb(177,37,26) solid;
-  border-bottom: 1px rgb(177,37,26) solid;
+  border-top: 1px var(--primary-colour) solid;
+  border-bottom: 1px var(--primary-colour) solid;
 }
 
 .outgunned .item-list {
@@ -292,7 +318,7 @@ body {
 
 .outgunned .restricted {
   color: white;
-  background-color:rgba(177, 36, 26) ;
+  background-color:var(--primary-colour) ;
 }
 
 .outgunned .items-list {
@@ -312,7 +338,7 @@ body {
 
 .outgunned .feat-grid{
   display: grid;
-  border-top: 5px rgb(177,37,26) solid;
+  border-top: 5px var(--primary-colour) solid;
   border-left: 1px grey solid;
   border-right: 1px grey solid;
   grid-template-columns: 200px 50px 150px ;
@@ -320,7 +346,7 @@ body {
 
 .outgunned .ride-header{
   display: grid;
-  border-top: 5px rgb(177,37,26) solid;
+  border-top: 5px var(--primary-colour) solid;
   border-left: 1px grey solid;
   border-right: 1px grey solid;
   border-bottom: 1px grey solid;
@@ -341,7 +367,7 @@ body {
   display: grid;
   grid-template-columns: 370px;
   border: 1px grey solid;
-  color:grey;
+  color: var(--mainTextColour);
 }
 
 .outgunned .gear-grid{
@@ -358,7 +384,7 @@ body {
   height: fit-content;
   border: 1px grey solid;
   padding: 0px 5px 0px 5px;
-  color:rgba(0, 0, 0, 0.75);
+  color: var(--mainTextColour);
   margin: 0px;
 }
 
@@ -366,7 +392,7 @@ body {
   border-top: 1px grey solid;
   border-left: 1px grey solid;
   border-right: 1px grey solid;
-  color:rgba(0, 0, 0, 0.75);
+  color: var(--mainTextColour);
   margin: 0px;
 }
 
@@ -375,11 +401,11 @@ body {
 }
 
 .outgunned .result-success {
-  color: rgb(177,37,26);
+  color: var(--primary-colour);
 }
 
 .outgunned .cream {
-  background-color: cornsilk;
+  background-color: var(--secondary-colour);
 }
 
 .outgunned .condition-grid{
@@ -431,8 +457,8 @@ body {
 }
 
 .outgunned .toggled {
-  background-color: rgb(177, 36, 26);
-  color: cornsilk;
+  background-color: var(--primary-colour);
+  color: var(--secondary-colour);
 }
 
 .outgunned .rideType-grid {
@@ -455,8 +481,8 @@ body {
 }
 
 .outgunned .enemy-name {
-  background-color: rgb(177, 36, 26);
-  color: cornsilk;
+  background-color: var(--primary-colour);
+  color: var(--secondary-colour);
   width: 170px;
   height: 18px;
 }
@@ -545,7 +571,7 @@ body {
   width: 100%;
   max-height: 40px;
   align-content: center;
-  background-color: rgb(177,37,26);
+  background-color: var(--primary-colour);
   color: white;
 } 
 
@@ -573,7 +599,7 @@ body {
   grid-template-columns: 100px 650px 40px;
   grid-column-gap: 5px; 
   max-height: 50px;
-  border: 1px solid rgb(177,37,26);
+  border: 1px solid var(--primary-colour);
 }
 
 
@@ -606,7 +632,7 @@ body {
 }
 
 .outgunned .mission-box {
-  border: 1px solid rgb(177,37,26);
+  border: 1px solid var(--primary-colour);
   background-color:rgb(247, 241, 241);
   padding: 5px;
 }
@@ -731,3 +757,27 @@ margin: 0px;
   grid-template-columns: 300px 70px ;
 }
 
+.outgunned form .outgunnedform-group, form .form-group-stacked {
+  clear: both;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 3px 0;
+  align-items: center;
+}  
+
+.outgunned form .outgunnedform-group > label {
+  flex: .5;
+}
+
+.outgunned .settingNote {
+  flex: 0 0 100%;
+  font-size: var(--font-size-12);
+  line-height: var(--line-height-16);
+  color: rgba(68, 7, 4, 1);
+  margin: 3px 0;
+}
+
+.outgunned .mainText{
+  color: var(--mainTextColour);
+}

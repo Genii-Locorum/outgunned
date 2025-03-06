@@ -18,7 +18,7 @@
         {{#each actor.system.need.hot as |value key|}}
           {{#if (lte key ../actor.system.need.max)}}  
             <div class="centre middle {{#if ../isGM}}actor-toggle chase-need contextmenu{{/if}}" data-property="need" data-target = {{key}}>
-              <a class="centre  {{#if value}}red{{/if}}" style="font-size: 20px;">
+              <a class="centre  {{#if value}}primIcon{{else}}secIcon{{/if}}" style="font-size: 20px;">
                 <i class="{{#if (gte ../actor.system.need.current key)}}fa-regular fa-square-check{{else}}fa-regular fa-square{{/if}}"></i>
               </a>
             </div>
@@ -50,9 +50,9 @@
       <div class="red upperCase">{{localize 'OG.speed'}}</div>
       <div class="chase-speed large-icon">
         <div></div>
-        <div class="{{#if isGM}}actor-toggle{{/if}}" data-property="speed" data-target = -1 title="{{localize 'OG.speedDown'}}"><a><i class="fa-solid fa-arrow-turn-left-down"></i></a></div>
-        <div class="">{{actor.system.speed}}</div>
-        <div class="{{#if isGM}}actor-toggle{{/if}}" data-property="speed" data-target = 1  title="{{localize 'OG.speedUp'}}"><a><i class="fa-solid fa-arrow-turn-up"></i></a></div>
+        <div class="{{#if isGM}}actor-toggle{{/if}}" data-property="speed" data-target = -1 title="{{localize 'OG.speedDown'}}"><a class="secIcon"><i class="fa-solid fa-arrow-turn-left-down"></i></a></div>
+        <div class="mainText">{{actor.system.speed}}</div>
+        <div class="{{#if isGM}}actor-toggle{{/if}}" data-property="speed" data-target = 1  title="{{localize 'OG.speedUp'}}"><a class="secIcon"><i class="fa-solid fa-arrow-turn-up"></i></a></div>
         <div></div>
       </div>
     </div>
@@ -69,18 +69,18 @@
             <div class="ride-header">
               <div class="indent clickable red ride-edit">{{ride.name}} ({{ride.parent.name}})</div>
               <div class="centre" >
-                  <a class="ride-refresh clickable" title=" {{localize 'OG.refresh'}}"><i class="fa-solid fa-arrows-rotate"></i></a>
-                  <a class="support-delete clickable" title=" {{localize 'OG.delete'}}"><i class="fa-solid fa-trash"></i></a>
+                  <a class="ride-refresh clickable secIcon" title=" {{localize 'OG.refresh'}}"><i class="fa-solid fa-arrows-rotate"></i></a>
+                  <a class="support-delete clickable secIcon" title=" {{localize 'OG.delete'}}"><i class="fa-solid fa-trash"></i></a>
               </div>
             </div>    
             <div class="ride-grid">
               <div class="borderleft"></div>
               {{#loop 1 6 1}}
-                <div class="centre middle"><a class="mediumplus-icon {{#if (lt this 4)}}red{{/if}}" title="{{localize 'OG.armour'}}" data-property="armour" data-target = {{this}}>
+                <div class="centre middle"><a class="mediumplus-icon {{#if (lt this 4)}}primIcon{{else}}secIcon{{/if}}" title="{{localize 'OG.armour'}}" data-property="armour" data-target = {{this}}>
                   <i class="{{#if (gte ride.system.armour.value this)}}fa-solid fa-shield{{else}}fa-regular fa-shield{{/if}}"></i>
                 </a></div>
                 {{#if (eq this 3)}}
-                  <div class="centre middle"><a class="extralarge-icon" title="{{localize 'OG.startingSpeed'}}: {{ride.system.speed.start}}"><i class="
+                  <div class="centre middle"><a class="extralarge-icon secIcon" title="{{localize 'OG.startingSpeed'}}: {{ride.system.speed.start}}"><i class="
                     {{#if (eq ride.system.speed.start 0)}}fa-solid fa-gauge-min{{/if}}
                     {{#if (eq ride.system.speed.start 1)}}fa-solid fa-gauge-low{{/if}}
                     {{#if (eq ride.system.speed.start 2)}}fa-solid fa-gauge-high{{/if}}
@@ -93,19 +93,19 @@
             
             <div class="ride-grid-type">     
                <div class="borderleft"></div>    
-               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.pedal}}red{{/if}}" title="{{localize 'OG.pedal'}}"><i class="fa-solid fa-bicycle"></i></a></div>
-               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.beast}}red{{/if}}" title="{{localize 'OG.beast'}}"><i class="fa-solid fa-horse"></i></a></div>
-               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.bike}}red{{/if}}" title="{{localize 'OG.bike'}}"><i class="fa-solid fa-motorcycle"></i></a></div>
-               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.car}}red{{/if}}" title="{{localize 'OG.car'}}"><i class="fa-solid fa-car-side"></i></a></div>
-               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.nautical}}red{{/if}}" title="{{localize 'OG.nautical'}}"><i class="fa-solid fa-ship"></i></a></div>
-               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.flying}}red{{/if}}" title="{{localize 'OG.flying'}}"><i class="fa-solid fa-helicopter"></i></a></div>
-               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.armoured}}red{{/if}}" title="{{localize 'OG.armoured'}}"><i class="fa-solid fa-truck-monster"></i></a></div>
-               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.space}}red{{/if}}" title="{{localize 'OG.spaceship'}}"><i class="fa-solid fa-starship"></i></a></div>
+               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.pedal}}primIcon{{else}}secIcon{{/if}}" title="{{localize 'OG.pedal'}}"><i class="fa-solid fa-bicycle"></i></a></div>
+               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.beast}}primIcon{{else}}secIcon{{/if}}" title="{{localize 'OG.beast'}}"><i class="fa-solid fa-horse"></i></a></div>
+               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.bike}}primIcon{{else}}secIcon{{/if}}" title="{{localize 'OG.bike'}}"><i class="fa-solid fa-motorcycle"></i></a></div>
+               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.car}}primIcon{{else}}secIcon{{/if}}" title="{{localize 'OG.car'}}"><i class="fa-solid fa-car-side"></i></a></div>
+               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.nautical}}primIcon{{else}}secIcon{{/if}}" title="{{localize 'OG.nautical'}}"><i class="fa-solid fa-ship"></i></a></div>
+               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.flying}}primIcon{{else}}secIcon{{/if}}" title="{{localize 'OG.flying'}}"><i class="fa-solid fa-helicopter"></i></a></div>
+               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.armoured}}primIcon{{else}}secIcon{{/if}}" title="{{localize 'OG.armoured'}}"><i class="fa-solid fa-truck-monster"></i></a></div>
+               <div class="centre middle"><a class="mediumplus-icon {{#if ride.system.space}}primIcon{{else}}secIcon{{/if}}" title="{{localize 'OG.spaceship'}}"><i class="fa-solid fa-starship"></i></a></div>
                <div class="borderright"></div>     
     
             </div>
     
-            <div class="ride-grid-bottom indent">{{ride.system.shortDesc}}</div>
+            <div class="ride-grid-bottom indent"><span class="fade">{{ride.system.shortDesc}}</span></div>
     
         </li>
         {{/each}}
@@ -119,7 +119,7 @@
       <div class="chase-adrenaline large-icon red">
         {{#loop 1 3 1}}
           <div class="centre middle {{#if ../isGM}}actor-toggle{{/if}}" data-property="adrenaline" data-target = {{this}}>
-            <a><i class="{{#if (gte ../actor.system.adrenaline.current this)}} fa-solid fa-battery-full fa-rotate-270 {{else}} fa-solid fa-battery-empty fa-rotate-270{{/if}}"></i></a>
+            <a class="primIcon"><i class="{{#if (gte ../actor.system.adrenaline.current this)}} fa-solid fa-battery-full fa-rotate-270 {{else}} fa-solid fa-battery-empty fa-rotate-270{{/if}}"></i></a>
           </div>
         {{/loop}}
       </div>
@@ -133,7 +133,7 @@
           <li class="item" data-item-id="{{sA._id}}">
             <div class="chase-sa">
               <div class="clickable ride-edit">{{sA.name}} ({{sA.system.cost}})</div>
-              <div class="centre"><a class="item-delete" title=" {{localize 'OG.delete'}}"><i class="fa-solid fa-trash"></i></a></div>
+              <div class="centre"><a class="secIcon item-delete" title=" {{localize 'OG.delete'}}"><i class="fa-solid fa-trash"></i></a></div>
             </div>  
           </li> 
         {{/each}}

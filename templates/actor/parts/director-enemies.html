@@ -9,8 +9,8 @@
               <span class="blue">{{localize 'OG.name'}}:  </span><span class="black clickable partic-edit">{{enemy.name}}</span>
             </div>  
             <div class="centre">
-              <a class="ride-refresh clickable"title=" {{localize 'OG.refresh'}}"><i class="fa-solid fa-arrows-rotate"></i></a>
-              <a class="support-delete clickable"title=" {{localize 'OG.delete'}}"><i class="fa-solid fa-trash"></i></a>
+              <a class="ride-refresh clickable secIcon" title=" {{localize 'OG.refresh'}}"><i class="fa-solid fa-arrows-rotate"></i></a>
+              <a class="support-delete clickable secIcon" title=" {{localize 'OG.delete'}}"><i class="fa-solid fa-trash"></i></a>
             </div>
           </div>
           <div>
@@ -33,9 +33,9 @@
               {{#each enemy.system.hot as |value key|}}
                 {{#if (lte key enemy.system.grit.max)}}  
                   {{#unless (eq value 'hot')}}
-                    <a class="{{#if (eq value 'bad')}}black{{else}}red{{/if}} medium-icon enemy-grit"><i class="{{#if (gte enemy.system.grit.value key)}}fa-solid fa-shield{{else}}fa-regular fa-shield{{/if}}"></i></a>
+                    <a class="{{#if (eq value 'bad')}}secIcon{{else}}primIcon{{/if}} medium-icon enemy-grit"><i class="{{#if (gte enemy.system.grit.value key)}}fa-solid fa-shield{{else}}fa-regular fa-shield{{/if}}"></i></a>
                   {{else}}  
-                    <a class="red medium-icon enemy-grit"><i class="{{#if (gte enemy.system.grit.value key)}}fa-solid fa-fire-flame-curved{{else}}fa-regular fa-fire-flame-curved{{/if}}"></i></a>
+                    <a class="primIcon medium-icon enemy-grit"><i class="{{#if (gte enemy.system.grit.value key)}}fa-solid fa-fire-flame-curved{{else}}fa-regular fa-fire-flame-curved{{/if}}"></i></a>
                   {{/unless}}  
                 {{/if}}  
               {{/each}}
@@ -43,7 +43,7 @@
       
             <div class="grit">
               {{#loop 1 enemy.system.adrenaline.max 1}}
-                <a class="red medium-icon"><i class="{{#if (gte enemy.system.adrenaline.value this)}}fa-solid fa-battery-full fa-rotate-270{{else}}fa-solid fa-battery-empty fa-rotate-270{{/if}}"></i></a>
+                <a class="primIcon medium-icon"><i class="{{#if (gte enemy.system.adrenaline.value this)}}fa-solid fa-battery-full fa-rotate-270{{else}}fa-solid fa-battery-empty fa-rotate-270{{/if}}"></i></a>
               {{/loop}}
             </div>  
           </div>
