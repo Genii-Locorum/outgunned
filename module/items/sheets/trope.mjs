@@ -34,6 +34,14 @@ export class OutgunnedTropeSheet extends ItemSheet {
     context.attribute1 = context.displayAttType[this.item.system.attribute1]
     context.attribute2 = context.displayShortAttType[this.item.system.attribute2]
 
+    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+      context.data.system.description,
+      {
+        async: true,
+        secrets: context.editable
+      }
+    )  
+
     const perSkill = [];
     for (let i of itemData.system.skills){
       perSkill.push(i);

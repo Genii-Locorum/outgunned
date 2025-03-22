@@ -3,7 +3,19 @@
   <section class="main-enemy-sheet">    
     <div class="enemy-header">
       <div class="enemy-name"><input class="enemy-name" name="name" type="text" value="{{actor.name}}"/></div>
+      {{#if (eq gameVersion "2")}}
+        <div class="right"><a class="large-icon primIcon actor-toggle clickable" title="{{localize 'OG.trainedAnimal'}}" data-property="animal">
+          <i class="{{#if actor.system.animal}}fa-solid fa-shield-dog{{else}}fa-light fa-shield-dog{{/if}}"></i>
+        </a></div>
+      {{/if}}
+
     </div>
+
+    {{#if actor.system.animal}}
+      <div class="">{{localize 'OG.species'}}</div>
+      <div class=""><input class="mainText" name="system.species" type="text" value="{{actor.system.species}}"/></div>
+    {{/if}}
+
     <br>
 
     <div class="">{{localize 'OG.help'}}</div>
@@ -37,7 +49,7 @@
       <br>
       <div class="red">{{localize 'OG.strengths'}}</div>
       <div>
-        {{editor system.strengths class="background-doc" target="system.strengths" button=true owner=owner editable=editable}}
+        {{editor enrichedNotesValue engine="prosemirror" class="background-doc" target="system.strengths" button=true owner=owner editable=editable}}
       </div> 
   </section>  
 </form>

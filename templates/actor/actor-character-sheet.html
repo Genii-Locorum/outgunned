@@ -43,7 +43,11 @@
       <div class="red info-cell item trope contextmenu" data-item-id="{{actor.system.tropeId}}">{{localize 'OG.trope'}}</div>
       <div class="info-cell indent">{{tropeName}}</div>
       <div class="red info-cell">{{localize 'OG.job'}}</div>
-      <div class="info-cell indent"><input name="system.job" type="text" value="{{actor.system.job}}"/></div>
+      {{#if actor.system.specialRole}}
+      <div class="info-cell indent">{{roleName}}</div>
+      {{else}}
+        <div class="info-cell indent"><input name="system.job" type="text" value="{{actor.system.job}}"/></div>
+      {{/if}}
       <div class="red info-cell item age contextmenu" data-item-id="{{actor.system.ageId}}">{{localize 'OG.age'}}</div>
       <div class="info-cell indent">{{ageName}}</div>
     </div> 
@@ -114,11 +118,21 @@
     <div class="small upperCase">{{localize 'OG.heat12Hint'}}</div>
     <br>
     <div class="red upperCase">{{localize 'OG.planB'}}</div>
-    <div>
-      <a class="{{#if planB1}}secIcon fade{{else}}primIcon{{/if}} large-icon" title="{{planB1Name}}"><i class="{{planB1Icon}}"></i></a>
-      <a class="{{#if planB2}}secIcon fade{{else}}primIcon{{/if}} large-icon" title="{{planB2Name}}"><i class="{{planB2Icon}}"></i></a>
-      <a class="{{#if planB3}}secIcon fade{{else}}primIcon{{/if}} large-icon" title="{{planB3Name}}"><i class="{{planB3Icon}}"></i></a>
+    <div class="charPlanB">
+      <div class="centre planBIcon {{#if planB1}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB1Name}}">2</div>
+      {{#if (eq gameVersion '2')}}
+        <div class="centre planBIcon {{#if planB1}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB4Name}}">A</div>
+        <div class="centre planBIcon {{#if planB2}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB2Name}}">B</div>
+      {{else}}    
+      <div class="centre planBIcon {{#if planB2}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB2Name}}">3</div>
+      {{/if}}
+      <div class="centre planBIcon {{#if planB3}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB3Name}}">4</div>
     </div>
+
+
+
+
+
   </div>
 
 
@@ -139,6 +153,7 @@
   </nav>
 
   {{!-- Individual Tab Pages --}}
+  <section class="character-body">
   <section class="sheet-body">
 
     {{!-- Biography Tab --}}
@@ -166,7 +181,7 @@
        {{> "systems/outgunned/templates/actor/parts/actor-feats.html"}}
     </div>
 
-
+  </section>
   </section>
   </section>
 

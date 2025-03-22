@@ -21,6 +21,14 @@ export class OutgunnedWeaponFeat extends ItemSheet {
     context.system = itemData.system;
     context.flags = itemData.flags;
     context.isGM =  game.user.isGM;
+    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+      context.data.system.description,
+      {
+        async: true,
+        secrets: context.editable
+      }
+    )  
+
     return context;
   }
 }

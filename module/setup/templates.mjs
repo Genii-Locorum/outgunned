@@ -17,6 +17,7 @@
     "systems/outgunned/templates/actor/parts/mission-villain.html",
     "systems/outgunned/templates/actor/parts/mission-support.html",
     "systems/outgunned/templates/actor/parts/mission-contacts.html",
+    "systems/outgunned/templates/actor/parts/mission-gold.html",
     "systems/outgunned/templates/actor/parts/director-ride.html",
     "systems/outgunned/templates/actor/parts/director-villain.html",
     "systems/outgunned/templates/actor/parts/director-enemies.html",

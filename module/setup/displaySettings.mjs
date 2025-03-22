@@ -5,7 +5,7 @@ const SETTINGS = {
         name: "OG.settings.mainTextColour",
         hint: "OG.settings.mainTextColourHint",
         scope: "world",
-        config: true,
+        config: false,
         type: String,
         default: "black"        
       },
@@ -14,7 +14,7 @@ const SETTINGS = {
         name: "OG.settings.primaryColour",
         hint: "OG.settings.primaryColourHint",
         scope: "world",
-        config: true,
+        config: false,
         type: String,
         default: "rgb(177,37,26)"
       },
@@ -23,7 +23,7 @@ const SETTINGS = {
         name: "OG.settings.secondaryColour",
         hint: "OG.settings.secondaryColourHint",
         scope: "world",
-        config: true,
+        config: false,
         type: String,
         default: "cornsilk"
       },
@@ -32,7 +32,7 @@ const SETTINGS = {
         name: "OG.settings.directorColour",
         hint: "OG.settings.directorColourHint",
         scope: "world",
-        config: true,
+        config: false,
         type: String,
         default: "rgb(73, 84, 231)"
       },
@@ -42,7 +42,7 @@ const SETTINGS = {
         name: "OG.settings.primaryIcon",
         hint: "OG.settings.primaryIconHint",
         scope: "world",
-        config: true,
+        config: false,
         type: String,
         default: "rgb(177,37,26)"
       },
@@ -51,7 +51,7 @@ const SETTINGS = {
         name: "OG.settings.secondaryIcon",
         hint: "OG.settings.secondaryIcon",
         scope: "world",
-        config: true,
+        config: false,
         type: String,
         default: "black"
       },

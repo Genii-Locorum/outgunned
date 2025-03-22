@@ -11,7 +11,7 @@ export class OutgunnedSupportSheet extends ActorSheet {
         classes: ["outgunned", "sheet", "actor"],
         template: "systems/outgunned/templates/actor/actor-sheet.html",
         width: 300,
-        height: 530,
+        height: 550,
         tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "feats" }]
       });
     }
@@ -32,9 +32,18 @@ export class OutgunnedSupportSheet extends ActorSheet {
       const actorData = this.actor.toObject(false);
       context.system = actorData.system;
       context.flags = actorData.flags;
+      context.gameVersion = game.settings.get("outgunned","ogVersion")
       context.displayDiffList = await OutgunnedSelectLists.getDifficultyList();
       context.displayMultiList = await OutgunnedSelectLists.getDiffMultiList();
       context.displayEnemyList = await OutgunnedSelectLists.getEnemyList();  
+
+      context.enrichedNotesValue = await TextEditor.enrichHTML(
+        context.data.system.strengths,
+        {
+          async: true,
+          secrets: context.editable
+        }
+      ) 
 
       // Prepare enemy data and items.
         this._prepareItems(context);
@@ -111,6 +120,8 @@ export class OutgunnedSupportSheet extends ActorSheet {
       targetScore = Number(event.currentTarget.dataset.target);
       let attKey = event.currentTarget.dataset.attkey
       checkProp = {[`system.abilities.${attKey}.value`] : targetScore}     
+    } else if (property === 'animal') {
+      checkProp = {'system.animal': !this.actor.system.animal}      
     } else {
       return
     }

@@ -1,0 +1,49 @@
+<div class="mission">
+
+    <div class="mission-gold" style="margin-top: 5px;">
+      <div class="centre">{{localize 'OG.start'}}</div>
+      <div class="centre">{{localize 'OG.heroes'}}</div>
+      <div class="centre">{{localize 'OG.earned'}}</div>
+      <div class="centre">{{localize 'OG.spent'}}</div>
+      <div class="centre">{{localize 'OG.total'}}</div>
+    </div>
+    <div class="mission-gold">  
+      {{#if isGM}}
+        <div class="centre"><input class="centre" style="max-height: 14px;" name="system.goldBF" type="text" value="{{actor.system.goldBF}}" data-dtype="Number"/></div>
+      {{else}}
+        <div class="centre">{{actor.system.goldBF}}</div>
+      {{/if}}
+      <div class="centre">{{goldActors}}</div>
+      {{#if isGM}}
+      <div class="centre"><input class="centre" style="max-height: 14px;" name="system.goldEarned" type="text" value="{{actor.system.goldEarned}}" data-dtype="Number"/></div>
+      {{else}}
+        <div class="centre">{{actor.system.goldEarned}}</div>
+      {{/if}}
+
+      <div class="centre">-{{goldSpent}}</div>
+      <div class="centre">{{goldTotal}}</div>
+    </div>
+    <br>
+
+    <div class="mission-spend" style="margin-top: 5px; margin-bottom:5px; background-color:rgb(214, 212, 212);">
+      <div class="indent">{{localize 'OG.spend'}}</div>
+      <div>{{localize 'OG.description'}}</div>
+      <div class="centre">{{localize 'OG.gold'}}</div>
+      <div class="centre item-control item-create" title="{{localize 'OG.createSpend'}}" data-type="shot" data-subtype="spend"><a class="centre primIcon clickable medium-icon" ><i class="fa-solid fa-plus"></i></a></div>
+  </div>
+  
+  <ol class="items-list">
+    {{#each spends as |spend key|}}
+      <li class="item" data-item-id="{{spend._id}}">
+        <div class="mission-spend">
+          <div class="indent red item-edit clickable"><p>{{spend.name}}</p></div>
+          <div class="truncate" style="max-height:50px;">{{{spend.system.description}}}</div>
+          <div class="centre"><p>{{spend.system.amount}}</p></div>
+          <p class="centre"><a class="secIcon item-control item-delete" title="{{localize 'OG.deleteItem'}}"><i class="fas fa-trash"></i></a></p>
+        </div>
+      </li>  
+    {{/each}}
+    <br>
+  </ol>
+
+</div>

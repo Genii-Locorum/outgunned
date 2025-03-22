@@ -61,7 +61,6 @@ export class OutgunnedActor extends Actor {
       ability.total = Math.min(ability.value + ability.role + ability.trope + ability.xp,3);
       ability.condition = false
     }
-
     //Loop through items and apply item specific impacts
     for (let i of actorData.items) {
       if (i.type === "age") {

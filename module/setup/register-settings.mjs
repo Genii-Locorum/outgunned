@@ -1,18 +1,41 @@
 import {OutgunnedActionDie} from "./outgunnedDice.mjs"
 import { OutgunnedDisplaySettings } from "./displaySettings.mjs";
+import { OutgunnedplanBSettings } from "./planBSettings.mjs";
 
 export async function registerSettings () {
 
   let gameVersion = {
     "0": game.i18n.localize("OG.outgunned"),
-    "1": game.i18n.localize("OG.adventures")
+    "1": game.i18n.localize("OG.adventures"),
+    "2": game.i18n.localize("OG.worldOK")
   };  
 
+
+    //Display Settings Menu Button
+    game.settings.registerMenu('outgunned', 'displaySettings', {
+      name: 'OG.settings.displaySettings',
+      label: 'OG.settings.displaySettingsHint',
+      icon: 'fas fa-palette',
+      type: OutgunnedDisplaySettings,
+      restricted: true
+    });
+    OutgunnedDisplaySettings.registerSettings()
   
+    //Display Settings Menu Button
+    game.settings.registerMenu('outgunned', 'planBSettings', {
+      name: 'OG.settings.planBSettings',
+      label: 'OG.settings.planBSettingsHint',
+      icon: 'fas fa-light-emergency-on',
+      type: OutgunnedplanBSettings,
+      restricted: true
+    });
+    OutgunnedplanBSettings.registerSettings()
+
+
   //Choose default difficulty level
   game.settings.register('outgunned', 'defaultDifficulty', {
-      name: 'OG.settings.defaultDifficulty',
-      hint: 'OG.settings.defaultDifficultyHint',
+    name: 'OG.settings.defaultDifficulty',
+    hint: 'OG.settings.defaultDifficultyHint',
     scope: 'world',
     config: true,
     default: "critical",
@@ -62,65 +85,7 @@ export async function registerSettings () {
     type: Boolean
   });
 
-  //Name Plan B option 1
-  game.settings.register('outgunned', 'planBName-1', {
-    name: 'OG.settings.planBName-1',
-    hint: 'OG.settings.planBNameHint',
-    scope: 'world',
-    config: true,
-    default: "Bullet",
-    type: String
-  });    
 
-  //Icon Plan B option 1
-  game.settings.register('outgunned', 'planBIcon-1', {
-    name: 'OG.settings.planBIcon-1',
-    hint: 'OG.fasIconHint',
-    scope: 'world',
-    config: true,
-    default: "fa-solid fa-person-rifle",
-    type: String
-  });  
-
-  //Name Plan B option 2
-  game.settings.register('outgunned', 'planBName-2', {
-    name: 'OG.settings.planBName-2',
-    hint: 'OG.settings.planBNameHint',
-    scope: 'world',
-    config: true,
-    default: "Backup",
-    type: String
-  });    
-
-  //Icon Plan B option 2
-  game.settings.register('outgunned', 'planBIcon-2', {
-    name: 'OG.settings.planBIcon-2',
-    hint: 'OG.fasIconHint',
-    scope: 'world',
-    config: true,
-    default: "fa-solid fa-heart",
-    type: String
-  });  
-  
-  //Name Plan B option 3
-  game.settings.register('outgunned', 'planBName-3', {
-    name: 'OG.settings.planBName-3',
-    hint: 'OG.settings.planBNameHint',
-    scope: 'world',
-    config: true,
-    default: "Bluff",
-    type: String
-  });      
-
-  //Icon Plan B option 3
-  game.settings.register('outgunned', 'planBIcon-3', {
-    name: 'OG.settings.planBIcon-3',
-    hint: 'OG.fasIconHint',
-    scope: 'world',
-    config: true,
-    default: "fa-solid fa-face-hand-peaking",
-    type: String
-  });  
 
   //Outgunned Game Version
   game.settings.register('outgunned', 'ogVersion', {
@@ -133,15 +98,7 @@ export async function registerSettings () {
     default: 0
   });  
 
-  //Display Settings Menu Button
-  game.settings.registerMenu('outgunned', 'displaySettings', {
-    name: 'OG.settings.displaySettings',
-    label: 'OG.settings.displaySettingsHint',
-    icon: 'fas fa-palette',
-    type: OutgunnedDisplaySettings,
-    restricted: true
-  });
-  OutgunnedDisplaySettings.registerSettings()
+
 
   //Non-visible setting to record heat
   game.settings.register('outgunned', 'heat', {

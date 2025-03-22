@@ -1,7 +1,27 @@
 # CHANGELOG
 
+## 2.14
+- World of Killers changes have been implemented
+- Set the "Game Version" setting to "World of Killers"
+- It is recommended to use "rgb(89,56,151)" for Primary Colour for Sheets, and Primary Colour for Icons
+- There is a new experience type - Blood Debt
+- There is now an additional selection on all Roles - "Special Role".  Currently you can choose from "No" for the basic rules or "Killer" for a World of Killers special role.  Selecting Killer adds a second attribute, and sets the number of Free Skill Points to 6 (rather than 2).  Special roles also fill the trope and job slots.
+- If you have set the game version to World of Killers, you can set a starting gold value (0 or 1) on Ages.
+- There are two new Plan Bs available in Game Settings.  If the game version is set to World of Killers the options in the GM Tools and the display on the Mission sheet are changed
+- Missions will show Gold if the game is set to World of Killers
+- Guns, gear and rides now show a Gold cost if using World of Killers
+- Some additional weapon feats for World of Killers on Guns
+- Gear now has feats (like Guns)
+- Support actors, for World of Killers, now has a dog/shield icon at the top right of the sheet.  Toggle this on to make the support a Trained Animal (you can enter the species then)
+- For World of Killers you can now select a Chase Type of Chase, Hunt or Getaway - the differences are mostly cosmetic, except that only Chases show Rides
+- Chases now have Countdown shown irrespective of the game version used
+- Plan B icons have been removed from Game Settings as they are now included in the "Dice Font" - but they will now be consistent across the GM Tools, Character Sheet and Mission Sheet 
+- I have tried to update the language packs using online translators but I appreciate that these are not always right.  Please feel free to feedback any changes that are needed.
+- (Hopefully) all descriptions etc are now use Prosemirror editor rather than TinyMCE giving you some edit/linking options
+- PLEASE NOTE:  The Feats tab and data have now been removed from Guns - ensure you have started using the new feats option before migrating to the new version
+
 ## 2.13
-There are now some colour settings for you to change text and icon colours.
+- There are now some colour settings for you to change text and icon colours.
 
 ## 2.12
 - Default "Need" for chases set to 18, with validation to maintain a minimum score of 1

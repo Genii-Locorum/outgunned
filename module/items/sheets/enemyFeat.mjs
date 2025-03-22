@@ -15,7 +15,7 @@ export class OutgunnedEnemyFeatSheet extends ItemSheet {
     return `${path}/${this.item.type}.html`;
   }
 
-  getData() {
+  async getData() {
     const context = super.getData();
     const itemData = context.item;
     context.rollData = {};
@@ -26,6 +26,22 @@ export class OutgunnedEnemyFeatSheet extends ItemSheet {
     context.system = itemData.system;
     context.flags = itemData.flags;
     context.isGM =  game.user.isGM;
+
+    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+      context.data.system.description,
+      {
+        async: true,
+        secrets: context.editable
+      }
+    )  
+
+    context.enrichedShortDescriptionValue = await TextEditor.enrichHTML(
+      context.data.system.shortDesc,
+      {
+        async: true,
+        secrets: context.editable
+      }
+    )  
 
     return context;
   }

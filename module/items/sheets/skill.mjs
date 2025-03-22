@@ -34,6 +34,16 @@ export class OutgunnedSkillSheet extends ItemSheet {
     context.attribute = context.displayAttType[this.item.system.displayAtt]
     context.freeform = await game.settings.get('outgunned', 'freeform')
     if(!this.item.isEmbedded || !context.isGM){ context.freeform = false}
+
+    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+      context.data.system.description,
+      {
+        async: true,
+        secrets: context.editable
+      }
+    )  
+
+
     return context;
   }
 

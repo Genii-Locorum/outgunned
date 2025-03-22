@@ -35,6 +35,9 @@
             {{/if}}
             {{#if (eq experience.system.variant 'reputation')}} 
               <i title = "{{localize 'OG.reputation'}}" class="fa-solid fa-sparkles"></i>
+            {{/if}}  
+            {{#if (eq experience.system.variant 'blood')}} 
+              <i title = "{{localize 'OG.blood'}}" class="fa-solid fa-droplet"></i>
             {{/if}}    
             </a></div>
             {{#if ../isLocked}}
@@ -50,7 +53,7 @@
 
     <div class="red">{{localize 'OG.background'}}</div>
     <div>
-      {{editor system.biography class="background-doc" target="system.biography" button=true owner=owner editable=editable}}
+      {{editor enrichedBiographyValue engine="prosemirror" class="background-doc" target="system.biography" button=true owner=owner editable=editable}}
     </div>   
     <br>
 
@@ -58,4 +61,13 @@
     <div class="item-skill-grid">
       <div class="">{{localize 'OG.cyberEnhanced'}}</div>
       <div><a class="secIcon medium-icon actor-toggle clickable" data-property="cyberEnhance"><i class="{{#if actor.system.cyberEnhance}}fa-solid fa-diamond{{else}}fa-regular fa-diamond{{/if}}"></i></a></div>
+
+      <div class="">{{localize 'OG.startingGold'}}</div>
+      <div>
+        {{#loop 1 3 1}}
+          <a class="secIcon medium-icon actor-toggle" data-property="baseGold" data-target = {{this}}>
+            <i class="{{#if (gte ../actor.system.baseGold this)}}fa-solid fa-coin{{else}}fa-regular fa-coin{{/if}}"></i>
+          </a>  
+        {{/loop}}
+      </div>
     </div>

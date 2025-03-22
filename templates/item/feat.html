@@ -19,6 +19,7 @@
   </nav>
 
   {{!-- Sheet Body --}}
+  <section class="item-bottom-panel">
   <section class="sheet-body">
   <br>  
     {{!-- Attributes Tab --}}
@@ -34,7 +35,7 @@
         <div class=" select-name left bold">{{localize 'OG.actionTime'}}</div>          
         {{#if isGM}}
           <div class="centre">
-          <select class="mainText" data-handle-change name="system.usage">
+          <select class="mainText centre" data-handle-change name="system.usage">
             {{selectOptions displayUsage selected=item.system.usage}}
           </select>
           </div>
@@ -51,19 +52,20 @@
       <br>
 
       <div title="{{localize 'OG.shortDescHint'}}">{{localize 'OG.shortDesc'}}</div>
-      {{editor item.system.shortDesc class="shortDesc-item-doc" target="system.shortDesc" button=true owner=owner editable=editable}}
+      {{editor enrichedShortDescriptionValue engine="prosemirror" class="shortDesc-item-doc" target="system.shortDesc" button=true owner=owner editable=editable}}
 
     </div>
 
     {{!-- Description Tab --}}
 
     <div class="tab" data-group="primary" data-tab="description">
-      {{editor item.system.description class="background-item-doc" target="system.description" button=true owner=owner editable=editable}}
+      {{editor enrichedDescriptionValue engine="prosemirror" class="background-item-doc" target="system.description" button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Image Tab --}}
     <div class="tab image" data-group="primary" data-tab="image">
       <img class="profile-img" src="{{item.img}}" data-edit="img" height="200" width="200" title="{{item.name}}"/>
     </div>
+  </section>
   </section>
 </form>

@@ -4,16 +4,28 @@
       {{#if (eq item.system.subtype 'shot')}}
         <div class="charname">{{localize 'OG.shot'}}: </div>
       {{else}}
-        <div class="charname">{{localize 'OG.contact'}}: </div>
+        {{#if (eq item.system.subtype 'spend')}}
+          <div class="charname">{{localize 'OG.spend'}}: </div>
+        {{else}}
+          <div class="charname">{{localize 'OG.contact'}}: </div>
+        {{/if}}
       {{/if}}
       <div class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></div>
+
+
+
     </div>
   </header>
   <br>
-    {{!-- Description Tab --}}
+  {{#if (eq item.system.subtype 'spend')}}
+    <div class=""><label>{{localize 'OG.gold'}}</label><input name="system.amount" type="text" value="{{item.system.amount}}" data-dtype="Number"/></div>
+    <br>
+  {{/if}}
+
+  {{!-- Description Tab --}}
     <div>
       <div>{{localize 'OG.description'}}</div>
-      {{editor item.system.description class="background-item-doc" target="system.description" button=true owner=owner editable=editable}}
+      {{editor enrichedDescriptionValue engine="prosemirror" class="background-item-doc" target="system.description" button=true owner=owner editable=editable}}
     </div>
   </section>
 </form>

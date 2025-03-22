@@ -25,6 +25,7 @@
 --primaryIcon: rgb(177,37,26);
 --secondaryIcon: black;
 --director-colour: rgb(73, 84, 231);
+--test-colour: rgb(89, 56, 151);
 }  
 
 
@@ -179,16 +180,17 @@ body {
   font-weight: bold;
   padding-left: 10px;
   padding-right: 10px;
-  height: 150px;
+  min-height: 100px;
+  height: fit-content;
   border: 1px gray solid;
 }
 
 .outgunned .background-item-doc {
   background-image: none;
-  font-weight: bold;
   padding-left: 10px;
   padding-right: 10px;
-  height: 450px;
+  height: fit-content;
+  min-height: 200px;
   border: 1px gray solid;
 }
 
@@ -329,10 +331,10 @@ body {
 
 .outgunned .shortDesc-item-doc {
   background-image: none;
-  font-weight: bold;
   padding-left: 10px;
   padding-right: 10px;
-  height: 75px;
+  height: fit-content;
+  min-height: 100px;
   border: 1px gray solid;
 }
 
@@ -419,7 +421,7 @@ body {
 }
 
 .outgunned .fade {
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 .outgunned .gear-cell {
@@ -545,6 +547,12 @@ body {
   grid-column-gap: 5px;
 }
 
+.outgunned .planB-4icons {
+  display: grid;
+  grid-template-columns: 60px 60px 60px 60px;
+  grid-column-gap: 3px;
+}
+
 .outgunned .planBIcon {
   font-family: 'OG-dice';
   font-size: 35px;
@@ -602,6 +610,21 @@ body {
   border: 1px solid var(--primary-colour);
 }
 
+.outgunned .mission-spend {
+  display: grid;
+  grid-template-columns: 100px 550px 90px 40px;
+  grid-column-gap: 5px; 
+  max-height: 50px;
+  border: 1px solid var(--primary-colour);
+}
+
+.outgunned .mission-gold {
+  display: grid;
+  grid-template-columns: 155px 155px 155px 155px 155px;
+  grid-column-gap: 5px; 
+  max-height: 50px;
+  border: 1px solid var(--primary-colour);
+}
 
 .outgunned .truncate {
   align-self: center;
@@ -733,8 +756,13 @@ margin: 0px;
 
 .outgunned .chase-title {
   display: grid;
-  grid-template-columns: 170px 60PX 270px;
+  grid-template-columns: 170px 330px;
   height: 70px;
+}
+
+.outgunned .chase-name {
+  display: grid;
+  grid-template-columns: 70px 260px;
 }
 
 .outgunned .chase-participants {
@@ -747,7 +775,7 @@ margin: 0px;
 .outgunned  .chase-adrenaline {
   display: grid;
   margin-top: 5px;
-  grid-template-columns: repeat(3,50px);
+  grid-template-columns: repeat(4,50px);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
 }
@@ -780,4 +808,61 @@ margin: 0px;
 
 .outgunned .mainText{
   color: var(--mainTextColour);
+}
+
+.outgunned .charPlanB {
+  display: grid;
+  grid-template-columns: repeat(4,50px);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}  
+ 
+.game-icon:before {
+  font-family: OG-dice !important;
+	font-style: normal;
+	font-weight: normal !important;
+}
+
+.game-icon-bullet:before {
+  content:"2";
+}
+
+.game-icon-blade:before {
+  content:"A";
+}
+
+.game-icon-bluff:before {
+  content:"4";
+}
+
+.game-icon-belmont:before {
+  content:"B";
+}
+
+.game-icon-backup:before {
+  content:"3";
+}
+
+.outgunned .item-bottom-panel {
+  min-height: 200px;
+  max-height: fit-content; 
+}
+
+.outgunned .actor-bottom-panel{
+  min-height: 200px;
+  max-height: fit-content; 
+}
+
+.outgunned .prosemirror .editor-content {
+  position:relative;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.outgunned .prosemirror .editor-container {
+  margin: 0px;
+}
+
+.outgunned textarea {
+  min-height: 200px !important;
 }

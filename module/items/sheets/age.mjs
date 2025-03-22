@@ -18,7 +18,7 @@ export class OutgunnedAgeSheet extends ItemSheet {
     return `${path}/${this.item.type}.html`;
   }
 
-  getData() {
+  async getData() {
     const context = super.getData();
     const itemData = context.item;
     context.rollData = {};
@@ -29,8 +29,20 @@ export class OutgunnedAgeSheet extends ItemSheet {
     context.system = itemData.system;
     context.flags = itemData.flags;
     context.isGM =  game.user.isGM;
-    context.displayAttType = OutgunnedSelectLists.getAttributeTypes();
-    context.attribute = context.displayAttType[this.item.system.displayAtt]
+    context.maxBullet = 2
+    context.showGold = false
+    if (game.settings.get('outgunned','ogVersion') === "2") {
+      context.maxBullet = 3
+      context.showGold = true
+    }
+
+    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+      context.data.system.description,
+      {
+        async: true,
+        secrets: context.editable
+      }
+    )  
 
     const feats = [];
     for (let i of itemData.system.feats){
@@ -70,7 +82,7 @@ export class OutgunnedAgeSheet extends ItemSheet {
     let checkProp={};
     if (prop === 'numFeat' || prop === 'baseDeathRoulette' || prop === 'baseAdrenaline') {
       checkProp = {[`system.${prop}`]: target};
-    } else if (prop === 'optFeat' || prop === 'baseExperience') {
+    } else if (prop === 'optFeat' || prop === 'baseExperience'|| prop === 'gold') {
         if (this.item.system[prop] === 0) {
           checkProp = {[`system.${prop}`]: 1};
       } else {

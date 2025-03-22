@@ -1,0 +1,56 @@
+<form class="outgunned settingsForm flexcol" autocomplete="off">
+<h2 class="bold">{{localize 'OG.settings.planBSettings'}}</h2>
+
+
+  <div class="form-group">
+    <label class="bold">{{localize 'OG.settings.planBName1'}}</label>
+    <div class="form-fields" style="flex: 1;">
+      <input class="centre" name="planBName1" type="text" value="{{planBName1.value}}"/>
+    </div>
+    <p class="settingNote">{{localize 'OG.settings.planBNameHint'}}</p>
+  </div>
+
+  <div class="form-group">
+    <label class="bold">{{localize 'OG.settings.planBName2'}}</label>
+    <div class="form-fields" style="flex: 1;">
+      <input class="centre" name="planBName2" type="text" value="{{planBName2.value}}"/>
+    </div>
+    <p class="settingNote">{{localize 'OG.settings.planBNameHint'}}</p>
+  </div>
+
+  <div class="form-group">
+    <label class="bold">{{localize 'OG.settings.planBName3'}}</label>
+    <div class="form-fields" style="flex: 1;">
+      <input class="centre" name="planBName3" type="text" value="{{planBName3.value}}"/>
+    </div>
+    <p class="settingNote">{{localize 'OG.settings.planBNameHint'}}</p>
+  </div>
+
+  <div class="form-group">
+    <label class="bold">{{localize 'OG.settings.planBWOKName2'}}</label>
+    <div class="form-fields" style="flex: 1;">
+      <input class="centre" name="planBWOKName2" type="text" value="{{planBWOKName2.value}}"/>
+    </div>
+    <p class="settingNote">{{localize 'OG.settings.planBNameHint'}}</p>
+  </div>
+
+  <div class="form-group">
+    <label class="bold">{{localize 'OG.settings.planBWOKName4'}}</label>
+    <div class="form-fields" style="flex: 1;">
+      <input class="centre" name="planBWOKName4" type="text" value="{{planBWOKName4.value}}"/>
+    </div>
+    <p class="settingNote">{{localize 'OG.settings.planBNameHint'}}</p>
+  </div>
+
+
+  <br>
+  <footer class="sheet-footer flexrow">
+    <button class = "settingsButton" type="submit" name="submit">
+      <i class="fas fa-save"></i> {{localize "Save Changes"}}
+    </button>
+    <button class="settingsButton" type="button" name="reset">
+      <i class="fas fa-undo"></i> {{localize "Reset Defaults"}}
+    </button>
+  </footer>
+  <br>
+</form>

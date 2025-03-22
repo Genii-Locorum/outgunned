@@ -20,18 +20,43 @@ export class OutgunnedMissionSheet extends ActorSheet {
     //Create context for easier access to actor data  
     const context = super.getData();
     const actorData = this.actor.toObject(false);
+    context.goldActors = 0
+    context.goldSpent = 0
 
     // Prepare character data and items.
       this._prepareItems(context);
       this._prepareCharacterData(context);
+      context.isGM =  game.user.isGM;
+      context.gameVersion = game.settings.get('outgunned', 'ogVersion')
       context.rollData = context.actor.getRollData();
-      context.planB1Name = game.settings.get('outgunned', 'planBName-1')
-      context.planB2Name = game.settings.get('outgunned', 'planBName-2')
-      context.planB3Name = game.settings.get('outgunned', 'planBName-3')
+      context.planB1Name = game.settings.get('outgunned', 'planBName1')
+      context.planB2Name = game.settings.get('outgunned', 'planBName2')
+      context.planB3Name = game.settings.get('outgunned', 'planBName3')
+      context.planB4Name = game.settings.get('outgunned', 'planBWOKName4')
       context.planB1 = game.settings.get('outgunned', 'planB1')
       context.planB2 = game.settings.get('outgunned', 'planB2')
       context.planB3 = game.settings.get('outgunned', 'planB3')
+      if (context.gameVersion === "2") {
+        context.planB2Name = game.settings.get('outgunned', 'planBWOKName2')
+      }
       context.heat = game.settings.get('outgunned', 'heat')
+
+      context.enrichedStrongValue = await TextEditor.enrichHTML(
+        context.data.system.villain.strongSpots,
+        {
+          async: true,
+          secrets: context.editable
+        }
+      )  
+  
+      context.enrichedWeakValue = await TextEditor.enrichHTML(
+        context.data.system.villain.weakSpots,
+        {
+          async: true,
+          secrets: context.editable
+        }
+      )  
+
       const partics = [];
       const supporters = [];
       const rides = [];
@@ -41,6 +66,7 @@ export class OutgunnedMissionSheet extends ActorSheet {
           if (partic.type === 'character') {
             let roleName = partic.system.roleId ? partic.items.get(partic.system.roleId).name : "";
             partics.push({uuid: partic.uuid, name: partic.name, role: roleName})
+            context.goldActors = context.goldActors + 1 + partic.system.baseGold
           } else if (partic.type === 'support') {
             supporters.push(partic)
           } 
@@ -58,10 +84,10 @@ export class OutgunnedMissionSheet extends ActorSheet {
         }  
       }
 
+      context.goldTotal = actorData.system.goldBF + context.goldActors - context.goldSpent + actorData.system.goldEarned
       context.participants = partics.sort(OutgunnedUtilities.sortByNameKey);
       context.supporters = supporters.sort(OutgunnedUtilities.sortByNameKey);
       context.rides = rides.sort(OutgunnedUtilities.sortByNameKey);
-      this._prepareItems(context);
       return context;
   }  
 
@@ -72,6 +98,7 @@ export class OutgunnedMissionSheet extends ActorSheet {
   _prepareItems(context) {
     const shots = [];
     const contacts = [];
+    const spends = [];
 
     for (let i of context.items) {
       if (i.type === 'shot') {
@@ -79,7 +106,11 @@ export class OutgunnedMissionSheet extends ActorSheet {
           shots.push(i)
         } else if (i.system.subtype === 'contact') {
           contacts.push(i)
-        } 
+        } else if (i.system.subtype === 'spend') {
+          spends.push(i)
+          context.goldSpent = context.goldSpent + i.system.amount
+          console.log(i.name, i.system.amount, context.goldSpent)
+        }
       }
     }  
 
@@ -103,6 +134,7 @@ export class OutgunnedMissionSheet extends ActorSheet {
 
     context.shots=shots
     context.contacts=contacts
+    context.spends = spends
   }  
 
 
@@ -197,10 +229,10 @@ export class OutgunnedMissionSheet extends ActorSheet {
     // Initialize a default name.
     let name = `New ${type.capitalize()}`;
 
-    if (type === "shot") {
+    if (type === "shot" || type === "spend") {
       data.subtype = header.dataset.subtype;
       name = `New ${data.subtype.capitalize()}`;
-    }
+    } 
 
     // Prepare the item object.
     const itemData = {

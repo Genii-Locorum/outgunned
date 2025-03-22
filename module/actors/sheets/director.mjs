@@ -27,6 +27,23 @@ export class OutgunnedDirectorSheet extends ActorSheet {
       context.rollData = context.actor.getRollData();
       context.heat = game.settings.get('outgunned', 'heat');
       context.isGM = game.user.isGM;
+
+      context.enrichedStrongValue = await TextEditor.enrichHTML(
+        context.data.system.villain.strongSpots,
+        {
+          async: true,
+          secrets: context.editable
+        }
+      )  
+  
+      context.enrichedWeakValue = await TextEditor.enrichHTML(
+        context.data.system.villain.weakSpots,
+        {
+          async: true,
+          secrets: context.editable
+        }
+      )  
+
       const partics = [];
       const supporters = [];
       const enemies = [];
@@ -46,6 +63,7 @@ export class OutgunnedDirectorSheet extends ActorSheet {
             partic.system.defenceName = game.i18n.localize('OG.'+partic.system.defence.rating)
             enemies.push(partic)
           } else if (partic.type === 'chase') {
+            partic.system.label = game.i18n.localize('OG.'+partic.system.subType)
             chases.push(partic)
           }
         } else {
@@ -67,7 +85,6 @@ export class OutgunnedDirectorSheet extends ActorSheet {
       context.enemies = enemies.sort(OutgunnedUtilities.sortByNameKey);
       context.chases = chases.sort(OutgunnedUtilities.sortByNameKey);
       context.rides = rides.sort(OutgunnedUtilities.sortByNameKey);
-      this._prepareItems(context);
       return context;
   }  
 

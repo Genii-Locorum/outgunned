@@ -12,7 +12,7 @@ export class OutgunnedCharacterSheet extends ActorSheet {
       classes: ["outgunned", "sheet", "actor"],
       template: "systems/outgunned/templates/actor/actor-sheet.html",
       width: 880,
-      height: 600,
+      height: 610,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "feats" }]
     });
   }
@@ -27,7 +27,7 @@ export class OutgunnedCharacterSheet extends ActorSheet {
   }
 
 
-  getData() {
+  async getData() {
     //Create context for easier access to actor data  
     const context = super.getData();
     const actorData = this.actor.toObject(false);
@@ -37,18 +37,24 @@ export class OutgunnedCharacterSheet extends ActorSheet {
     context.gameVersion = game.settings.get("outgunned","ogVersion")
     context.ageName = this.actor.system.ageId ? this.actor.items.get(this.actor.system.ageId).name : "";
     context.roleName = this.actor.system.roleId ? this.actor.items.get(this.actor.system.roleId).name : "";
-    context.tropeName = this.actor.system.tropeId ? this.actor.items.get(this.actor.system.tropeId).name : "";
+    if (this.actor.system.specialRole) {
+      context.tropeName = context.roleName
+      context.jobName = context.roleName
+    } else {
+      context.tropeName = this.actor.system.tropeId ? this.actor.items.get(this.actor.system.tropeId).name : "";
+    }  
     context.heat = game.settings.get('outgunned', 'heat')
     context.planB1 = game.settings.get("outgunned","planB1")
-    context.planB1Name = game.settings.get("outgunned","planBName-1")
-    context.planB1Icon = game.settings.get("outgunned","planBIcon-1")
+    context.planB1Name = game.settings.get("outgunned","planBName1")
     context.planB2 = game.settings.get("outgunned","planB2")
-    context.planB2Name = game.settings.get("outgunned","planBName-2")
-    context.planB2Icon = game.settings.get("outgunned","planBIcon-2")
+    context.planB2Name = game.settings.get("outgunned","planBName2")
     context.planB3 = game.settings.get("outgunned","planB3")
-    context.planB3Name = game.settings.get("outgunned","planBName-3")
-    context.planB3Icon = game.settings.get("outgunned","planBIcon-3")
-    context.planB3Name = game.settings.get("outgunned","planBName-3")
+    context.planB3Name = game.settings.get("outgunned","planBName3")
+    context.planB4Name = game.settings.get('outgunned', 'planBWOKName4')
+    if (context.gameVersion === "2") {
+      context.planB2Name = game.settings.get('outgunned', 'planBWOKName2')
+    }
+
     context.adrenalineLabel = game.i18n.localize("OG.adrenaline")
     context.jobLabel = game.i18n.localize("OG.job")
     context.missionLabel = game.i18n.localize("OG.mission")
@@ -57,6 +63,14 @@ export class OutgunnedCharacterSheet extends ActorSheet {
       context.missionLabel = game.i18n.localize("OG.treasure")
       context.jobLabel = game.i18n.localize("OG.background")
     }
+
+    context.enrichedBiographyValue = await TextEditor.enrichHTML(
+      context.data.system.biography,
+      {
+        async: true,
+        secrets: context.editable
+      }
+    )  
 
     // Prepare character data and items.
       this._prepareItems(context);
@@ -306,6 +320,10 @@ export class OutgunnedCharacterSheet extends ActorSheet {
       checkProp = {'system.cash' : targetScore};
     } else if (property === "cyberEnhance") {      
       checkProp = {'system.cyberEnhance': !this.actor.system.cyberEnhance};
+    } else if (property === "baseGold") {
+      targetScore = Number(event.currentTarget.dataset.target);
+      if (targetScore === this.actor.system.baseGold) {targetScore = 0};
+      checkProp = {'system.baseGold' : targetScore};
     } else {
       return
     }
@@ -416,13 +434,17 @@ export class OutgunnedCharacterSheet extends ActorSheet {
           }
           //Now add the optional Feats
           //Call selector routine with the source item (k), count, itemtype and list source in item
-          let newFeats = await this._newItemSelect(k,this.actor.system.ageFeat,'feat','feats')
+          let featCount = this.actor.system.ageFeat
+          if (k.system.special === 'killer') {featCount++}
+          let newFeats = await this._newItemSelect(k,featCount,'feat','feats')
           if (newFeats.length > 0) {
             for (let j of newFeats) {
               j.system.source = "role";
             newData.push(j)
             }    
           }
+          //If this is a special role then set finalise to true
+          if (k.system.special === 'killer') {finalise = true}
         } 
       }  
 
@@ -435,8 +457,12 @@ export class OutgunnedCharacterSheet extends ActorSheet {
           //If the Role doesnt already exist then give warning message
           reqResult = false;
           errMsg = game.i18n.localize('OG.msg.noRole')                  
+        } else if(this.actor.system.specialRole) {
+          //If the actor has a special role then don't allow a trope
+          reqResult = false;
+          errMsg = game.i18n.localize('OG.msg.specialRole')                  
         } else {
-          //Set finalise to true so that the character will get to add 2 free skills at the end plus any age related feats
+          //Set finalise to true so that the character will get to add free skills at the end plus any age related feats
           finalise = true;
 
           //As we are adding a Trope - first check which attribute to improve
@@ -494,10 +520,18 @@ export class OutgunnedCharacterSheet extends ActorSheet {
         if (k.type === 'role' || k.type === 'age') {
           let checkProp ={};
           if (k.type === 'role') {
-            //For a role add the role name and increase attribute score by 1
-            checkProp = {
-              [`system.abilities.${k.system.attribute}.role`] : 1
-            };
+            //For a role increase attribute score(s) by 1
+            if (k.system.special === 'killer') {
+              checkProp = {
+                [`system.abilities.${k.system.attribute}.role`] : 1,
+                [`system.abilities.${k.system.attribute2}.role`] : 1,
+                'system.specialRole' : true
+              };              
+            } else {
+              checkProp = {
+                [`system.abilities.${k.system.attribute}.role`] : 1
+              };
+            }
           } else if (k.type === 'age') {
             checkProp = {
               'system.adrenaline.base' : k.system.baseAdrenaline,
@@ -506,7 +540,8 @@ export class OutgunnedCharacterSheet extends ActorSheet {
               'system.deathRoulette.value': k.system.baseDeathRoulette,
               'system.ageOptFeat': k.system.optFeat,
               'system.ageFeat': k.system.numFeat,
-              'system.ageExp': k.system.baseExperience
+              'system.ageExp': k.system.baseExperience,
+              'system.baseGold': k.system.gold
             };
           }
         await this.actor.update(checkProp);
@@ -518,7 +553,11 @@ export class OutgunnedCharacterSheet extends ActorSheet {
     
     //Once the Trope and associated items have been added finalise the charactewr
     if (finalise) {
-      let count = Math.max(2-this.actor.system.freeXP,0)
+      let freeSkill = 2
+      if (this.actor.system.specialRole) {
+        freeSkill = 6
+      }
+      let count = Math.max(freeSkill-this.actor.system.freeXP,0)
       newData = await this.finaliseCharacter("all",count);
       await this.actor.createEmbeddedDocuments("Item", newData); 
     }
@@ -573,10 +612,13 @@ export class OutgunnedCharacterSheet extends ActorSheet {
       }
     } else if (collectionName === 'optFeat') {
       let target = this.actor.items.get(this.actor.system.roleId).system.feats
+
       for (let i = 0; i<2; i++) {
+
         if (i === 1) {
-          target = this.actor.items.get(this.actor.system.tropeId).system.feats
+          target = this.actor.system.tropeId ? this.actor.items.get(this.actor.system.tropeId).system.feats : []
         }
+        
         for (let j of target) {
           let exists = false
           for (let k of this.actor.items) {
@@ -588,7 +630,7 @@ export class OutgunnedCharacterSheet extends ActorSheet {
             newList.push(j)
           }  
         }  
-      }  
+      }
     } else {
       let newItem = foundry.utils.duplicate(item)
       for (let j of newItem.system[collectionName]){
@@ -659,7 +701,7 @@ export class OutgunnedCharacterSheet extends ActorSheet {
 
   async finaliseCharacter(option, count) {
     let newData =[];
-    //Now add the 2 free skills available to new characters
+    //Now add the free skills available to new characters
     if(count>0){
       let newSkills=[];
       newSkills = await this._newItemSelect("",count,'skill','free')

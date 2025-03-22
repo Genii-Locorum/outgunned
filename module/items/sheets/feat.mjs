@@ -18,7 +18,7 @@ export class OutgunnedFeatSheet extends ItemSheet {
     return `${path}/${this.item.type}.html`;
   }
 
-  getData() {
+  async getData() {
     const context = super.getData();
     const itemData = context.item;
     context.rollData = {};
@@ -29,8 +29,24 @@ export class OutgunnedFeatSheet extends ItemSheet {
     context.system = itemData.system;
     context.flags = itemData.flags;
     context.isGM =  game.user.isGM;
-    context.displayUsage = OutgunnedSelectLists.getUsageTypes();
+    context.displayUsage = await OutgunnedSelectLists.getUsageTypes();
     context.usage = context.displayUsage[this.item.system.usage]
+
+    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+      context.data.system.description,
+      {
+        async: true,
+        secrets: context.editable
+      }
+    )  
+
+    context.enrichedShortDescriptionValue = await TextEditor.enrichHTML(
+      context.data.system.shortDesc,
+      {
+        async: true,
+        secrets: context.editable
+      }
+    )  
 
     return context;
   }

@@ -35,6 +35,15 @@ export class OutgunnedEnemySheet extends ActorSheet {
       context.displayMultiList = await OutgunnedSelectLists.getDiffMultiList();
       context.displayEnemyList = await OutgunnedSelectLists.getEnemyList();  
 
+      context.enrichedNotesValue = await TextEditor.enrichHTML(
+        context.data.system.strengths,
+        {
+          async: true,
+          secrets: context.editable
+        }
+      ) 
+
+
       // Prepare enemy data and items.
         this._prepareItems(context);
         this._prepareCharacterData(context);

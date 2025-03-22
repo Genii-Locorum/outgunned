@@ -36,6 +36,22 @@ export class OutgunnedConditionSheet extends ItemSheet {
     context.skill = context.displaySkill[this.item.system.skill];
     context.skill2 = context.displaySkill[this.item.system.skill2];
 
+    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+      context.data.system.description,
+      {
+        async: true,
+        secrets: context.editable
+      }
+    )  
+
+    context.enrichedShortDescriptionValue = await TextEditor.enrichHTML(
+      context.data.system.shortDesc,
+      {
+        async: true,
+        secrets: context.editable
+      }
+    )  
+
     return context;
   }
 

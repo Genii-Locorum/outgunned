@@ -27,9 +27,18 @@ export class OutgunnedGunSheet extends ItemSheet {
     context.system = itemData.system;
     context.flags = itemData.flags;
     context.isGM =  game.user.isGM;
+    context.gameVersion = game.settings.get('outgunned','ogVersion')
     context.hasOwner = this.item.isEmbedded === true
     context.displayLocList = await OutgunnedSelectLists.getLocationList();
     context.displayMagsList = await OutgunnedSelectLists.getMagsList();
+
+    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+      context.data.system.description,
+      {
+        async: true,
+        secrets: context.editable
+      }
+    )  
 
     const weaponfeats = [];
     for (let i of itemData.system.weaponfeats){

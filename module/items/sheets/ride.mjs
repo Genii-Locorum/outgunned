@@ -18,6 +18,7 @@ export class OutgunnedRideSheet extends ItemSheet {
   async getData() {
     const context = super.getData();
     const itemData = context.item;
+    context.gameVersion = game.settings.get("outgunned","ogVersion")
     context.rollData = {};
     let actor = this.object?.parent ?? null;
     if (actor) {
@@ -26,6 +27,24 @@ export class OutgunnedRideSheet extends ItemSheet {
     context.system = itemData.system;
     context.flags = itemData.flags;
     context.isGM =  game.user.isGM;
+
+    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+      context.data.system.description,
+      {
+        async: true,
+        secrets: context.editable
+      }
+    )  
+
+    context.enrichedShortDescriptionValue = await TextEditor.enrichHTML(
+      context.data.system.shortDesc,
+      {
+        async: true,
+        secrets: context.editable
+      }
+    )  
+
+    
     const items = [];
     for (let i of itemData.system.items){
       items.push(i);

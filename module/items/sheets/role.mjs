@@ -30,7 +30,23 @@ export class OutgunnedRoleSheet extends ItemSheet {
     context.flags = itemData.flags;
     context.isGM =  game.user.isGM;
     context.displayAttType = await OutgunnedSelectLists.getAttributeTypes();
+    context.displayShortAttType = await OutgunnedSelectLists.getShortAttributeTypes(context.displayAttType,this.item.system.attribute);
     context.attribute = context.displayAttType[this.item.system.attribute]
+    context.attribute2 = context.displayShortAttType[this.item.system.attribute2]
+    context.specialRoleType = await OutgunnedSelectLists.getSpecialRoleList();
+    context.roleType = context.specialRoleType[this.item.system.special]
+
+    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+      context.data.system.description,
+      {
+        async: true,
+        secrets: context.editable
+      }
+    )  
+
+    context.showAtt2 = false
+    if (context.system.special === "killer") {context.showAtt2 = true}
+
 
     const perSkill = [];
     for (let i of itemData.system.skills){

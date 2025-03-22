@@ -15,6 +15,7 @@
   </nav>
 
   {{!-- Sheet Body --}}
+  <section class="item-bottom-panel">
   <section class="sheet-body">
   <br>  
     {{!-- Attributes Tab --}}
@@ -22,6 +23,10 @@
       <div class="item-skill-grid">
         <div class="info-cell borderless left bold">{{localize 'OG.cost'}} ($)</div>          
         <div class="info-cell borderless centre"><input name="system.cost" type="text" value="{{item.system.cost}}" data-dtype="Number"/></div>
+        {{#if (eq gameVersion '2')}}
+          <div class="info-cell borderless left bold">{{localize 'OG.gold'}}</div>          
+          <div class="info-cell borderless centre"><input name="system.gold" type="text" value="{{item.system.gold}}" data-dtype="Number"/></div>
+        {{/if}}
         <br>
 
         <div class="new-row info-cell borderless left bold">{{localize 'OG.speed'}}</div>          
@@ -70,14 +75,15 @@
 
 
       <div title="{{localize 'OG.shortDescHint'}}">{{localize 'OG.shortDesc'}}</div>
-      <div class="info-cell bordered"><input name="system.shortDesc" type="text" value="{{item.system.shortDesc}}"/></div>
+      {{editor enrichedShortDescriptionValue engine="prosemirror" class="shortDesc-item-doc" target="system.shortDesc" button=true owner=owner editable=editable}}
+
 
 
     </div>
     
     {{!-- Description Tab --}}
     <div class="tab" data-group="primary" data-tab="description">
-      {{editor item.system.description class="background-item-doc" target="system.description" button=true owner=owner editable=editable}}
+      {{editor enrichedDescriptionValue engine="prosemirror" class="background-item-doc" target="system.description" button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Image Tab --}}
@@ -85,4 +91,5 @@
       <img class="profile-img" src="{{item.img}}" data-edit="img" height="200" width="200" title="{{item.name}}"/>
     </div>
   </section>
+</section>
 </form>

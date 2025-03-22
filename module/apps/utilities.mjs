@@ -136,7 +136,8 @@ if (dataitem === 'grit') {
       'system.deathRoulette.value': 0,
       'system.ageOptFeat': 0,
       'system.ageFeat': 0,
-      'system.ageExp': 0
+      'system.ageExp': 0,
+      'system.baseGold': 0
     };
     await actor.update(checkProp);
       //Now delete age and all feats where source = age
@@ -169,7 +170,9 @@ if (dataitem === 'grit') {
         i.delete();
       } else if (i.type === 'skill') {
         //Reset all skill to zero role value
-        await i.update({'system.role' : 0})
+        await i.update({'system.role' : 0,
+                        'system.free' : 0
+        })
       }
     }
     //Reset all attribute role points to zero
@@ -179,6 +182,7 @@ if (dataitem === 'grit') {
       'system.abilities.smooth.role': 0,
       'system.abilities.focus.role': 0,
       'system.abilities.crime.role': 0,
+      'system.specialRole': false
     }
     await actor.update(checkProp);  
 
@@ -201,7 +205,9 @@ if (dataitem === 'grit') {
         i.delete();
       } else if (i.type === 'skill') {
         //Reset all skill to zero trope value
-        await i.update({'system.trope' : 0})
+        await i.update({'system.trope' : 0,
+                        'system.free' : 0
+        })
       }  
     }
     //Reset all attribute trope points to zero
@@ -453,12 +459,16 @@ if (dataitem === 'grit') {
   
 
   static async spendFreeXP(el, actor) {
-    let count = Math.max(2-actor.system.freeXP,0)
+    let freeSkill = 2
+    if (actor.system.specialRole) {
+      freeSkill = 6
+    }
+    let count = Math.max(freeSkill-actor.system.freeXP,0)
     if (count<=0) {return}
       let newData =[];
       let newList=[];
       const dialogData = {}
-      //Now add the 2 free skills available to new characters
+      //Now add the free skills available to new characters
       for (let j of game.items) {
         if (j.type === 'skill') {
           let exists = false
@@ -520,12 +530,13 @@ if (dataitem === 'grit') {
     } 
   }  
 
-  static async _planB(name) {
+  static async _planB(name,title) {
     if(!game.user.isGM) {
       return
     }
     let val = await game.settings.get('outgunned', "planB"+name)
-    let planName =  await game.settings.get('outgunned', "planBName-"+name)
+    
+    let planName =  await game.settings.get('outgunned', title)
     await game.settings.set('outgunned', "planB"+name, !val)
 
     if (!val) {

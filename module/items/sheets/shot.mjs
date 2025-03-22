@@ -17,7 +17,7 @@ export class OutgunnedShotSheet extends ItemSheet {
     return `${path}/${this.item.type}.html`;
   }
 
-  getData() {
+  async getData() {
     const context = super.getData();
     const itemData = context.item;
     context.rollData = {};
@@ -29,6 +29,15 @@ export class OutgunnedShotSheet extends ItemSheet {
     context.flags = itemData.flags;
     context.isGM =  game.user.isGM;
     context.itemType = game.i18n.localize('OG.'+itemData.system.type)
+
+    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+      context.data.system.description,
+      {
+        async: true,
+        secrets: context.editable
+      }
+    )  
+
     return context;
   }
 

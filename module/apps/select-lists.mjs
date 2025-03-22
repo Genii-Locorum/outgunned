@@ -125,9 +125,30 @@ export class OutgunnedSelectLists {
         "bond":game.i18n.localize("OG.bond"),
         "reputation":game.i18n.localize("OG.reputation"),
       }   
+      if (game.settings.get("outgunned","ogVersion") === "2") {
+        options= Object.assign(options,{"blood": game.i18n.localize("OG.blood")});
+      }
       return options;
     }
 
+    //Special Role List
+    static async getSpecialRoleList () {    
+      let options = {
+        "no":game.i18n.localize("OG.no"),
+        "killer":game.i18n.localize("OG.killer"),
+      }   
+      return options;
+    }
+
+    //Chase Type List
+    static async getChaseList () {    
+      let options = {
+        "chase":game.i18n.localize("OG.chase"),
+        "hunt":game.i18n.localize("OG.hunt"),
+        "getaway":game.i18n.localize("OG.getaway"),
+      }   
+      return options;
+    }
 }
 
 

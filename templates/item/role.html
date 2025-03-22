@@ -19,12 +19,26 @@
   </nav>
 
   {{!-- Sheet Body --}}
+  <section class="item-bottom-panel">
   <section class="sheet-body">
   <br>  
     {{!-- Attributes Tab --}}
     <div class="tab attributes" data-group="primary" data-tab="attributes">
       <div class="item-skill-grid">
-        <div class=" select-name left bold">{{localize 'OG.displayAttType'}}</div>          
+
+        <div class=" select-name left bold">{{localize 'OG.specialRole'}}</div>  
+        {{#if isGM}}
+          <div class="left">
+          <select class="mainText" data-handle-change name="system.special">
+            {{selectOptions specialRoleType selected=item.system.special}}
+          </select>
+          </div>
+        {{else}}
+          <div class="select-name left">{{roleType}}</div>
+        {{/if}}
+        <br>  
+
+        <div class=" select-name left bold new-row">{{localize 'OG.displayAttType'}}</div>          
         {{#if isGM}}
           <div class="left">
           <select class="mainText" data-handle-change name="system.attribute">
@@ -35,6 +49,20 @@
           <div class="select-name left">{{attribute}}</div>
         {{/if}}
         <br>
+
+        {{#if showAtt2}}
+          <div class=" select-name left bold new-row">{{localize 'OG.displaySecAttType'}}</div>          
+          {{#if isGM}}
+            <div class="left">
+            <select class="mainText" data-handle-change name="system.attribute2">
+              {{selectOptions displayShortAttType selected=item.system.attribute2}}
+            </select>
+            </div>
+          {{else}}
+            <div class="select-name left">{{attribute2}}</div>
+          {{/if}}
+          <br>
+        {{/if}}
       </div>
 
       {{!-- Selected Skills --}}
@@ -84,12 +112,13 @@
     {{!-- Description Tab --}}
 
     <div class="tab" data-group="primary" data-tab="description">
-      {{editor item.system.description class="background-item-doc" target="system.description" button=true owner=owner editable=editable}}
+      {{editor enrichedDescriptionValue engine="prosemirror" class="background-item-doc" target="system.description" button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Image Tab --}}
     <div class="tab image" data-group="primary" data-tab="image">
       <img class="profile-img" src="{{item.img}}" data-edit="img" height="200" width="200" title="{{item.name}}"/>
     </div>
+  </section>
   </section>
 </form>

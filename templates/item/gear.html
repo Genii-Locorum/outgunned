@@ -15,6 +15,7 @@
   </nav>
 
   {{!-- Sheet Body --}}
+  <section class="item-bottom-panel">
   <section class="sheet-body">
   <br>  
     {{!-- Attributes Tab --}}
@@ -22,6 +23,10 @@
       <div class="item-skill-grid">
         <div class="info-cell borderless left bold">{{localize 'OG.cost'}} ($)</div>          
         <div class="info-cell borderless centre"><input name="system.cost" type="text" value="{{item.system.cost}}" data-dtype="Number"/></div>
+        {{#if (eq gameVersion '2')}}
+          <div class="info-cell borderless left bold">{{localize 'OG.gold'}}</div>          
+          <div class="info-cell borderless centre"><input name="system.gold" type="text" value="{{item.system.gold}}" data-dtype="Number"/></div>
+        {{/if}}
         <br>
 
         {{#if hasOwner}}
@@ -43,19 +48,42 @@
     </div>
 
       <div title="{{localize 'OG.shortDescHint'}}">{{localize 'OG.shortDesc'}}</div>
-      <div class="info-cell bordered"><input name="system.shortDesc" type="text" value="{{item.system.shortDesc}}"/></div>
+      {{editor enrichedShortDescriptionValue engine="prosemirror" class="shortDesc-item-doc" target="system.shortDesc" button=true owner=owner editable=editable}}
+      <br>
+      {{!-- Selected Feats --}}
+      <div class="horizontalboxed {{#if isGM}} droppable {{/if}} weaponfeats">
+        <div class="select-name">{{ localize "OG.feats"}}</div>
+        <ol class="item-list">
+          {{#each weaponfeats as |weaponfeat|}}
+            <li class="item flexrow" data-item-id="{{weaponfeat._id}}" >
+              <div class="item-name flexrow">
+                <div class="item-list-name">{{weaponfeat.name}}  <a class="secIcon"><i class="{{weaponfeat.system.fasIcon}}"></i></a></div>
+              </div>
+
+              <div class="item-controls">
+                {{#if ../isGM}}
+                  <a class="item-control item-delete feats secIcon" title="{{localize 'OG.deleteItem'}}"><i class="fas fa-trash"></i></a>
+                {{/if}}
+              </div>
+            </li>
+          {{/each}}
+        </ol>
+      </div>
 
 
     </div>
     
     {{!-- Description Tab --}}
     <div class="tab" data-group="primary" data-tab="description">
-      {{editor item.system.description class="background-item-doc" target="system.description" button=true owner=owner editable=editable}}
+      {{editor enrichedDescriptionValue engine="prosemirror" class="background-item-doc" target="system.description" button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Image Tab --}}
     <div class="tab image" data-group="primary" data-tab="image">
       <img class="profile-img" src="{{item.img}}" data-edit="img" height="200" width="200" title="{{item.name}}"/>
     </div>
+
+   
+  </section>
   </section>
 </form>

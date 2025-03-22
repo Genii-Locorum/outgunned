@@ -79,10 +79,14 @@
       "cash": 1,
       "mission": "",
       "locked": false,
-      "cyberEnhance": false
+      "cyberEnhance": false,
+      "baseGold": 0,
+      "specialRole": false
     },
     "support": {
       "templates": ["base"],
+      "animal": false,
+      "species": "",
       "abilities": {
         "brawn": {
           "value": 3,
@@ -116,7 +120,8 @@
         }
       },
       "help": "",
-      "flaw": ""
+      "flaw": "",
+      "strengths": ""
     },
     "enemy": {
       "templates": ["base"],
@@ -152,7 +157,9 @@
         "strongSpots": "",
         "weakSpots": ""
       },
-      "rides": []
+      "rides": [],
+      "goldBF":0,
+      "goldEarned": 0
     },
     "director": {
       "participants": [],
@@ -164,6 +171,8 @@
       "rides": []
     },
     "chase": {
+      "subType":"chase",
+      "hunt": false,
       "participants": [],
       "rides": [],
       "need": {
@@ -191,16 +200,13 @@
         }
       },
       "speed": 0,
-      "countdown": {
-        "status": false,
-        "turns": 4
-      },
       "adrenaline": {
         "current": 0,
         "max": 3
       },
       "specialActions": [],
-      "notes": ""
+      "notes": "",
+      "extract": 0
     }  
   },
   "Item": {
@@ -213,38 +219,31 @@
     "gear": {
       "templates": ["base"],
       "cost": 0,
+      "gold": 0,
       "shortDesc": "",
       "location": "worn",
-      "keyItem": false
-      },
-      "gun": {
-        "templates": ["base"],
-        "cost": 0,
-        "shortDesc": "",
-        "location": "worn",
-        "mags":0,
-        "weaponfeats":[],
-        "feats": {
-          "accurate": false,
-          "explosive": false,
-          "jam": false,
-          "precision": false,
-          "rapid": false,
-          "short": false,
-          "silent": false,
-          "single": false,
-          "slow": false
-        },
-        "range": {
-          "melee": "0",
-          "close": "0",
-          "medium": "0",
-          "long": "0"
-        }
-      },
+      "keyItem": false,
+      "weaponfeats":[]
+    },
+    "gun": {
+      "templates": ["base"],
+      "cost": 0,
+      "gold": 0,
+      "shortDesc": "",
+      "location": "worn",
+      "mags":0,
+      "weaponfeats":[],
+      "range": {
+        "melee": "0",
+        "close": "0",
+        "medium": "0",
+        "long": "0"
+      }
+    },
     "ride": {
       "templates": ["base"],
       "cost": 0,
+      "gold": 0,
       "shortDesc": "",
       "bike": false,
       "car": false,
@@ -277,9 +276,11 @@
     "role": {
       "templates": ["base"],
       "attribute": "brawn",
+      "attribute2": "",
       "skills": [],
       "feats": [],
-      "gear": []
+      "gear": [],
+      "special": "no"
     },
     "feat": {
       "templates": ["base"],
@@ -296,6 +297,7 @@
       "baseAdrenaline": 1,
       "baseDeathRoulette": 1,
       "baseExperience": 0,
+      "gold": 0,
       "feats": []      
     },
     "trope": {
@@ -335,7 +337,8 @@
     },
     "shot": {
       "templates": ["base"],
-      "subtype":"shot"
+      "subtype":"shot",
+      "amount": 1
     }  
   }
 }

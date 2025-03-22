@@ -9,13 +9,20 @@
     </div>
     <div class="planB">
       <div class="upperCase centre">{{localize 'OG.whatPlanB'}}<span class="red upperCase">{{localize 'OG.planB'}}</span>?</div>
-      <div class="planB-icons">
+      <div class="{{#if (eq gameVersion '2')}}planB-4icons{{else}}planB-icons{{/if}}">
         <div class="planBIcon centre {{#unless planB1}}primIcon{{/unless}}">2</div>
-        <div class="planBIcon centre {{#unless planB2}}primIcon{{/unless}}">3</div>
+        {{#if (eq gameVersion '2')}}
+          <div class="planBIcon centre {{#unless planB1}}primIcon{{/unless}}">A</div>
+          <div class="planBIcon centre {{#unless planB2}}primIcon{{/unless}}">B</div>
+        {{else}}
+          <div class="planBIcon centre {{#unless planB2}}primIcon{{/unless}}">3</div>
+        {{/if}}
         <div class="planBIcon centre {{#unless planB3}}primIcon{{/unless}}">4</div>
-      </div>
-      <div class="planB-icons">
+
         <div class="centre">{{planB1Name}}</div>
+        {{#if (eq gameVersion '2')}}
+          <div class="centre">{{planB4Name}}</div>
+        {{/if}}
         <div class="centre">{{planB2Name}}</div>
         <div class="centre">{{planB3Name}}</div>
       </div>
@@ -62,6 +69,9 @@
       <div><a class="item" data-tab="villain">{{localize 'OG.villain'}}</a></div>
       <div><a class="item" data-tab="support">{{localize 'OG.support'}}</a></div>
       <div><a class="item" data-tab="contacts">{{localize 'OG.contact'}}</a></div>
+      {{#if (eq gameVersion "2")}}
+      <div><a class="item" data-tab="gold">{{localize 'OG.gold'}}</a></div>
+      {{/if}}
     </nav>
   </section> 
 
@@ -91,6 +101,11 @@
     <div class="tab contacts" data-group="primary" data-tab="contacts">
       {{> "systems/outgunned/templates/actor/parts/mission-contacts.html"}}
     </div>    
+
+    {{!-- Gold Tab --}}
+    <div class="tab gold" data-group="primary" data-tab="gold">
+      {{> "systems/outgunned/templates/actor/parts/mission-gold.html"}}
+    </div> 
 
   </section>
 </form>

@@ -19,6 +19,7 @@
   </nav>
 
   {{!-- Sheet Body --}}
+  <section class="item-bottom-panel">
   <section class="sheet-body">
   <br>  
     {{!-- Attributes Tab --}}
@@ -37,8 +38,9 @@
 
         <div class="new-row select-name left bold" title="{{localize 'OG.startingBulletsHint'}}">{{localize 'OG.startingBullets'}}</div>  
         <div>
-          <a class="large-icon toggle secIcon" data-property="baseDeathRoulette" data-target = 1><i class="{{#if (gte item.system.baseDeathRoulette 1)}}fa-solid fa-gun-slash{{else}}fa-regular fa-gun{{/if}}"></i></a>
-          <a class="large-icon toggle secIcon" data-property="baseDeathRoulette" data-target = 2><i class="{{#if (gte item.system.baseDeathRoulette 2)}}fa-solid fa-gun-slash{{else}}fa-regular fa-gun{{/if}}"></i></a>
+          {{#loop 1 maxBullet 1}}
+          <a class="large-icon toggle secIcon" data-property="baseDeathRoulette" data-target = {{this}}><i class="{{#if (gte ../item.system.baseDeathRoulette this)}}fa-solid fa-gun-slash{{else}}fa-regular fa-gun{{/if}}"></i></a>
+          {{/loop}}
         </div>
 
         <div class="new-row select-name left bold" title="{{localize 'OG.startingAdrenalineHint'}}">{{localize 'OG.startingAdrenaline'}}</div>  
@@ -51,6 +53,14 @@
         <div>
           <a class="large-icon toggle secIcon" data-property="baseExperience"><i class="{{#if (gte item.system.baseExperience 1)}}fa-solid fa-seal-exclamation{{else}}fa-regular fa-seal-exclamation{{/if}}"></i></a>
         </div>
+
+        {{#if showGold}}
+          <div class="new-row select-name left bold">{{localize 'OG.startingGold'}}</div>  
+          <div>
+            <a class="large-icon toggle secIcon" data-property="gold"><i class="{{#if (gte item.system.gold 1)}}fa-solid fa-coin{{else}}fa-regular fa-coin{{/if}}"></i></a>
+          </div>
+        {{/if}}  
+          
       </div>  
 
       <br>
@@ -81,12 +91,13 @@
     {{!-- Description Tab --}}
 
     <div class="tab" data-group="primary" data-tab="description">
-      {{editor item.system.description class="background-item-doc" target="system.description" button=true owner=owner editable=editable}}
+      {{editor enrichedDescriptionValue engine="prosemirror" class="background-item-doc" target="system.description" button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Image Tab --}}
     <div class="tab image" data-group="primary" data-tab="image">
       <img class="profile-img" src="{{item.img}}" data-edit="img" height="200" width="200" title="{{item.name}}"/>
     </div>
+  </section>
   </section>
 </form>

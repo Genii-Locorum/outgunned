@@ -1,5 +1,6 @@
 import { OutgunnedUtilities } from "../../apps/utilities.mjs";
 import { OutgunnedContextMenu } from '../../setup/context-menu.mjs';
+import { OutgunnedSelectLists }  from "../../apps/select-lists.mjs";
 import * as contextMenu from "../actor-cm.mjs";
 
 export class OutgunnedChaseSheet extends ActorSheet {
@@ -27,6 +28,31 @@ export class OutgunnedChaseSheet extends ActorSheet {
       this._prepareCharacterData(context);
       context.rollData = context.actor.getRollData();
       context.isGM = game.user.isGM;
+      context.gameVersion = game.settings.get("outgunned","ogVersion");
+      context.speedLabel = game.i18n.localize('OG.speed');
+      context.extractLabel = game.i18n.localize('OG.countdown');
+      context.allowChange = false
+      if (context.isGM && context.gameVersion === '2') {
+        context.allowChange = true
+      }
+
+      if (actorData.system.subType === "hunt") {
+        context.speedLabel = game.i18n.localize('OG.kill');
+        context.extractLabel = game.i18n.localize('OG.extract');
+      } else if (actorData.system.subType === "getaway") {
+        context.speedLabel = game.i18n.localize('OG.survive');
+      } 
+      context.displayChase = await OutgunnedSelectLists.getChaseList();
+      context.subType = context.displayChase[this.actor.system.subType];
+
+      context.enrichedNotesValue = await TextEditor.enrichHTML(
+        context.data.system.notes,
+        {
+          async: true,
+          secrets: context.editable
+        }
+      ) 
+
       const partics = [];
       const rides = [];
       for (let particUuid of actorData.system.participants){
@@ -52,7 +78,6 @@ export class OutgunnedChaseSheet extends ActorSheet {
 
       context.participants = partics.sort(OutgunnedUtilities.sortByNameKey);
       context.rides = rides;
-      this._prepareItems(context);
       return context;
   }  
 
@@ -87,7 +112,8 @@ export class OutgunnedChaseSheet extends ActorSheet {
     html.find('.partic-edit').click(this._particEdit.bind(this));                           // View a participant from the mission
     html.find('.ride-edit').click(this._onRideEdit.bind(this));                             // View Ride
     html.find('.ride-refresh').click(this._onRideRefresh.bind(this));                       // Refresh Ride
-    html.find('.actor-toggle').dblclick(this._onActorToggle.bind(this));                       // Adjust need/adrenaline
+    html.find('.actor-toggle').dblclick(this._onActorToggle.bind(this));                    // Adjust need/adrenaline
+    html.find('.support-delete').dblclick(this._onSupportDelete.bind(this));                // Delete a ride etc
 
     //Delete Item
     html.find('.item-delete').dblclick(ev => {
@@ -243,6 +269,7 @@ export class OutgunnedChaseSheet extends ActorSheet {
     const item = $(event.currentTarget).closest('.item')
     const itemId = item.data('particuuid')
     const collectionName = item.data('collection')
+    console.log(itemId, collectionName)
     const itemIndex = this.actor.system[collectionName].findIndex(i => (itemId && i.uuid === itemId))
     if (itemIndex > -1) {
       const collection = this.actor.system[collectionName] ? foundry.utils.duplicate(this.actor.system[collectionName]) : []
@@ -255,6 +282,9 @@ export class OutgunnedChaseSheet extends ActorSheet {
     const property = $(event.currentTarget).data('property')
     let value = $(event.currentTarget).data('target')
     if (property === 'need') {
+      if (value === this.actor.system.need.current) {
+        value = 0
+      }
       await this.actor.update({'system.need.current': value })
     } else if (property === 'speed') {
       let newSpeed = Math.max(Math.min(this.actor.system.speed + Number(value),6),0)
@@ -264,6 +294,11 @@ export class OutgunnedChaseSheet extends ActorSheet {
         value = 0
       }
       await this.actor.update({'system.adrenaline.current': value })
+    } else if (property === 'extract') {
+      if (value === this.actor.system.extract) {
+        value = 0
+      }
+      await this.actor.update({'system.extract': value })
     } 
   }
  
