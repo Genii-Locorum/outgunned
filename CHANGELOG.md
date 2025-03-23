@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## 2.14
+## 12.15
+- Support Actors now have the "Trained Animal" toggle irrespective of the game version.  Use it or not as you see fit.
+
+
+## 12.14
 - World of Killers changes have been implemented
 - Set the "Game Version" setting to "World of Killers"
 - It is recommended to use "rgb(89,56,151)" for Primary Colour for Sheets, and Primary Colour for Icons

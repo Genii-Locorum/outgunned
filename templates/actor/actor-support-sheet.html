@@ -3,12 +3,9 @@
   <section class="main-enemy-sheet">    
     <div class="enemy-header">
       <div class="enemy-name"><input class="enemy-name" name="name" type="text" value="{{actor.name}}"/></div>
-      {{#if (eq gameVersion "2")}}
         <div class="right"><a class="large-icon primIcon actor-toggle clickable" title="{{localize 'OG.trainedAnimal'}}" data-property="animal">
           <i class="{{#if actor.system.animal}}fa-solid fa-shield-dog{{else}}fa-light fa-shield-dog{{/if}}"></i>
         </a></div>
-      {{/if}}
-
     </div>
 
     {{#if actor.system.animal}}
