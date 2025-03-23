@@ -86,7 +86,7 @@ class OutgunnedLayer extends PlaceablesLayer {
             icon: "game-icon game-icon-blade",
             title: game.i18n.localize('OG.planB')+":"+game.settings.get("outgunned","planBWOKName4"),
             button: true,
-            visible: isGM,
+            visible: (isGM && game.settings.get("outgunned","ogVersion") === '2'),
             onClick: async planB1 => {
               await OutgunnedUtilities._planB("1","planBWOKName4")}            
           },

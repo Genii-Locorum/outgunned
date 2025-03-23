@@ -2,7 +2,7 @@
 
 ## 12.15
 - Support Actors now have the "Trained Animal" toggle irrespective of the game version.  Use it or not as you see fit.
-
+- Blade Plan B now only shows in the GM Tools if you've set the game Version to World of Killers
 
 ## 12.14
 - World of Killers changes have been implemented
