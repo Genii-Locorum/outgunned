@@ -27,6 +27,22 @@ class OutgunnedLayer extends PlaceablesLayer {
 
   export class OutgunnedMenu {
     static getButtons (controls) {
+
+      let usePlanB1icon = "game-icon game-icon-bullet"
+      let usePlanB2icon = "game-icon game-icon-backup"
+      let usePlanB3icon = "game-icon game-icon-bluff"
+      let usePlanBWOK4icon = "game-icon game-icon-blade"
+      let usePlanBWOK2icon = "game-icon game-icon-belmont"
+
+      if (game.settings.get('outgunned','customPlanBIcons')) {
+        usePlanB1icon = game.settings.get('outgunned','planBIcon-1')
+        usePlanB2icon = game.settings.get('outgunned','planBIcon-2')
+        usePlanB3icon = game.settings.get('outgunned','planBIcon-3')
+        usePlanBWOK2icon = game.settings.get('outgunned','planBWOKIcon-2')
+        usePlanBWOK4icon = game.settings.get('outgunned','planBWOKIcon-4')
+      }
+
+
       canvas.outgunnedgmtools = new OutgunnedLayer()
       const isGM = game.user.isGM
       controls.push({
@@ -74,7 +90,7 @@ class OutgunnedLayer extends PlaceablesLayer {
           },
           {
             name: "planB1",
-            icon: "game-icon game-icon-bullet",
+            icon: usePlanB1icon,
             title: game.i18n.localize('OG.planB')+":"+game.settings.get("outgunned","planBName1"),
             button: true,
             visible: isGM,
@@ -83,7 +99,7 @@ class OutgunnedLayer extends PlaceablesLayer {
           },
           {
             name: "planBWOK4",
-            icon: "game-icon game-icon-blade",
+            icon: usePlanBWOK4icon,
             title: game.i18n.localize('OG.planB')+":"+game.settings.get("outgunned","planBWOKName4"),
             button: true,
             visible: (isGM && game.settings.get("outgunned","ogVersion") === '2'),
@@ -92,7 +108,7 @@ class OutgunnedLayer extends PlaceablesLayer {
           },
           {
             name: "planB2",
-            icon: "game-icon game-icon-backup",
+            icon: usePlanB2icon,
             title: game.i18n.localize('OG.planB')+":"+game.settings.get("outgunned","planBName2"),
             button: true,
             visible: (isGM && game.settings.get("outgunned","ogVersion") != '2'),
@@ -101,7 +117,7 @@ class OutgunnedLayer extends PlaceablesLayer {
           },
           {
             name: "planBWOK2",
-            icon: "game-icon game-icon-belmont",
+            icon: usePlanBWOK2icon,
             title: game.i18n.localize('OG.planB')+":"+game.settings.get("outgunned","planBWOKName2"),
             button: true,
             visible: (isGM && game.settings.get("outgunned","ogVersion") === '2'),
@@ -110,7 +126,7 @@ class OutgunnedLayer extends PlaceablesLayer {
           },
           {
             name: "planB3",
-            icon: "game-icon game-icon-bluff",
+            icon: usePlanB3icon,
             title: game.i18n.localize('OG.planB')+":"+game.settings.get("outgunned","planBName3"),
             button: true,
             visible: isGM,

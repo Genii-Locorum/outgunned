@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 12.16
+- OG Dice font has been tweaked so you can see the dice faces properly if using Dice So Nice
+- Plan B custom icons have been added back in - change the game settings to activate the,.
+
 ## 12.15
 - Support Actors now have the "Trained Animal" toggle irrespective of the game version.  Use it or not as you see fit.
 - Blade Plan B now only shows in the GM Tools if you've set the game Version to World of Killers

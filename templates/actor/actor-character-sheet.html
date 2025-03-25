@@ -119,14 +119,26 @@
     <br>
     <div class="red upperCase">{{localize 'OG.planB'}}</div>
     <div class="charPlanB">
-      <div class="centre planBIcon {{#if planB1}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB1Name}}">2</div>
-      {{#if (eq gameVersion '2')}}
-        <div class="centre planBIcon {{#if planB1}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB4Name}}">A</div>
-        <div class="centre planBIcon {{#if planB2}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB2Name}}">B</div>
-      {{else}}    
-      <div class="centre planBIcon {{#if planB2}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB2Name}}">3</div>
+      {{#if customPlanB}}
+        <div class="centre planBIcon {{#if planB1}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB1Name}}"><a><i class="{{planB1Icon}}"></i></a></div>
+        {{#if (eq gameVersion '2')}}
+           <div class="centre planBIcon {{#if planB1}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB4Name}}"><a><i class="{{planB4WOKIcon}}"></i></a></div>
+           <div class="centre planBIcon {{#if planB2}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB2Name}}"><a><i class="{{planB2Icon}}"></i></a></div>
+        {{else}}    
+         <div class="centre planBIcon {{#if planB2}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB2Name}}"><a><i class="{{planB2Icon}}"></i></a></div>
+         {{/if}}
+         <div class="centre planBIcon {{#if planB3}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB3Name}}"><a><i class="{{planB3Icon}}"></i></a></div>
+      {{else}}
+        <div class="centre planBIcon {{#if planB1}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB1Name}}">2</div>
+       {{#if (eq gameVersion '2')}}
+          <div class="centre planBIcon {{#if planB1}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB4Name}}">A</div>
+          <div class="centre planBIcon {{#if planB2}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB2Name}}">B</div>
+        {{else}}    
+        <div class="centre planBIcon {{#if planB2}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB2Name}}">3</div>
+        {{/if}}
+        <div class="centre planBIcon {{#if planB3}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB3Name}}">4</div>
       {{/if}}
-      <div class="centre planBIcon {{#if planB3}}secIcon fade{{else}}primIcon{{/if}}" title="{{planB3Name}}">4</div>
+
     </div>
 
 

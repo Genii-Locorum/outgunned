@@ -52,6 +52,67 @@ const SETTINGS = {
       type: String
     },      
     
+  //Icon Plan B option 1
+   "planBIcon-1": {
+    name: 'OG.settings.planBIcon-1',
+    hint: 'OG.fasIconHint',
+    scope: 'world',
+    config: false,
+    default: "fa-solid fa-person-rifle",
+    type: String
+  },  
+
+  //Icon Plan B option 2
+  "planBIcon-2": {
+    name: 'OG.settings.planBIcon-2',
+    hint: 'OG.fasIconHint',
+    scope: 'world',
+    config: false,
+    default: "fa-solid fa-heart",
+    type: String
+  },
+  
+  //Icon Plan B option 3
+  "planBIcon-3": {
+    name: 'OG.settings.planBIcon-3',
+    hint: 'OG.fasIconHint',
+    scope: 'world',
+    config: false,
+    default: "fa-solid fa-face-hand-peeking",
+    type: String
+  },
+
+  //Icon Plan World of Killers B option 2
+  "planBWOKIcon-2": {
+    name: 'OG.settings.planBWOKIcon-2',
+    hint: 'OG.fasIconHint',
+    scope: 'world',
+    config: false,
+    default: "fa-solid fa-hotel",
+    type: String
+  },
+
+  //Icon Plan World of Killers B option 4
+  "planBWOKIcon-4": {
+    name: 'OG.settings.planBWOKIcon-4',
+    hint: 'OG.fasIconHint',
+    scope: 'world',
+    config: false,
+    default: "fa-solid fa-swords",
+    type: String
+  },    
+
+  //Choose whether to use customised Plan B icons
+  "customPlanBIcons": {
+      name: 'OG.settings.customPlanBIcons',
+      hint: 'OG.settings.customPlanBIconsHint',
+      scope: 'world',
+      config: false,
+      default: false,
+      type: Boolean
+    },
+
+
   }
   
   export class OutgunnedplanBSettings extends FormApplication {

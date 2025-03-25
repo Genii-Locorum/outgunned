@@ -29,15 +29,21 @@ export class OutgunnedMissionSheet extends ActorSheet {
       context.isGM =  game.user.isGM;
       context.gameVersion = game.settings.get('outgunned', 'ogVersion')
       context.rollData = context.actor.getRollData();
+      context.customPlanB = game.settings.get("outgunned","customPlanBIcons") 
       context.planB1Name = game.settings.get('outgunned', 'planBName1')
+      context.planB1Icon = game.settings.get("outgunned","planBIcon-1")
       context.planB2Name = game.settings.get('outgunned', 'planBName2')
+      context.planB2Icon = game.settings.get("outgunned","planBIcon-2")
       context.planB3Name = game.settings.get('outgunned', 'planBName3')
+      context.planB3Icon = game.settings.get("outgunned","planBIcon-3")
       context.planB4Name = game.settings.get('outgunned', 'planBWOKName4')
+      context.planB4WOKIcon = game.settings.get("outgunned","planBWOKIcon-4")
       context.planB1 = game.settings.get('outgunned', 'planB1')
       context.planB2 = game.settings.get('outgunned', 'planB2')
       context.planB3 = game.settings.get('outgunned', 'planB3')
       if (context.gameVersion === "2") {
         context.planB2Name = game.settings.get('outgunned', 'planBWOKName2')
+        context.planB2Icon = game.settings.get("outgunned","planBWOKIcon-2")
       }
       context.heat = game.settings.get('outgunned', 'heat')
 
