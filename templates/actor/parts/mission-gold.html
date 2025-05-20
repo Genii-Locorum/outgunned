@@ -1,13 +1,15 @@
 <div class="mission">
 
     <div class="mission-gold" style="margin-top: 5px;">
+      <div class="centre">{{localize 'OG.currency'}}</div>
       <div class="centre">{{localize 'OG.start'}}</div>
       <div class="centre">{{localize 'OG.heroes'}}</div>
       <div class="centre">{{localize 'OG.earned'}}</div>
       <div class="centre">{{localize 'OG.spent'}}</div>
       <div class="centre">{{localize 'OG.total'}}</div>
     </div>
-    <div class="mission-gold">  
+    <div class="mission-gold"> 
+      <div class="centre">{{localize 'OG.gold'}}</div>       
       {{#if isGM}}
         <div class="centre"><input class="centre" style="max-height: 14px;" name="system.goldBF" type="text" value="{{actor.system.goldBF}}" data-dtype="Number"/></div>
       {{else}}
@@ -22,6 +24,22 @@
 
       <div class="centre">-{{goldSpent}}</div>
       <div class="centre">{{goldTotal}}</div>
+
+      <div class="centre">{{localize 'OG.cash'}}</div>       
+      {{#if isGM}}
+        <div class="centre"><input class="centre" style="max-height: 14px;" name="system.cashBF" type="text" value="{{actor.system.cashBF}}" data-dtype="Number"/></div>
+      {{else}}
+        <div class="centre">{{actor.system.cashBF}}</div>
+      {{/if}}
+      <div class="centre">{{cashActors}}</div>
+      {{#if isGM}}
+      <div class="centre"><input class="centre" style="max-height: 14px;" name="system.cashEarned" type="text" value="{{actor.system.cashEarned}}" data-dtype="Number"/></div>
+      {{else}}
+        <div class="centre">{{actor.system.cashEarned}}</div>
+      {{/if}}
+
+      <div class="centre">-{{cashSpent}}</div>
+      <div class="centre">{{cashTotal}}</div>
     </div>
     <br>
 
@@ -29,6 +47,7 @@
       <div class="indent">{{localize 'OG.spend'}}</div>
       <div>{{localize 'OG.description'}}</div>
       <div class="centre">{{localize 'OG.gold'}}</div>
+      <div class="centre">{{localize 'OG.cash'}}</div>
       <div class="centre item-control item-create" title="{{localize 'OG.createSpend'}}" data-type="shot" data-subtype="spend"><a class="centre primIcon clickable medium-icon" ><i class="fa-solid fa-plus"></i></a></div>
   </div>
   
@@ -39,6 +58,7 @@
           <div class="indent red item-edit clickable"><p>{{spend.name}}</p></div>
           <div class="truncate" style="max-height:50px;">{{{spend.system.description}}}</div>
           <div class="centre"><p>{{spend.system.amount}}</p></div>
+          <div class="centre"><p>{{spend.system.cash}}</p></div>          
           <p class="centre"><a class="secIcon item-control item-delete" title="{{localize 'OG.deleteItem'}}"><i class="fas fa-trash"></i></a></p>
         </div>
       </li>  

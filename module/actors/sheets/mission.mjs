@@ -22,6 +22,8 @@ export class OutgunnedMissionSheet extends ActorSheet {
     const actorData = this.actor.toObject(false);
     context.goldActors = 0
     context.goldSpent = 0
+    context.cashActors = 0
+    context.cashSpent = 0
 
     // Prepare character data and items.
       this._prepareItems(context);
@@ -73,6 +75,7 @@ export class OutgunnedMissionSheet extends ActorSheet {
             let roleName = partic.system.roleId ? partic.items.get(partic.system.roleId).name : "";
             partics.push({uuid: partic.uuid, name: partic.name, role: roleName})
             context.goldActors = context.goldActors + 1 + partic.system.baseGold
+            context.cashActors = context.cashActors + partic.system.cash
           } else if (partic.type === 'support') {
             supporters.push(partic)
           } 
@@ -86,11 +89,12 @@ export class OutgunnedMissionSheet extends ActorSheet {
         if (ride) {
           rides.push(ride)
         } else {
-          rides.push({uuid: particUuid.uuid, name: game.i18n.localize("OG.invalid"),parent:{name:""}})
+          rides.push({uuid: rideUuid.uuid, name: game.i18n.localize("OG.invalid"),parent:{name:""}})
         }  
       }
 
       context.goldTotal = actorData.system.goldBF + context.goldActors - context.goldSpent + actorData.system.goldEarned
+      context.cashTotal = actorData.system.cashBF + context.cashActors - context.cashSpent + actorData.system.cashEarned
       context.participants = partics.sort(OutgunnedUtilities.sortByNameKey);
       context.supporters = supporters.sort(OutgunnedUtilities.sortByNameKey);
       context.rides = rides.sort(OutgunnedUtilities.sortByNameKey);
@@ -115,7 +119,7 @@ export class OutgunnedMissionSheet extends ActorSheet {
         } else if (i.system.subtype === 'spend') {
           spends.push(i)
           context.goldSpent = context.goldSpent + i.system.amount
-          console.log(i.name, i.system.amount, context.goldSpent)
+          context.cashSpent = context.cashSpent + i.system.cash
         }
       }
     }  

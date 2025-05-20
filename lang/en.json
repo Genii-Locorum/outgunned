@@ -86,6 +86,7 @@
     "createShot": "Create Shot",
     "createSpend": "Spend Gold",
     "critical": "Critical",
+    "currency": "Currency",
     "custom": "Custom",
     "cyberEnhanced": "Cyber Enhanced",
     "danger": {
@@ -310,6 +311,7 @@
     },
 
     "msg": {
+      "actorExists": "An Actor with that name already exists in the game world",
       "bulletAdded": "A bullet has been added to your death roulette gun",
       "charDrop": "This item must be added from a character sheet",
       "deleteRole": "Please delete the character's Role before deleting Age",

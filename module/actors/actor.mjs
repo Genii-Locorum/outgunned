@@ -144,6 +144,16 @@ export class OutgunnedActor extends Actor {
 
   /** @override */
   static async create (data, options = {}) {
+
+    //If dropping from compendium check to see if the actor already exists in game.actors and if it does then get the game.actors details rather than create a copy
+    if (options.fromCompendium) {
+      let tempActor = await (game.actors.filter(actr => actr.name === data.name))[0]
+      if (tempActor) {
+        return tempActor
+      }
+    }
+
+
     //When creating an actor set basics including tokenlink, bars, displays sight
     if (data.type === 'character') {
       data.prototypeToken = foundry.utils.mergeObject( {
@@ -218,9 +228,15 @@ export class OutgunnedActor extends Actor {
     //If an actor now add all skills to the sheet
     if (data.type === 'character') {
       let newData = []
+      const actorItems = actor.items.filter(i=> ['skill','condition'].includes(i.type))
+    
+      //Check to see if the new actor has skills and conditions and only add if not.
       for (let i of game.items){
         if (i.type === 'skill' || (i.type === 'condition' && i.system.common)) {
-          newData.push(i)
+          let currItem = actorItems.filter(j=>j.name === i.name)
+          if (currItem.length <1) {          
+            newData.push(i)
+          }
         }
       }
       await actor.createEmbeddedDocuments("Item", newData);

@@ -612,15 +612,15 @@ body {
 
 .outgunned .mission-spend {
   display: grid;
-  grid-template-columns: 100px 550px 90px 40px;
+  grid-template-columns: 100px 455px 90px 90px 40px;
   grid-column-gap: 5px; 
-  max-height: 50px;
+  max-height: 60px;
   border: 1px solid var(--primary-colour);
 }
 
 .outgunned .mission-gold {
   display: grid;
-  grid-template-columns: 155px 155px 155px 155px 155px;
+  grid-template-columns: 95px 135px 135px 135px 135px 135px;
   grid-column-gap: 5px; 
   max-height: 50px;
   border: 1px solid var(--primary-colour);

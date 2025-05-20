@@ -159,7 +159,9 @@
       },
       "rides": [],
       "goldBF":0,
-      "goldEarned": 0
+      "goldEarned": 0,
+      "cashBF": 0,
+      "cashEarned": 0
     },
     "director": {
       "participants": [],
@@ -338,7 +340,8 @@
     "shot": {
       "templates": ["base"],
       "subtype":"shot",
-      "amount": 1
+      "amount": 1,
+      "cash": 0
     }  
   }
 }

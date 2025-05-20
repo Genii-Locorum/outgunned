@@ -19,6 +19,7 @@
   <br>
   {{#if (eq item.system.subtype 'spend')}}
     <div class=""><label>{{localize 'OG.gold'}}</label><input name="system.amount" type="text" value="{{item.system.amount}}" data-dtype="Number"/></div>
+    <div class=""><label>{{localize 'OG.cash'}}</label><input name="system.cash" type="text" value="{{item.system.cash}}" data-dtype="Number"/></div>
     <br>
   {{/if}}
 

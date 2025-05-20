@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 12.17
+- Please note this update is for Foundry Version 12 (Version 13 migration will happen later)
+- When dropping an actor from a compendium skills etc will no longer be duplicated
+- Fixed an error with Rides on Mission sheets
+- You can now track cash on Missions.  Bear in mind the "Heroes" cash figure is from the character sheets so if cash is earned
+  and added to the characters you will need to exclude that from the "earned" amount to prevent it being counted twice.
+  Likewise cash spent on the character sheet doesn't need to be shown on the mission sheet
+
 ## 12.16
 - OG Dice font has been tweaked so you can see the dice faces properly if using Dice So Nice
 - Plan B custom icons have been added back in - change the game settings to activate the,.
