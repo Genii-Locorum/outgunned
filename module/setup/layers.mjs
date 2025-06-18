@@ -26,7 +26,7 @@ class OutgunnedLayer extends PlaceablesLayer {
 }
 
   export class OutgunnedMenu {
-    static getButtons (controls) {
+    static getButtons ({ controls }) {
 
       let usePlanB1icon = "game-icon game-icon-bullet"
       let usePlanB2icon = "game-icon game-icon-backup"
@@ -42,8 +42,16 @@ class OutgunnedLayer extends PlaceablesLayer {
         usePlanBWOK4icon = game.settings.get('outgunned','planBWOKIcon-4')
       }
 
+	  if (!controls) {
+		console.warn("OutgunnedMenu.getButtons: controls is undefined", controls);
+		return;
+	  }
 
-      canvas.outgunnedgmtools = new OutgunnedLayer()
+	  // Create the layer only once
+	  if (!canvas.outgunnedgmtools) {
+		canvas.outgunnedgmtools = new OutgunnedLayer();
+	  }
+      
       const isGM = game.user.isGM
       controls.push({
         icon: "fas fa-gun",
@@ -139,8 +147,8 @@ class OutgunnedLayer extends PlaceablesLayer {
   
     static renderControls (app, html, data) {
       const isGM = game.user.isGM
-      const gmMenu = html.find('.fas-fa-tools').parent()
-      gmMenu.addClass('outgunned-menu')
+      const gmMenu = html.querySelector('.fas-fa-tools')?.parentElement;
+      if (gmMenu) gmMenu.classList.add('outgunned-menu');
     }
   }  
 
