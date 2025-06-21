@@ -19,7 +19,10 @@ export class OutgunnedContextMenu extends ContextMenu
   _setPosition(html, target)
   {
     super._setPosition(html, target);
-    html.css(foundry.utils.mergeObject(this._position, s_DEFAULT_STYLE));
+	const pos = foundry.utils.mergeObject(this._position ?? {}, s_DEFAULT_STYLE);
+	html.style.position = pos.position;
+	Object.assign(html.style, pos);
+
   }
 }
 

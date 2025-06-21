@@ -2,9 +2,15 @@ import { OutgunnedInteractiveChat } from './interactive-chat.mjs';
 import { OutgunnedActorDetails } from '../apps/actorDetails.mjs';
 
 export function addChatListeners(html) {
-  html.on('click', '.cardbutton', OutgunnedInteractiveChat.triggerChatButton)
-  return
+  html.addEventListener('click', event => {
+    // Check if the clicked element or one of its parents has the class "cardbutton"
+    const button = event.target.closest('.cardbutton')
+    if (!button) return
+
+    OutgunnedInteractiveChat.triggerChatButton(event)
+  })
 }
+
 
 
 export class OutgunnedChat{
