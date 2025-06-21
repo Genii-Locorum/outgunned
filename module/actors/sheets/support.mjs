@@ -4,7 +4,11 @@ import { OutgunnedChecks } from '../../apps/checks.mjs';
 import * as contextMenu from "../actor-cm.mjs";
 import { OutgunnedUtilities } from '../../apps/utilities.mjs';
 
-export class OutgunnedSupportSheet extends ActorSheet {
+export class OutgunnedSupportSheet extends foundry.appv1.sheets.ActorSheet {
+
+    //Turn off App V1 deprecation warnings
+    //TODO - move to V2
+    static _warnedAppV1 = true
 
     static get defaultOptions() {
       return foundry.utils.mergeObject(super.defaultOptions, {
@@ -37,7 +41,7 @@ export class OutgunnedSupportSheet extends ActorSheet {
       context.displayMultiList = await OutgunnedSelectLists.getDiffMultiList();
       context.displayEnemyList = await OutgunnedSelectLists.getEnemyList();  
 
-      context.enrichedNotesValue = await TextEditor.enrichHTML(
+      context.enrichedNotesValue = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
         context.data.system.strengths,
         {
           async: true,

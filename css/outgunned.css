@@ -109,7 +109,8 @@ body {
   font-size: 12px;
   max-height: 15px;
   background: none;
-  color: var(--mainTextColour)
+  color: var(--mainTextColour);
+  box-shadow: none;
 }
 
 .outgunned .gear-cell input{
@@ -221,6 +222,10 @@ body {
 
 .outgunned .bold{
   font-weight: bold;
+}
+
+.outgunned .italics{
+  font-style: italic;
 }
 
 .outgunned .borderless {

@@ -3,7 +3,11 @@ import { OutgunnedContextMenu } from '../../setup/context-menu.mjs';
 import { OutgunnedSelectLists }  from "../../apps/select-lists.mjs";
 import * as contextMenu from "../actor-cm.mjs";
 
-export class OutgunnedChaseSheet extends ActorSheet {
+export class OutgunnedChaseSheet extends foundry.appv1.sheets.ActorSheet {
+
+  //Turn off App V1 deprecation warnings
+  //TODO - move to V2
+  static _warnedAppV1 = true
 
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -45,7 +49,7 @@ export class OutgunnedChaseSheet extends ActorSheet {
       context.displayChase = await OutgunnedSelectLists.getChaseList();
       context.subType = context.displayChase[this.actor.system.subType];
 
-      context.enrichedNotesValue = await TextEditor.enrichHTML(
+      context.enrichedNotesValue = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
         context.data.system.notes,
         {
           async: true,

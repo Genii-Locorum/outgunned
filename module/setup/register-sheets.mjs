@@ -20,105 +20,105 @@ import { OutgunnedWeaponFeat } from '../items/sheets/weaponfeat.mjs';
 import { OutgunnedShotSheet } from '../items/sheets/shot.mjs';
 
 export function registerSheets () {
-  Actors.unregisterSheet("core", ActorSheet);
+  foundry.documents.collections.Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
   
-  Actors.registerSheet('Outgunned', OutgunnedCharacterSheet, {
+  foundry.documents.collections.Actors.registerSheet('Outgunned', OutgunnedCharacterSheet, {
     types: ['character'],
     makeDefault: true
   })
 
-  Actors.registerSheet('Outgunned', OutgunnedEnemySheet, {
+  foundry.documents.collections.Actors.registerSheet('Outgunned', OutgunnedEnemySheet, {
     types: ['enemy'],
     makeDefault: true
   })
 
-  Actors.registerSheet('Outgunned', OutgunnedSupportSheet, {
+  foundry.documents.collections.Actors.registerSheet('Outgunned', OutgunnedSupportSheet, {
     types: ['support'],
     makeDefault: true
   })
 
-  Actors.registerSheet('Outgunned', OutgunnedMissionSheet, {
+  foundry.documents.collections.Actors.registerSheet('Outgunned', OutgunnedMissionSheet, {
     types: ['mission'],
     makeDefault: true
   })
 
-  Actors.registerSheet('Outgunned', OutgunnedDirectorSheet, {
+  foundry.documents.collections.Actors.registerSheet('Outgunned', OutgunnedDirectorSheet, {
     types: ['director'],
     makeDefault: true
   })
 
-  Actors.registerSheet('Outgunned', OutgunnedChaseSheet, {
+  foundry.documents.collections.Actors.registerSheet('Outgunned', OutgunnedChaseSheet, {
     types: ['chase'],
     makeDefault: true
   })  
 
-  Items.unregisterSheet('core', ItemSheet)
-    Items.registerSheet('Outgunned', OutgunnedGearSheet, {
+  foundry.documents.collections.Items.unregisterSheet('core', foundry.appv1.sheets.ItemSheet)
+    foundry.documents.collections.Items.registerSheet('Outgunned', OutgunnedGearSheet, {
       types: ['gear'],
       makeDefault: true
     })    
 
-  Items.registerSheet('Outgunned', OutgunnedSkillSheet, {
+  foundry.documents.collections.Items.registerSheet('Outgunned', OutgunnedSkillSheet, {
     types: ['skill'],
     makeDefault: true
   })
   
-  Items.registerSheet('Outgunned', OutgunnedRoleSheet, {
+  foundry.documents.collections.Items.registerSheet('Outgunned', OutgunnedRoleSheet, {
     types: ['role'],
     makeDefault: true
   }) 
   
-  Items.registerSheet('Outgunned', OutgunnedFeatSheet, {
+  foundry.documents.collections.Items.registerSheet('Outgunned', OutgunnedFeatSheet, {
     types: ['feat'],
     makeDefault: true
   }) 
 
-  Items.registerSheet('Outgunned', OutgunnedAgeSheet, {
+  foundry.documents.collections.Items.registerSheet('Outgunned', OutgunnedAgeSheet, {
     types: ['age'],
     makeDefault: true
   }) 
 
-  Items.registerSheet('Outgunned', OutgunnedTropeSheet, {
+  foundry.documents.collections.Items.registerSheet('Outgunned', OutgunnedTropeSheet, {
     types: ['trope'],
     makeDefault: true
   }) 
   
-  Items.registerSheet('Outgunned', OutgunnedConditionSheet, {
+  foundry.documents.collections.Items.registerSheet('Outgunned', OutgunnedConditionSheet, {
     types: ['condition'],
     makeDefault: true
   }) 
 
-  Items.registerSheet('Outgunned', OutgunnedGunSheet, {
+  foundry.documents.collections.Items.registerSheet('Outgunned', OutgunnedGunSheet, {
     types: ['gun'],
     makeDefault: true
   })
 
-  Items.registerSheet('Outgunned', OutgunnedRideSheet, {
+  foundry.documents.collections.Items.registerSheet('Outgunned', OutgunnedRideSheet, {
     types: ['ride'],
     makeDefault: true
   })
 
-  Items.registerSheet('Outgunned', OutgunnedEnemyFeatSheet, {
+  foundry.documents.collections.Items.registerSheet('Outgunned', OutgunnedEnemyFeatSheet, {
     types: ['enemyFeat'],
     makeDefault: true
   })
 
-  Items.registerSheet('Outgunned', OutgunnedSpecialActionSheet, {
+  foundry.documents.collections.Items.registerSheet('Outgunned', OutgunnedSpecialActionSheet, {
     types: ['specialAction'],
     makeDefault: true
   })
 
-  Items.registerSheet('Outgunned', OutgunnedExperienceSheet, {
+  foundry.documents.collections.Items.registerSheet('Outgunned', OutgunnedExperienceSheet, {
     types: ['experience'],
     makeDefault: true
   })
   
-  Items.registerSheet('Outgunned', OutgunnedWeaponFeat, {
+  foundry.documents.collections.Items.registerSheet('Outgunned', OutgunnedWeaponFeat, {
     types: ['weaponfeat'],
     makeDefault: true
   })
 
-  Items.registerSheet('Outgunned', OutgunnedShotSheet, {
+  foundry.documents.collections.Items.registerSheet('Outgunned', OutgunnedShotSheet, {
     types: ['shot'],
     makeDefault: true
   })  

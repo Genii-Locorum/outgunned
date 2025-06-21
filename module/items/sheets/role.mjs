@@ -1,8 +1,11 @@
 import {OutgunnedSelectLists}  from "../../apps/select-lists.mjs";
 import {OutgunnedUtilities} from "../../apps/utilities.mjs";
 
-export class OutgunnedRoleSheet extends ItemSheet {
+export class OutgunnedRoleSheet extends foundry.appv1.sheets.ItemSheet {
 
+  //Turn off App V1 deprecation warnings
+  //TODO - move to V2
+  static _warnedAppV1 = true
 
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -28,6 +31,8 @@ export class OutgunnedRoleSheet extends ItemSheet {
     }
     context.system = itemData.system;
     context.flags = itemData.flags;
+    context.hasSkills = false;
+    context.hasFeats = false;
     context.isGM =  game.user.isGM;
     context.displayAttType = await OutgunnedSelectLists.getAttributeTypes();
     context.displayShortAttType = await OutgunnedSelectLists.getShortAttributeTypes(context.displayAttType,this.item.system.attribute);
@@ -36,7 +41,7 @@ export class OutgunnedRoleSheet extends ItemSheet {
     context.specialRoleType = await OutgunnedSelectLists.getSpecialRoleList();
     context.roleType = context.specialRoleType[this.item.system.special]
 
-    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+    context.enrichedDescriptionValue = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
       context.data.system.description,
       {
         async: true,
@@ -51,6 +56,7 @@ export class OutgunnedRoleSheet extends ItemSheet {
     const perSkill = [];
     for (let i of itemData.system.skills){
       perSkill.push(i);
+      context.hasSkills = true;
     }
     // Sort Skills
     perSkill.sort(function(a, b){
@@ -65,6 +71,7 @@ export class OutgunnedRoleSheet extends ItemSheet {
     const feats = [];
     for (let i of itemData.system.feats){
       feats.push(i);
+      context.hasFeats = true;
     }
     // Sort Feats
     feats.sort(function(a, b){

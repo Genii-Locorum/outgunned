@@ -1,38 +1,14 @@
-export class OutgunnedContextMenu extends ContextMenu
+export class OutgunnedContextMenu extends foundry.applications.ux.ContextMenu.implementation
 {
-  constructor(element, selector, menuItems, options = {})
-  {
+  constructor(element, selector, menuItems, options = {}) {
     super(element, selector, menuItems, options);
   }
-
-  //Stores the pageX / pageY position from the the JQuery event to be applied in `_setPosition`.
-  bind()
-  {
-    this.element.on(this.eventName, this.selector, (event) =>
-    {
-      event.preventDefault();
-       this._position = { left: event.pageX, top: event.pageY };
-    });
-    super.bind();
+  
+    /** @inheritdoc */
+  static create(app, element, selector, items, { hookName = "EntryContext", ...options } = {}) {
+    options.fixed ??= true;
+    app._callHooks?.(className => `get${className}${hookName}`, items);
+    return new this(element, selector, items, options);
   }
 
-  _setPosition(html, target)
-  {
-    super._setPosition(html, target);
-	const pos = foundry.utils.mergeObject(this._position ?? {}, s_DEFAULT_STYLE);
-	html.style.position = pos.position;
-	Object.assign(html.style, pos);
-
-  }
 }
-
-//Defines the default CSS styles for the context menu.
-const s_DEFAULT_STYLE = {
-   position: 'fixed',
-   width: 'fit-content',
-   'font-family': '"Signika", sans-serif',
-   'font-size': '14px',
-   'box-shadow': '0 0 10px #000',
-   'text-transform': 'capitalize',
-   'text-align': 'left'
-};

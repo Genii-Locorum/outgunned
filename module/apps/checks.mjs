@@ -39,8 +39,10 @@ export class OutgunnedChecks {
   }
 
   //Death Roulette roll from Character Sheet
-  static async _deathRoulette(event,actor) {
-    let partic =await OutgunnedActorDetails._getParticipantId(this.token,actor); 
+  static async _deathRoulette(event) {
+    const dataset = event.currentTarget.dataset
+    let partic =await OutgunnedActorDetails._getParticipantId(this.token, this.actor); 
+    let actor = await OutgunnedActorDetails._getParticipant(partic.particId, partic.particType);    
     await OutgunnedChecks.startCheck ({
       shiftKey: true,
       partic,
@@ -317,7 +319,7 @@ export class OutgunnedChecks {
       neutralRoll: options.neutralRoll,
       razorsEdge,
     }
-    const html = await renderTemplate(options.dialogTemplate,data);
+    const html = await foundry.applications.handlebars.renderTemplate(options.dialogTemplate,data);
     return new Promise(resolve => {
       let formData = null
       const dlg = new Dialog({
@@ -334,7 +336,10 @@ export class OutgunnedChecks {
         },
       default: 'roll',
       close: () => {}
-      },{classes: ["outgunned"]})
+      },
+      {classes: ["outgunned"],
+       height: 400 
+      })
       dlg.render(true);
     })
   }
@@ -429,7 +434,7 @@ export class OutgunnedChecks {
       neutralRoll: config.neutralRoll
     }
     const messageTemplate = config.chatTemplate
-    let html = await renderTemplate (messageTemplate, messageData);
+    let html = await foundry.applications.handlebars.renderTemplate (messageTemplate, messageData);
     return html;
   }  
 

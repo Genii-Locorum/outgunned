@@ -1,8 +1,11 @@
 import {OutgunnedSelectLists}  from "../../apps/select-lists.mjs";
 
 
-export class OutgunnedSkillSheet extends ItemSheet {
+export class OutgunnedSkillSheet extends foundry.appv1.sheets.ItemSheet {
 
+  //Turn off App V1 deprecation warnings
+  //TODO - move to V2
+  static _warnedAppV1 = true
 
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -35,7 +38,7 @@ export class OutgunnedSkillSheet extends ItemSheet {
     context.freeform = await game.settings.get('outgunned', 'freeform')
     if(!this.item.isEmbedded || !context.isGM){ context.freeform = false}
 
-    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+    context.enrichedDescriptionValue = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
       context.data.system.description,
       {
         async: true,

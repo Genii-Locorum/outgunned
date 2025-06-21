@@ -23,7 +23,7 @@ export class ItemSelectDialog extends Dialog {
     }
   
     static async create (data) {
-      const html = await renderTemplate(
+      const html = await foundry.applications.handlebars.renderTemplate(
         'systems/outgunned/templates/dialog/newItemSelect.html',
         data
       ) 

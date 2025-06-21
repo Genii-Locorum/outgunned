@@ -23,6 +23,7 @@
     "actionTime": "Aktionszeit",
     "active": "Aktiv",
     "activeHint": "Wenn dieser Zustand aktiviert ist, wirkt er auf den Charakter",
+    "adConvert": "Wandel Adrenalin zu Spotlight",
     "adrenaline": "Adrenalin",
     "adrenalineCost": "Adrenalin-Kosten",
     "advanced": "Fortschritt",
@@ -99,6 +100,7 @@
     "death": {
       "roll": "Todesroulette"
     },
+    "deathRoll": "Todesroulette-Wurf",    
     "deathRoulette": "Todesroulette",
     "defence": "Verteidigung",
     "delete": "Löschen",
@@ -111,6 +113,7 @@
     "displaySecAttType": "Sekundäres Attribut",
     "double": "Doppelt",
     "doubleDiff": "Doppelte Schwierigkeit",
+    "drop": "Bitte legen Sie die Gegenstände hier ab",
     "dupActor": "Dieses Element kann nicht hinzugefügt werden, da es bereits auf dem Blatt vorhanden ist.",
     "earned": "Verdiente",
     "edit": "Editieren",
@@ -389,6 +392,32 @@
       "secondaryColourHint": "Dies ist die Sekundärfarbe, die für Überschriften, Zeilen usw. verwendet wird.",
       "secondaryIcon": "Sekundärfarbe, die für Symbole verwendet wird.",
       "secondaryIconHint": "Dies ist die Sekundärfarbe, die für Symbole verwendet wird."  
+    }
+  },
+  "TYPES": {
+    "Actor": {
+      "character": "Spielercharakter",
+      "chase": "Rennen",
+      "director": "Regisseur",
+      "enemy": "Feind",
+      "mission": "Auftrag",
+      "support": "Helfer"
+    },
+    "Item": {
+      "age": "Alter",
+      "condition": "Zustand",
+      "enemyFeat": "Enemy Feat",
+      "experience": "Erfahrung",
+      "feat": "Talent",
+      "gear": "Ausrüstung",
+      "gun": "Schusswaffe",
+      "ride": "Fahrzeug",
+      "role": "Rolle",
+      "shot": "Schuss",
+      "skill": "Fertigkeit",
+      "specialAction": "Spezialaktion",
+      "trope": "Klischee",
+      "weaponfeat": "Waffen-Talent"
     }
   }
 }

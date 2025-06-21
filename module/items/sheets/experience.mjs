@@ -1,7 +1,10 @@
 import {OutgunnedSelectLists}  from "../../apps/select-lists.mjs";
 
-export class OutgunnedExperienceSheet extends ItemSheet {
+export class OutgunnedExperienceSheet extends foundry.appv1.sheets.ItemSheet {
 
+  //Turn off App V1 deprecation warnings
+  //TODO - move to V2
+  static _warnedAppV1 = true
 
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {

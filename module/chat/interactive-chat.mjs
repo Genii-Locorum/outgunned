@@ -7,20 +7,16 @@ export class OutgunnedInteractiveChat {
 
 static  async triggerChatButton(event){
     ui.chat.scrollBottom()
-    const targetElement = event.target.closest('.cardbutton');
-    if (!targetElement) {
-      console.error("triggerChatButton: No element with class .cardbutton found.");
-      return;
-    }
+    const targetElement = event.currentTarget;
     const presetType = targetElement.dataset?.preset;
-    const targetChat = targetElement.closest('.message');
-    let targetChatId = targetChat?.dataset?.messageId;
+    const targetChat = $(targetElement).closest('.message');
+    let targetChatId = targetChat[0].dataset.messageId;
 
     let origin = game.user.id;
     let originGM = game.user.isGM;
 
     //Call confirmation
-    const confirmation = await OutgunnedUtilities.confirmation(presetType, "chatMsg")
+    let confirmation = await OutgunnedUtilities.confirmation(presetType, "chatMsg")
     if (!confirmation) {return}
     
     //If this is GM then call the handleChatButton, otherwise it's a player in which case trigger Socket emit for the GM to act on

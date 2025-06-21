@@ -1,7 +1,10 @@
 import {OutgunnedSelectLists}  from "../../apps/select-lists.mjs";
 
-export class OutgunnedConditionSheet extends ItemSheet {
+export class OutgunnedConditionSheet extends foundry.appv1.sheets.ItemSheet {
 
+  //Turn off App V1 deprecation warnings
+  //TODO - move to V2
+  static _warnedAppV1 = true
 
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -36,7 +39,7 @@ export class OutgunnedConditionSheet extends ItemSheet {
     context.skill = context.displaySkill[this.item.system.skill];
     context.skill2 = context.displaySkill[this.item.system.skill2];
 
-    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+    context.enrichedDescriptionValue = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
       context.data.system.description,
       {
         async: true,
@@ -44,7 +47,7 @@ export class OutgunnedConditionSheet extends ItemSheet {
       }
     )  
 
-    context.enrichedShortDescriptionValue = await TextEditor.enrichHTML(
+    context.enrichedShortDescriptionValue = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
       context.data.system.shortDesc,
       {
         async: true,

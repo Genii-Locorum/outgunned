@@ -51,12 +51,24 @@
       <div class="red info-cell item age contextmenu" data-item-id="{{actor.system.ageId}}">{{localize 'OG.age'}}</div>
       <div class="info-cell indent">{{ageName}}</div>
     </div> 
-    <div class="red flaw contextmenu">{{localize 'OG.flaw'}}</div>
-    <div class="info-cell indent">{{{actor.system.flaw}}}</div>
-    <div class="red catchphrase contextmenu">{{localize 'OG.catchphrase'}}</div>
-    <div class="info-cell indent">{{{actor.system.catchphrase}}}</div>
-    <div class="red mission contextmenu">{{missionLabel}}</div>
-    <div class="info-cell indent">{{{actor.system.mission}}}</div>
+    <div class="red">{{localize 'OG.flaw'}}</div>
+    {{#if isLocked}}
+      <div class="info-cell indent truncate" title="{{actor.system.flaw}}">{{actor.system.flaw}}</div>
+    {{else}}
+      <div class="info-cell indent"><input name="system.flaw" type="text" value="{{actor.system.flaw}}"/></div>
+    {{/if}}
+    <div class="red">{{localize 'OG.catchphrase'}}</div>
+    {{#if isLocked}}
+      <div class="info-cell indent truncate" title="{{actor.system.catchphrase}}">{{actor.system.catchphrase}}</div>
+    {{else}}
+      <div class="info-cell indent"><input name="system.catchphrase" type="text" value="{{actor.system.catchphrase}}"/></div>
+    {{/if}}
+    <div class="red">{{missionLabel}}</div>
+    {{#if isLocked}}
+      <div class="info-cell indent truncate" title="{{actor.system.mission}}">{{actor.system.mission}}</div>
+    {{else}}
+      <div class="info-cell indent"><input name="system.mission" type="text" value="{{actor.system.mission}}"/></div>
+    {{/if}}
     <br>
 
     <div class="red upperCase">{{localize 'OG.grit'}}</div>
@@ -81,7 +93,7 @@
     </div>
 
     <br>
-    <div class="red upperCase adrenaline-name contextmenu">{{adrenalineLabel}}</div>
+    <div class="red upperCase rollable adrenaline-name" title="{{ localize 'OG.adConvert'}}">{{adrenalineLabel}}</div>
     <div class="grit">
       {{#loop 1 system.adrenaline.max 1}}
       <a class="primIcon medium-icon actor-toggle clickable" data-property="adrenaline" data-target = {{this}}><i class="{{#if (gte ../actor.system.adrenaline.value this)}} fa-solid fa-battery-full fa-rotate-270 {{else}} fa-solid fa-battery-empty fa-rotate-270{{/if}}"></i></a>
@@ -99,7 +111,7 @@
     
     <br>
 
-    <div class="red upperCase deathRoulette contextmenu">{{localize 'OG.deathRoulette'}}</div>
+    <div class="red upperCase rollable deathRoulette" title="{{ localize 'OG.deathRoll'}}">{{localize 'OG.deathRoulette'}}</div>
     <div class="grit">
       {{#loop 1 6 1}}
       <a class="primIcon medium-icon actor-toggle clickable" data-property="deathRoulette" data-target = {{this}}><i class="{{#if (gte ../actor.system.deathRoulette.value this)}} fa-solid fa-gun-slash {{else}} fa-regular fa-gun{{/if}}"></i></a>

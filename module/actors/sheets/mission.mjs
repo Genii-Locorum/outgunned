@@ -1,6 +1,10 @@
 import { OutgunnedUtilities } from "../../apps/utilities.mjs";
 
-export class OutgunnedMissionSheet extends ActorSheet {
+export class OutgunnedMissionSheet extends foundry.appv1.sheets.ActorSheet {
+
+  //Turn off App V1 deprecation warnings
+  //TODO - move to V2
+  static _warnedAppV1 = true
 
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -49,7 +53,7 @@ export class OutgunnedMissionSheet extends ActorSheet {
       }
       context.heat = game.settings.get('outgunned', 'heat')
 
-      context.enrichedStrongValue = await TextEditor.enrichHTML(
+      context.enrichedStrongValue = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
         context.data.system.villain.strongSpots,
         {
           async: true,
@@ -57,7 +61,7 @@ export class OutgunnedMissionSheet extends ActorSheet {
         }
       )  
   
-      context.enrichedWeakValue = await TextEditor.enrichHTML(
+      context.enrichedWeakValue = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
         context.data.system.villain.weakSpots,
         {
           async: true,

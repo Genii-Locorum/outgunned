@@ -1,8 +1,11 @@
 import {OutgunnedSelectLists}  from "../../apps/select-lists.mjs";
 import {OutgunnedUtilities} from "../../apps/utilities.mjs";
 
-export class OutgunnedAgeSheet extends ItemSheet {
+export class OutgunnedAgeSheet extends foundry.appv1.sheets.ItemSheet {
 
+  //Turn off App V1 deprecation warnings
+  //TODO - move to V2
+  static _warnedAppV1 = true
 
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -29,6 +32,7 @@ export class OutgunnedAgeSheet extends ItemSheet {
     context.system = itemData.system;
     context.flags = itemData.flags;
     context.isGM =  game.user.isGM;
+    context.hasFeats = false
     context.maxBullet = 2
     context.showGold = false
     if (game.settings.get('outgunned','ogVersion') === "2") {
@@ -36,7 +40,7 @@ export class OutgunnedAgeSheet extends ItemSheet {
       context.showGold = true
     }
 
-    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+    context.enrichedDescriptionValue = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
       context.data.system.description,
       {
         async: true,
@@ -47,6 +51,7 @@ export class OutgunnedAgeSheet extends ItemSheet {
     const feats = [];
     for (let i of itemData.system.feats){
       feats.push(i);
+      context.hasFeats = true
     }
     // Sort Feats
     feats.sort(function(a, b){

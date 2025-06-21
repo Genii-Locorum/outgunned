@@ -5,14 +5,18 @@ import * as contextMenu from "../actor-cm.mjs";
 import { OutgunnedUtilities } from '../../apps/utilities.mjs';
 
 
-export class OutgunnedCharacterSheet extends ActorSheet {
+export class OutgunnedCharacterSheet extends foundry.appv1.sheets.ActorSheet {
+
+  //Turn off App V1 deprecation warnings
+  //TODO - move to V2
+  static _warnedAppV1 = true
 
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["outgunned", "sheet", "actor"],
       template: "systems/outgunned/templates/actor/actor-sheet.html",
       width: 880,
-      height: 610,
+      height: 660,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "feats" }]
     });
   }
@@ -70,7 +74,7 @@ export class OutgunnedCharacterSheet extends ActorSheet {
       context.jobLabel = game.i18n.localize("OG.background")
     }
 
-    context.enrichedBiographyValue = await TextEditor.enrichHTML(
+    context.enrichedBiographyValue = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
       context.data.system.biography,
       {
         async: true,
@@ -252,25 +256,21 @@ export class OutgunnedCharacterSheet extends ActorSheet {
 
     html.find('.item-create').click(this._onItemCreate.bind(this));                       // Add Inventory Item
     html.find('.rollable.skill-name').click(OutgunnedChecks._onSkillRoll.bind(this));     // Rollable skills
+    html.find('.rollable.deathRoulette').dblclick(OutgunnedChecks._deathRoulette.bind(this));  // Roll death routlette
+    html.find('.rollable.adrenaline-name').dblclick(OutgunnedUtilities.spendAdrenaline.bind(this));  // Convert Adrenaline    
     html.find('.actor-toggle').dblclick(this._actorToggle.bind(this));                    // Toggle an actor value (not an item)
     html.find('.item-toggle').dblclick((event) => this._itemToggle(event));               // Toggle an item value (not an actor value)
     html.find(".inline-edit").change(this._inlineEdit.bind(this));                        // Edit an item from the character sheet
     
     //Character Context Menu
-    new OutgunnedContextMenu(html, ".skill-name.contextmenu", contextMenu.skillMenuOptions(this.actor, this.token));
-    new OutgunnedContextMenu(html, ".age.contextmenu", contextMenu.ageMenuOptions(this.actor, this.token));
-    new OutgunnedContextMenu(html, ".role.contextmenu", contextMenu.roleMenuOptions(this.actor, this.token));
-    new OutgunnedContextMenu(html, ".trope.contextmenu", contextMenu.tropeMenuOptions(this.actor, this.token));
-    new OutgunnedContextMenu(html, ".attribute-name.contextmenu", contextMenu.attributeMenuOptions(this.actor, this.token));
-    new OutgunnedContextMenu(html, ".feat-name.contextmenu", contextMenu.featMenuOptions(this.actor, this.token));
-    new OutgunnedContextMenu(html, ".adrenaline-name.contextmenu", contextMenu.adrenalineMenuOptions(this.actor, this.token));
-    new OutgunnedContextMenu(html, ".spotlight.contextmenu", contextMenu.spotlightMenuOptions(this.actor, this.token));
-    new OutgunnedContextMenu(html, ".condition-name.contextmenu", contextMenu.conditionMenuOptions(this.actor, this.token));
-    new OutgunnedContextMenu(html, ".catchphrase.contextmenu", contextMenu.catchphraseMenuOptions(this.actor, this.token));
-    new OutgunnedContextMenu(html, ".mission.contextmenu", contextMenu.missionMenuOptions(this.actor, this.token));
-    new OutgunnedContextMenu(html, ".flaw.contextmenu", contextMenu.flawMenuOptions(this.actor, this.token));
-    new OutgunnedContextMenu(html, ".deathRoulette.contextmenu", contextMenu.deathRouletteMenuOptions(this.actor, this.token));
-    new OutgunnedContextMenu(html, ".free.contextmenu", contextMenu.freeXPMenuOptions(this.actor, this.token));
+    new OutgunnedContextMenu(html, ".skill-name.contextmenu", contextMenu.skillMenuOptions(this.actor, this.token),{parentClassHooks: false, fixed:true});
+    new OutgunnedContextMenu(html, ".age.contextmenu", contextMenu.ageMenuOptions(this.actor, this.token),{parentClassHooks: false, fixed:true});
+    new OutgunnedContextMenu(html, ".role.contextmenu", contextMenu.roleMenuOptions(this.actor, this.token),{parentClassHooks: false, fixed:true});
+    new OutgunnedContextMenu(html, ".trope.contextmenu", contextMenu.tropeMenuOptions(this.actor, this.token),{parentClassHooks: false, fixed:true});
+    new OutgunnedContextMenu(html, ".feat-name.contextmenu", contextMenu.featMenuOptions(this.actor, this.token),{parentClassHooks: false, fixed:true});
+    new OutgunnedContextMenu(html, ".spotlight.contextmenu", contextMenu.spotlightMenuOptions(this.actor, this.token),{parentClassHooks: false, fixed:true});
+    new OutgunnedContextMenu(html, ".condition-name.contextmenu", contextMenu.conditionMenuOptions(this.actor, this.token),{parentClassHooks: false, fixed:true});
+    new OutgunnedContextMenu(html, ".free.contextmenu", contextMenu.freeXPMenuOptions(this.actor, this.token),{parentClassHooks: false, fixed:true});
     // Drag events for macros.
     if (this.actor.isOwner) {
       let handler = ev => this._onDragStart(ev);
@@ -683,7 +683,7 @@ export class OutgunnedCharacterSheet extends ActorSheet {
       disp1: this.actor.system.abilities[opt1].label,
       disp2: this.actor.system.abilities[opt2].label,
     }
-    const html = await renderTemplate('systems/outgunned/templates/dialog/tropeAtt.html',data);
+    const html = await foundry.applications.handlebars.renderTemplate('systems/outgunned/templates/dialog/tropeAtt.html',data);
     return new Promise(resolve => {
       let formData = null
       const dlg = new Dialog({

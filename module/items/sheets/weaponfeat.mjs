@@ -1,5 +1,8 @@
-export class OutgunnedWeaponFeat extends ItemSheet {
+export class OutgunnedWeaponFeat extends foundry.appv1.sheets.ItemSheet {
 
+  //Turn off App V1 deprecation warnings
+  //TODO - move to V2
+  static _warnedAppV1 = true  
 
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -21,7 +24,7 @@ export class OutgunnedWeaponFeat extends ItemSheet {
     context.system = itemData.system;
     context.flags = itemData.flags;
     context.isGM =  game.user.isGM;
-    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+    context.enrichedDescriptionValue = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
       context.data.system.description,
       {
         async: true,

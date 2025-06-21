@@ -56,7 +56,7 @@ export class AttViewDialog extends Dialog {
         trope,
         freeform
       }
-      const html = await renderTemplate(destination,data);
+      const html = await foundry.applications.handlebars.renderTemplate(destination,data);
       
       return new Promise(resolve => {
         const dlg = new AttViewDialog(

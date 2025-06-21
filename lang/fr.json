@@ -23,6 +23,7 @@
     "actionTime": "Temps d'action",
     "active": "Actif",
     "activeHint": "Lorsque cette condition est activée, elle affecte le personnage",
+    "adConvert": "Convertir l'adrénaline en Spotlight",
     "adrenaline": "Adrénaline",
     "adrenalineCost": "Coût en adrénaline",
     "advanced": "Avancé",
@@ -99,6 +100,7 @@
     "death": {
       "roll": "Roulette russe"
     },
+    "deathRoll": "Roulette russe roul",
     "deathRoulette": "Roulette russe",
     "defence": "Défense",
     "delete": "Supprimer",
@@ -111,6 +113,7 @@
     "displaySecAttType": "Attribut secondaire",
     "double": "Double",
     "doubleDiff": "Double difficulté",
+    "drop": "Veuillez déposer les articles ici",    
     "dupActor": "Impossible d'ajouter cet élément car il existe déjà sur la feuille.",
     "earned": "Gagné",
     "edit": "Modifier",
@@ -389,6 +392,32 @@
       "secondaryColourHint": "Il s’agit de la couleur secondaire utilisée pour les titres, les lignes, etc.",
       "secondaryIcon": "Couleur secondaire utilisée pour les icônes.",
       "secondaryIconHint": "Il s’agit de la couleur secondaire utilisée pour les icônes."  
+    }
+  },
+  "TYPES": {
+    "Actor": {
+      "character": "Personnage",
+      "chase": "Poursuite",
+      "director": "Directeur",
+      "enemy": "Ennemi",
+      "mission": "Mission",
+      "support": "Soutien"
+    },
+    "Item": {
+      "age": "Âge",
+      "condition": "Condition",
+      "enemyFeat": "Enemy Feat",
+      "experience": "Expérience",
+      "feat": "Exploit",
+      "gear": "Équipement",
+      "gun": "Arme à feu",
+      "ride": "Conduite",
+      "role": "Rôle",
+      "shot": "Scène",
+      "skill": "Compétence",
+      "specialAction": "Action spéciale",
+      "trope": "Tropisme",
+      "weaponfeat": "Exploit d’arme"
     }
   }
 }

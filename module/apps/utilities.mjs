@@ -1,6 +1,7 @@
 import { OutgunnedCharacterSheet } from '../actors/sheets/character.mjs';
 import { AttViewDialog } from '../chat/attributeView.mjs'
 import { ItemSelectDialog} from "../apps/feat-selection-dialog.mjs";
+import { OutgunnedActorDetails } from './actorDetails.mjs';
 
 export class OutgunnedUtilities {
     static async triggerDelete(el, actor, dataitem) {
@@ -75,7 +76,7 @@ if (dataitem === 'grit') {
   const data = {
     currVal,
   }
-  const html = await renderTemplate('systems/outgunned/templates/dialog/catchPhrase.html',data);
+  const html = await foundry.applications.handlebars.renderTemplate('systems/outgunned/templates/dialog/catchPhrase.html',data);
   let result = await new Promise(resolve => {
     let formData = null
     const dlg = new Dialog({
@@ -233,7 +234,11 @@ if (dataitem === 'grit') {
     })
   } 
 
-  static async spendAdrenaline(el, actor) {
+  static async spendAdrenaline(event) {
+console.log(this)
+    const dataset = event.currentTarget.dataset
+    let partic =await OutgunnedActorDetails._getParticipantId(this.token, this.actor); 
+    let actor = await OutgunnedActorDetails._getParticipant(partic.particId, partic.particType); 
     if (actor.system.adrenaline.value <6) {
       ui.notifications.warn(game.i18n.localize('OG.msg.notAdrenaline'));
       return
@@ -273,7 +278,7 @@ if (dataitem === 'grit') {
     let destination = 'systems/outgunned/templates/dialog/characterList.html';
     let winTitle = game.i18n.localize("OG.selectFriend");
     
-    const html = await renderTemplate(destination,data);
+    const html = await foundry.applications.handlebars.renderTemplate(destination,data);
   
     let usage = await new Promise(resolve => {
       let formData = null
@@ -338,7 +343,7 @@ if (dataitem === 'grit') {
     }
 
 
-    let html = await renderTemplate ('systems/outgunned/templates/chat/spotlight-result.html', messageData);
+    let html = await foundry.applications.handlebars.renderTemplate ('systems/outgunned/templates/chat/spotlight-result.html', messageData);
 
     // Display the chat card and roll the dice
     let chatData={};

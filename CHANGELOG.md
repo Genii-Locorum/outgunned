@@ -1,5 +1,13 @@
 # CHANGELOG
 
+##13.1
+-  Updated for Foundry V13 (still using Application V1) - PLEASE BACKUP YOUR WORLD
+-  A huge thank you to Kenneth Blaney for his help wih the move to V13
+-  Character sheet Flaw, Mission and Catchphrase are now direct inputs rather than via context menu.  Tooltip shows full text
+-  Death roullette roll is made by double-clicking (to prevent accidents) on the title "Death Roulette" rather than via the context menu
+-  Adrenaline conversion is made by double-clicking the title "Adrenaline" rather than via the context menu
+-  Where an item can have other items dropped on it (e.g. Age) there is a "drop here" text to show where to drop if there's nothing in the list.  This also increases the target drop space size
+
 ## 12.17
 - Please note this update is for Foundry Version 12 (Version 13 migration will happen later)
 - When dropping an actor from a compendium skills etc will no longer be duplicated

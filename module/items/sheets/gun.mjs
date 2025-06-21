@@ -1,7 +1,12 @@
 import {OutgunnedSelectLists}  from "../../apps/select-lists.mjs";
 import {OutgunnedUtilities} from "../../apps/utilities.mjs";
 
-export class OutgunnedGunSheet extends ItemSheet {
+export class OutgunnedGunSheet extends foundry.appv1.sheets.ItemSheet {
+
+  //Turn off App V1 deprecation warnings
+  //TODO - move to V2
+  static _warnedAppV1 = true
+
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["outgunned", "sheet", "item"],
@@ -27,12 +32,13 @@ export class OutgunnedGunSheet extends ItemSheet {
     context.system = itemData.system;
     context.flags = itemData.flags;
     context.isGM =  game.user.isGM;
+    context.hasFeats = false;
     context.gameVersion = game.settings.get('outgunned','ogVersion')
     context.hasOwner = this.item.isEmbedded === true
     context.displayLocList = await OutgunnedSelectLists.getLocationList();
     context.displayMagsList = await OutgunnedSelectLists.getMagsList();
 
-    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+    context.enrichedDescriptionValue = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
       context.data.system.description,
       {
         async: true,
@@ -43,6 +49,7 @@ export class OutgunnedGunSheet extends ItemSheet {
     const weaponfeats = [];
     for (let i of itemData.system.weaponfeats){
       weaponfeats.push(i);
+      context.hasFeats = true;
     }
     // Sort Feats
     weaponfeats.sort(function(a, b){

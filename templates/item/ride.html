@@ -56,6 +56,9 @@
     <div class="horizontalboxed {{#if isGM}} droppable {{/if}} skills">
     <div class="select-name">{{ localize "OG.extras"}}</div>
     <ol class="item-list">
+      {{#unless hasFeats}}
+        <div class="centre italics fade">{{localize 'OG.drop'}}</div>
+      {{/unless}}
       {{#each items as |item|}}
         <li class="item flexrow" data-item-id="{{item._id}}" >
           <div class="item-name flexrow">

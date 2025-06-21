@@ -23,6 +23,7 @@
     "actionTime": "Action Time",
     "active": "Active",
     "activeHint": "When toggled on this condition will affect the character",
+    "adConvert": "Convert Adrenaline to Spotlight",
     "adrenaline": "Adrenaline",
     "adrenalineCost": "Adrenaline Cost",
     "advanced": "Advanced",
@@ -100,6 +101,7 @@
     "death": {
       "roll": "Death Roulette"
     },
+    "deathRoll": "Death Roulette Roll",
     "deathRoulette": "Death Roulette",
     "defence": "Defence",
     "delete": "Delete",
@@ -112,6 +114,7 @@
     "displaySecAttType": "Secondary Attribute",
     "double": "Double",
     "doubleDiff": "Double Difficulty",
+    "drop": "Please drop items here",
     "dupActor": "Can not add this item as it already exists on the sheet",
     "earned": "Earned",
     "edit": "Edit",
@@ -391,6 +394,32 @@
       "secondaryColourHint": "This is the secondary colour used for headings, lines etc.",
       "secondaryIcon": "Secondary Colour used for icons",
       "secondaryIconHint": "This is the secondary colour used for icons."
+    }
+  },
+  "TYPES": {
+    "Actor": {
+      "character": "Character",
+      "chase": "Chase",
+      "director": "Director",
+      "enemy": "Enemy",
+      "mission": "Mission",
+      "support": "Support"
+    },
+    "Item": {
+      "age": "Age",
+      "condition": "Condition",
+      "enemyFeat": "Enemy Feat",
+      "experience": "Experience",
+      "feat": "Feat",
+      "gear": "Gear",
+      "gun": "Gun",
+      "ride": "Ride",
+      "role": "Role",
+      "shot": "Shot",
+      "skill": "Skill",
+      "specialAction": "Special Action",
+      "trope": "Trope",
+      "weaponfeat": "Weapon Feat"
     }
   }
 }

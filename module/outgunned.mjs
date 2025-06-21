@@ -12,6 +12,7 @@ import { OutgunnedUtilities } from './apps/utilities.mjs'
 import { OutgunnedChecks } from './apps/checks.mjs'
 import { OutgunnedCharacterSheet } from "./actors/sheets/character.mjs";
 import { OutgunnedAgeSheet } from "./items/sheets/age.mjs";
+import renderSceneControls from "./setup/render-scene-controls.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -52,28 +53,17 @@ Hooks.on('ready', async () => {
   });
 });
 
-//Remove certain Items types from the list of options to create under the items menu (can still be created directly from the character sheet)
-Hooks.on("renderDialog", (dialog, html) => {
-  let deprecatedTypes = ["experience","shot"]; // 
-  Array.from(html.find("#document-create option")).forEach(i => {
-      if (deprecatedTypes.includes(i.value))
-      {
-          i.remove()
-      }
-  })
-})
-
 OutgunnedHooks.listen()
 
 //Add Chat Log Hooks
-Hooks.on("renderChatLog", (app, html, data) => Chat.addChatListeners(html));
 Hooks.on('renderActorSheet', OutgunnedCharacterSheet.renderSheet)
 Hooks.on('renderItemSheet', OutgunnedAgeSheet.renderSheet)
 
 
+
 //Add GM Tool Layer
 Hooks.on('getSceneControlButtons', OutgunnedMenu.getButtons)
-Hooks.on('renderSceneControls', OutgunnedMenu.renderControls)
+Hooks.on('renderSceneControls', renderSceneControls);
 
 //Ready Hook
 Hooks.once("ready", async function() {

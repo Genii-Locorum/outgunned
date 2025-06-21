@@ -1,8 +1,11 @@
 import {OutgunnedSelectLists}  from "../../apps/select-lists.mjs";
 
 
-export class OutgunnedFeatSheet extends ItemSheet {
+export class OutgunnedFeatSheet extends foundry.appv1.sheets.ItemSheet {
 
+  //Turn off App V1 deprecation warnings
+  //TODO - move to V2
+  static _warnedAppV1 = true  
 
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -32,7 +35,7 @@ export class OutgunnedFeatSheet extends ItemSheet {
     context.displayUsage = await OutgunnedSelectLists.getUsageTypes();
     context.usage = context.displayUsage[this.item.system.usage]
 
-    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+    context.enrichedDescriptionValue = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
       context.data.system.description,
       {
         async: true,
@@ -40,7 +43,7 @@ export class OutgunnedFeatSheet extends ItemSheet {
       }
     )  
 
-    context.enrichedShortDescriptionValue = await TextEditor.enrichHTML(
+    context.enrichedShortDescriptionValue = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
       context.data.system.shortDesc,
       {
         async: true,

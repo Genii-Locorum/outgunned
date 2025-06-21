@@ -26,6 +26,15 @@ export class OutgunnedItem extends Item {
     return rollData;
   }
 
+
+  static async createDialog(data={}, createOptions={}, { types, ...options }={}) {
+    //Enter the document types you want to remove from the side bar create option - 'base' is removed in the super
+    const invalid = ["experience","shot"];
+    if (!types) types = this.TYPES.filter(type => !invalid.includes(type));
+    else types = types.filter(type => !invalid.includes(type));
+    return super.createDialog(data, createOptions, { types, ...options });
+  }
+
   /**
    * Handle clickable rolls.
    * @param {Event} event   The originating click event

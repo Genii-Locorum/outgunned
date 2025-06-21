@@ -1,7 +1,10 @@
 import {OutgunnedUtilities} from "../../apps/utilities.mjs";
 
-export class OutgunnedShotSheet extends ItemSheet {
+export class OutgunnedShotSheet extends foundry.appv1.sheets.ItemSheet {
 
+  //Turn off App V1 deprecation warnings
+  //TODO - move to V2
+  static _warnedAppV1 = true
 
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -30,7 +33,7 @@ export class OutgunnedShotSheet extends ItemSheet {
     context.isGM =  game.user.isGM;
     context.itemType = game.i18n.localize('OG.'+itemData.system.type)
 
-    context.enrichedDescriptionValue = await TextEditor.enrichHTML(
+    context.enrichedDescriptionValue = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
       context.data.system.description,
       {
         async: true,
