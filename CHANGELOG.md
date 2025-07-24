@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 13.2
+-  Players can now access re-rolls etc from Neutral Rolls
+
 ##13.1
 -  Updated for Foundry V13 (still using Application V1) - PLEASE BACKUP YOUR WORLD
 -  A huge thank you to Kenneth Blaney for his help wih the move to V13

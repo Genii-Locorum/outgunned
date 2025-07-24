@@ -65,7 +65,7 @@ export class OutgunnedTropeSheet extends foundry.appv1.sheets.ItemSheet {
     const feats = [];
     for (let i of itemData.system.feats){
       feats.push(i);
-      context.hasFeats = false;
+      context.hasFeats = true;
     }
     // Sort Feats
     feats.sort(function(a, b){

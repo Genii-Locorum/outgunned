@@ -1,7 +1,7 @@
 import { OutgunnedUtilities } from '../apps/utilities.mjs'
 import { OutgunnedChecks } from '../apps/checks.mjs'
 
-class OutgunnedLayer extends foundry.canvas.layers.PlaceablesLayer {
+class OutgunnedLayer extends foundry.canvas.layers.InteractionLayer {
 
   constructor () {
     super()
@@ -11,10 +11,11 @@ class OutgunnedLayer extends foundry.canvas.layers.PlaceablesLayer {
   static get layerOptions () {
     return foundry.utils.mergeObject(super.layerOptions, {
       name: 'outgunnedmenu',
-      zIndex: 60
+      //zIndex: 60
     })
   }
 
+  /*
   static get documentName () {
     return 'Token'
   }
@@ -22,7 +23,7 @@ class OutgunnedLayer extends foundry.canvas.layers.PlaceablesLayer {
   get placeables () {
     return []
   }
- 
+ */
 }
 
   export class OutgunnedMenu {
@@ -165,8 +166,8 @@ class OutgunnedLayer extends foundry.canvas.layers.PlaceablesLayer {
   static renderControls (app, html, data) {
     const isGM = game.user.isGM
     const gmMenu = html.querySelector('.fas-fa-tools')?.parentNode
-    if (gmMenu && !gmMenu.classList.contains('outgunned-menu')) {
-      gmMenu.classList.add('outgunned-menu')
+    if (gmMenu && !gmMenu.classList.contains('outgunnedmenu')) {
+      gmMenu.classList.add('outgunnedmenu')
       if (isGM) {
         const menuLi = document.createElement('li')
         const menuButton = document.createElement('button')

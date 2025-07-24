@@ -16,14 +16,11 @@ static async renderMessageHook (message, html) {
     const ownerOnly = html.querySelectorAll('.owner-only')
 
 
-
-
-
-    //const actor = await OutgunnedActorDetails._getParticipant(message.flags.config.partic.particId,message.flags.config.partic.particType);
-    //const origin = message.flags.config.origin
     for (const zone of ownerOnly) {
+console.log(game.user.id, message.flags.config.origin)
+
       const actor = await OutgunnedActorDetails._getParticipant(message.flags.config.partic.particId,message.flags.config.partic.particType);
-      if ((actor && !actor.isOwner) || (!actor && (!game.user.isGM && game.user.id != origin))) {
+      if ((actor && !actor.isOwner) || (!actor && (!game.user.isGM && game.user.id != message.flags?.config?.origin))) {
         zone.style.display = 'none'
       } 
     }
