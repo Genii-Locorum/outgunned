@@ -15,7 +15,7 @@ export class OutgunnedSupportSheet extends foundry.appv1.sheets.ActorSheet {
         classes: ["outgunned", "sheet", "actor"],
         template: "systems/outgunned/templates/actor/actor-sheet.html",
         width: 300,
-        height: 550,
+        height: 600,
         tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "feats" }]
       });
     }

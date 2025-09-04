@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 13.3
+- HTML formatting removed from ride descriptions on character sheet.
+- Enemy and Support actors now show their actor image at the bottom of the page
+
 ## 13.2
 -  Players can now access re-rolls etc from Neutral Rolls
 

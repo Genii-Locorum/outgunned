@@ -14,7 +14,7 @@ export class OutgunnedEnemySheet extends foundry.appv1.sheets.ActorSheet {
         classes: ["outgunned", "sheet", "actor"],
         template: "systems/outgunned/templates/actor/actor-sheet.html",
         width: 300,
-        height: 475,
+        height: 520,
         tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "feats" }]
       });
     }

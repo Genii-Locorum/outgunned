@@ -118,6 +118,7 @@ export class OutgunnedCharacterSheet extends foundry.appv1.sheets.ActorSheet {
       } else if (i.type === 'gun' ){
         guns.push(i);
       } else if (i.type === 'ride' ){
+        i.system.cleanDesc = i.system.shortDesc.replace(/(<([^>]+)>)/ig, '')
         rides.push(i);
       } else if (i.type === 'skill' ){
           skills.push(i);
